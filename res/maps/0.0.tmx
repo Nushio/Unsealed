@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" source="wallfloor.tsx"/>
+ <tileset firstgid="26" source="watergrass.tsx"/>
+ <tileset firstgid="44" source="rock.tsx"/>
+ <tileset firstgid="46" name="grass" tilewidth="32" tileheight="32">
+  <image source="grass.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="64" name="dirt2" tilewidth="32" tileheight="32">
+  <image source="dirt2.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="82" name="dirt" tilewidth="32" tileheight="32">
+  <image source="dirt.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="100" source="water.tsx"/>
+ <tileset firstgid="118" source="trunk.tsx"/>
+ <tileset firstgid="136" source="treetop.tsx"/>
+ <tileset firstgid="178" source="chests.tsx"/>
+ <layer name="Walkable" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztzsEJADAMAzEPmv3n6A6BYgg60P8myQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAZ9va31dta39fta39fdUDCtf7bA==
+  </data>
+ </layer>
+ <layer name="Walkable_" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt18lOAkEQBuB5II+isjyRoiCLeFAPyoNbEEikwzJrhjjfl/wXEiqV6mSqO8sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADr1FVpH3thth6yPyGflquxG2viM/kXXbjQDwbz1GnpKMW+2o254jL0kmF/5z03RTHXFsjtPIa5JZwbqrin1R3wy9daqrc4beOtUVmeHfb1y6++39824jvZK5y1E/3f2X9n7X3UceSqafo366+4vu/a4ZRIYlM9rVcFe6Hu5K9Urf2Xmz38vuSvVK39nnssjs5aZtZrvMjs9/fuJ359GcImfgPJr3C1cNQbM=
+  </data>
+ </layer>
+ <layer name="Walkable__" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt3DEKwjAYhuEeSO9ZHdRBPYhe0CxdRAlSla/9nweCgSwS5SVZMg7DsGtj38YYNq/o0MaxjVPgvKJzG5c2roHziqr3IU31PqSp3oc0epVFr7LoVRa9yqJXWfQqi15l0assepVFr7LoVRa9yqJXWfQqi14BAAAAAAAAAAAAAAAAAAAAAAAAAAAA1OQd9yzecc/iHXcAgOVy15nvm3vortN376x/sofbzrq7znxz97D3G8Fa+e/ncFb6rc2bz+f1ibNSFmclYMlenbduf/8WwNo8AEHkdms=
+  </data>
+ </layer>
+ <layer name="Collisions" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+ <layer name="AlwaysOnTop" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+</map>
