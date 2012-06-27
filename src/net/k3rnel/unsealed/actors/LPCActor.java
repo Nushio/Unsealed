@@ -93,7 +93,7 @@ public class LPCActor extends Entity {
     public void setupAnimations(String filename) {
         try {
             setGraphic(new SpriteSheet(filename, WIDTH, HEIGHT));
-            duration = 150;
+            duration = 200;
             addAnimation(STAND_UP, false, 0, 0);
             addAnimation(STAND_LEFT, false, 1, 0);
             addAnimation(STAND_DOWN, false, 2, 0);

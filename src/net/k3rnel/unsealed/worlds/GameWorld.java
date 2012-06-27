@@ -24,6 +24,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.tiled.Layer;
 import org.newdawn.slick.tiled.TiledMapPlus;
 
 import it.marteEngine.CameraFollowStyle;
@@ -57,19 +58,21 @@ public class GameWorld extends World {
             throws SlickException {
         super.init(container, game);
         //Loads the beach map
-        map = new TiledMapPlus("res/maps/0.0.tmx");
+        map = new TiledMapPlus("res/maps/beach.tmx");
         setWidth(map.getWidth()*32);//32 is the TileSize. 
         setHeight(map.getHeight()*32);
         
 
+        //Loads the Soldier Sprite
         player = new LPCActor(250, 300, "res/sprites/soldier.png");
         
         add(player);
         
         //Creates the Camera-Follow code. 
-        camera.follow(player, CameraFollowStyle.TOPDOWN);
+        
         player.mySpeed.set(playerSpeed.x, playerSpeed.y);
         camera.setSpeed(playerSpeed.x * 2, playerSpeed.y * 2);
+        camera.follow(player, CameraFollowStyle.LOCKON);
     }
     
     /**
@@ -79,8 +82,9 @@ public class GameWorld extends World {
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
         super.update(container, game, delta);
+        //Grabs the player input, usable for moving the character
         Input input = container.getInput();
-        scroll(input);
+        scroll(input,delta);
             
     }
   
@@ -89,20 +93,22 @@ public class GameWorld extends World {
      * @param input
      */
     
-    private void scroll(Input input) {
-        // Scroll 30 pixels
+    private void scroll(Input input,int delta) {
+        // Scroll by delta
+        
         if (input.isKeyDown(Input.KEY_RIGHT)) {
-            camera.scroll(30, 0);
+            camera.setPosition(delta, 0);
         }
         if (input.isKeyDown(Input.KEY_LEFT)) {
-            camera.scroll(-30, 0);
+            camera.setPosition(-delta, 0);
         }
         if (input.isKeyDown(Input.KEY_UP)) {
-            camera.scroll(0, -30);
+            camera.setPosition(0, -delta);
         }
         if (input.isKeyDown(Input.KEY_DOWN)) {
-            camera.scroll(0, 30);
+            camera.setPosition(0, delta);
         }
+        camera.follow(player, CameraFollowStyle.TOPDOWN_TIGHT);
     }
 
     /**
@@ -111,7 +117,27 @@ public class GameWorld extends World {
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
-        map.render(-camera.getX(), -camera.getY());
+
+        // determine cameraX and cameraY
+        g.translate(-camera.getX(), -camera.getY());
+        
+        // Draw the map!
+        drawLayers(camera.getX(), camera.getY(), 800, 600);
+        
+        // draw player at its real position
+        g.translate(camera.getX(), camera.getY());
+
         super.render(container, game, g);
+    }
+    
+  //Draws only the necessary tiles for a given area
+    private void drawLayers(int x, int y, int w, int h ){
+        int tileOffsetX = (-1*x%32);
+        int tileOffsetY = (-1*y%32);
+        int tileIndexX  = x/32;
+        int tileIndexY  = y/32;
+        map.render(x + tileOffsetX,y+ tileOffsetY, tileIndexX, tileIndexY,
+                (w - tileOffsetX)/32 + 2,
+                (h - tileOffsetY)/32 + 2,true);
     }
 }
