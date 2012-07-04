@@ -11,6 +11,6 @@ public class Main {
 		cfg.width = 800;
 		cfg.height = 600;
 		
-		new LwjglApplication(new UnsealedGameClient(), cfg);
+		new LwjglApplication(new GameClient(), cfg);
 	}
 }
