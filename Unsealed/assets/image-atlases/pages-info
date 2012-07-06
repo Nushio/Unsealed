@@ -1,0 +1,19 @@
+
+splash-screen1.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+splash
+  rotate: false
+  xy: 0, 0
+  size: 512, 307
+  orig: 512, 307
+  offset: 0, 0
+  index: -1
+menulogo
+  rotate: false
+  xy: 0, 309
+  size: 512, 191
+  orig: 512, 191
+  offset: 0, 0
+  index: -1

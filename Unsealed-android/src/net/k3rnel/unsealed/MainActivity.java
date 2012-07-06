@@ -17,6 +17,6 @@ public class MainActivity extends AndroidApplication {
         cfg.useGL20 = true;
         cfg.useAccelerometer = false;
         cfg.useCompass = false;
-        initialize(new GameClient(), cfg);
+        initialize(new Unsealed(), cfg);
     }
 }
