@@ -1,9 +1,0 @@
-debug
-* spacing:5 padding:0 align:center
-[unsealed] width:100% maxwidth:512 height:30% maxheight:191 spacingBottom:20
----
-[continueButton] width:40% minwidth:100 maxwidth:250 height:12% minheight:30 maxheight:50
----
-[newGameButton] width:40% minwidth:100 maxwidth:250 height:12% minheight:30 maxheight:50
----
-[optionsButton] width:40% minwidth:100 maxwidth:250 height:12% minheight:30 maxheight:50

@@ -2,16 +2,13 @@ package net.k3rnel.unsealed.screens;
 
 import net.k3rnel.unsealed.Unsealed;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.ActorEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.tablelayout.TableLayout;
-import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class MenuScreen extends AbstractScreen {
     
@@ -30,47 +27,45 @@ public class MenuScreen extends AbstractScreen {
 
         // create the table actor and add it to the stage
         table = new Table( skin );
-        table.width = stage.width();
-        table.height = stage.height();
-        stage.addActor( table );
-
-        // retrieve the table's layout
-        TableLayout layout = table.getTableLayout();
+        table.setWidth(stage.getWidth());
+        table.setHeight(stage.getHeight());
+        table.pad(10).defaults().spaceBottom(10);
+        table.row().fill().expandX();
         AtlasRegion splashRegion = getAtlas().findRegion( "menulogo" );
-        Image logo = new Image(splashRegion, Scaling.stretch);
-        layout.register("unsealed",logo);
-        // register the button "continue game"
+        Image logo = new Image(splashRegion);
+        table.add(logo).fill(false);
+        table.row();
+        table.pad(10).defaults().spaceBottom(10);
         TextButton continueButton = new TextButton( "Continue", skin );
-        continueButton.visible=false;
-        continueButton.setClickListener( new ClickListener() {
+        continueButton.setVisible(false);
+        continueButton.addListener( new ClickListener() {
             @Override
-            public void click( Actor actor, float x, float y ) {
+            public void clicked(ActorEvent event, float x, float y ) {
 //                game.setScreen( new StartGameScreen( game ) );
             }
         } );
-        layout.register( "continueButton", continueButton );
-        
-        // register the button "new game"
+        //width:40% minwidth:100 maxwidth:250 height:12% minheight:30 maxheight:50
+        table.add(continueButton).width(.4f).height(.12f).maxHeight(50).minHeight(30).maxWidth(250).minWidth(100);
+        table.row();
+        table.pad(10).defaults().spaceBottom(10);
         TextButton newGameButton = new TextButton( "New game", skin );
-        newGameButton.setClickListener( new ClickListener() {
+        newGameButton.addListener( new ClickListener() {
             @Override
-            public void click( Actor actor, float x, float y ) {
+            public void clicked(ActorEvent event, float x, float y ) {
 //                game.setScreen( new StartGameScreen( game ) );
             }
         } );
-        layout.register( "newGameButton", newGameButton );
-
-        // register the button "options"
+        table.add(newGameButton).width(.4f).height(.12f).maxHeight(50).minHeight(30).maxWidth(250).minWidth(100);
+        table.row();
+        table.pad(10).defaults().spaceBottom(10);
         TextButton optionsButton = new TextButton( "Options", skin );
-        optionsButton.setClickListener( new ClickListener() {
+        optionsButton.addListener( new ClickListener() {
             @Override
-            public void click( Actor actor, float x, float y ) {
+            public void clicked(ActorEvent event, float x, float y ) {
                 game.setScreen( new OptionsScreen( game ) );
             }
         } );
-        layout.register( "optionsButton", optionsButton );
-
-        // finally, parse the layout descriptor
-        layout.parse( Gdx.files.internal( "layout-descriptors/menu-screen.txt" ).readString() );
+        table.add(optionsButton).width(.4f).height(.12f).maxHeight(50).minHeight(30).maxWidth(250).minWidth(100);
+        stage.addActor( table );
     }
 }

@@ -23,7 +23,7 @@ public abstract class AbstractScreen extends InputAdapter implements Screen {
     public static final int MENU_VIEWPORT_WIDTH = 800, MENU_VIEWPORT_HEIGHT = 480;
 
     protected final Unsealed game;
-    protected Stage stage;
+    protected final Stage stage;
 
     private BitmapFont font;
     private SpriteBatch batch;
@@ -70,8 +70,9 @@ public abstract class AbstractScreen extends InputAdapter implements Screen {
     protected Skin getSkin() {
         if( skin == null ) {
             FileHandle skinFile = Gdx.files.internal( "skin/uiskin.json" );
-            FileHandle textureFile = Gdx.files.internal( "skin/uiskin.png" );
-            skin = new Skin( skinFile, textureFile );
+//            FileHandle textureFile = Gdx.files.internal( "skin/uiskin.png" );
+            skin = new Skin( skinFile );
+//            skin.load(skinFile);
         }
         return skin;
     }
@@ -138,7 +139,7 @@ public abstract class AbstractScreen extends InputAdapter implements Screen {
         // crashes the game, so I've commented it out; more info can be found
         // at: http://www.badlogicgames.com/forum/viewtopic.php?f=11&t=3624
         
-//        if( stage != null ) stage.dispose();
+        if( stage != null ) stage.dispose();
         if( font != null ) font.dispose();
         if( batch != null ) batch.dispose();
         if( skin != null ) skin.dispose();
