@@ -7,7 +7,7 @@ import com.badlogic.gdx.tools.imagepacker.TexturePacker2.Settings;
 /**
  * Packs single images into image atlases.
  */
-public class TexturePackerGenerator {
+public class TextureAtlasGenerator {
     private static final String INPUT_DIR = "raw-resources/images";
     private static final String OUTPUT_DIR = "../Unsealed/assets/image-atlases";
     private static final String PACK_FILE = "pages-info";
@@ -17,7 +17,7 @@ public class TexturePackerGenerator {
         Settings settings = new Settings();
 
         // adjust the padding settings
-        settings.paddingX = 2;
+        settings.paddingX = 0;
         settings.edgePadding = false;
 
         // set the maximum dimension of each image atlas

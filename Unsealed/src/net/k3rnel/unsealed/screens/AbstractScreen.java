@@ -139,11 +139,12 @@ public abstract class AbstractScreen extends InputAdapter implements Screen {
         // crashes the game, so I've commented it out; more info can be found
         // at: http://www.badlogicgames.com/forum/viewtopic.php?f=11&t=3624
         
-        if( stage != null ) stage.dispose();
+        
         if( font != null ) font.dispose();
         if( batch != null ) batch.dispose();
         if( skin != null ) skin.dispose();
         if( atlas != null ) atlas.dispose();
+        if( stage != null ) stage.dispose();
     }
 
     public boolean keyUp(int keycode) {

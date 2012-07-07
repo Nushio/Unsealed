@@ -40,10 +40,17 @@ public class OptionsScreen extends AbstractScreen {
         // create the table actor and add it to the stage
         table = new Table( skin );
         table.debug();
+
         table.setWidth(stage.getWidth());
         table.setHeight(stage.getHeight());
         table.pad(4);
-        final CheckBox soundEffectsCheckbox = new CheckBox("Sound Effects", skin );
+        
+        final Label optionsLabel = new Label("Options", skin);
+        table.add(optionsLabel).colspan(3).align(Align.center);
+        table.row();
+        
+        final Label soundEffectsLabel = new Label("Sound Effects", skin);
+        final CheckBox soundEffectsCheckbox = new CheckBox("", skin );
         soundEffectsCheckbox.setChecked( game.getPreferencesManager().isSoundEnabled() );
         soundEffectsCheckbox.addListener( new ClickListener() {
             @Override
@@ -55,10 +62,11 @@ public class OptionsScreen extends AbstractScreen {
             }
         } );
         //colspan:2 align:left
-        table.add(soundEffectsCheckbox).colspan(2).align(Align.left);
+        table.add(soundEffectsLabel).align(Align.left);
+        table.add(soundEffectsCheckbox).padLeft(5).colspan(2).align(Align.left);
         table.row();
-
-        final CheckBox musicCheckbox = new CheckBox("Music", skin );
+        final Label musicLabel = new Label("Music", skin);
+        final CheckBox musicCheckbox = new CheckBox("", skin );
         musicCheckbox.setChecked( game.getPreferencesManager().isMusicEnabled() );
         musicCheckbox.addListener( new ClickListener() {
             @Override
@@ -72,10 +80,12 @@ public class OptionsScreen extends AbstractScreen {
                 if( enabled ) game.getMusicManager().play( UnsealedMusic.MENU );
             }
         } );
-        table.add(musicCheckbox).colspan(2).align(Align.left);
+        table.add(musicLabel).align(Align.left);
+        table.add(musicCheckbox).padLeft(5).colspan(2).align(Align.left);
         
         table.row();
         
+        final Label volumeLabel = new Label("Volume",skin);
         // range is [0.0,1.0]; step is 0.1f
         final Slider volumeSlider = new Slider( 0f, 1f, 0.1f, skin );
         volumeSlider.setValue( game.getPreferencesManager().getVolume() );
@@ -88,9 +98,9 @@ public class OptionsScreen extends AbstractScreen {
                 updateVolumeLabel();
             }
         } );
-        table.add(volumeSlider);
+        table.add(volumeLabel).align(Align.left);
+        table.add(volumeSlider).padLeft(5).align(Align.left);
         
-        table.row();
 
         volumeValue = new Label("Volume", skin );
         updateVolumeLabel();
@@ -106,10 +116,15 @@ public class OptionsScreen extends AbstractScreen {
             }
         } );
         //colspan:3 width:40% minwidth:100 maxwidth:250 height:12% minheight:30 maxheight:50 spacingTop:20
-        table.add(backButton).colspan(3).width(.4f).minWidth(100).maxWidth(250).height(.12f).minHeight(30).maxHeight(50).spaceTop(20);
+        table.add(backButton).colspan(3).minWidth(100).maxWidth(250).height(.12f).minHeight(30).maxHeight(50).spaceTop(20);
         stage.addActor( table );
         
         Gdx.input.setInputProcessor(new InputMultiplexer(this,stage));
+    }
+    
+    @Override
+    public void render(float delta) {
+        super.render(delta);
     }
 
     /**
