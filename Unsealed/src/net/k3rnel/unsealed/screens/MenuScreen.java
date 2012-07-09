@@ -29,9 +29,9 @@ public class MenuScreen extends AbstractScreen {
         table = new Table( skin );
         table.setWidth(stage.getWidth());
         table.setHeight(stage.getHeight());
-        table.pad(10).defaults().spaceBottom(10);
+        table.pad(10).defaults().spaceBottom(10).space(5);
         table.row().fill().expandX();
-        AtlasRegion splashRegion = getAtlas().findRegion( "menulogo" );
+        AtlasRegion splashRegion = getAtlas().findRegion( "splash-screen/menulogo" );
         Image logo = new Image(splashRegion);
         table.add(logo).fill(false);
         table.row();
@@ -45,17 +45,17 @@ public class MenuScreen extends AbstractScreen {
             }
         } );
         //width:40% minwidth:100 maxwidth:250 height:12% minheight:30 maxheight:50
-        table.add(continueButton).width(.4f).height(.12f).maxHeight(50).minHeight(30).maxWidth(250).minWidth(100);
+        table.add(continueButton).maxHeight(50).minHeight(30).maxWidth(250).minWidth(100).space(5).pad(10);
         table.row();
         table.pad(10).defaults().spaceBottom(10);
         TextButton newGameButton = new TextButton( "New game", skin );
         newGameButton.addListener( new ClickListener() {
             @Override
             public void clicked(ActorEvent event, float x, float y ) {
-//                game.setScreen( new StartGameScreen( game ) );
+                game.setScreen( new CharSelectScreen( game ) );
             }
         } );
-        table.add(newGameButton).width(.4f).height(.12f).maxHeight(50).minHeight(30).maxWidth(250).minWidth(100);
+        table.add(newGameButton).maxHeight(50).minHeight(30).maxWidth(250).minWidth(100);
         table.row();
         table.pad(10).defaults().spaceBottom(10);
         TextButton optionsButton = new TextButton( "Options", skin );
@@ -65,7 +65,7 @@ public class MenuScreen extends AbstractScreen {
                 game.setScreen( new OptionsScreen( game ) );
             }
         } );
-        table.add(optionsButton).width(.4f).height(.12f).maxHeight(50).minHeight(30).maxWidth(250).minWidth(100);
+        table.add(optionsButton).height(.12f).maxHeight(50).minHeight(30).maxWidth(250).minWidth(100);
         stage.addActor( table );
     }
 }

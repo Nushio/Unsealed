@@ -62,7 +62,7 @@ public abstract class AbstractScreen extends InputAdapter implements Screen {
 
     public TextureAtlas getAtlas() {
         if( atlas == null ) {
-            atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info" ) );
+            atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
         }
         return atlas;
     }
@@ -134,17 +134,11 @@ public abstract class AbstractScreen extends InputAdapter implements Screen {
         Gdx.app.log( Unsealed.LOG, "Disposing screen: " + getName() );
 
         // as the collaborators are lazily loaded, they may be null
-
-        // the following call disposes the screen's stage but on my computer it
-        // crashes the game, so I've commented it out; more info can be found
-        // at: http://www.badlogicgames.com/forum/viewtopic.php?f=11&t=3624
-        
-        
         if( font != null ) font.dispose();
         if( batch != null ) batch.dispose();
         if( skin != null ) skin.dispose();
         if( atlas != null ) atlas.dispose();
-        if( stage != null ) stage.dispose();
+//        if( stage != null ) stage.dispose();
     }
 
     public boolean keyUp(int keycode) {

@@ -3,6 +3,72 @@ pages-info.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+char-sprites/male_spritesheet
+  rotate: false
+  xy: 0, 53
+  size: 832, 1344
+  orig: 832, 1344
+  offset: 0, 0
+  index: -1
+char-sprites/female_spritesheet
+  rotate: false
+  xy: 832, 565
+  size: 576, 832
+  orig: 576, 832
+  offset: 0, 0
+  index: -1
+char-sprites/male
+  rotate: false
+  xy: 0, 0
+  size: 30, 51
+  orig: 30, 51
+  offset: 0, 0
+  index: -1
+char-sprites/female
+  rotate: false
+  xy: 832, 512
+  size: 30, 51
+  orig: 30, 51
+  offset: 0, 0
+  index: -1
+
+pages-info2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+battle/field-4x4
+  rotate: false
+  xy: 0, 54
+  size: 305, 67
+  orig: 305, 67
+  offset: 0, 0
+  index: -1
+battle/field-3x4
+  rotate: false
+  xy: 0, 0
+  size: 305, 52
+  orig: 305, 52
+  offset: 0, 0
+  index: -1
+battle/field-4x3
+  rotate: false
+  xy: 305, 54
+  size: 230, 67
+  orig: 230, 67
+  offset: 0, 0
+  index: -1
+battle/field-3x3
+  rotate: false
+  xy: 305, 0
+  size: 230, 52
+  orig: 230, 52
+  offset: 0, 0
+  index: -1
+
+pages-info3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
 splash-screen/splash
   rotate: false
   xy: 0, 193

@@ -121,11 +121,6 @@ public class OptionsScreen extends AbstractScreen {
         
         Gdx.input.setInputProcessor(new InputMultiplexer(this,stage));
     }
-    
-    @Override
-    public void render(float delta) {
-        super.render(delta);
-    }
 
     /**
      * Updates the volume label next to the slider.
@@ -133,6 +128,7 @@ public class OptionsScreen extends AbstractScreen {
     private void updateVolumeLabel() {
         float volume = ( game.getPreferencesManager().getVolume() * 100 );
         volumeValue.setText( String.format( Locale.US, "%1.0f%%", volume ) );
+        Gdx.app.log( Unsealed.LOG, "Volume Value: " + volume );
     }
     
     /**
