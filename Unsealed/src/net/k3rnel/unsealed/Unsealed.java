@@ -1,6 +1,5 @@
 package net.k3rnel.unsealed;
 
-import net.k3rnel.unsealed.screens.CharSelectScreen;
 import net.k3rnel.unsealed.screens.MenuScreen;
 import net.k3rnel.unsealed.screens.OptionsScreen;
 import net.k3rnel.unsealed.screens.SplashScreen;
@@ -99,7 +98,7 @@ public class Unsealed extends Game {
         // this approach avoids calling the screen's resize method repeatedly
         if( getScreen() == null ) {
             if( DEBUG ) {
-                setScreen( new CharSelectScreen( this ) );
+                setScreen( new SplashScreen( this ) );
             } else {
                 setScreen( new SplashScreen( this ) );
             }

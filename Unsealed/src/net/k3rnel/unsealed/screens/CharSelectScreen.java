@@ -1,6 +1,7 @@
 package net.k3rnel.unsealed.screens;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ActorEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -50,8 +51,10 @@ public class CharSelectScreen extends AbstractScreen {
         table.add(guyLabel).align(Align.center);
         table.add(galLabel).align(Align.center);
         table.row();
-        AtlasRegion charRegion = getAtlas().findRegion( "char-sprites/male" );
-        Image guy = new Image(charRegion);
+        AtlasRegion charRegion = getAtlas().findRegion( "char-sprites/male_spritesheet" );
+        TextureRegion[][] charTextures = charRegion.split(64,64);
+        
+        Image guy = new Image(charTextures[2][0]);
         guy.setScaling(Scaling.stretch);
         guy.scale(1f);
         guy.setOrigin(guy.getWidth()/2,guy.getHeight()/2);
@@ -66,8 +69,10 @@ public class CharSelectScreen extends AbstractScreen {
             }
         });
         table.add(guyButton).height(128).width(128);
-        charRegion = getAtlas().findRegion( "char-sprites/female" );
-        Image gal = new Image(charRegion);
+        charRegion = getAtlas().findRegion( "char-sprites/female_spritesheet" );
+        charTextures = charRegion.split(64,64);
+        
+        Image gal = new Image(charTextures[2][0]);
         gal.setScaling(Scaling.stretch);
         gal.scale(1f);
         gal.setOrigin(gal.getWidth()/2,gal.getHeight()/2);

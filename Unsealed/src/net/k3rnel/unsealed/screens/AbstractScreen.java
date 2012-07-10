@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 /**
  * The base class for all game screens.
@@ -29,6 +30,7 @@ public abstract class AbstractScreen extends InputAdapter implements Screen {
     private SpriteBatch batch;
     private Skin skin;
     private TextureAtlas atlas;
+    private Table table;
 
     public AbstractScreen( Unsealed game ) {
         this.game = game;
@@ -77,6 +79,18 @@ public abstract class AbstractScreen extends InputAdapter implements Screen {
         return skin;
     }
 
+    protected Table getTable() {
+        if( table == null ) {
+            table = new Table( getSkin() );
+            table.setFillParent( true );
+            if( Unsealed.DEBUG ) {
+                table.debug();
+            }
+            stage.addActor( table );
+        }
+        return table;
+    }
+
     // Screen implementation
 
     @Override
@@ -107,6 +121,10 @@ public abstract class AbstractScreen extends InputAdapter implements Screen {
 
         // draw the actors
         stage.draw();
+        
+        // draw the table debug lines
+        Table.drawDebug( stage );
+
     }
 
     @Override

@@ -3,32 +3,18 @@ pages-info.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-char-sprites/male_spritesheet
-  rotate: false
-  xy: 0, 53
-  size: 832, 1344
-  orig: 832, 1344
-  offset: 0, 0
-  index: -1
 char-sprites/female_spritesheet
   rotate: false
-  xy: 832, 565
-  size: 576, 832
-  orig: 576, 832
-  offset: 0, 0
-  index: -1
-char-sprites/male
-  rotate: false
   xy: 0, 0
-  size: 30, 51
-  orig: 30, 51
+  size: 576, 256
+  orig: 576, 256
   offset: 0, 0
   index: -1
-char-sprites/female
+char-sprites/male_spritesheet
   rotate: false
-  xy: 832, 512
-  size: 30, 51
-  orig: 30, 51
+  xy: 576, 0
+  size: 575, 256
+  orig: 575, 256
   offset: 0, 0
   index: -1
 

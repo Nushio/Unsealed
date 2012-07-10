@@ -2,8 +2,13 @@ package net.k3rnel.unsealed.screens;
 
 import net.k3rnel.unsealed.Unsealed;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
@@ -35,11 +40,9 @@ public class SplashScreen extends AbstractScreen {
         splashImage.getColor().a = 0f;
         
         // configure the fade-in/out effect on the splash image
-        SequenceAction actions = Actions.sequence(
-                Actions.fadeIn(0.75f), 
-                Actions.delay(1.75f, Actions.fadeOut(0.75f)),
+        SequenceAction actions = sequence(fadeIn(0.75f), delay(1.75f), fadeOut(0.75f),
                         // when the image is faded out, move on to the next screen
-                        Actions.run(new Runnable() {
+                        run(new Runnable() {
                             @Override
                             public void run() {
                                 game.setScreen( new MenuScreen( game ) );

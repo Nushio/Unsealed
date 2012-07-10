@@ -26,7 +26,7 @@ public class MenuScreen extends AbstractScreen {
         Skin skin = super.getSkin();
 
         // create the table actor and add it to the stage
-        table = new Table( skin );
+        table = super.getTable();
         table.setWidth(stage.getWidth());
         table.setHeight(stage.getHeight());
         table.pad(10).defaults().spaceBottom(10).space(5);
@@ -44,8 +44,7 @@ public class MenuScreen extends AbstractScreen {
 //                game.setScreen( new StartGameScreen( game ) );
             }
         } );
-        //width:40% minwidth:100 maxwidth:250 height:12% minheight:30 maxheight:50
-        table.add(continueButton).maxHeight(50).minHeight(30).maxWidth(250).minWidth(100).space(5).pad(10);
+        table.add(continueButton).size( 300, 60 ).uniform().spaceBottom(10);
         table.row();
         table.pad(10).defaults().spaceBottom(10);
         TextButton newGameButton = new TextButton( "New game", skin );
@@ -55,7 +54,7 @@ public class MenuScreen extends AbstractScreen {
                 game.setScreen( new CharSelectScreen( game ) );
             }
         } );
-        table.add(newGameButton).maxHeight(50).minHeight(30).maxWidth(250).minWidth(100);
+        table.add(newGameButton).size( 300, 60 ).uniform().spaceBottom(10);
         table.row();
         table.pad(10).defaults().spaceBottom(10);
         TextButton optionsButton = new TextButton( "Options", skin );
@@ -65,7 +64,6 @@ public class MenuScreen extends AbstractScreen {
                 game.setScreen( new OptionsScreen( game ) );
             }
         } );
-        table.add(optionsButton).height(.12f).maxHeight(50).minHeight(30).maxWidth(250).minWidth(100);
-        stage.addActor( table );
+        table.add(optionsButton).size( 300, 60 ).uniform().spaceBottom(10);
     }
 }
