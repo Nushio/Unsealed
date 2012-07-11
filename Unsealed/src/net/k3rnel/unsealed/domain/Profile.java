@@ -14,17 +14,21 @@ import com.badlogic.gdx.utils.OrderedMap;
  */
 public class Profile implements Serializable {
 
+    private Player player;
+    
     public Profile() {
-
+        player = new Player();
     }
 
     @Override
     public void read(Json json, OrderedMap<String,Object> jsonData){
+        player = json.readValue( "player", Player.class, jsonData );
 
     }
 
     @Override
     public void write(Json json) {
+        json.writeValue( "player", player );
 
     }
 }
