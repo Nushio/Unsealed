@@ -50,6 +50,13 @@ battle/field-3x3
   orig: 230, 52
   offset: 0, 0
   index: -1
+battle/lifebar
+  rotate: false
+  xy: 535, 65
+  size: 28, 56
+  orig: 28, 56
+  offset: 0, 0
+  index: -1
 
 pages-info3.png
 format: RGBA8888
