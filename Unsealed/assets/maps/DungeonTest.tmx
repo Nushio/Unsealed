@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="30" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" source="wall.tsx"/>
+ <tileset firstgid="26" source="wallfloor.tsx"/>
+ <tileset firstgid="51" source="hole.tsx"/>
+ <tileset firstgid="69" source="water.tsx"/>
+ <tileset firstgid="87" source="barrel.tsx"/>
+ <layer name="Floor" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwwENAAAMw6BKmX+VF3JIWDVVVVXfPSF4cIE=
+  </data>
+ </layer>
+ <layer name="Water" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0lEKgCAQhOG9XVjm6v0v0yytIIlvZg/NB4PQy6+QCBERERGZhCmWF3cLtn3QNemH3YBF7FzcVV8YtA+/V5zYrf9W236+vd5ttuKnSt+37c33N+lgdLsAcAEOPQ==
+  </data>
+ </layer>
+ <layer name="Decorations Lower" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt09sJACAMQ9GM6Xv/MewIgpAq3AP5LOlPJCBHSeodF7c//gy8qkaa/LuakSX/rrq5DwCAExt0BwPm
+  </data>
+ </layer>
+ <layer name="Walls Extra" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztk0sKgDAMBXuFbnISxf/v/pfyCQ1INq6aKL6BITSb2TQpEUL+SH5412qK2YlDW5sDHOFk9jW5mj1cYHdr12YuTXV16m6wLc0GHk5dbe/Oza+SzfRCzCQkmsi/GH0H0X3yHk451AYS
+  </data>
+ </layer>
+ <layer name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy1VotOhDAQLOc9UA8VFNAv8a13//9Ttkk3GcddWgo2meRuS2fKdqfLwTl3KMCVx1HBZSFfLm492ohH+H3zz7oPHkPEE/y+X4Fby6XksXb62GesnZNLzmNKd2rtnFxyHnceG4+LqFfF/9uMtSkIN/Lv6Zk6Ea+AY+vydFP84QybGL92v8/P2s9SXdHsYvyOtNfWDdxH0BxjvAdtmS/RZR8IT+BuSVNGT/O4z1wvsQ864B4UTWfMyz5yvcQ+CDxYm1LfPCqal33keinlg52iXcEzqXtljm80f+O9wfvaKEh5ONcHS/witVvie/ZXbt2K/1ta2xh8Vl/S6pa9iHsJfgkeGWhtZ/BZfUmrW/Yieij4ZVTWajHND1N1y15ED8m6V4+3iHfi0Obk3LlusW9xP8NaEd0Pj8+IZ+APmi8w90W6uXXWZOgivxUXXq5b67zHlXSFl/uu9R3Cd0aprozeePfa/b3DtLzM1cX7H9/dOs+1dLmeUV87T0v32+MEOCfizKn1gakeYPk+NZZ+N1n9KoWSb1LED9+bLLU=
+  </data>
+ </layer>
+ <layer name="Decorations Upper" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgDEQNkbwyNzB1u/hkFo2CwgsGc1waz2wYzAAB6xwLR
+  </data>
+ </layer>
+</map>
