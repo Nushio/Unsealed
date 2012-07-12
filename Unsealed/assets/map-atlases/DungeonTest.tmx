@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><map height="30" orientation="orthogonal" tileheight="32" tilewidth="32" version="1.0" width="30"><properties><property name="blended tiles" value="1,2,3,4,5,6,8,11,13,16,18,19,20,21,22,23,25,26,27,28,29,30,31,33,36,38,41,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,62,63,64,65,69,70,71,72,73,74,75,76,77,78,80,81,82,83,87,88,89,90,91,92,93,94,95,96,97,98,99,101,102,103,104,105,106,107,108,109,110"/></properties>
+ <tileset firstgid="1" name="wall" tileheight="32" tilewidth="32">
+  <image height="160" source="tiles/wall.png" width="160"/>
+  <tile id="0">
+   <properties>
+    <property name="wall" value="se"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="wall" value="s"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="wall" value="sw"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="wall" value="e"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="wall" value="w"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="wall" value="e"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="wall" value="w"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="wall" value="e"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="wall" value="w"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="wall" value="e"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="wall" value="w"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="wall" value="n"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="26" name="wallfloor" tileheight="32" tilewidth="32">
+  <image height="160" source="tiles/wallfloor.png" width="160"/>
+  <tile id="0">
+   <properties>
+    <property name="wall" value="se"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="wall" value="s"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="wall" value="sw"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="wall" value="e"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="wall" value="w"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="wall" value="e"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="wall" value="w"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="wall" value="e"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="wall" value="w"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="wall" value="ne"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="wall" value="n"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="wall" value="nw"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="51" name="hole" tileheight="32" tilewidth="32">
+  <image height="192" source="tiles/hole.png" width="96"/>
+  <tile id="0">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="wall" value="se"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="wall" value="s"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="wall" value="sw"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="wall" value="e"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="wall" value="w"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="wall" value="ne"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="wall" value="n"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="wall" value="nw"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="69" name="water" tileheight="32" tilewidth="32">
+  <image height="192" source="tiles/water.png" width="96"/>
+  <tile id="1">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="wall" value="se"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="wall" value="s"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="wall" value="sw"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="wall" value="e"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="wall" value="w"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="wall" value="ne"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="wall" value="n"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="wall" value="nw"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="87" name="barrel" tileheight="32" tilewidth="32">
+  <image height="64" source="tiles/barrel.png" width="128"/>
+  <tile id="0">
+   <properties>
+    <property name="wall" value="s"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="wall" value="w"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="wall" value="n"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="wall" value="w"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="95" name="collisionator" tileheight="32" tilewidth="32">
+  <image height="128" source="tiles/collisionator.png" width="128"/>
+  <tile id="0">
+   <properties>
+    <property name="wall" value="se"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="wall" value="s"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="wall" value="sw"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="wall" value="e"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="wall" value="a"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="wall" value="w"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="wall" value="bs"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="wall" value="ne"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="wall" value="n"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="wall" value="nw"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="wall" value="sl"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="wall" value="l1"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="wall" value="l2"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="wall" value="l3"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="wall" value="l4"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer height="30" name="Floor" width="30">
+  <data compression="zlib" encoding="base64">
+   eJztwwENAAAMw6BKmX+VF3JIWDVVVVXfPSF4cIE=
+  </data>
+ </layer>
+ <layer height="30" name="Water" width="30">
+  <data compression="zlib" encoding="base64">
+   eJzt0lEKgCAQhOG9XVjm6v0v0yytIIlvZg/NB4PQy6+QCBERERGZhCmWF3cLtn3QNemH3YBF7FzcVV8YtA+/V5zYrf9W236+vd5ttuKnSt+37c33N+lgdLsAcAEOPQ==
+  </data>
+ </layer>
+ <layer height="30" name="DecorationsLower" width="30">
+  <data compression="zlib" encoding="base64">
+   eJzt09sJACAMQ9GM6Xv/MewIgpAq3AP5LOlPJCBHSeodF7c//gy8qkaa/LuakSX/rrq5DwCAExt0BwPm
+  </data>
+ </layer>
+ <layer height="30" name="WallsExtra" width="30">
+  <data compression="zlib" encoding="base64">
+   eJztk0sKgDAMBXuFbnISxf/v/pfyCQ1INq6aKL6BITSb2TQpEUL+SH5412qK2YlDW5sDHOFk9jW5mj1cYHdr12YuTXV16m6wLc0GHk5dbe/Oza+SzfRCzCQkmsi/GH0H0X3yHk451AYS
+  </data>
+ </layer>
+ <layer height="30" name="Walls" width="30">
+  <data compression="zlib" encoding="base64">
+   eJy1VotOhDAQLOc9UA8VFNAv8a13//9Ttkk3GcddWgo2meRuS2fKdqfLwTl3KMCVx1HBZSFfLm492ohH+H3zz7oPHkPEE/y+X4Fby6XksXb62GesnZNLzmNKd2rtnFxyHnceG4+LqFfF/9uMtSkIN/Lv6Zk6Ea+AY+vydFP84QybGL92v8/P2s9SXdHsYvyOtNfWDdxH0BxjvAdtmS/RZR8IT+BuSVNGT/O4z1wvsQ864B4UTWfMyz5yvcQ+CDxYm1LfPCqal33keinlg52iXcEzqXtljm80f+O9wfvaKEh5ONcHS/witVvie/ZXbt2K/1ta2xh8Vl/S6pa9iHsJfgkeGWhtZ/BZfUmrW/Yieij4ZVTWajHND1N1y15ED8m6V4+3iHfi0Obk3LlusW9xP8NaEd0Pj8+IZ+APmi8w90W6uXXWZOgivxUXXq5b67zHlXSFl/uu9R3Cd0aprozeePfa/b3DtLzM1cX7H9/dOs+1dLmeUV87T0v32+MEOCfizKn1gakeYPk+NZZ+N1n9KoWSb1LED9+bLLU=
+  </data>
+ </layer>
+ <layer height="30" name="DecorationsUpper" width="30">
+  <data compression="zlib" encoding="base64">
+   eJxjYBgFo2AUjIJRMApGwUgDEQNkbwyNzB1u/hkFo2CwgsGc1waz2wYzAAB6xwLR
+  </data>
+ </layer>
+</map>

@@ -46,8 +46,8 @@ public class CharSelectScreen extends AbstractScreen {
         table.add(titleLabel).expandX().align(Align.center).colspan(2);
         table.row();
         table.row();
-        final Label guyLabel = new Label("Guy",skin);
-        final Label galLabel = new Label("Gal",skin);
+        final Label guyLabel = new Label("Overworld",skin);
+        final Label galLabel = new Label("Battle",skin);
         table.add(guyLabel).align(Align.center);
         table.add(galLabel).align(Align.center);
         table.row();
@@ -64,7 +64,7 @@ public class CharSelectScreen extends AbstractScreen {
             
             @Override
             public void clicked(ActorEvent event, float x, float y) {
-                game.setScreen( new BattleScreen( game ) );
+                game.setScreen( new OverworldScreen( game ) );
                 
             }
         });
