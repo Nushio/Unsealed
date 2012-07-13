@@ -98,7 +98,7 @@ public class Unsealed extends Game {
         // this approach avoids calling the screen's resize method repeatedly
         if( getScreen() == null ) {
             if( DEBUG ) {
-                setScreen( new SplashScreen( this ) );
+                setScreen( new MenuScreen ( this ) );
             } else {
                 setScreen( new SplashScreen( this ) );
             }

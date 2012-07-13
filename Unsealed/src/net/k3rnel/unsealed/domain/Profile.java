@@ -22,13 +22,13 @@ public class Profile implements Serializable {
 
     @Override
     public void read(Json json, OrderedMap<String,Object> jsonData){
-        player = json.readValue( "player", Player.class, jsonData );
+//        player = json.readValue( "player", Player.class, jsonData );
 
     }
 
     @Override
     public void write(Json json) {
-        json.writeValue( "player", player );
+//        json.writeValue( "player", player );
 
     }
 }
