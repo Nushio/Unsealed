@@ -3,65 +3,6 @@ pages-info.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-char-sprites/female_spritesheet
-  rotate: false
-  xy: 0, 0
-  size: 576, 256
-  orig: 576, 256
-  offset: 0, 0
-  index: -1
-char-sprites/male_spritesheet
-  rotate: false
-  xy: 576, 0
-  size: 575, 256
-  orig: 575, 256
-  offset: 0, 0
-  index: -1
-
-pages-info2.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-battle/field-4x4
-  rotate: false
-  xy: 0, 54
-  size: 305, 67
-  orig: 305, 67
-  offset: 0, 0
-  index: -1
-battle/field-3x4
-  rotate: false
-  xy: 0, 0
-  size: 305, 52
-  orig: 305, 52
-  offset: 0, 0
-  index: -1
-battle/field-4x3
-  rotate: false
-  xy: 305, 54
-  size: 230, 67
-  orig: 230, 67
-  offset: 0, 0
-  index: -1
-battle/field-3x3
-  rotate: false
-  xy: 305, 0
-  size: 230, 52
-  orig: 230, 52
-  offset: 0, 0
-  index: -1
-battle/lifebar
-  rotate: false
-  xy: 535, 65
-  size: 28, 56
-  orig: 28, 56
-  offset: 0, 0
-  index: -1
-
-pages-info3.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 splash-screen/splash
   rotate: false
   xy: 0, 193
@@ -74,5 +15,99 @@ splash-screen/menulogo
   xy: 0, 0
   size: 512, 191
   orig: 512, 191
+  offset: 0, 0
+  index: -1
+
+pages-info2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+battle/ghost
+  rotate: false
+  xy: 0, 152
+  size: 1020, 90
+  orig: 1020, 90
+  offset: 0, 0
+  index: -1
+battle/field-4x4
+  rotate: false
+  xy: 0, 73
+  size: 351, 77
+  orig: 351, 77
+  offset: 0, 0
+  index: -1
+battle/field-3x4
+  rotate: false
+  xy: 0, 11
+  size: 352, 60
+  orig: 352, 60
+  offset: 0, 0
+  index: -1
+battle/field-4x3
+  rotate: false
+  xy: 351, 73
+  size: 265, 77
+  orig: 265, 77
+  offset: 0, 0
+  index: -1
+battle/clam
+  rotate: false
+  xy: 352, 23
+  size: 288, 48
+  orig: 288, 48
+  offset: 0, 0
+  index: -1
+battle/field-3x3
+  rotate: false
+  xy: 616, 98
+  size: 230, 52
+  orig: 230, 52
+  offset: 0, 0
+  index: -1
+battle/lidia
+  rotate: false
+  xy: 846, 36
+  size: 74, 114
+  orig: 74, 114
+  offset: 0, 0
+  index: -1
+battle/blue_facebutton1
+  rotate: false
+  xy: 920, 58
+  size: 83, 92
+  orig: 83, 92
+  offset: 0, 0
+  index: -1
+battle/lifebar
+  rotate: false
+  xy: 920, 0
+  size: 28, 56
+  orig: 28, 56
+  offset: 0, 0
+  index: -1
+battle/blue_facebutton2
+  rotate: false
+  xy: 640, 22
+  size: 75, 74
+  orig: 75, 74
+  offset: 0, 0
+  index: -1
+
+pages-info3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+char-sprites/female_spritesheet
+  rotate: false
+  xy: 0, 0
+  size: 576, 256
+  orig: 576, 256
+  offset: 0, 0
+  index: -1
+char-sprites/male_spritesheet
+  rotate: false
+  xy: 576, 0
+  size: 575, 256
+  orig: 575, 256
   offset: 0, 0
   index: -1
