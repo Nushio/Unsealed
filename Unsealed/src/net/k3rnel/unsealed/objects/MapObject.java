@@ -1,19 +1,21 @@
 package net.k3rnel.unsealed.objects;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+
 /**
  * The base class for all map objects like players, NPCs and whatever else we want
  * to place on the map.
  * 
  * @author Drawig
  */
-public abstract class MapObject {
+public abstract class MapObject extends Actor {
 	
 	/** The x-position of this map object on the map. */
-	private int mapX;
+	protected int mapX;
 	/** The y-position of this map object on the map. */
-	private int mapY;
+	protected int mapY;
 	/** The name of the map this map object is on. */
-	private String mapName;
+	protected String mapName;
 	
 	/**
 	 * Constructs a new MapObject which is on the given map

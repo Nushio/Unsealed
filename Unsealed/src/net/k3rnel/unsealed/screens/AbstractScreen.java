@@ -29,7 +29,7 @@ public abstract class AbstractScreen extends InputAdapter implements Screen {
     private BitmapFont font;
     private SpriteBatch batch;
     private Skin skin;
-    private TextureAtlas atlas;
+    protected TextureAtlas atlas;
     private Table table;
 
     public AbstractScreen( Unsealed game ) {

@@ -3,6 +3,9 @@ package net.k3rnel.unsealed.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.tiled.TileAtlas;
 import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledLoader;
@@ -16,6 +19,8 @@ public class OverworldScreen extends AbstractScreen {
     private OrthographicCamera camera;
     TiledMap map;
     TileAtlas atlas;
+    
+    private TextureRegion[] frames;
     
     public OverworldScreen(Unsealed game) {
         super(game);
@@ -40,6 +45,14 @@ public class OverworldScreen extends AbstractScreen {
         
         stage.setCamera(camera);
         
+        // Get our character images to create animations.
+        TextureRegion[][] tmp = this.getAtlas().findRegion("char-sprites/male_spritesheet").split(64, 64);
+        frames = new TextureRegion[9 * 4];
+        
+        int k = 0;
+        for(int i = 0; i < 4; i++)
+        	for(int j = 0; j < 6; j++)
+        		frames[k++] = tmp[i][j];
     }
     
     @Override
