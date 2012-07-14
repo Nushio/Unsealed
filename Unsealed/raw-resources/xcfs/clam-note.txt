@@ -1,0 +1,1 @@
+Each "clam" measures exactly 48 (height) x 41 (width) pixels. 

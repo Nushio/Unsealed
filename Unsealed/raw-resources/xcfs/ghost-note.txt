@@ -1,0 +1,10 @@
+Ghost by Ben Potter
+
+Each sprite's size is 102 (Width) 90 (height)
+
+The ghost isn't centered. 
+You have to add 55 pixels from the front
+You have to add 9 pixels from the back
+You have to add 1 pixel from the bottom
+You have to add 13 pixels from the top
+To get to the chewey center. 

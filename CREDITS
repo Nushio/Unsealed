@@ -59,6 +59,16 @@ http://lpc.opengameart.org/static/lpc-style-guide/assets.html#building-indoors
 
 ----
 
+Ben 'Cookiez' Potter
+
+raw-resources/images/battle/clam.png
+raw-resources/images/battle/ghost.png
+
+raw-resources/xcfs/clam.xcf
+raw-resources/xcfs/ghost.xcf
+
+----
+
 LibGDX / Bad Logic Games
 raw-resources/xcfs/uiskin.xcf
 http://code.google.com/p/libgdx/source/browse/#svn%2Ftrunk%2Fextensions%2Fgdx-tools%2Fassets%2Fui
