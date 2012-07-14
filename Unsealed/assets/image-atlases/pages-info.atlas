@@ -13,8 +13,8 @@ char-sprites/female_spritesheet
 char-sprites/male_spritesheet
   rotate: false
   xy: 576, 0
-  size: 575, 256
-  orig: 575, 256
+  size: 576, 256
+  orig: 576, 256
   offset: 0, 0
   index: -1
 
@@ -24,44 +24,44 @@ filter: Nearest,Nearest
 repeat: none
 battle/ghost
   rotate: false
-  xy: 0, 400
+  xy: 0, 420
   size: 1020, 90
   orig: 1020, 90
   offset: 0, 0
   index: -1
 battle/lifebar
   rotate: false
-  xy: 0, 2
+  xy: 0, 22
   size: 300, 396
   orig: 300, 396
   offset: 0, 0
   index: -1
 battle/field-4x4
   rotate: false
-  xy: 300, 321
+  xy: 300, 341
   size: 351, 77
   orig: 351, 77
   offset: 0, 0
   index: -1
 battle/field-3x4
   rotate: false
-  xy: 651, 338
+  xy: 651, 358
   size: 352, 60
   orig: 352, 60
   offset: 0, 0
   index: -1
-battle/field-4x3
+battle/field-3x3
   rotate: false
-  xy: 300, 242
-  size: 265, 77
-  orig: 265, 77
+  xy: 300, 271
+  size: 300, 68
+  orig: 300, 68
   offset: 0, 0
   index: -1
-battle/clam
+battle/field-4x3
   rotate: false
   xy: 300, 192
-  size: 288, 48
-  orig: 288, 48
+  size: 265, 77
+  orig: 265, 77
   offset: 0, 0
   index: -1
 battle/enemy-lifebar
@@ -71,11 +71,11 @@ battle/enemy-lifebar
   orig: 106, 190
   offset: 0, 0
   index: -1
-battle/field-3x3
+battle/clam
   rotate: false
-  xy: 651, 284
-  size: 230, 52
-  orig: 230, 52
+  xy: 651, 308
+  size: 288, 48
+  orig: 288, 48
   offset: 0, 0
   index: -1
 battle/triggers
@@ -101,7 +101,7 @@ battle/blue_facebutton1
   index: -1
 battle/blue_facebutton2
   rotate: false
-  xy: 565, 245
+  xy: 939, 282
   size: 75, 74
   orig: 75, 74
   offset: 0, 0
