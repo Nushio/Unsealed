@@ -18,6 +18,9 @@ Based on the Liberated Pixel Cup 'dirt' tileset.
 http://lpc.opengameart.org/static/lpc-style-guide/assets.html
 
 raw-resources/images/battle/lifebar.png
+raw-resources/images/battle/enemy-lifebar.png
+raw-resources/xcfs/lifebar.xcf
+raw-resources/xcfs/lifebar-xl.xcf
 Based on Pennomi's UI Elements
 http://opengameart.org/content/lpc-pennomis-ui-elements
 
@@ -29,6 +32,9 @@ Based on Johannes Sjölund's Character animations & weapons
 
 raw-resources/maps/tiles_/collisionator.png
 Licensed: CC0. (Free to use as needed / Public Domain)
+
+raw-resources/images/battle/triggers.png
+raw-resources/xcfs/triggers.xcf
 
 ----
 
@@ -63,6 +69,7 @@ Ben 'Cookiez' Potter
 
 raw-resources/images/battle/clam.png
 raw-resources/images/battle/ghost.png
+raw-resources/images/battle/lidia.png
 
 raw-resources/xcfs/clam.xcf
 raw-resources/xcfs/ghost.xcf
