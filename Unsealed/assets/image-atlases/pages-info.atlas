@@ -24,58 +24,72 @@ filter: Nearest,Nearest
 repeat: none
 battle/ghost
   rotate: false
-  xy: 0, 158
+  xy: 0, 152
   size: 1020, 90
   orig: 1020, 90
   offset: 0, 0
   index: -1
 battle/field-4x4
   rotate: false
-  xy: 0, 79
+  xy: 0, 73
   size: 351, 77
   orig: 351, 77
   offset: 0, 0
   index: -1
 battle/field-3x4
   rotate: false
-  xy: 351, 96
+  xy: 0, 11
   size: 352, 60
   orig: 352, 60
   offset: 0, 0
   index: -1
 battle/field-4x3
   rotate: false
-  xy: 0, 0
+  xy: 351, 73
   size: 265, 77
   orig: 265, 77
   offset: 0, 0
   index: -1
 battle/clam
   rotate: false
-  xy: 703, 108
+  xy: 352, 23
   size: 288, 48
   orig: 288, 48
   offset: 0, 0
   index: -1
 battle/field-3x3
   rotate: false
-  xy: 351, 42
+  xy: 616, 98
   size: 230, 52
   orig: 230, 52
   offset: 0, 0
   index: -1
 battle/lidia
   rotate: false
-  xy: 265, 20
-  size: 37, 57
-  orig: 37, 57
+  xy: 846, 36
+  size: 74, 114
+  orig: 74, 114
+  offset: 0, 0
+  index: -1
+battle/blue_facebutton1
+  rotate: false
+  xy: 920, 58
+  size: 83, 92
+  orig: 83, 92
   offset: 0, 0
   index: -1
 battle/lifebar
   rotate: false
-  xy: 302, 21
+  xy: 920, 0
   size: 28, 56
   orig: 28, 56
+  offset: 0, 0
+  index: -1
+battle/blue_facebutton2
+  rotate: false
+  xy: 640, 22
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 
