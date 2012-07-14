@@ -3,15 +3,13 @@ package net.k3rnel.unsealed.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.tiled.TileAtlas;
 import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledLoader;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 
 import net.k3rnel.unsealed.Unsealed;
+import net.k3rnel.unsealed.objects.GameCharacter;
 
 public class OverworldScreen extends AbstractScreen {
 
@@ -20,10 +18,13 @@ public class OverworldScreen extends AbstractScreen {
     TiledMap map;
     TileAtlas atlas;
     
-    private TextureRegion[] frames;
+    private GameCharacter player;
     
     public OverworldScreen(Unsealed game) {
         super(game);
+        
+        //TODO: Load him from last save game/take gender into account.
+        player = new GameCharacter(this.getAtlas(), 0, 0, "tutorial_dungeon");
     }
 
     @Override
@@ -44,15 +45,6 @@ public class OverworldScreen extends AbstractScreen {
         camera = new OrthographicCamera(MENU_VIEWPORT_WIDTH,MENU_VIEWPORT_HEIGHT);
         
         stage.setCamera(camera);
-        
-        // Get our character images to create animations.
-        TextureRegion[][] tmp = this.getAtlas().findRegion("char-sprites/male_spritesheet").split(64, 64);
-        frames = new TextureRegion[9 * 4];
-        
-        int k = 0;
-        for(int i = 0; i < 4; i++)
-        	for(int j = 0; j < 6; j++)
-        		frames[k++] = tmp[i][j];
     }
     
     @Override
