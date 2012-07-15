@@ -1,6 +1,7 @@
 package net.k3rnel.unsealed.objects;
 
 import java.util.List;
+import java.util.Random;
 
 import net.k3rnel.unsealed.Unsealed;
 
@@ -57,7 +58,9 @@ public class BattleHUD extends Stage {
     private void init() {
         //TODO: Non-hardcoded field sizes
         atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
-        AtlasRegion atlasRegion = atlas.findRegion( "battle/battlemap1" );
+        int battlemap = new Random().nextInt(6);
+        battlemap = battlemap+1;
+        AtlasRegion atlasRegion = atlas.findRegion( "battle/battlemap"+battlemap );
         background = new Image(atlasRegion);
 
         this.addActor(background);
