@@ -3,20 +3,21 @@ package net.k3rnel.unsealed.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Scaling;
 
 import net.k3rnel.unsealed.Unsealed;
+import net.k3rnel.unsealed.objects.BattleHUD;
 import net.k3rnel.unsealed.screens.AbstractScreen;
 
 public class BattleScreen extends AbstractScreen {
 
+    BattleHUD hud;
     Image guy;
     Image gal;
-    Image battlefield;
-    Image guybar;
     Image galbar;
     public BattleScreen(Unsealed game) {
         super(game);
@@ -28,73 +29,81 @@ public class BattleScreen extends AbstractScreen {
     @Override
     public void show() {
         super.show();
-        // retrieve the battle area from the atlas
-        AtlasRegion atlasRegion = getAtlas().findRegion( "battle/field-3x3" );
-        battlefield = new Image( atlasRegion);
-        battlefield.setScaling(Scaling.stretch);
-        battlefield.setScale(2f);
-        battlefield.setOriginX((battlefield.getWidth()*battlefield.getScaleX())/2 - stage.getWidth()/2 );
-        battlefield.setOriginY((battlefield.getHeight()*battlefield.getScaleY())+40 - stage.getHeight()/2 );
-        stage.addActor(battlefield);
-        AtlasRegion charRegion = getAtlas().findRegion( "char-sprites/male_spritesheet" );
-        TextureRegion[][] charTextures = charRegion.split(64,64);
-        guy = new Image(charTextures[3][0]);
+     
+        hud = new BattleHUD(this.stage.getWidth(), stage.getHeight());
+        AtlasRegion charRegion = getAtlas().findRegion( "battle/lidia" );
+        guy = new Image(charRegion);
         guy.setScaling(Scaling.stretch);
-        guy.setPosition(222,84);
-        guy.setScale(2f);
+        guy.setScale(0.5f);
+        guy.setPosition(234,196);
         stage.addActor(guy);
         charRegion = getAtlas().findRegion( "battle/lifebar" );
-        charTextures = charRegion.split(28,8);
-        guybar = new Image(charTextures[0][0]);
-        guybar.setScale(2f);
-        guybar.setPosition(222,104);
-        stage.addActor(guybar);
+        TextureRegion[][] charTextures = charRegion.split(28,8);
         charRegion = getAtlas().findRegion( "char-sprites/female_spritesheet" );
         charTextures = charRegion.split(64,64);
-        gal = new Image(charTextures[1][0]);
+        gal = new Image(charTextures[1][8]);
         gal.setScaling(Scaling.fill);
         gal.setScale(2f);
         gal.setPosition(450,84);
-        charRegion = getAtlas().findRegion( "battle/lifebar" );
-        charTextures = charRegion.split(28,8);
+        charRegion = getAtlas().findRegion( "battle/enemy-lifebar" );
+        charTextures = charRegion.split(106,19);
         galbar = new Image(charTextures[0][0]);
-        galbar.setScale(2f);
+//        galbar.setScale(2f);
         galbar.setPosition(450,104);
-        stage.addActor(galbar);
-        stage.addActor(gal);
+//        stage.addActor(galbar);
+//        stage.addActor(gal);
         
-        Gdx.input.setInputProcessor(new InputMultiplexer(this,stage));
+        Gdx.input.setInputProcessor(new InputMultiplexer(this,stage,hud));
     }
     @Override
     public void render(float delta) {
-        super.render(delta);
-        guybar.setX(guy.getX()+33);
-        guybar.setY(guy.getY()+100);
-        galbar.setX(gal.getX()+37);
+        guy.setScale(0.9f);
+        
+        // (1) process the game logic
+
+        // update the actors
+        stage.act( delta );
+
+        // (2) draw the result
+
+        // clear the screen with the given RGB color (black)
+        Gdx.gl.glClearColor( 0f, 0f, 0f, 1f );
+        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
+
+        // draw the actors
+
+        hud.draw();
+        stage.draw();
+        
+        galbar.setX(gal.getX()+17);
         galbar.setY(gal.getY()+100);
     }
+    
+    
+    
+    
     @Override
     public boolean keyDown(int keycode) {
         
         switch(keycode) {
             case Input.Keys.RIGHT:
-                if(guy.getX()<298)
-                guy.setX(guy.getX()+76);
+                if(guy.getX()<322)
+                guy.setX(guy.getX()+88);
                 Gdx.app.log(Unsealed.LOG, "Position: "+guy.getX()+"/"+guy.getY());
                 return true;
             case Input.Keys.LEFT:
                 if(guy.getX()>146)
-                    guy.setX(guy.getX()-76);
+                    guy.setX(guy.getX()-88);
                 Gdx.app.log(Unsealed.LOG, "Position: "+guy.getX()+"/"+guy.getY());
                 return true;
             case Input.Keys.UP:
-                if(guy.getY()<115)
-                    guy.setY(guy.getY()+31);
+                if(guy.getY()<196)
+                    guy.setY(guy.getY()+40);
                 Gdx.app.log(Unsealed.LOG, "Position: "+guy.getX()+"/"+guy.getY());
                 return true;
             case Input.Keys.DOWN:
-                if(guy.getY()>53)
-                    guy.setY(guy.getY()-31);
+                if(guy.getY()>116)
+                    guy.setY(guy.getY()-40);
                 Gdx.app.log(Unsealed.LOG, "Position: "+guy.getX()+"/"+guy.getY());
                 return true;
             case Input.Keys.D:
@@ -128,9 +137,6 @@ public class BattleScreen extends AbstractScreen {
                 return true;
             case Input.Keys.ESCAPE:
                 game.setScreen(new MenuScreen(game));
-                return true;
-            case Input.Keys.Q:
-                battlefield.setY((battlefield.getHeight()*battlefield.getScaleY())+40 - stage.getHeight()/2 );
                 return true;
 
         }

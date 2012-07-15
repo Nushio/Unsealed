@@ -80,9 +80,9 @@ battle/ghost
   index: -1
 battle/lifebar
   rotate: false
-  xy: 1600, 1620
-  size: 300, 398
-  orig: 300, 398
+  xy: 1600, 1536
+  size: 363, 482
+  orig: 363, 482
   offset: 0, 0
   index: -1
 battle/field-3x3
@@ -94,91 +94,91 @@ battle/field-3x3
   index: -1
 battle/field-4x4
   rotate: false
-  xy: 800, 368
+  xy: 1600, 1457
   size: 351, 77
   orig: 351, 77
   offset: 0, 0
   index: -1
 battle/field-3x4
   rotate: false
-  xy: 800, 306
+  xy: 800, 385
   size: 352, 60
   orig: 352, 60
   offset: 0, 0
   index: -1
 battle/field-4x3
   rotate: false
-  xy: 1600, 1541
+  xy: 1335, 495
   size: 265, 77
   orig: 265, 77
   offset: 0, 0
   index: -1
 battle/clam
   rotate: false
-  xy: 800, 256
+  xy: 1600, 1407
   size: 288, 48
   orig: 288, 48
   offset: 0, 0
   index: -1
 battle/enemy-lifebar
   rotate: false
-  xy: 1900, 1828
+  xy: 800, 193
   size: 106, 190
   orig: 106, 190
   offset: 0, 0
   index: -1
 battle/dpad_alt
   rotate: false
-  xy: 1335, 448
+  xy: 1600, 1281
   size: 124, 124
   orig: 124, 124
   offset: 0, 0
   index: -1
 battle/dpad
   rotate: false
-  xy: 1600, 1415
+  xy: 906, 259
   size: 124, 124
   orig: 124, 124
   offset: 0, 0
   index: -1
 battle/lefttrigger
   rotate: false
-  xy: 1151, 388
-  size: 181, 57
-  orig: 181, 57
-  offset: 0, 0
-  index: -1
-battle/righttrigger
-  rotate: false
-  xy: 800, 197
+  xy: 1152, 388
   size: 181, 57
   orig: 181, 57
   offset: 0, 0
   index: -1
 battle/mana_sphere
   rotate: false
-  xy: 800, 152
+  xy: 1335, 450
   size: 192, 43
   orig: 192, 43
   offset: 0, 0
   index: -1
+battle/righttrigger
+  rotate: false
+  xy: 1724, 1348
+  size: 181, 57
+  orig: 181, 57
+  offset: 0, 0
+  index: -1
 battle/lidia
   rotate: false
-  xy: 1900, 1712
+  xy: 1963, 1904
   size: 74, 114
   orig: 74, 114
   offset: 0, 0
   index: -1
 battle/blue_facebutton1
   rotate: false
-  xy: 1459, 480
+  xy: 800, 99
   size: 83, 92
   orig: 83, 92
   offset: 0, 0
   index: -1
 battle/blue_facebutton2
   rotate: false
-  xy: 1600, 1339
+  xy: 1600, 1205
   size: 75, 74
   orig: 75, 74
   offset: 0, 0
