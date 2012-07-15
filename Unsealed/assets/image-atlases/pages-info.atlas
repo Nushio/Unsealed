@@ -3,114 +3,6 @@ pages-info.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-char-sprites/female_spritesheet
-  rotate: false
-  xy: 0, 0
-  size: 576, 256
-  orig: 576, 256
-  offset: 0, 0
-  index: -1
-char-sprites/male_spritesheet
-  rotate: false
-  xy: 576, 0
-  size: 576, 256
-  orig: 576, 256
-  offset: 0, 0
-  index: -1
-
-pages-info2.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-battle/ghost
-  rotate: false
-  xy: 0, 400
-  size: 1020, 90
-  orig: 1020, 90
-  offset: 0, 0
-  index: -1
-battle/lifebar
-  rotate: false
-  xy: 0, 2
-  size: 300, 396
-  orig: 300, 396
-  offset: 0, 0
-  index: -1
-battle/field-4x4
-  rotate: false
-  xy: 300, 321
-  size: 351, 77
-  orig: 351, 77
-  offset: 0, 0
-  index: -1
-battle/field-3x4
-  rotate: false
-  xy: 651, 338
-  size: 352, 60
-  orig: 352, 60
-  offset: 0, 0
-  index: -1
-battle/field-4x3
-  rotate: false
-  xy: 300, 242
-  size: 265, 77
-  orig: 265, 77
-  offset: 0, 0
-  index: -1
-battle/clam
-  rotate: false
-  xy: 300, 192
-  size: 288, 48
-  orig: 288, 48
-  offset: 0, 0
-  index: -1
-battle/enemy-lifebar
-  rotate: false
-  xy: 300, 0
-  size: 106, 190
-  orig: 106, 190
-  offset: 0, 0
-  index: -1
-battle/field-3x3
-  rotate: false
-  xy: 651, 284
-  size: 230, 52
-  orig: 230, 52
-  offset: 0, 0
-  index: -1
-battle/triggers
-  rotate: false
-  xy: 406, 133
-  size: 181, 57
-  orig: 181, 57
-  offset: 0, 0
-  index: -1
-battle/lidia
-  rotate: false
-  xy: 406, 17
-  size: 74, 114
-  orig: 74, 114
-  offset: 0, 0
-  index: -1
-battle/blue_facebutton1
-  rotate: false
-  xy: 480, 39
-  size: 83, 92
-  orig: 83, 92
-  offset: 0, 0
-  index: -1
-battle/blue_facebutton2
-  rotate: false
-  xy: 565, 245
-  size: 75, 74
-  orig: 75, 74
-  offset: 0, 0
-  index: -1
-
-pages-info3.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 splash-screen/splash
   rotate: false
   xy: 0, 193
@@ -123,5 +15,190 @@ splash-screen/menulogo
   xy: 0, 0
   size: 512, 191
   orig: 512, 191
+  offset: 0, 0
+  index: -1
+
+pages-info2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+battle/battlemap6
+  rotate: false
+  xy: 0, 1538
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+battle/battlemap5
+  rotate: false
+  xy: 0, 1056
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+battle/battlemap3
+  rotate: false
+  xy: 800, 1538
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+battle/battlemap4
+  rotate: false
+  xy: 0, 574
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+battle/battlemap7
+  rotate: false
+  xy: 800, 1056
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+battle/battlemap2
+  rotate: false
+  xy: 0, 92
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+battle/battlemap1
+  rotate: false
+  xy: 800, 574
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+battle/ghost
+  rotate: false
+  xy: 0, 0
+  size: 1020, 90
+  orig: 1020, 90
+  offset: 0, 0
+  index: -1
+battle/lifebar
+  rotate: false
+  xy: 1600, 1620
+  size: 300, 398
+  orig: 300, 398
+  offset: 0, 0
+  index: -1
+battle/field-3x3
+  rotate: false
+  xy: 800, 447
+  size: 535, 125
+  orig: 535, 125
+  offset: 0, 0
+  index: -1
+battle/field-4x4
+  rotate: false
+  xy: 800, 368
+  size: 351, 77
+  orig: 351, 77
+  offset: 0, 0
+  index: -1
+battle/field-3x4
+  rotate: false
+  xy: 800, 306
+  size: 352, 60
+  orig: 352, 60
+  offset: 0, 0
+  index: -1
+battle/field-4x3
+  rotate: false
+  xy: 1600, 1541
+  size: 265, 77
+  orig: 265, 77
+  offset: 0, 0
+  index: -1
+battle/clam
+  rotate: false
+  xy: 800, 256
+  size: 288, 48
+  orig: 288, 48
+  offset: 0, 0
+  index: -1
+battle/enemy-lifebar
+  rotate: false
+  xy: 1900, 1828
+  size: 106, 190
+  orig: 106, 190
+  offset: 0, 0
+  index: -1
+battle/dpad_alt
+  rotate: false
+  xy: 1335, 448
+  size: 124, 124
+  orig: 124, 124
+  offset: 0, 0
+  index: -1
+battle/dpad
+  rotate: false
+  xy: 1600, 1415
+  size: 124, 124
+  orig: 124, 124
+  offset: 0, 0
+  index: -1
+battle/lefttrigger
+  rotate: false
+  xy: 1151, 388
+  size: 181, 57
+  orig: 181, 57
+  offset: 0, 0
+  index: -1
+battle/righttrigger
+  rotate: false
+  xy: 800, 197
+  size: 181, 57
+  orig: 181, 57
+  offset: 0, 0
+  index: -1
+battle/mana_sphere
+  rotate: false
+  xy: 800, 152
+  size: 192, 43
+  orig: 192, 43
+  offset: 0, 0
+  index: -1
+battle/lidia
+  rotate: false
+  xy: 1900, 1712
+  size: 74, 114
+  orig: 74, 114
+  offset: 0, 0
+  index: -1
+battle/blue_facebutton1
+  rotate: false
+  xy: 1459, 480
+  size: 83, 92
+  orig: 83, 92
+  offset: 0, 0
+  index: -1
+battle/blue_facebutton2
+  rotate: false
+  xy: 1600, 1339
+  size: 75, 74
+  orig: 75, 74
+  offset: 0, 0
+  index: -1
+
+pages-info3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+char-sprites/female_spritesheet
+  rotate: false
+  xy: 0, 0
+  size: 576, 256
+  orig: 576, 256
+  offset: 0, 0
+  index: -1
+char-sprites/male_spritesheet
+  rotate: false
+  xy: 576, 0
+  size: 576, 256
+  orig: 576, 256
   offset: 0, 0
   index: -1
