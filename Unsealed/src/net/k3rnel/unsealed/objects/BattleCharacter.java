@@ -14,6 +14,7 @@ public class BattleCharacter extends Actor {
     public static final int stateIdle = 0;
     public static final int stateAttacking = 1;
     public static final int stateCharging = 2;
+    public static final int stateBlocking = 3;
 
     public final HashMap<String, Animation> animations;
     private Animation currentAnimation;
@@ -70,6 +71,9 @@ public class BattleCharacter extends Actor {
                 break;
             case stateCharging:
                 currentAnimation = animations.get("charging");
+                break;
+            case stateBlocking:
+                currentAnimation = animations.get("blocking");
                 break;
         }
     }

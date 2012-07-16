@@ -99,39 +99,32 @@ battle/righttrigger
   orig: 181, 114
   offset: 0, 0
   index: -1
-battle/lidia
-  rotate: false
-  xy: 800, 30
-  size: 74, 114
-  orig: 74, 114
-  offset: 0, 0
-  index: -1
 battle/dpad_up
   rotate: false
-  xy: 874, 58
-  size: 60, 86
-  orig: 60, 86
-  offset: 0, 0
-  index: -1
-battle/dpad_down
-  rotate: false
-  xy: 934, 58
+  xy: 800, 58
   size: 60, 86
   orig: 60, 86
   offset: 0, 0
   index: -1
 battle/dpad_right
   rotate: false
-  xy: 906, 802
+  xy: 860, 84
   size: 86, 60
   orig: 86, 60
   offset: 0, 0
   index: -1
 battle/dpad_left
   rotate: false
-  xy: 883, 740
+  xy: 906, 802
   size: 86, 60
   orig: 86, 60
+  offset: 0, 0
+  index: -1
+battle/dpad_down
+  rotate: false
+  xy: 883, 714
+  size: 60, 86
+  orig: 60, 86
   offset: 0, 0
   index: -1
 
@@ -191,30 +184,37 @@ battle/lifebar
   orig: 363, 482
   offset: 0, 0
   index: -1
+battle/lidia
+  rotate: false
+  xy: 363, 348
+  size: 560, 134
+  orig: 560, 134
+  offset: 0, 0
+  index: -1
 battle/field-3x3
   rotate: false
-  xy: 363, 357
+  xy: 363, 221
   size: 535, 125
   orig: 535, 125
   offset: 0, 0
   index: -1
 battle/field-4x4
   rotate: false
-  xy: 363, 278
+  xy: 363, 142
   size: 351, 77
   orig: 351, 77
   offset: 0, 0
   index: -1
 battle/field-4x3
   rotate: false
-  xy: 714, 278
+  xy: 714, 142
   size: 265, 77
   orig: 265, 77
   offset: 0, 0
   index: -1
 battle/field-3x4
   rotate: false
-  xy: 363, 216
+  xy: 363, 80
   size: 352, 60
   orig: 352, 60
   offset: 0, 0

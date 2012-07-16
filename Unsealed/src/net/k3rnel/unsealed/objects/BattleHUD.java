@@ -1,9 +1,6 @@
 package net.k3rnel.unsealed.objects;
 
-import java.util.Arrays;
 import java.util.Random;
-
-import net.k3rnel.unsealed.Unsealed;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -16,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.PressedListener;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
@@ -87,11 +83,16 @@ public class BattleHUD extends Stage {
         grid = new boolean[3][6];
 
         hero = new BattleCharacter();
-        Animation waiting = new Animation(1f, atlas.findRegion("battle/lidia"));
+        atlasRegion = atlas.findRegion("battle/lidia");
+        TextureRegion[][] lidia = atlasRegion.split(112,134);
+        Animation waiting = new Animation(1f, lidia[0][0]);
         waiting.setPlayMode(Animation.NORMAL);
         hero.animations.put("waiting", waiting);
+        Animation blocking = new Animation(1f,lidia[0][1]);
+        blocking.setPlayMode(Animation.NORMAL);
+        hero.animations.put("blocking",blocking);
         hero.setState(0);
-        hero.setPosition(230,150);
+        hero.setPosition(220,150);
         this.addActor(hero);
         grid[1][1] = true;
 
@@ -110,8 +111,14 @@ public class BattleHUD extends Stage {
             @Override
             public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
                  super.touchDown(event, x, y, pointer, button);
-                 buttonPress(4); 
+                 buttonPress(4,true); 
                  return true;
+            }
+            
+            @Override
+            public void touchUp(ActorEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                buttonPress(4,false); 
             }
         });
         this.addActor(leftTrigger);
@@ -124,7 +131,7 @@ public class BattleHUD extends Stage {
             @Override
             public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
                  super.touchDown(event, x, y, pointer, button);
-                 buttonPress(5); 
+                 buttonPress(5,true); 
                  return true;
             }
         });
@@ -170,7 +177,7 @@ public class BattleHUD extends Stage {
             @Override
             public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
                  super.touchDown(event, x, y, pointer, button);
-                 buttonPress(1); 
+                 buttonPress(1,true); 
                  return true;
             }
         });
@@ -184,7 +191,7 @@ public class BattleHUD extends Stage {
             @Override
             public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
                  super.touchDown(event, x, y, pointer, button);
-                 buttonPress(0); 
+                 buttonPress(0,true); 
                  return true;
             }
         });
@@ -198,7 +205,7 @@ public class BattleHUD extends Stage {
             @Override
             public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
                  super.touchDown(event, x, y, pointer, button);
-                 buttonPress(2); 
+                 buttonPress(2,true); 
                  return true;
             }
         });
@@ -212,7 +219,7 @@ public class BattleHUD extends Stage {
             @Override
             public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
                  super.touchDown(event, x, y, pointer, button);
-                 buttonPress(3); 
+                 buttonPress(3,true); 
                  return true;
             }
         });
@@ -255,7 +262,12 @@ public class BattleHUD extends Stage {
             
             @Override
             public void run() {
-                if(hero.getMana()<30)
+                if(hero.getState()==3){
+                    if(hero.getMana()>0)
+                        hero.setMana(hero.getMana()-2);
+                    else
+                        hero.setState(0);
+                }else if(hero.getMana()<30)
                     hero.setMana(hero.getMana()+1);
                 
             }
@@ -265,10 +277,8 @@ public class BattleHUD extends Stage {
     @Override
     public void draw() {
         super.draw();
-        
         int fillSize = hero.getMana()%5;
         int manaBars = hero.getMana()/5;
-        Gdx.app.log(Unsealed.LOG, "Mana: "+hero.getMana()+"/"+manaBars+"/"+fillSize);
         switch(manaBars){
             case 0:
                 manasphere1.setDrawable(new Image(manasphere[0][fillSize]).getDrawable());
@@ -340,7 +350,7 @@ public class BattleHUD extends Stage {
      * 4 = shield, 5 = attack
      * @param direction
      */
-    public void buttonPress(int button){
+    public void buttonPress(int button,boolean pressed){
         switch(button){
             case 0:{ // Up
                 if((hero.getGridY()-1>-1))
@@ -384,7 +394,14 @@ public class BattleHUD extends Stage {
                 break;
             }
             case 4:{ // Shield
-               
+                if(pressed){
+                   if(hero.getState()!=3){
+                        hero.setState(3);
+                        hero.setMana(hero.getMana()-2);
+                    }
+                }else{
+                    hero.setState(0);
+                }
                 break;
             }
             case 5:{ // Attack

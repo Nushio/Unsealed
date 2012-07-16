@@ -76,21 +76,24 @@ public class BattleScreen extends AbstractScreen {
     
     
     
+    
     @Override
     public boolean keyDown(int keycode) {
-        
         switch(keycode) {
             case Input.Keys.RIGHT:
-                hud.buttonPress(3);
+                hud.buttonPress(3,true);
                 return true;
             case Input.Keys.LEFT:
-                hud.buttonPress(2);
+                hud.buttonPress(2,true);
                 return true;
             case Input.Keys.UP:
-                hud.buttonPress(0);
+                hud.buttonPress(0,true);
                 return true;
             case Input.Keys.DOWN:
-                hud.buttonPress(1);
+                hud.buttonPress(1,true);
+                return true;
+            case Input.Keys.U:
+                hud.buttonPress(4,true);
                 return true;
         }
         return false;
@@ -98,6 +101,9 @@ public class BattleScreen extends AbstractScreen {
     @Override
     public boolean keyUp(int keycode) {
         switch(keycode) {
+            case Input.Keys.U:
+                hud.buttonPress(4,false);
+                return true;
             case Input.Keys.BACK:
                 game.setScreen(new MenuScreen(game));
                 return true;
