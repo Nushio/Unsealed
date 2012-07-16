@@ -61,6 +61,7 @@ public class BattleHUD extends Stage {
         this.width = width;
         this.height = height;
         this.atlas = atlas;
+        setViewport(this.width, this.height, true);
         init();
     }
 
