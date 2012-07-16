@@ -16,7 +16,6 @@ import net.k3rnel.unsealed.screens.AbstractScreen;
 public class BattleScreen extends AbstractScreen {
 
     BattleHUD hud;
-    Image guy;
     Image gal;
     Image galbar;
     public BattleScreen(Unsealed game) {
@@ -30,14 +29,9 @@ public class BattleScreen extends AbstractScreen {
     public void show() {
         super.show();
      
-        hud = new BattleHUD(this.stage.getWidth(), stage.getHeight());
-        AtlasRegion charRegion = getAtlas().findRegion( "battle/lidia" );
-        guy = new Image(charRegion);
-        guy.setScaling(Scaling.stretch);
-        guy.setScale(0.5f);
-        guy.setPosition(234,196);
-        stage.addActor(guy);
-        charRegion = getAtlas().findRegion( "battle/lifebar" );
+        hud = new BattleHUD(this.stage.getWidth(), stage.getHeight(),getAtlas());
+       
+        AtlasRegion charRegion = getAtlas().findRegion( "battle/lifebar" );
         TextureRegion[][] charTextures = charRegion.split(28,8);
         charRegion = getAtlas().findRegion( "char-sprites/female_spritesheet" );
         charTextures = charRegion.split(64,64);
@@ -57,7 +51,7 @@ public class BattleScreen extends AbstractScreen {
     }
     @Override
     public void render(float delta) {
-        guy.setScale(0.9f);
+       
         
         // (1) process the game logic
 
@@ -87,44 +81,16 @@ public class BattleScreen extends AbstractScreen {
         
         switch(keycode) {
             case Input.Keys.RIGHT:
-                if(guy.getX()<322)
-                guy.setX(guy.getX()+88);
-                Gdx.app.log(Unsealed.LOG, "Position: "+guy.getX()+"/"+guy.getY());
+                hud.buttonPress(3);
                 return true;
             case Input.Keys.LEFT:
-                if(guy.getX()>146)
-                    guy.setX(guy.getX()-88);
-                Gdx.app.log(Unsealed.LOG, "Position: "+guy.getX()+"/"+guy.getY());
+                hud.buttonPress(2);
                 return true;
             case Input.Keys.UP:
-                if(guy.getY()<196)
-                    guy.setY(guy.getY()+40);
-                Gdx.app.log(Unsealed.LOG, "Position: "+guy.getX()+"/"+guy.getY());
+                hud.buttonPress(0);
                 return true;
             case Input.Keys.DOWN:
-                if(guy.getY()>116)
-                    guy.setY(guy.getY()-40);
-                Gdx.app.log(Unsealed.LOG, "Position: "+guy.getX()+"/"+guy.getY());
-                return true;
-            case Input.Keys.D:
-                if(gal.getX()<526)
-                    gal.setX(gal.getX()+76);
-                Gdx.app.log(Unsealed.LOG, "Position: "+gal.getX()+"/"+gal.getY());
-                return true;
-            case Input.Keys.A:
-                if(gal.getX()>374)
-                    gal.setX(gal.getX()-76);
-                Gdx.app.log(Unsealed.LOG, "Position: "+gal.getX()+"/"+gal.getY());
-                return true;
-            case Input.Keys.W:
-                if(gal.getY()<115)
-                gal.setY(gal.getY()+31);
-                Gdx.app.log(Unsealed.LOG, "Position: "+gal.getX()+"/"+gal.getY());
-                return true;
-            case Input.Keys.S:
-                if(gal.getY()>53)
-                gal.setY(gal.getY()-31);
-                Gdx.app.log(Unsealed.LOG, "Position: "+gal.getX()+"/"+gal.getY());
+                hud.buttonPress(1);
                 return true;
         }
         return false;
@@ -138,7 +104,6 @@ public class BattleScreen extends AbstractScreen {
             case Input.Keys.ESCAPE:
                 game.setScreen(new MenuScreen(game));
                 return true;
-
         }
         return false;
     }

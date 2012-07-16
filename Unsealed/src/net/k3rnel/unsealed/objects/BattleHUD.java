@@ -1,19 +1,25 @@
 package net.k3rnel.unsealed.objects;
 
-import java.util.List;
+import java.util.Arrays;
 import java.util.Random;
 
 import net.k3rnel.unsealed.Unsealed;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.ActorEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.PressedListener;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 public class BattleHUD extends Stage {
 
@@ -24,15 +30,19 @@ public class BattleHUD extends Stage {
     private TextureAtlas atlas;
 
     private Image lifebar;
-    TextureRegion[][] lifebarTextures;
-    
-    private Image leftTrigger;
-    private Image rightTrigger;
+    private TextureRegion[][] lifebarTextures;
+
+    private Button leftTrigger;
+    private Button rightTrigger;
     private Image dPad;
-    private Image aButton;
-    private Image bButton;
-    private Image xButton;
-    private Image yButton;
+    private Button dPadDown;
+    private Button dPadUp;
+    private Button dPadLeft;
+    private Button dPadRight;
+    private Button aButton;
+    private Button bButton;
+    private Button xButton;
+    private Button yButton;
 
     TextureRegion[][] manasphere; 
     private Image manasphere1;
@@ -41,17 +51,20 @@ public class BattleHUD extends Stage {
     private Image manasphere4;
     private Image manasphere5;
     private Image manasphere6;
-    
+
     private Image background;
     private Image battleoverlay;
 
-    private List<Object>[][] grid;
+    public boolean[][] grid;
+
+    public BattleCharacter hero;
     
-    
-    public BattleHUD(float width, float height) {
+    private Timer timer;
+
+    public BattleHUD(float width, float height, TextureAtlas atlas) {
         this.width = width;
         this.height = height;
-
+        this.atlas = atlas;
         init();
     }
 
@@ -59,7 +72,6 @@ public class BattleHUD extends Stage {
         //TODO: Non-hardcoded field sizes
         atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
         int battlemap = new Random().nextInt(6);
-        battlemap = battlemap+1;
         AtlasRegion atlasRegion = atlas.findRegion( "battle/battlemap"+battlemap );
         background = new Image(atlasRegion);
 
@@ -72,6 +84,17 @@ public class BattleHUD extends Stage {
 
         this.addActor(battleoverlay);
 
+        grid = new boolean[3][6];
+
+        hero = new BattleCharacter();
+        Animation waiting = new Animation(1f, atlas.findRegion("battle/lidia"));
+        waiting.setPlayMode(Animation.NORMAL);
+        hero.animations.put("waiting", waiting);
+        hero.setState(0);
+        hero.setPosition(230,150);
+        this.addActor(hero);
+        grid[1][1] = true;
+
         atlasRegion = atlas.findRegion("battle/lifebar");
         lifebarTextures = atlasRegion.split(363,23);
         lifebar = new Image(lifebarTextures[0][0]);
@@ -80,91 +103,294 @@ public class BattleHUD extends Stage {
         this.addActor(lifebar);
 
         atlasRegion = atlas.findRegion("battle/lefttrigger");
-        leftTrigger = new Image(atlasRegion);
+        TextureRegion[][] textures  = atlasRegion.split(181,57);
+        leftTrigger = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
         leftTrigger.setPosition(0, this.height-leftTrigger.getHeight());
+        leftTrigger.addListener(new PressedListener() {
+            @Override
+            public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
+                 super.touchDown(event, x, y, pointer, button);
+                 buttonPress(4); 
+                 return true;
+            }
+        });
         this.addActor(leftTrigger);
 
         atlasRegion = atlas.findRegion("battle/righttrigger");
-        rightTrigger = new Image(atlasRegion);
+        textures = atlasRegion.split(181,57);
+        rightTrigger = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
         rightTrigger.setPosition(this.width-rightTrigger.getWidth(), this.height-rightTrigger.getHeight());
+        rightTrigger.addListener(new PressedListener() {
+            @Override
+            public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
+                 super.touchDown(event, x, y, pointer, button);
+                 buttonPress(5); 
+                 return true;
+            }
+        });
         this.addActor(rightTrigger);
 
         atlasRegion = atlas.findRegion("battle/blue_facebutton1");
-        aButton = new Image(atlasRegion);
+        textures = atlasRegion.split(83,92);
+        aButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
         aButton.setX( this.width - (aButton.getWidth()*aButton.getScaleX()) );
         aButton.setY( this.height -(aButton.getHeight()*aButton.getScaleY()+ 100) ); 
         this.addActor(aButton);
 
-        xButton = new Image(atlasRegion);
+        textures = atlasRegion.split(83,92);
+        xButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
         xButton.setX( this.width - (xButton.getWidth()*xButton.getScaleX()) -160 );
         xButton.setY( this.height -(xButton.getHeight()*xButton.getScaleY()+ 100) );
         this.addActor(xButton);
 
-        bButton = new Image(atlasRegion);
+        textures = atlasRegion.split(83,92);
+        bButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
         bButton.setX( this.width - (bButton.getWidth()*bButton.getScaleX()) -80 );
         bButton.setY( this.height -(bButton.getHeight()*bButton.getScaleY()+ 160) ); 
         this.addActor(bButton);
 
         atlasRegion = atlas.findRegion("battle/blue_facebutton2");
-        yButton = new Image(atlasRegion);
+        textures = atlasRegion.split(75,74);
+        yButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
         yButton.setX( this.width - (yButton.getWidth()*yButton.getScaleX()) -84 );
         yButton.setY( this.height -(yButton.getHeight()*yButton.getScaleY()+ 60) ); 
         this.addActor(yButton);
-        
+
         atlasRegion = atlas.findRegion("battle/dpad_alt");
-        dPad = new Image(atlasRegion);
+        dPad = new Image(new Image(atlasRegion).getDrawable());
         dPad.setX((dPad.getWidth()*dPad.getScaleX()) - 80);
         dPad.setY( this.height -(dPad.getHeight()*dPad.getScaleY()+ 100) ); 
-        
         this.addActor(dPad);
-        
+
+        atlasRegion = atlas.findRegion("battle/dpad_down");
+        textures = atlasRegion.split(60,43);
+        dPadDown = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+        dPadDown.setPosition(84,this.height-227); 
+        dPadDown.addListener(new PressedListener() {
+            @Override
+            public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
+                 super.touchDown(event, x, y, pointer, button);
+                 buttonPress(1); 
+                 return true;
+            }
+        });
+        this.addActor(dPadDown);
+
+        atlasRegion = atlas.findRegion("battle/dpad_up");
+        textures = atlasRegion.split(60,43);
+        dPadUp = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+        dPadUp.setPosition(84,this.height-143);
+        dPadUp.addListener(new PressedListener() {
+            @Override
+            public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
+                 super.touchDown(event, x, y, pointer, button);
+                 buttonPress(0); 
+                 return true;
+            }
+        });
+        this.addActor(dPadUp);
+
+        atlasRegion = atlas.findRegion("battle/dpad_left");
+        textures = atlasRegion.split(43,60);
+        dPadLeft = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[0][1]).getDrawable());
+        dPadLeft.setPosition(50,this.height-194);  
+        dPadLeft.addListener(new PressedListener() {
+            @Override
+            public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
+                 super.touchDown(event, x, y, pointer, button);
+                 buttonPress(2); 
+                 return true;
+            }
+        });
+        this.addActor(dPadLeft);
+
+        atlasRegion = atlas.findRegion("battle/dpad_right");
+        textures = atlasRegion.split(43,60);
+        dPadRight = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[0][1]).getDrawable());
+        dPadRight.setPosition(138,this.height-194);
+        dPadRight.addListener(new PressedListener() {
+            @Override
+            public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
+                 super.touchDown(event, x, y, pointer, button);
+                 buttonPress(3); 
+                 return true;
+            }
+        });
+        this.addActor(dPadRight);
+
         atlasRegion = atlas.findRegion("battle/mana_sphere");
         manasphere = atlasRegion.split(32,43);
         manasphere1 = new Image(manasphere[0][0]);
         manasphere1.setX( this.width/2 - manasphere1.getWidth()/2 -125 );
         manasphere1.setY(this.height-manasphere1.getHeight()-26);
         this.addActor(manasphere1);
-        
+
         manasphere2 = new Image(manasphere[0][0]);
         manasphere2.setX( this.width/2 - manasphere2.getWidth()/2 -75 );
         manasphere2.setY(this.height-manasphere2.getHeight()-26);
         this.addActor(manasphere2);
-        
+
         manasphere3 = new Image(manasphere[0][0]);
         manasphere3.setX( this.width/2 - manasphere3.getWidth()/2 - 25 );
         manasphere3.setY(this.height-manasphere3.getHeight()-26);
         this.addActor(manasphere3);
-        
+
         manasphere4 = new Image(manasphere[0][0]);
         manasphere4.setX( this.width/2 - manasphere4.getWidth()/2 + 25 );
         manasphere4.setY(this.height-manasphere4.getHeight()-26);
         this.addActor(manasphere4);
-        
+
         manasphere5 = new Image(manasphere[0][0]);
         manasphere5.setX( this.width/2 - manasphere5.getWidth()/2 + 75 );
         manasphere5.setY(this.height-manasphere5.getHeight()-26);
         this.addActor(manasphere5);
-        
+
         manasphere6 = new Image(manasphere[0][0]);
         manasphere6.setX( this.width/2 - manasphere6.getWidth()/2 + 125 );
         manasphere6.setY(this.height-manasphere6.getHeight()-26);
         this.addActor(manasphere6);
+        
+        timer = new Timer();
+        timer.scheduleTask(new Task() {
+            
+            @Override
+            public void run() {
+                if(hero.getMana()<30)
+                    hero.setMana(hero.getMana()+1);
+                
+            }
+        }, 0f, 1f);
     }
 
     @Override
     public void draw() {
         super.draw();
-         
+        
+        int fillSize = hero.getMana()%5;
+        int manaBars = hero.getMana()/5;
+        Gdx.app.log(Unsealed.LOG, "Mana: "+hero.getMana()+"/"+manaBars+"/"+fillSize);
+        switch(manaBars){
+            case 0:
+                manasphere1.setDrawable(new Image(manasphere[0][fillSize]).getDrawable());
+                manasphere2.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere3.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere4.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere5.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere6.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                break;
+            case 1:
+                manasphere1.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere2.setDrawable(new Image(manasphere[0][fillSize]).getDrawable());
+                manasphere3.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere4.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere5.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere6.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                break;
+            case 2:
+                manasphere1.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere2.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere3.setDrawable(new Image(manasphere[0][fillSize]).getDrawable());
+                manasphere4.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere5.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere6.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                break;
+            case 3:
+                manasphere1.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere2.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere3.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere4.setDrawable(new Image(manasphere[0][fillSize]).getDrawable());
+                manasphere5.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere6.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                break;
+            case 4:
+                manasphere1.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere2.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere3.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere4.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere5.setDrawable(new Image(manasphere[0][fillSize]).getDrawable());
+                manasphere6.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                break;
+            case 5:
+                manasphere1.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere2.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere3.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere4.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere5.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere6.setDrawable(new Image(manasphere[0][fillSize]).getDrawable());
+                break;
+            case 6:
+                manasphere1.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere2.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere3.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere4.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere5.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere6.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                break;
+        }
         
     }
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        Gdx.app.log(Unsealed.LOG, "TOUCHDOWN!: "+screenX+"/"+screenY+"/"+pointer+"/"+button);
-      
-        return super.touchDown(screenX, screenY, pointer, button);
-    }
+
     public void dispose () {
         if(atlas!=null) atlas.dispose();
         if(batch!=null) batch.dispose();
+    }
+
+    /**
+     * 0 = up, 1 = down, 2 = left, 3 = right
+     * 4 = shield, 5 = attack
+     * @param direction
+     */
+    public void buttonPress(int button){
+        switch(button){
+            case 0:{ // Up
+                if((hero.getGridY()-1>-1))
+                    if(!grid[hero.getGridX()][hero.getGridY()-1]){
+                        hero.setY(hero.getY()+40);
+                        grid[hero.getGridX()][hero.getGridY()] =  false;
+                        grid[hero.getGridX()][hero.getGridY()-1] = true;
+                        hero.setGridY(hero.getGridY()-1);
+                    }
+
+                break;
+            }
+            case 1:{ // Down
+                if((hero.getGridY()+1<3))
+                    if(!grid[hero.getGridX()][hero.getGridY()+1]){
+                        hero.setY(hero.getY()-40);
+                        grid[hero.getGridX()][hero.getGridY()] =  false;
+                        grid[hero.getGridX()][hero.getGridY()+1] = true;
+                        hero.setGridY(hero.getGridY()+1);
+                    }
+                break;
+            }
+            case 2:{ // Left
+                if((hero.getGridX()-1>-1))
+                    if(!grid[hero.getGridX()-1][hero.getGridY()]){
+                        hero.setX(hero.getX()-88);
+                        grid[hero.getGridX()][hero.getGridY()] =  false;
+                        grid[hero.getGridX()-1][hero.getGridY()] = true;
+                        hero.setGridX(hero.getGridX()-1);
+                    }
+                break;
+            }
+            case 3:{ // Right
+                if((hero.getGridX()+1<3))
+                    if(!grid[hero.getGridX()+1][hero.getGridY()]){
+                        hero.setX(hero.getX()+88);
+                        grid[hero.getGridX()][hero.getGridY()] =  false;
+                        grid[hero.getGridX()+1][hero.getGridY()] = true;
+                        hero.setGridX(hero.getGridX()+1);
+                    }
+                break;
+            }
+            case 4:{ // Shield
+               
+                break;
+            }
+            case 5:{ // Attack
+                
+                break;
+            }
+        }
     }
 }

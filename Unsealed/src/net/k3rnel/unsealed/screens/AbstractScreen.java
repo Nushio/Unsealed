@@ -72,9 +72,7 @@ public abstract class AbstractScreen extends InputAdapter implements Screen {
     protected Skin getSkin() {
         if( skin == null ) {
             FileHandle skinFile = Gdx.files.internal( "skin/uiskin.json" );
-//            FileHandle textureFile = Gdx.files.internal( "skin/uiskin.png" );
             skin = new Skin( skinFile );
-//            skin.load(skinFile);
         }
         return skin;
     }
