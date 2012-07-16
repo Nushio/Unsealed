@@ -101,6 +101,8 @@ public class BattleCharacter extends Actor {
      */
     public void setMana(int mana) {
         this.mana = mana;
+        if(this.mana<0)
+            this.mana = 0;
         if(this.mana > 30)
             this.mana = 30;
     }
