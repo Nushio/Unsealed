@@ -71,6 +71,7 @@ public class BattleHUD extends Stage {
         int battlemap = new Random().nextInt(6);
         AtlasRegion atlasRegion = atlas.findRegion( "battle/battlemap"+battlemap );
         background = new Image(atlasRegion);
+        background.setSize(width, height);
 
         this.addActor(background);
 
@@ -78,7 +79,6 @@ public class BattleHUD extends Stage {
         battleoverlay = new Image(atlasRegion);
         battleoverlay.setX( this.width/2 - (battleoverlay.getWidth()*battleoverlay.getScaleX())/2 );
         battleoverlay.setY( this.height/2 -(battleoverlay.getHeight()*battleoverlay.getScaleY())/2 - 75); 
-
         this.addActor(battleoverlay);
 
         grid = new boolean[3][6];
@@ -353,6 +353,7 @@ public class BattleHUD extends Stage {
      */
     public void buttonPress(int button,boolean pressed){
         switch(button){
+            //TODO: Hero moves at a fixed pixel rate (A.k.a. magic numbers). It should instead move based on screen width.
             case 0:{ // Up
                 if((hero.getGridY()-1>-1))
                     if(!grid[hero.getGridX()][hero.getGridY()-1]){
