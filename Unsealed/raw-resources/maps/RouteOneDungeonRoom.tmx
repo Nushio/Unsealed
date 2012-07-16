@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="14" height="13" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" source="tiles_/Exteriors.tsx"/>
+ <tileset firstgid="1891" source="tiles_/collisionator.tsx"/>
+ <layer name="Ground" width="14" height="13">
+  <data encoding="base64" compression="zlib">
+   eJwzYWBgMBnFo3iYYQDgdCT5
+  </data>
+ </layer>
+ <layer name="Ground" width="14" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhcoBAHppW+KUDMSYY+ECigkz5fIPYDYh0S9WGzZzDqm8wAiQcYRo4PUgCy/QCfXBxv
+  </data>
+ </layer>
+ <layer name="Decorations" width="14" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg6oI4INUco0EsKoJZ52NyLz2xc/qMGoHYY0SsusAEA4fEGBQ==
+  </data>
+ </layer>
+ <layer name="Walls" width="14" height="13">
+  <data encoding="base64" compression="zlib">
+   eJx7wMDAEIIF3wdiQyB+gEOOmZGBoQpIe0FpGGZihOhjRhKHqQHJqQHxXCA7F0rDsCpUnxqSOEwNSM6IATswgLoTm7wBDnFK9AVDwyCURH2VDJAwqCZR3xwGSBjMI1EfLxDzATE/ifroHZ6E9O1lgPgDHe+B6sMmD5IDAEYoHx4=
+  </data>
+ </layer>
+ <layer name="Collisions" width="14" height="13">
+  <data encoding="base64" compression="zlib">
+   eJylUMsKgDAM220fquKGEx//f1gLFUOojrFCLknTNk0xhDQArZ6eS1CMK/HFSTr2qJZhFtZqfIY9qHm852PN49H3dUvLx7py7MPZm/1ib+TjmoSfBUvHnc8tI3/xcvzla+07LAfjNp+nq1YBncsuMg==
+  </data>
+ </layer>
+</map>
