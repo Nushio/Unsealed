@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.screens.AbstractScreen;
-import net.k3rnel.unsealed.screens.battle.BattleEnemy;
 import net.k3rnel.unsealed.screens.battle.BattleHUD;
 
 public class BattleScreen extends AbstractScreen {
@@ -63,13 +62,25 @@ public class BattleScreen extends AbstractScreen {
             case Input.Keys.RIGHT:
                 hud.buttonPress(3,true);
                 return true;
+            case Input.Keys.D:
+                hud.buttonPress(3,true);
+                return true;
             case Input.Keys.LEFT:
+                hud.buttonPress(2,true);
+                return true;
+            case Input.Keys.A:
                 hud.buttonPress(2,true);
                 return true;
             case Input.Keys.UP:
                 hud.buttonPress(0,true);
                 return true;
+            case Input.Keys.W:
+                hud.buttonPress(0,true);
+                return true;
             case Input.Keys.DOWN:
+                hud.buttonPress(1,true);
+                return true;
+            case Input.Keys.S:
                 hud.buttonPress(1,true);
                 return true;
             case Input.Keys.U:

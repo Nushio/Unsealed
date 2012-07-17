@@ -20,8 +20,8 @@ public class BattleEnemy extends BattleEntity {
     private float stateTime;
     private int state;
 
-    private int hp;
     private int mana;
+   
 
 
     /**
@@ -33,7 +33,8 @@ public class BattleEnemy extends BattleEntity {
         this.animations = new HashMap<String, Animation>();
         this.currentAnimation = null;
 
-        this.hp = hp;
+        setHp(hp);
+        
         setGridX(x);
         setGridY(y);       
 
@@ -52,7 +53,7 @@ public class BattleEnemy extends BattleEntity {
             Gdx.app.log(Unsealed.LOG,"No anim!");
             return;
         }
-
+        hpLabel.draw(batch,1);
         batch.draw(currentAnimation.getKeyFrame(stateTime), getX(), getY());
     }
 
@@ -85,18 +86,7 @@ public class BattleEnemy extends BattleEntity {
         }
     }
 
-    /**
-     * @return the hp
-     */
-    public int getHp() {
-        return hp;
-    }
-    /**
-     * @param hp the hp to set
-     */
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
+    
     /**
      * @return the mana
      */
