@@ -7,9 +7,8 @@ import net.k3rnel.unsealed.Unsealed;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class BattleHero extends Actor {
+public class BattleHero extends BattleEntity {
 
     public static final int stateIdle = 0;
     public static final int stateAttacking = 1;
@@ -28,17 +27,14 @@ public class BattleHero extends Actor {
     private int mana;
 
 
-    private int gridX;
-    private int gridY;
-
-    public BattleHero() {
+   public BattleHero() {
         this.animations = new HashMap<String, Animation>();
         this.currentAnimation = null;
 
         hp = 100;
         mana = 0;
-        gridX = 1;
-        gridY = 1;       
+        setGridX(1);
+        setGridY(1);       
 
     }
 
@@ -79,7 +75,7 @@ public class BattleHero extends Actor {
 
         switch(state) {
             case stateIdle:
-                currentAnimation = animations.get("waiting");
+                currentAnimation = animations.get("idle");
                 break;
             case stateAttacking:
                 isCharging = true;
@@ -124,34 +120,6 @@ public class BattleHero extends Actor {
             this.mana = 0;
         if(this.mana > 30)
             this.mana = 30;
-    }
-
-    /**
-     * @return the gridX
-     */
-    public int getGridX() {
-        return gridX;
-    }
-
-    /**
-     * @param gridX the gridX to set
-     */
-    public void setGridX(int gridX) {
-        this.gridX = gridX;
-    }
-
-    /**
-     * @return the gridY
-     */
-    public int getGridY() {
-        return gridY;
-    }
-
-    /**
-     * @param gridY the gridY to set
-     */
-    public void setGridY(int gridY) {
-        this.gridY = gridY;
     }
     
 }

@@ -56,7 +56,7 @@ public class BattleHUD extends Stage {
     private Image background;
     private Image battleoverlay;
 
-    public boolean[][] grid;
+    public BattleEntity[][] grid;
 
     public BattleHero hero;
     public List<BattleEnemy> enemies;
@@ -88,14 +88,14 @@ public class BattleHUD extends Stage {
         battleoverlay.setY( this.height/2 -(battleoverlay.getHeight()*battleoverlay.getScaleY())/2 - 75); 
         this.addActor(battleoverlay);
 
-        grid = new boolean[6][3];
+        grid = new BattleEntity[6][3];
 
         hero = new BattleHero();
         atlasRegion = atlas.findRegion("battle/lidia");
         TextureRegion[][] lidia = atlasRegion.split(112,134);
-        Animation waiting = new Animation(1f, lidia[0][0]);
-        waiting.setPlayMode(Animation.NORMAL);
-        hero.animations.put("waiting", waiting);
+        Animation idle = new Animation(1f, lidia[0][0]);
+        idle.setPlayMode(Animation.NORMAL);
+        hero.animations.put("idle", idle);
         Animation blocking = new Animation(1f,lidia[0][1]);
         blocking.setPlayMode(Animation.NORMAL);
         hero.animations.put("blocking",blocking);
@@ -121,7 +121,7 @@ public class BattleHUD extends Stage {
         hero.setState(0);
         hero.setPosition(220,150);
         this.addActor(hero);
-        grid[1][1] = true;
+        grid[1][1] = hero;
 
         atlasRegion = atlas.findRegion("battle/lifebar");
         lifebarTextures = atlasRegion.split(363,23);
@@ -192,7 +192,7 @@ public class BattleHUD extends Stage {
         textures = atlasRegion.split(75,74);
         yButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
         yButton.setX( this.width - (yButton.getWidth()*yButton.getScaleX()) -84 );
-        yButton.setY( this.height -(yButton.getHeight()*yButton.getScaleY()+ 60) ); 
+        yButton.setY( this.height -(yButton.getHeight()*yButton.getScaleY()+ 60) );
         this.addActor(yButton);
 
         atlasRegion = atlas.findRegion("battle/dpad_alt");
@@ -410,10 +410,10 @@ public class BattleHUD extends Stage {
             //TODO: Hero moves at a fixed pixel rate (A.k.a. magic numbers). It should instead move based on screen width.
             case 0:{ // Up
                 if((hero.getGridY()-1>-1))
-                    if(!grid[hero.getGridX()][hero.getGridY()-1]){
+                    if(grid[hero.getGridX()][hero.getGridY()-1]==null){
                         hero.setY(hero.getY()+40);
-                        grid[hero.getGridX()][hero.getGridY()] =  false;
-                        grid[hero.getGridX()][hero.getGridY()-1] = true;
+                        grid[hero.getGridX()][hero.getGridY()] =  null;
+                        grid[hero.getGridX()][hero.getGridY()-1] = hero;
                         hero.setGridY(hero.getGridY()-1);
                     }
 
@@ -421,30 +421,30 @@ public class BattleHUD extends Stage {
             }
             case 1:{ // Down
                 if((hero.getGridY()+1<3))
-                    if(!grid[hero.getGridX()][hero.getGridY()+1]){
+                    if(grid[hero.getGridX()][hero.getGridY()+1]==null){
                         hero.setY(hero.getY()-40);
-                        grid[hero.getGridX()][hero.getGridY()] =  false;
-                        grid[hero.getGridX()][hero.getGridY()+1] = true;
+                        grid[hero.getGridX()][hero.getGridY()] =  null;
+                        grid[hero.getGridX()][hero.getGridY()+1] = hero;
                         hero.setGridY(hero.getGridY()+1);
                     }
                 break;
             }
             case 2:{ // Left
                 if((hero.getGridX()-1>-1))
-                    if(!grid[hero.getGridX()-1][hero.getGridY()]){
+                    if(grid[hero.getGridX()-1][hero.getGridY()]==null){
                         hero.setX(hero.getX()-88);
-                        grid[hero.getGridX()][hero.getGridY()] =  false;
-                        grid[hero.getGridX()-1][hero.getGridY()] = true;
+                        grid[hero.getGridX()][hero.getGridY()] =  null;
+                        grid[hero.getGridX()-1][hero.getGridY()] = hero;
                         hero.setGridX(hero.getGridX()-1);
                     }
                 break;
             }
             case 3:{ // Right
                 if((hero.getGridX()+1<3))
-                    if(!grid[hero.getGridX()+1][hero.getGridY()]){
+                    if(grid[hero.getGridX()+1][hero.getGridY()]==null){
                         hero.setX(hero.getX()+88);
-                        grid[hero.getGridX()][hero.getGridY()] =  false;
-                        grid[hero.getGridX()+1][hero.getGridY()] = true;
+                        grid[hero.getGridX()][hero.getGridY()] =  null;
+                        grid[hero.getGridX()+1][hero.getGridY()] = hero;
                         hero.setGridX(hero.getGridX()+1);
                     }
                 break;
@@ -473,8 +473,14 @@ public class BattleHUD extends Stage {
     public void spawnEnemies() {
 
         Random random = new Random(new Date().getTime());
-        for(int i = 0; i < random.nextInt(2)+1; i++){
-            BattleEnemy clam = new BattleEnemy(100,random.nextInt(3)+3,random.nextInt(3));
+        for(int i = 0; i < random.nextInt(3)+4; i++){
+            int x = random.nextInt(3)+3;
+            int y = random.nextInt(3);
+            while(grid[x][y]!=null){
+                x = random.nextInt(3)+3;
+                y = random.nextInt(3);
+            }
+            BattleEnemy clam = new BattleEnemy(100,x,y);
             AtlasRegion atlasRegion = atlas.findRegion( "battle/clam" );
             TextureRegion[][] spriteSheet = atlasRegion.split(41, 48);
             TextureRegion[] frames = new TextureRegion[2];
@@ -490,14 +496,14 @@ public class BattleHUD extends Stage {
             frames[3] = spriteSheet[0][5];
             frames[4] = spriteSheet[0][6];
             frames[5] = spriteSheet[0][0];
-            Animation attacking = new Animation(0.2f,frames);
-            idle.setPlayMode(Animation.NORMAL);
+            Animation attacking = new Animation(1f,frames);
+            idle.setPlayMode(Animation.LOOP);
             clam.animations.put("attacking",attacking);
-            int x = (int)((battleoverlay.getWidth()/2)/6);
-            int y = (int)((battleoverlay.getHeight())/3);
+            x = (int)((battleoverlay.getWidth()/2)/6);
+            y = (int)((battleoverlay.getHeight())/3);
             clam.setPosition(x*clam.getGridX(),y*clam.getGridY());
             clam.setState(0);
-            grid[clam.getGridX()][clam.getGridY()] = true;
+            grid[clam.getGridX()][clam.getGridY()] = clam;
             this.addActor(clam);
             enemies.add(clam);
         }

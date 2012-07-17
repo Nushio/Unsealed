@@ -7,9 +7,8 @@ import net.k3rnel.unsealed.Unsealed;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class BattleEnemy extends Actor {
+public class BattleEnemy extends BattleEntity {
 
     public static final int stateIdle = 0;
     public static final int stateAttacking = 1;
@@ -25,9 +24,6 @@ public class BattleEnemy extends Actor {
     private int mana;
 
 
-    private int gridX;
-    private int gridY;
-
     /**
      * Grid position of the enemy
      * @param x
@@ -38,8 +34,8 @@ public class BattleEnemy extends Actor {
         this.currentAnimation = null;
 
         this.hp = hp;
-        this.gridX = x;
-        this.gridY = y;       
+        setGridX(x);
+        setGridY(y);       
 
     }
 
@@ -118,32 +114,5 @@ public class BattleEnemy extends Actor {
             this.mana = 30;
     }
 
-    /**
-     * @return the gridX
-     */
-    public int getGridX() {
-        return gridX;
-    }
-
-    /**
-     * @param gridX the gridX to set
-     */
-    public void setGridX(int gridX) {
-        this.gridX = gridX;
-    }
-
-    /**
-     * @return the gridY
-     */
-    public int getGridY() {
-        return gridY;
-    }
-
-    /**
-     * @param gridY the gridY to set
-     */
-    public void setGridY(int gridY) {
-        this.gridY = gridY;
-    }
     
 }
