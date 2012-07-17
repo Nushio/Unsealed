@@ -23,7 +23,6 @@ public class BattleHero extends BattleEntity {
     private float stateTime;
     private int state;
 
-    private int hp;
     private int mana;
 
 
@@ -31,7 +30,7 @@ public class BattleHero extends BattleEntity {
         this.animations = new HashMap<String, Animation>();
         this.currentAnimation = null;
 
-        hp = 100;
+        setHp(100);
         mana = 0;
         setGridX(1);
         setGridY(1);       
@@ -93,18 +92,7 @@ public class BattleHero extends BattleEntity {
         }
     }
 
-    /**
-     * @return the hp
-     */
-    public int getHp() {
-        return hp;
-    }
-    /**
-     * @param hp the hp to set
-     */
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
+    
     /**
      * @return the mana
      */
