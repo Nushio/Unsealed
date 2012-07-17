@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.tiled.TiledLoader;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 
 import net.k3rnel.unsealed.Unsealed;
-import net.k3rnel.unsealed.objects.GameCharacter;
+import net.k3rnel.unsealed.objects.MapCharacter;
 
 public class OverworldScreen extends AbstractScreen {
 
@@ -18,13 +18,12 @@ public class OverworldScreen extends AbstractScreen {
     TiledMap map;
     TileAtlas atlas;
     
-    private GameCharacter player;
+    private MapCharacter player;
     
     public OverworldScreen(Unsealed game) {
         super(game);
         
-        //TODO: Load him from last save game/take gender into account.
-        player = new GameCharacter(this.getAtlas(), 0, 0, "tutorial_dungeon");
+        //TODO: Load Player from last save game/take gender into account.
     }
 
     @Override
