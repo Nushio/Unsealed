@@ -4,20 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.Scaling;
 
 import net.k3rnel.unsealed.Unsealed;
-import net.k3rnel.unsealed.objects.BattleHUD;
 import net.k3rnel.unsealed.screens.AbstractScreen;
+import net.k3rnel.unsealed.screens.battle.BattleEnemy;
+import net.k3rnel.unsealed.screens.battle.BattleHUD;
 
 public class BattleScreen extends AbstractScreen {
 
     BattleHUD hud;
-    Image gal;
-    Image galbar;
+    
     public BattleScreen(Unsealed game) {
         super(game);
     }
@@ -30,22 +26,7 @@ public class BattleScreen extends AbstractScreen {
         super.show();
      
         hud = new BattleHUD(this.stage.getWidth(), stage.getHeight(),getAtlas());
-       
-        AtlasRegion charRegion = getAtlas().findRegion( "battle/lifebar" );
-        TextureRegion[][] charTextures = charRegion.split(28,8);
-        charRegion = getAtlas().findRegion( "char-sprites/female_spritesheet" );
-        charTextures = charRegion.split(64,64);
-        gal = new Image(charTextures[1][8]);
-        gal.setScaling(Scaling.fill);
-        gal.setScale(2f);
-        gal.setPosition(450,84);
-        charRegion = getAtlas().findRegion( "battle/enemy-lifebar" );
-        charTextures = charRegion.split(106,19);
-        galbar = new Image(charTextures[0][0]);
-//        galbar.setScale(2f);
-        galbar.setPosition(450,104);
-//        stage.addActor(galbar);
-//        stage.addActor(gal);
+        hud.spawnEnemies();
         
         Gdx.input.setInputProcessor(new InputMultiplexer(this,stage,hud));
     }
@@ -57,7 +38,7 @@ public class BattleScreen extends AbstractScreen {
 
         // update the actors
         stage.act( delta );
-
+        hud.act(delta);
         // (2) draw the result
 
         // clear the screen with the given RGB color (black)
@@ -69,8 +50,7 @@ public class BattleScreen extends AbstractScreen {
         hud.draw();
         stage.draw();
         
-        galbar.setX(gal.getX()+17);
-        galbar.setY(gal.getY()+100);
+      
     }
     
     
@@ -95,6 +75,9 @@ public class BattleScreen extends AbstractScreen {
             case Input.Keys.U:
                 hud.buttonPress(4,true);
                 return true;
+            case Input.Keys.O:
+                hud.buttonPress(5,true);
+                return true;
         }
         return false;
     }
@@ -103,6 +86,9 @@ public class BattleScreen extends AbstractScreen {
         switch(keycode) {
             case Input.Keys.U:
                 hud.buttonPress(4,false);
+                return true;
+            case Input.Keys.O:
+                hud.buttonPress(5,false);
                 return true;
             case Input.Keys.BACK:
                 game.setScreen(new MenuScreen(game));

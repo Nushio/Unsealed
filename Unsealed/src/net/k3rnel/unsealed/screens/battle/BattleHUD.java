@@ -1,6 +1,11 @@
-package net.k3rnel.unsealed.objects;
+package net.k3rnel.unsealed.screens.battle;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
+
+import net.k3rnel.unsealed.Unsealed;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -53,8 +58,9 @@ public class BattleHUD extends Stage {
 
     public boolean[][] grid;
 
-    public BattleCharacter hero;
-    
+    public BattleHero hero;
+    public List<BattleEnemy> enemies;
+
     private Timer timer;
 
     public BattleHUD(float width, float height, TextureAtlas atlas) {
@@ -68,6 +74,7 @@ public class BattleHUD extends Stage {
     private void init() {
         //TODO: Non-hardcoded field sizes
         atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
+        enemies = new ArrayList<BattleEnemy>();
         int battlemap = new Random().nextInt(6);
         AtlasRegion atlasRegion = atlas.findRegion( "battle/battlemap"+battlemap );
         background = new Image(atlasRegion);
@@ -81,9 +88,9 @@ public class BattleHUD extends Stage {
         battleoverlay.setY( this.height/2 -(battleoverlay.getHeight()*battleoverlay.getScaleY())/2 - 75); 
         this.addActor(battleoverlay);
 
-        grid = new boolean[3][6];
+        grid = new boolean[6][3];
 
-        hero = new BattleCharacter();
+        hero = new BattleHero();
         atlasRegion = atlas.findRegion("battle/lidia");
         TextureRegion[][] lidia = atlasRegion.split(112,134);
         Animation waiting = new Animation(1f, lidia[0][0]);
@@ -92,6 +99,25 @@ public class BattleHUD extends Stage {
         Animation blocking = new Animation(1f,lidia[0][1]);
         blocking.setPlayMode(Animation.NORMAL);
         hero.animations.put("blocking",blocking);
+        TextureRegion[] attackFrames = new TextureRegion[8]; 
+        attackFrames[0] = lidia[0][1];
+        attackFrames[1] = lidia[0][2];
+        attackFrames[2] = lidia[0][3];
+        attackFrames[3] = lidia[0][4];
+        attackFrames[4] = lidia[0][5];
+        attackFrames[5] = lidia[0][6];
+        attackFrames[6] = lidia[0][7];
+        attackFrames[7] = lidia[0][4];
+        Animation attacking = new Animation(0.1f,attackFrames);
+        attacking.setPlayMode(Animation.NORMAL);
+        hero.animations.put("attacking",attacking);
+        attackFrames = new TextureRegion[3]; 
+        attackFrames[0] = lidia[0][4];
+        attackFrames[1] = lidia[0][2];
+        attackFrames[2] = lidia[0][0];
+        Animation release = new Animation(0.1f,attackFrames);
+        release.setPlayMode(Animation.NORMAL);
+        hero.animations.put("released",release);
         hero.setState(0);
         hero.setPosition(220,150);
         this.addActor(hero);
@@ -111,11 +137,11 @@ public class BattleHUD extends Stage {
         leftTrigger.addListener(new PressedListener() {
             @Override
             public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
-                 super.touchDown(event, x, y, pointer, button);
-                 buttonPress(4,true); 
-                 return true;
+                super.touchDown(event, x, y, pointer, button);
+                buttonPress(4,true); 
+                return true;
             }
-            
+
             @Override
             public void touchUp(ActorEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
@@ -131,9 +157,14 @@ public class BattleHUD extends Stage {
         rightTrigger.addListener(new PressedListener() {
             @Override
             public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
-                 super.touchDown(event, x, y, pointer, button);
-                 buttonPress(5,true); 
-                 return true;
+                super.touchDown(event, x, y, pointer, button);
+                buttonPress(5,true); 
+                return true;
+            }
+            @Override
+            public void touchUp(ActorEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                buttonPress(5,false); 
             }
         });
         this.addActor(rightTrigger);
@@ -177,9 +208,9 @@ public class BattleHUD extends Stage {
         dPadDown.addListener(new PressedListener() {
             @Override
             public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
-                 super.touchDown(event, x, y, pointer, button);
-                 buttonPress(1,true); 
-                 return true;
+                super.touchDown(event, x, y, pointer, button);
+                buttonPress(1,true); 
+                return true;
             }
         });
         this.addActor(dPadDown);
@@ -191,9 +222,9 @@ public class BattleHUD extends Stage {
         dPadUp.addListener(new PressedListener() {
             @Override
             public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
-                 super.touchDown(event, x, y, pointer, button);
-                 buttonPress(0,true); 
-                 return true;
+                super.touchDown(event, x, y, pointer, button);
+                buttonPress(0,true); 
+                return true;
             }
         });
         this.addActor(dPadUp);
@@ -205,9 +236,9 @@ public class BattleHUD extends Stage {
         dPadLeft.addListener(new PressedListener() {
             @Override
             public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
-                 super.touchDown(event, x, y, pointer, button);
-                 buttonPress(2,true); 
-                 return true;
+                super.touchDown(event, x, y, pointer, button);
+                buttonPress(2,true); 
+                return true;
             }
         });
         this.addActor(dPadLeft);
@@ -219,9 +250,9 @@ public class BattleHUD extends Stage {
         dPadRight.addListener(new PressedListener() {
             @Override
             public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
-                 super.touchDown(event, x, y, pointer, button);
-                 buttonPress(3,true); 
-                 return true;
+                super.touchDown(event, x, y, pointer, button);
+                buttonPress(3,true); 
+                return true;
             }
         });
         this.addActor(dPadRight);
@@ -257,10 +288,10 @@ public class BattleHUD extends Stage {
         manasphere6.setX( this.width/2 - manasphere6.getWidth()/2 + 125 );
         manasphere6.setY(this.height-manasphere6.getHeight()-26);
         this.addActor(manasphere6);
-        
+
         timer = new Timer();
         timer.scheduleTask(new Task() {
-            
+
             @Override
             public void run() {
                 if(hero.getState()==3){
@@ -270,14 +301,37 @@ public class BattleHUD extends Stage {
                         hero.setState(0);
                 }else if(hero.getMana()<30)
                     hero.setMana(hero.getMana()+1);
-                
+
             }
         }, 0f, 1f);
     }
 
     @Override
+    public void act(float delta) {
+        super.act(delta);
+        hero.act(delta);
+        if(hero.getState()==1&&hero.waitingOnAnimation){
+            Gdx.app.log(Unsealed.LOG,"Change Anim!");
+            hero.waitingOnAnimation = false;
+            hero.setState(4);
+        }
+        for(BattleEnemy enemy : enemies){
+            enemy.act(delta);
+        }
+    }
+    @Override
     public void draw() {
         super.draw();
+
+        for(BattleEnemy enemy : enemies){
+            int x = (int)((battleoverlay.getWidth()/2)/3);
+            int y = (int)((battleoverlay.getHeight())/3);
+//            Gdx.app.log(Unsealed.LOG, "Blah: "+enemy.getGridX()+"/"+enemy.getGridY());
+//            Gdx.app.log(Unsealed.LOG, "Bleh: "+x+"/"+y);
+            enemy.setPosition(battleoverlay.getX()+battleoverlay.getWidth()/2 + 20 + x * (enemy.getGridX()-3) ,battleoverlay.getY()+battleoverlay.getHeight()  - 38*(enemy.getGridY()+1));
+
+        }
+
         int fillSize = hero.getMana()%5;
         int manaBars = hero.getMana()/5;
         switch(manaBars){
@@ -338,7 +392,7 @@ public class BattleHUD extends Stage {
                 manasphere6.setDrawable(new Image(manasphere[0][5]).getDrawable());
                 break;
         }
-        
+
     }
 
     public void dispose () {
@@ -397,7 +451,7 @@ public class BattleHUD extends Stage {
             }
             case 4:{ // Shield
                 if(pressed){
-                   if(hero.getState()!=3){
+                    if(hero.getState()!=3){
                         hero.setState(3);
                         hero.setMana(hero.getMana()-2);
                     }
@@ -407,9 +461,47 @@ public class BattleHUD extends Stage {
                 break;
             }
             case 5:{ // Attack
-                
+                if(pressed)
+                    hero.setState(1);
+                else
+                    hero.isCharging = false;
                 break;
             }
         }
+    }
+
+    public void spawnEnemies() {
+
+        Random random = new Random(new Date().getTime());
+        for(int i = 0; i < random.nextInt(2)+1; i++){
+            BattleEnemy clam = new BattleEnemy(100,random.nextInt(3)+3,random.nextInt(3));
+            AtlasRegion atlasRegion = atlas.findRegion( "battle/clam" );
+            TextureRegion[][] spriteSheet = atlasRegion.split(41, 48);
+            TextureRegion[] frames = new TextureRegion[2];
+            frames[0] = spriteSheet[0][0];
+            frames[1] = spriteSheet[0][1];
+            Animation idle = new Animation(0.2f,frames);
+            idle.setPlayMode(Animation.LOOP);
+            clam.animations.put("idle",idle);
+            frames = new TextureRegion[6];
+            frames[0] = spriteSheet[0][2];
+            frames[1] = spriteSheet[0][3];
+            frames[2] = spriteSheet[0][4];
+            frames[3] = spriteSheet[0][5];
+            frames[4] = spriteSheet[0][6];
+            frames[5] = spriteSheet[0][0];
+            Animation attacking = new Animation(0.2f,frames);
+            idle.setPlayMode(Animation.NORMAL);
+            clam.animations.put("attacking",attacking);
+            int x = (int)((battleoverlay.getWidth()/2)/6);
+            int y = (int)((battleoverlay.getHeight())/3);
+            clam.setPosition(x*clam.getGridX(),y*clam.getGridY());
+            clam.setState(0);
+            grid[clam.getGridX()][clam.getGridY()] = true;
+            this.addActor(clam);
+            enemies.add(clam);
+        }
+
+
     }
 }
