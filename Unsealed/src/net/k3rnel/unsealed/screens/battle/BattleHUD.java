@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ActorEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -54,7 +55,7 @@ public class BattleHUD extends Stage {
     private Image background;
     private Image battleoverlay;
 
-    public BattleEntity[][] grid;
+    private BattleEntity[][] grid;
 
     public BattleHero hero;
     public List<BattleEnemy> enemies;
@@ -106,9 +107,10 @@ public class BattleHUD extends Stage {
         attackFrames[5] = lidia[0][6];
         attackFrames[6] = lidia[0][7];
         attackFrames[7] = lidia[0][4];
-        Animation attacking = new Animation(0.1f,attackFrames);
+        Animation attacking = new Animation(0.15f,attackFrames);
         attacking.setPlayMode(Animation.NORMAL);
         hero.animations.put("attacking",attacking);
+
         attackFrames = new TextureRegion[3]; 
         attackFrames[0] = lidia[0][4];
         attackFrames[1] = lidia[0][2];
@@ -302,7 +304,17 @@ public class BattleHUD extends Stage {
         super.act(delta);
         hero.act(delta);
         if(hero.getState()==1&&hero.waitingOnAnimation){
-            Gdx.app.log(Unsealed.LOG,"Change Anim!");
+            Gdx.app.log(Unsealed.LOG,"Check Collision!");
+            for(int i = 3; i < 6; i++){
+                if(grid[i][hero.getGridY()]!=null){
+                    if(grid[i][hero.getGridY()].setHp(grid[i][hero.getGridY()].getHp()-25)){
+                        this.getActors().removeValue(grid[i][hero.getGridY()], false);
+                        grid[i][hero.getGridY()] = null;
+                        checkVictory();
+                    }
+                    i = 6;
+                }
+            }
             hero.waitingOnAnimation = false;
             hero.setState(4);
         }
@@ -310,19 +322,37 @@ public class BattleHUD extends Stage {
             enemy.act(delta);
         }
     }
+    private void checkVictory() {
+        boolean youwin = true;
+        for(int x = 3; x< 6; x++){
+            for (int y = 0; y < 3 ; y++){
+                if(grid[x][y]!=null){
+                    youwin = false;
+                }
+            }
+        }
+        if(youwin){
+            Gdx.app.log(Unsealed.LOG, "How exciting! You have defeated the evil, unmovable, innocent clams!");
+            spawnEnemies();
+        }
+
+    }
+
     @Override
     public void draw() {
         super.draw();
-
         for(BattleEnemy enemy : enemies){
             int x = (int)((battleoverlay.getWidth()/2)/3);
-//            int y = (int)((battleoverlay.getHeight())/6);
-//            Gdx.app.log(Unsealed.LOG, "Blah: "+enemy.getGridX()+"/"+battleoverlay.getHeight());
-//            Gdx.app.log(Unsealed.LOG, "Bleh: "+x+"/"+y);
+            //            int y = (int)((battleoverlay.getHeight())/6);
+            //            Gdx.app.log(Unsealed.LOG, "Blah: "+enemy.getGridX()+"/"+battleoverlay.getHeight());
+            //            Gdx.app.log(Unsealed.LOG, "Bleh: "+x+"/"+y);
             enemy.setPosition(battleoverlay.getX()+battleoverlay.getWidth()/2 + 20 + x * (enemy.getGridX()-3) ,battleoverlay.getY()+battleoverlay.getHeight()  - 38*(enemy.getGridY()+1));
-            enemy.hpLabel.setPosition(battleoverlay.getX()+battleoverlay.getWidth()/2 + 20 + x * (enemy.getGridX()-3) ,battleoverlay.getY()+battleoverlay.getHeight()  - 38*(enemy.getGridY()+1)+40);
+            enemy.hpLabel.setPosition(battleoverlay.getX()+battleoverlay.getWidth()/2 + 20 + x * (enemy.getGridX()-3) + 5 ,battleoverlay.getY()+battleoverlay.getHeight()  - 38*(enemy.getGridY()+1)-10);
+            enemy.hpBar.setPosition(battleoverlay.getX()+battleoverlay.getWidth()/2 + 20 + x * (enemy.getGridX()-3) -30,battleoverlay.getY()+battleoverlay.getHeight()  - 38*(enemy.getGridY()+1)-15);
 
         }
+        hero.hpLabel.setPosition(hero.getX()+32,hero.getY()+hero.getHeight()+128);
+        hero.hpBar.setPosition(hero.getX(),hero.getY()+hero.getHeight()+118);
 
         int fillSize = hero.getMana()%5;
         int manaBars = hero.getMana()/5;
@@ -453,9 +483,9 @@ public class BattleHUD extends Stage {
                 break;
             }
             case 5:{ // Attack
-                if(pressed)
+                if(pressed){
                     hero.setState(1);
-                else
+                }else
                     hero.isCharging = false;
                 break;
             }
@@ -463,7 +493,6 @@ public class BattleHUD extends Stage {
     }
 
     public void spawnEnemies() {
-
         Random random = new Random(new Date().getTime());
         //TODO: Allow using numbers > 9. Currently loops to infinity... and beyond!
         for(int i = 0; i < random.nextInt(5)+4; i++){
@@ -478,7 +507,18 @@ public class BattleHUD extends Stage {
             this.addActor(clam);
             enemies.add(clam);
         }
+        reorderActors();
 
+    }
+    public void reorderActors(){
+        List<BattleEntity> entities = new ArrayList<BattleEntity>();
+        for(Actor actor : this.getActors()){
 
+            if(actor instanceof BattleEntity){
+                BattleEntity entity = (BattleEntity)actor;
+                entities.add(entity);
+                Gdx.app.log(Unsealed.LOG, "Entity: "+entity.getGridX()+"/"+entity.getGridY());
+            }
+        }
     }
 }

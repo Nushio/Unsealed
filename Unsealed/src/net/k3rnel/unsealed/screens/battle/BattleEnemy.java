@@ -49,11 +49,11 @@ public class BattleEnemy extends BattleEntity {
     
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
         if(currentAnimation == null){
             Gdx.app.log(Unsealed.LOG,"No anim!");
             return;
         }
-        hpLabel.draw(batch,1);
         batch.draw(currentAnimation.getKeyFrame(stateTime), getX(), getY());
     }
 

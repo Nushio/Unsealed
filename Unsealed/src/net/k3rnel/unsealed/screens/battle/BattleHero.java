@@ -46,11 +46,12 @@ public class BattleHero extends BattleEntity {
     
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
         if(currentAnimation == null){
             Gdx.app.log(Unsealed.LOG,"No anim!");
             return;
         }
-
+        
         batch.draw(currentAnimation.getKeyFrame(stateTime), getX(), getY());
         if(this.state == 1&&currentAnimation.isAnimationFinished(stateTime)){
             waitingOnAnimation = true;

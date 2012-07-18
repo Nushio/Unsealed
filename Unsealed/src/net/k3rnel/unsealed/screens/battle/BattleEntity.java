@@ -1,10 +1,18 @@
 package net.k3rnel.unsealed.screens.battle;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
@@ -12,6 +20,8 @@ public class BattleEntity extends Actor {
     
     private int hp;
     public Label hpLabel;
+    public Image hpBar;
+    public TextureRegion[][] hpBarTextures;
     
     private int gridX;
     private int gridY;
@@ -20,9 +30,18 @@ public class BattleEntity extends Actor {
     
     public BattleEntity() {
         hpLabel = new Label("",getSkin());
-        hpLabel.setColor(Color.BLACK);
+        hpLabel.setColor(Color.WHITE);
+        AtlasRegion region = getAtlas().findRegion("battle/enemy-lifebar");
+        hpBarTextures = region.split(106,19);
+        
     }
     
+    @Override
+    public void draw(SpriteBatch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+        hpBar.draw(batch,1);
+        hpLabel.draw(batch,1);
+    }
     
     public TextureAtlas getAtlas() {
         if( atlas == null ) {
@@ -74,9 +93,18 @@ public class BattleEntity extends Actor {
     /**
      * @param hp the hp to set
      */
-    public void setHp(int hp) {
-        this.hp = hp;
-        this.hpLabel.setText(hp+"");
+    public boolean setHp(int hp) {
+        if(hp>0){
+            this.hp = hp;
+            this.hpLabel.setText(hp+"");
+            this.hpBar = new Image(hpBarTextures[0][0]);
+            return false;
+        }else{
+            hp = 0;
+            SequenceAction actions = sequence(fadeOut(0.75f));
+            this.addAction(actions);
+            return true;
+        }
     }
 
     /**
