@@ -10,7 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ActorEvent;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -103,7 +103,7 @@ public class OptionsScreen extends AbstractScreen {
         TextButton backButton = new TextButton( "Back to Main Menu", skin );
         backButton.addListener( new ClickListener() {
             @Override
-            public void clicked(ActorEvent event, float x, float y ) {
+            public void clicked(InputEvent event, float x, float y ) {
                 game.getSoundManager().play( UnsealedSound.CLICK );
                 game.setScreen( new MenuScreen( game ) );
             }

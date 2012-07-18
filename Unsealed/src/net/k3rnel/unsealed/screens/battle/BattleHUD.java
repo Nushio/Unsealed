@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ActorEvent;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -98,14 +98,14 @@ public class BattleHUD extends Stage {
         leftTrigger.setPosition(0, this.height-leftTrigger.getHeight());
         leftTrigger.addListener(new PressedListener() {
             @Override
-            public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 buttonPress(4,true); 
                 return true;
             }
 
             @Override
-            public void touchUp(ActorEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
                 buttonPress(4,false); 
             }
@@ -118,13 +118,13 @@ public class BattleHUD extends Stage {
         rightTrigger.setPosition(this.width-rightTrigger.getWidth(), this.height-rightTrigger.getHeight());
         rightTrigger.addListener(new PressedListener() {
             @Override
-            public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 buttonPress(5,true); 
                 return true;
             }
             @Override
-            public void touchUp(ActorEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
                 buttonPress(5,false); 
             }
@@ -169,7 +169,7 @@ public class BattleHUD extends Stage {
         dPadDown.setPosition(84,this.height-227); 
         dPadDown.addListener(new PressedListener() {
             @Override
-            public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 buttonPress(1,true); 
                 return true;
@@ -183,7 +183,7 @@ public class BattleHUD extends Stage {
         dPadUp.setPosition(84,this.height-143);
         dPadUp.addListener(new PressedListener() {
             @Override
-            public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 buttonPress(0,true); 
                 return true;
@@ -197,7 +197,7 @@ public class BattleHUD extends Stage {
         dPadLeft.setPosition(50,this.height-194);  
         dPadLeft.addListener(new PressedListener() {
             @Override
-            public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 buttonPress(2,true); 
                 return true;
@@ -211,7 +211,7 @@ public class BattleHUD extends Stage {
         dPadRight.setPosition(138,this.height-194);
         dPadRight.addListener(new PressedListener() {
             @Override
-            public boolean touchDown(ActorEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 buttonPress(3,true); 
                 return true;

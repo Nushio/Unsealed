@@ -3,7 +3,7 @@ package net.k3rnel.unsealed.screens;
 import net.k3rnel.unsealed.Unsealed;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.scenes.scene2d.ActorEvent;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -40,7 +40,7 @@ public class MenuScreen extends AbstractScreen {
         continueButton.setVisible(false);
         continueButton.addListener( new ClickListener() {
             @Override
-            public void clicked(ActorEvent event, float x, float y ) {
+            public void clicked(InputEvent event, float x, float y ) {
 //                game.setScreen( new StartGameScreen( game ) );
             }
         } );
@@ -50,7 +50,7 @@ public class MenuScreen extends AbstractScreen {
         TextButton newGameButton = new TextButton( "New game", skin );
         newGameButton.addListener( new ClickListener() {
             @Override
-            public void clicked(ActorEvent event, float x, float y ) {
+            public void clicked(InputEvent event, float x, float y ) {
                 game.setScreen( new CharSelectScreen( game ) );
             }
         } );
@@ -60,7 +60,7 @@ public class MenuScreen extends AbstractScreen {
         TextButton optionsButton = new TextButton( "Options", skin );
         optionsButton.addListener( new ClickListener() {
             @Override
-            public void clicked(ActorEvent event, float x, float y ) {
+            public void clicked(InputEvent event, float x, float y ) {
                 game.setScreen( new OptionsScreen( game ) );
             }
         } );

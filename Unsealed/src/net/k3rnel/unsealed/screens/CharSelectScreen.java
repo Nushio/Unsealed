@@ -2,7 +2,7 @@ package net.k3rnel.unsealed.screens;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ActorEvent;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -63,7 +63,7 @@ public class CharSelectScreen extends AbstractScreen {
         guyButton.addListener(new ClickListener() {
             
             @Override
-            public void clicked(ActorEvent event, float x, float y) {
+            public void clicked(InputEvent event, float x, float y) {
                 game.setScreen( new OverworldScreen( game ) );
                 
             }
@@ -81,7 +81,7 @@ public class CharSelectScreen extends AbstractScreen {
         galButton.addListener(new ClickListener() {
             
             @Override
-            public void clicked(ActorEvent event, float x, float y) {
+            public void clicked(InputEvent event, float x, float y) {
                 game.setScreen( new BattleScreen( game ) );
                 
             }
