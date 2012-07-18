@@ -9,7 +9,6 @@ import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.screens.battle.enemies.Clam;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
@@ -89,37 +88,7 @@ public class BattleHUD extends Stage {
 
         grid = new BattleEntity[6][3];
 
-        hero = new BattleHero();
-        atlasRegion = atlas.findRegion("battle/lidia");
-        TextureRegion[][] lidia = atlasRegion.split(112,134);
-        Animation idle = new Animation(1f, lidia[0][0]);
-        idle.setPlayMode(Animation.NORMAL);
-        hero.animations.put("idle", idle);
-        Animation blocking = new Animation(1f,lidia[0][1]);
-        blocking.setPlayMode(Animation.NORMAL);
-        hero.animations.put("blocking",blocking);
-        TextureRegion[] attackFrames = new TextureRegion[8]; 
-        attackFrames[0] = lidia[0][1];
-        attackFrames[1] = lidia[0][2];
-        attackFrames[2] = lidia[0][3];
-        attackFrames[3] = lidia[0][4];
-        attackFrames[4] = lidia[0][5];
-        attackFrames[5] = lidia[0][6];
-        attackFrames[6] = lidia[0][7];
-        attackFrames[7] = lidia[0][4];
-        Animation attacking = new Animation(0.15f,attackFrames);
-        attacking.setPlayMode(Animation.NORMAL);
-        hero.animations.put("attacking",attacking);
-
-        attackFrames = new TextureRegion[3]; 
-        attackFrames[0] = lidia[0][4];
-        attackFrames[1] = lidia[0][2];
-        attackFrames[2] = lidia[0][0];
-        Animation release = new Animation(0.1f,attackFrames);
-        release.setPlayMode(Animation.NORMAL);
-        hero.animations.put("released",release);
-        hero.setState(0);
-        hero.setPosition(220,150);
+        hero = new BattleHero(100);
         this.addActor(hero);
         grid[1][1] = hero;
 
@@ -287,23 +256,25 @@ public class BattleHUD extends Stage {
 
             @Override
             public void run() {
-                if(hero.getState()==3){
-                    if(hero.getMana()>0)
+                if(hero.getState()==BattleEntity.stateBlocking){
+                    if(hero.getMana()>=2){
                         hero.setMana(hero.getMana()-2);
-                    else
-                        hero.setState(0);
+                    }else{
+                        hero.setMana(0);
+                        hero.setState(BattleEntity.stateIdle);
+                    }
                 }else if(hero.getMana()<30)
                     hero.setMana(hero.getMana()+1);
 
             }
-        }, 0f, 1f);
+        }, 0f, 1.5f);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
         hero.act(delta);
-        if(hero.getState()==1&&hero.waitingOnAnimation){
+        if(hero.getState()==BattleEntity.stateAttacking&&hero.waitingOnAnimation){
             Gdx.app.log(Unsealed.LOG,"Check Collision!");
             for(int i = 3; i < 6; i++){
                 if(grid[i][hero.getGridY()]!=null){
@@ -316,7 +287,7 @@ public class BattleHUD extends Stage {
                 }
             }
             hero.waitingOnAnimation = false;
-            hero.setState(4);
+            hero.setState(BattleEntity.stateIdle);
         }
         for(BattleEnemy enemy : enemies){
             enemy.act(delta);
@@ -473,18 +444,19 @@ public class BattleHUD extends Stage {
             }
             case 4:{ // Shield
                 if(pressed){
-                    if(hero.getState()!=3){
-                        hero.setState(3);
+                    if(hero.getState()!=BattleEntity.stateBlocking){
+                        hero.setState(BattleEntity.stateBlocking);
                         hero.setMana(hero.getMana()-2);
                     }
                 }else{
-                    hero.setState(0);
+                    hero.setState(BattleEntity.stateIdle);
                 }
                 break;
             }
             case 5:{ // Attack
                 if(pressed){
-                    hero.setState(1);
+                    hero.setMana(hero.getMana()-1);
+                    hero.setState(BattleEntity.stateAttacking);
                 }else
                     hero.isCharging = false;
                 break;

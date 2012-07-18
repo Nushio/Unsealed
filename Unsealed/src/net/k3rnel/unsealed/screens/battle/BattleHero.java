@@ -1,36 +1,55 @@
 package net.k3rnel.unsealed.screens.battle;
 
-import java.util.HashMap;
-
 import net.k3rnel.unsealed.Unsealed;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class BattleHero extends BattleEntity {
 
-    public static final int stateIdle = 0;
-    public static final int stateAttacking = 1;
-    public static final int stateCharging = 2;
-    public static final int stateBlocking = 3;
-    public static final int stateReleased = 4;
-
-    public final HashMap<String, Animation> animations;
     public boolean waitingOnAnimation = false;
     public boolean isCharging = false;
-    private Animation currentAnimation;
-    private float stateTime;
-    private int state;
-
+  
     private int mana;
 
 
-   public BattleHero() {
-        this.animations = new HashMap<String, Animation>();
-        this.currentAnimation = null;
+   public BattleHero(int hp) {
 
-        setHp(100);
+        AtlasRegion atlasRegion = getAtlas().findRegion("battle/lidia");
+        TextureRegion[][] lidia = atlasRegion.split(112,134);
+        Animation idle = new Animation(1f, lidia[0][0]);
+        idle.setPlayMode(Animation.NORMAL);
+        this.animations.put("idle", idle);
+        Animation blocking = new Animation(1f,lidia[0][1]);
+        blocking.setPlayMode(Animation.NORMAL);
+        this.animations.put("blocking",blocking);
+        TextureRegion[] attackFrames = new TextureRegion[8]; 
+        attackFrames[0] = lidia[0][1];
+        attackFrames[1] = lidia[0][2];
+        attackFrames[2] = lidia[0][3];
+        attackFrames[3] = lidia[0][4];
+        attackFrames[4] = lidia[0][5];
+        attackFrames[5] = lidia[0][6];
+        attackFrames[6] = lidia[0][7];
+        attackFrames[7] = lidia[0][4];
+        Animation attacking = new Animation(0.15f,attackFrames);
+        attacking.setPlayMode(Animation.NORMAL);
+        this.animations.put("attacking",attacking);
+
+        attackFrames = new TextureRegion[3]; 
+        attackFrames[0] = lidia[0][4];
+        attackFrames[1] = lidia[0][2];
+        attackFrames[2] = lidia[0][0];
+        Animation release = new Animation(0.1f,attackFrames);
+        release.setPlayMode(Animation.NORMAL);
+        this.animations.put("released",release);
+        this.setState(BattleEntity.stateIdle);
+        this.setPosition(220,150);
+        
+        setHp(hp);
         mana = 0;
         setGridX(1);
         setGridY(1);       
@@ -53,46 +72,12 @@ public class BattleHero extends BattleEntity {
         }
         
         batch.draw(currentAnimation.getKeyFrame(stateTime), getX(), getY());
-        if(this.state == 1&&currentAnimation.isAnimationFinished(stateTime)){
+        if(this.getState() == 1&&currentAnimation.isAnimationFinished(stateTime)){
             waitingOnAnimation = true;
             if(isCharging)
-                setState(4);
+                setState(BattleEntity.stateCharging);
         }
     }
-
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-        Gdx.app.log(Unsealed.LOG,"Changed State to "+state);
-        updateAnimations();
-    }
-
-    private void updateAnimations() {
-        stateTime = 0;
-
-        switch(state) {
-            case stateIdle:
-                currentAnimation = animations.get("idle");
-                break;
-            case stateAttacking:
-                isCharging = true;
-                currentAnimation = animations.get("attacking");
-                break;
-            case stateCharging:
-                currentAnimation = animations.get("charging");
-                break;
-            case stateBlocking:
-                currentAnimation = animations.get("blocking");
-                break;
-            case stateReleased:
-                currentAnimation = animations.get("released");
-                break;
-        }
-    }
-
     
     /**
      * @return the mana

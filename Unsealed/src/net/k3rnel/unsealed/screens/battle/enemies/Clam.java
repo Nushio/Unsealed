@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 import net.k3rnel.unsealed.screens.battle.BattleEnemy;
+import net.k3rnel.unsealed.screens.battle.BattleEntity;
 
 public class Clam extends BattleEnemy {
 
@@ -26,12 +27,12 @@ public class Clam extends BattleEnemy {
         frames[4] = spriteSheet[0][6];
         frames[5] = spriteSheet[0][0];
         Animation attacking = new Animation(2f,frames);
-        idle.setPlayMode(Animation.LOOP);
+        attacking.setPlayMode(Animation.NORMAL);
         this.animations.put("attacking",attacking);
 //        x = (int)((battleoverlay.getWidth()/2)/6);
 //        y = (int)((battleoverlay.getHeight())/3);
 //        this.setPosition(x*this.getGridX(),y*this.getGridY());
-        this.setState(0);
+        this.setState(BattleEntity.stateIdle);
     }
 
 }
