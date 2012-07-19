@@ -1,9 +1,15 @@
 package net.k3rnel.unsealed.screens.battle;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.alpha;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 
 import java.util.HashMap;
+
+import net.k3rnel.unsealed.Unsealed;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -56,12 +62,16 @@ public class BattleEntity extends Actor {
         hpBarTextures = region.split(106,19);
         
     }
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+    }
     
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        hpBar.draw(batch,1);
-        hpLabel.draw(batch,1);
+        hpBar.draw(batch,parentAlpha);
+        hpLabel.draw(batch,parentAlpha);
     }
     
     public TextureAtlas getAtlas() {
@@ -119,11 +129,16 @@ public class BattleEntity extends Actor {
             this.hp = hp;
             this.hpLabel.setText(hp+"");
             this.hpBar = new Image(hpBarTextures[0][0]);
+            SequenceAction actions = sequence(color(Color.WHITE),
+                    delay(3f),color(Color.CLEAR), run(new Runnable() {
+                public void run() {
+                    Gdx.app.log(Unsealed.LOG, "I'm hurt");
+                }
+            }));
+            this.addAction(actions);
             return false;
         }else{
-            hp = 0;
-            SequenceAction actions = sequence(fadeOut(0.75f));
-            this.addAction(actions);
+            this.hp = 0;
             return true;
         }
     }
@@ -148,7 +163,6 @@ public class BattleEntity extends Actor {
 
     public void setState(int state) {
         this.state = state;
-        
         updateAnimations();
     }
     private void updateAnimations() {

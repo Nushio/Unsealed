@@ -35,7 +35,7 @@ public class BattleHero extends BattleEntity {
         attackFrames[5] = lidia[0][6];
         attackFrames[6] = lidia[0][7];
         attackFrames[7] = lidia[0][4];
-        Animation attacking = new Animation(0.15f,attackFrames);
+        Animation attacking = new Animation(0.1f,attackFrames);
         attacking.setPlayMode(Animation.NORMAL);
         this.animations.put("attacking",attacking);
 
@@ -52,8 +52,10 @@ public class BattleHero extends BattleEntity {
         setHp(hp);
         mana = 0;
         setGridX(1);
-        setGridY(1);       
-
+        setGridY(1); 
+        
+        this.setWidth(112);
+        this.setHeight(134);
     }
 
     @Override
