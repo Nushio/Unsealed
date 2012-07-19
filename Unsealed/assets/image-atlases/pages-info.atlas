@@ -99,21 +99,21 @@ battle/righttrigger
   orig: 181, 114
   offset: 0, 0
   index: -1
+battle/fireball
+  rotate: false
+  xy: 800, 44
+  size: 102, 100
+  orig: 102, 100
+  offset: 0, 0
+  index: -1
 battle/dpad_up
   rotate: false
-  xy: 800, 58
+  xy: 902, 58
   size: 60, 86
   orig: 60, 86
   offset: 0, 0
   index: -1
 battle/dpad_right
-  rotate: false
-  xy: 860, 84
-  size: 86, 60
-  orig: 86, 60
-  offset: 0, 0
-  index: -1
-battle/dpad_left
   rotate: false
   xy: 906, 802
   size: 86, 60
@@ -125,6 +125,13 @@ battle/dpad_down
   xy: 883, 714
   size: 60, 86
   orig: 60, 86
+  offset: 0, 0
+  index: -1
+battle/dpad_left
+  rotate: false
+  xy: 883, 652
+  size: 86, 60
+  orig: 86, 60
   offset: 0, 0
   index: -1
 

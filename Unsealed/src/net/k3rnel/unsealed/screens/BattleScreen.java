@@ -1,6 +1,8 @@
 package net.k3rnel.unsealed.screens;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
@@ -9,20 +11,24 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.PressedListener;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.screens.AbstractScreen;
-import net.k3rnel.unsealed.screens.battle.BattleEnemy;
 import net.k3rnel.unsealed.screens.battle.BattleEntity;
 import net.k3rnel.unsealed.screens.battle.BattleHero;
 import net.k3rnel.unsealed.screens.battle.enemies.Clam;
+import net.k3rnel.unsealed.screens.battle.magic.Blast;
+import net.k3rnel.unsealed.screens.battle.magic.MagicEntity;
 
 public class BattleScreen extends AbstractScreen {
 
@@ -57,6 +63,9 @@ public class BattleScreen extends AbstractScreen {
     private Timer timer;
 
     private int bonus = 1;
+
+    List<MagicEntity> magics = new ArrayList<MagicEntity>();
+
     public BattleScreen(Unsealed game) {
         super(game);
     }
@@ -275,27 +284,50 @@ public class BattleScreen extends AbstractScreen {
             grid[hero.getGridX()][hero.getGridY()] = null;
             stage.getActors().removeValue(hero, false);
         }
-        if(hero.getState()==BattleEntity.stateAttacking&&hero.waitingOnAnimation){
-            Gdx.app.log(Unsealed.LOG,"Check Collision!");
-            for(int i = 3; i < 6; i++){
-                if(grid[i][hero.getGridY()]!=null){
-                    BattleEntity entity = grid[i][hero.getGridY()];
-                    if(entity instanceof Clam){
-                        if(entity.getState() == BattleEntity.stateBlocking){
-                            Gdx.app.log(Unsealed.LOG, "You hit me but it didn't hurt! Haha");
-                        }else{
-                            if(grid[i][hero.getGridY()].setHp(grid[i][hero.getGridY()].getHp()-15)){
-                                stage.getActors().removeValue(grid[i][hero.getGridY()], false);
-                                grid[i][hero.getGridY()] = null;
-                                checkVictory();
-                            }
-                            
-                        }
-                    }
-                    i = 6;
-                   
+
+        for(int i = 0; i< magics.size(); i++){
+            MagicEntity magic = magics.get(i);
+            if(magic instanceof Blast){
+                if(magic.getX()> 650){
+                    magics.remove(magic);
+                    this.stage.getActors().removeValue(magic, false);
+                    i--;
+                    return;
                 }
             }
+            Gdx.app.log(Unsealed.LOG,"Check Collision!");
+            if(magic.getGridX()<6)
+            if(grid[magic.getGridX()][magic.getGridY()]!=null){
+                BattleEntity entity = grid[magic.getGridX()][magic.getGridY()];
+                if(entity instanceof Clam){
+                    if(entity.getState() == BattleEntity.stateBlocking){
+                        Gdx.app.log(Unsealed.LOG, "You hit me but it didn't hurt! Haha");
+                        
+                    }else{
+                        if(grid[magic.getGridX()][magic.getGridY()].setHp(grid[magic.getGridX()][magic.getGridY()].getHp()-15)){
+                            stage.getActors().removeValue(grid[magic.getGridX()][magic.getGridY()], false);
+                            grid[magic.getGridX()][magic.getGridY()] = null;
+                            checkVictory();
+                            
+                        }
+
+                    }
+                    magics.remove(magic);
+                    this.stage.getActors().removeValue(magic, false);
+                    i--;
+                }
+            }
+
+
+            
+        }
+        if(hero.waitingOnAnimation){
+            Blast blast = new Blast(0,20,hero);
+            stage.addActor(blast);
+            magics.add(blast);
+        }
+        if(hero.getState()==BattleEntity.stateAttacking&&hero.waitingOnAnimation){
+
             hero.waitingOnAnimation = false;
             hero.setState(BattleEntity.stateIdle);
         }
@@ -305,11 +337,11 @@ public class BattleScreen extends AbstractScreen {
                 if(grid[x][y]!=null){
                     enemy = grid[x][y];
                     if(enemy instanceof Clam){
-                       Clam clam =  ((Clam)enemy);
-                       if(clam.action(hero, delta)){
-                           Gdx.app.log(Unsealed.LOG,"Rescheduling!");
-                           timer.scheduleTask(clam.blocking(),new Random().nextInt(4));
-                       }
+                        Clam clam =  ((Clam)enemy);
+                        if(clam.action(hero, delta)){
+                            Gdx.app.log(Unsealed.LOG,"Rescheduling!");
+                            timer.scheduleTask(clam.blocking(),new Random().nextInt(4));
+                        }
                     }
                     int xx = (int)((battleoverlay.getWidth()/2)/3);
                     //            int y = (int)((battleoverlay.getHeight())/6);
@@ -322,7 +354,7 @@ public class BattleScreen extends AbstractScreen {
             }
         }
         hero.hpLabel.setPosition(hero.getX()+32,hero.getY()+hero.getHeight());
-//        hero.hpBar.setPosition(hero.getX(),hero.getY()+hero.getHeight());
+        //        hero.hpBar.setPosition(hero.getX(),hero.getY()+hero.getHeight());
 
         int fillSize = hero.getMana()%5;
         int manaBars = hero.getMana()/5;

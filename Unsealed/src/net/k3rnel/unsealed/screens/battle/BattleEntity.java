@@ -29,7 +29,7 @@ public class BattleEntity extends Actor {
     
     private int hp;
     public Label hpLabel;
-    public Image hpBar;
+//    public Image hpBar;
     public TextureRegion[][] hpBarTextures;
     
     private int gridX;
@@ -70,7 +70,7 @@ public class BattleEntity extends Actor {
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        hpBar.draw(batch,parentAlpha);
+//        hpBar.draw(batch,parentAlpha);
         hpLabel.draw(batch,parentAlpha);
     }
     
@@ -128,7 +128,7 @@ public class BattleEntity extends Actor {
         if(hp>0){
             this.hp = hp;
             this.hpLabel.setText(hp+"");
-            this.hpBar = new Image(hpBarTextures[0][0]);
+//            this.hpBar = new Image(hpBarTextures[0][0]);
             SequenceAction actions = sequence(color(Color.WHITE),
                     delay(3f),color(Color.CLEAR), run(new Runnable() {
                 public void run() {

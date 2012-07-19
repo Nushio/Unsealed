@@ -36,7 +36,8 @@ public class CharSelectScreen extends AbstractScreen {
 
         // create the table actor and add it to the stage
         table = new Table( skin );
-        table.debug();
+        if(Unsealed.DEBUG)
+            table.debug();
         table.setWidth(stage.getWidth());
         table.setHeight(stage.getHeight());
         table.pad(10).defaults().spaceBottom(10);
