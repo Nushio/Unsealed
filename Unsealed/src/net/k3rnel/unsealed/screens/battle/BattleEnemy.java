@@ -32,11 +32,7 @@ public class BattleEnemy extends BattleEntity {
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch,parentAlpha);
-        if(this.currentAnimation == null){
-            Gdx.app.log(Unsealed.LOG,"No anim!");
-            return;
-        }
-        batch.draw(this.currentAnimation.getKeyFrame(this.stateTime), getX(), getY());
+       
        
     }
 

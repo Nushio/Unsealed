@@ -1,9 +1,9 @@
 package net.k3rnel.unsealed.screens.battle;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.alpha;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
+
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 
@@ -25,7 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-public class BattleEntity extends Actor {
+public class BattleEntity extends Image {
     
     private int hp;
     public Label hpLabel;
@@ -65,6 +65,11 @@ public class BattleEntity extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        if(this.currentAnimation == null){
+            Gdx.app.log(Unsealed.LOG,"No anim!");
+            return;
+        }
+        this.setDrawable(new Image(this.currentAnimation.getKeyFrame(this.stateTime)).getDrawable());
     }
     
     @Override
@@ -129,8 +134,8 @@ public class BattleEntity extends Actor {
             this.hp = hp;
             this.hpLabel.setText(hp+"");
 //            this.hpBar = new Image(hpBarTextures[0][0]);
-            SequenceAction actions = sequence(color(Color.WHITE),
-                    delay(3f),color(Color.CLEAR), run(new Runnable() {
+            SequenceAction actions = sequence(fadeOut(0.75f),
+                    delay(0.1f),fadeIn(1f), run(new Runnable() {
                 public void run() {
                     Gdx.app.log(Unsealed.LOG, "I'm hurt");
                 }
