@@ -52,15 +52,15 @@ public class CharSelectScreen extends AbstractScreen {
         table.add(guyLabel).align(Align.center);
         table.add(galLabel).align(Align.center);
         table.row();
-        AtlasRegion charRegion = getAtlas().findRegion( "char-sprites/male_spritesheet" );
+        AtlasRegion charRegion = getAtlas().findRegion( "char-sprites/female_spritesheet" );
         TextureRegion[][] charTextures = charRegion.split(64,64);
         
-        Image guy = new Image(charTextures[2][0]);
-        guy.setScaling(Scaling.stretch);
-        guy.scale(1f);
-        guy.setOrigin(guy.getWidth()/2,guy.getHeight()/2);
+        Image overworld = new Image(charTextures[2][0]);
+        overworld.setScaling(Scaling.stretch);
+        overworld.scale(1f);
+        overworld.setOrigin(overworld.getWidth()/2,overworld.getHeight()/2);
         final Button guyButton = new Button(skin);
-        guyButton.add(guy);
+        guyButton.add(overworld);
         guyButton.addListener(new ClickListener() {
             
             @Override
@@ -73,12 +73,12 @@ public class CharSelectScreen extends AbstractScreen {
         charRegion = getAtlas().findRegion( "char-sprites/female_spritesheet" );
         charTextures = charRegion.split(64,64);
         
-        Image gal = new Image(charTextures[2][0]);
-        gal.setScaling(Scaling.stretch);
-        gal.scale(1f);
-        gal.setOrigin(gal.getWidth()/2,gal.getHeight()/2);
+        Image battle = new Image(charTextures[2][0]);
+        battle.setScaling(Scaling.stretch);
+        battle.scale(1f);
+        battle.setOrigin(battle.getWidth()/2,battle.getHeight()/2);
         final Button galButton = new Button(skin);
-        galButton.add(gal).left().bottom();
+        galButton.add(battle).left().bottom();
         galButton.addListener(new ClickListener() {
             
             @Override

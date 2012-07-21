@@ -1,9 +1,5 @@
 package net.k3rnel.unsealed.screens.battle;
 
-
-import net.k3rnel.unsealed.Unsealed;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class BattleEnemy extends BattleEntity {
@@ -14,27 +10,28 @@ public class BattleEnemy extends BattleEntity {
      * @param y
      */
     public BattleEnemy(int hp, int x, int y) {
-      
+        super();
         setHp(hp);
-        
-        setGridX(x);
-        setGridY(y);       
+
+        setGrid(x,y);       
 
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        this.stateTime+=delta;
 
     }
-    
+
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch,parentAlpha);
-       
-       
+
+
     }
 
-    
+    public void idle(){
+
+    }
+
 }

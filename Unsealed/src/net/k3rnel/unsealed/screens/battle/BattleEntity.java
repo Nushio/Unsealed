@@ -16,27 +16,22 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer.Task;
 
 public class BattleEntity extends Image {
-    
+
     private int hp;
     public Label hpLabel;
-//    public Image hpBar;
-    public TextureRegion[][] hpBarTextures;
-    
+  
     private int gridX;
     private int gridY;
     private Skin skin;
-    protected TextureAtlas atlas;
-    
+  
     public static final int stateIdle = 0;
     public static final int stateAttacking = 1;
     public static final int stateAltAttacking = 2;
@@ -44,47 +39,44 @@ public class BattleEntity extends Image {
     public static final int stateBlocking = 4;
     public static final int statePassThrough = 5;
     public static final int stateHit = 6;
-    
-    
+    public static final int stateMoving = 7;
+
 
     public final HashMap<String, Animation> animations;
     public Animation currentAnimation;
     public float stateTime;
     private int state;
-    
+    protected Task currentTask;
+
+    public int offsetX = 0, offsetY = 0;
+
     public BattleEntity() {
         this.animations = new HashMap<String, Animation>();
         this.currentAnimation = null;
 
         hpLabel = new Label("",getSkin());
         hpLabel.setColor(Color.WHITE);
-        AtlasRegion region = getAtlas().findRegion("battle/enemy-lifebar");
-        hpBarTextures = region.split(106,19);
-        
+
     }
     @Override
     public void act(float delta) {
         super.act(delta);
+        stateTime+=delta;
         if(this.currentAnimation == null){
             Gdx.app.log(Unsealed.LOG,"No anim!");
             return;
         }
         this.setDrawable(new Image(this.currentAnimation.getKeyFrame(this.stateTime)).getDrawable());
     }
-    
+
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-//        hpBar.draw(batch,parentAlpha);
+        //        hpBar.draw(batch,parentAlpha);
         hpLabel.draw(batch,parentAlpha);
     }
-    
-    public TextureAtlas getAtlas() {
-        if( atlas == null ) {
-            atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
-        }
-        return atlas;
-    }
+
+   
 
     protected Skin getSkin() {
         if( skin == null ) {
@@ -93,18 +85,36 @@ public class BattleEntity extends Image {
         }
         return skin;
     }
-    
+
     /**
      * @return the gridX
      */
     public int getGridX() {
         return gridX;
     }
+    public void setGrid(int x, int y){
+        setGridX(x);
+        setGridY(y);
+    }
+
+    @Override
+    public void setX(float x) {
+        super.setX(x);
+        hpLabel.setX(x+(this.hpLabel.getWidth()/2)+10);
+    }
+
+    @Override
+    public void setY(float y) {
+        super.setY(y);
+        hpLabel.setY(y-5);
+    }
     /**
      * @param gridX the gridX to set
      */
     public void setGridX(int gridX) {
         this.gridX = gridX;
+//        Gdx.app.log(Unsealed.LOG, "GridX:"+gridX);
+        setX((gridX+1)*65+150 - offsetX);
     }
     /**
      * @return the gridY
@@ -117,6 +127,9 @@ public class BattleEntity extends Image {
      */
     public void setGridY(int gridY) {
         this.gridY = gridY;
+//        Gdx.app.log(Unsealed.LOG, "GridY:"+gridY);
+        setY((gridY+1)*-40 + 230 - offsetY);
+//        setY();
     }
 
     /**
@@ -133,13 +146,13 @@ public class BattleEntity extends Image {
         if(hp>0){
             this.hp = hp;
             this.hpLabel.setText(hp+"");
-//            this.hpBar = new Image(hpBarTextures[0][0]);
-            SequenceAction actions = sequence(fadeOut(0.75f),
-                    delay(0.1f),fadeIn(1f), run(new Runnable() {
-                public void run() {
-                    Gdx.app.log(Unsealed.LOG, "I'm hurt");
-                }
-            }));
+            //            this.hpBar = new Image(hpBarTextures[0][0]);
+            SequenceAction actions = sequence(fadeOut(0.90f),
+                    delay(0.01f),fadeIn(1f), run(new Runnable() {
+                        public void run() {
+                            Gdx.app.log(Unsealed.LOG, "I'm hurt");
+                        }
+                    }));
             this.addAction(actions);
             return false;
         }else{
@@ -172,7 +185,6 @@ public class BattleEntity extends Image {
     }
     private void updateAnimations() {
         stateTime = 0;
-
         switch(state) {
             case stateIdle:
                 currentAnimation = animations.get("idle");
@@ -195,10 +207,28 @@ public class BattleEntity extends Image {
             case statePassThrough:
                 currentAnimation = animations.get("passthrough");
                 break;
+            case stateMoving:
+                currentAnimation = animations.get("moving");
+                break;
         }
     }
-    
 
+    public boolean action(Array<BattleHero> heroes, float delta){
+        return false;
+    }
+
+    public Task nextTask(){
+        currentTask = new Task(){
+
+            @Override
+            public void run() {
+                // Do something;
+
+            }
+
+        };
+        return currentTask;
+    }
     /**
      * @return the animations
      */
