@@ -1,22 +1,19 @@
 package net.k3rnel.unsealed.screens.battle.enemies;
 
-
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer.Task;
 
 import net.k3rnel.unsealed.screens.battle.BattleEnemy;
 import net.k3rnel.unsealed.screens.battle.BattleEntity;
-import net.k3rnel.unsealed.screens.battle.BattleHero;
 
 public class Turtle extends BattleEnemy {
 
     public Turtle(TextureAtlas atlas, int x, int y) {
         super(30, x, y);
-        AtlasRegion atlasRegion = atlas.findRegion( "battle/turtle" );
+        AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/turtle" );
         TextureRegion[][] spriteSheet = atlasRegion.split(41, 48);
         TextureRegion[] frames = new TextureRegion[2];
         frames[0] = spriteSheet[0][0];
@@ -71,9 +68,8 @@ public class Turtle extends BattleEnemy {
     }
 
     @Override
-    public boolean action(Array<BattleHero> heroes, float delta){
-        boolean reschedule = false;
-        stateTime+=delta;
+    public void act(float delta) {
+        super.act(delta);   
         switch(getState()){
             case BattleEntity.stateIdle:
                 break;
@@ -82,6 +78,6 @@ public class Turtle extends BattleEnemy {
             case BattleEntity.stateMoving:
                 break;
         }
-        return reschedule;
     }
+  
 }

@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.utils.Array;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.screens.battle.BattleEntity;
+import net.k3rnel.unsealed.screens.battle.BattleGrid;
 import net.k3rnel.unsealed.screens.battle.BattleHero;
 
 public class PeaDart extends MagicEntity {
@@ -17,8 +17,8 @@ public class PeaDart extends MagicEntity {
      * 0 = gray. 1 = blue. 2 = red. 3 = green.
      * @param color
      */
-    public PeaDart(TextureAtlas atlas, BattleEntity entity) {
-        super(-1,entity);
+    public PeaDart(TextureAtlas atlas, float speed, BattleEntity entity) {
+        super(speed,0,entity);
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/fireball" );
         TextureRegion[][] spriteSheet = atlasRegion.split(34, 25);
         TextureRegion[] frames = new TextureRegion[3];
@@ -42,11 +42,8 @@ public class PeaDart extends MagicEntity {
         super.act(delta);
         if(this.getGridX()<0)
             this.setVisible(false);
-    }
-    @Override
-    public boolean action(Array<BattleHero> heroes, float delta) {
-        for(BattleHero hero : heroes){
-            if(hero.getGridY() == this.getGridY() && hero.getGridX() == this.getGridX()){
+        for(BattleHero hero : BattleGrid.heroes){
+            if(hero.getGridYInt() == this.getGridYInt() && hero.getGridXInt() == this.getGridXInt()){
                 Gdx.app.log(Unsealed.LOG,"SMACK!");
                 if(hero.getState()==BattleEntity.stateBlocking){
                     hero.setHp(hero.getHp()-5);
@@ -59,6 +56,5 @@ public class PeaDart extends MagicEntity {
                 this.setVisible(false);
             }
         }
-        return false;
     }
 }

@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class BattleEnemy extends BattleEntity {
 
+    public int rounds = 0;
+
     /**
      * Grid position of the enemy
      * @param x
@@ -29,9 +31,10 @@ public class BattleEnemy extends BattleEntity {
 
 
     }
-
-    public void idle(){
-
+    @Override
+    public void setState(int state) {
+        super.setState(state);
+        rounds = 0;
     }
 
 }

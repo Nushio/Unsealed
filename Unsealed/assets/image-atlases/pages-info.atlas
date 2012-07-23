@@ -3,18 +3,18 @@ pages-info.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-splash-screen/splash
+char-sprites/female_spritesheet
   rotate: false
-  xy: 0, 193
-  size: 512, 307
-  orig: 512, 307
+  xy: 0, 258
+  size: 576, 256
+  orig: 576, 256
   offset: 0, 0
   index: -1
-splash-screen/menulogo
+char-sprites/male_spritesheet
   rotate: false
   xy: 0, 0
-  size: 512, 191
-  orig: 512, 191
+  size: 576, 256
+  orig: 576, 256
   offset: 0, 0
   index: -1
 
@@ -22,123 +22,18 @@ pages-info2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-battle/ui/lifebar
+battle/maps/battlemap-test
   rotate: false
-  xy: 0, 16
-  size: 363, 482
-  orig: 363, 482
+  xy: 0, 482
+  size: 800, 480
+  orig: 800, 480
   offset: 0, 0
   index: -1
-battle/ui/field-3x3
+battle/maps/battlemap2
   rotate: false
-  xy: 363, 373
-  size: 382, 125
-  orig: 382, 125
-  offset: 0, 0
-  index: -1
-battle/ui/field-4x4
-  rotate: false
-  xy: 363, 294
-  size: 351, 77
-  orig: 351, 77
-  offset: 0, 0
-  index: -1
-battle/ui/field-3x4
-  rotate: false
-  xy: 363, 232
-  size: 352, 60
-  orig: 352, 60
-  offset: 0, 0
-  index: -1
-battle/ui/field-4x3
-  rotate: false
-  xy: 745, 421
-  size: 265, 77
-  orig: 265, 77
-  offset: 0, 0
-  index: -1
-battle/ui/enemy-lifebar
-  rotate: false
-  xy: 363, 40
-  size: 106, 190
-  orig: 106, 190
-  offset: 0, 0
-  index: -1
-battle/ui/lefttrigger
-  rotate: false
-  xy: 469, 116
-  size: 181, 114
-  orig: 181, 114
-  offset: 0, 0
-  index: -1
-battle/ui/righttrigger
-  rotate: false
-  xy: 469, 0
-  size: 181, 114
-  orig: 181, 114
-  offset: 0, 0
-  index: -1
-battle/ui/blue_facebutton1
-  rotate: false
-  xy: 650, 46
-  size: 83, 184
-  orig: 83, 184
-  offset: 0, 0
-  index: -1
-battle/ui/mana_sphere
-  rotate: false
-  xy: 745, 376
-  size: 192, 43
-  orig: 192, 43
-  offset: 0, 0
-  index: -1
-battle/ui/dpad_alt
-  rotate: false
-  xy: 745, 247
-  size: 130, 127
-  orig: 130, 127
-  offset: 0, 0
-  index: -1
-battle/ui/dpad
-  rotate: false
-  xy: 733, 118
-  size: 130, 127
-  orig: 130, 127
-  offset: 0, 0
-  index: -1
-battle/ui/blue_facebutton2
-  rotate: false
-  xy: 875, 226
-  size: 75, 148
-  orig: 75, 148
-  offset: 0, 0
-  index: -1
-battle/ui/dpad_right
-  rotate: false
-  xy: 733, 56
-  size: 86, 60
-  orig: 86, 60
-  offset: 0, 0
-  index: -1
-battle/ui/dpad_up
-  rotate: false
-  xy: 863, 138
-  size: 60, 86
-  orig: 60, 86
-  offset: 0, 0
-  index: -1
-battle/ui/dpad_down
-  rotate: false
-  xy: 923, 138
-  size: 60, 86
-  orig: 60, 86
-  offset: 0, 0
-  index: -1
-battle/ui/dpad_left
-  rotate: false
-  xy: 819, 56
-  size: 86, 60
-  orig: 86, 60
+  xy: 0, 0
+  size: 800, 480
+  orig: 800, 480
   offset: 0, 0
   index: -1
 
@@ -146,54 +41,14 @@ pages-info3.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-battle/entities/ghost
-  rotate: false
-  xy: 0, 888
-  size: 1020, 90
-  orig: 1020, 90
-  offset: 0, 0
-  index: -1
-battle/entities/shield
-  rotate: false
-  xy: 0, 374
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
-battle/entities/lidia
-  rotate: false
-  xy: 0, 0
-  size: 520, 372
-  orig: 520, 372
-  offset: 0, 0
-  index: -1
-battle/entities/clam
-  rotate: false
-  xy: 512, 838
-  size: 288, 48
-  orig: 288, 48
-  offset: 0, 0
-  index: -1
-battle/entities/fireball
-  rotate: false
-  xy: 512, 736
-  size: 102, 100
-  orig: 102, 100
-  offset: 0, 0
-  index: -1
-
-pages-info4.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-battle/maps/battlemap6
+battle/maps/battlemap5
   rotate: false
   xy: 0, 482
   size: 800, 480
   orig: 800, 480
   offset: 0, 0
   index: -1
-battle/maps/battlemap5
+battle/maps/battlemap6
   rotate: false
   xy: 0, 0
   size: 800, 480
@@ -201,7 +56,7 @@ battle/maps/battlemap5
   offset: 0, 0
   index: -1
 
-pages-info5.png
+pages-info4.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -220,11 +75,11 @@ battle/maps/battlemap4
   offset: 0, 0
   index: -1
 
-pages-info6.png
+pages-info5.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-battle/maps/battlemap-test
+battle/maps/battlemap1
   rotate: false
   xy: 0, 482
   size: 800, 480
@@ -239,22 +94,181 @@ battle/maps/battlemap0
   offset: 0, 0
   index: -1
 
+pages-info6.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+battle/ui/lifebar
+  rotate: false
+  xy: 0, 474
+  size: 363, 482
+  orig: 363, 482
+  offset: 0, 0
+  index: -1
+battle/ui/spells
+  rotate: false
+  xy: 363, 828
+  size: 384, 128
+  orig: 384, 128
+  offset: 0, 0
+  index: -1
+battle/ui/field-3x3
+  rotate: false
+  xy: 363, 701
+  size: 382, 125
+  orig: 382, 125
+  offset: 0, 0
+  index: -1
+battle/ui/field-4x4
+  rotate: false
+  xy: 0, 395
+  size: 351, 77
+  orig: 351, 77
+  offset: 0, 0
+  index: -1
+battle/ui/field-3x4
+  rotate: false
+  xy: 363, 639
+  size: 352, 60
+  orig: 352, 60
+  offset: 0, 0
+  index: -1
+battle/ui/field-4x3
+  rotate: false
+  xy: 747, 879
+  size: 265, 77
+  orig: 265, 77
+  offset: 0, 0
+  index: -1
+battle/ui/enemy-lifebar
+  rotate: false
+  xy: 0, 203
+  size: 106, 190
+  orig: 106, 190
+  offset: 0, 0
+  index: -1
+battle/ui/lefttrigger
+  rotate: false
+  xy: 363, 523
+  size: 181, 114
+  orig: 181, 114
+  offset: 0, 0
+  index: -1
+battle/ui/righttrigger
+  rotate: false
+  xy: 106, 279
+  size: 181, 114
+  orig: 181, 114
+  offset: 0, 0
+  index: -1
+battle/ui/blue_facebutton1
+  rotate: false
+  xy: 0, 17
+  size: 83, 184
+  orig: 83, 184
+  offset: 0, 0
+  index: -1
+battle/ui/dpad_alt
+  rotate: false
+  xy: 544, 510
+  size: 130, 127
+  orig: 130, 127
+  offset: 0, 0
+  index: -1
+battle/ui/mana_sphere
+  rotate: false
+  xy: 747, 834
+  size: 192, 43
+  orig: 192, 43
+  offset: 0, 0
+  index: -1
+battle/ui/dpad
+  rotate: false
+  xy: 106, 150
+  size: 130, 127
+  orig: 130, 127
+  offset: 0, 0
+  index: -1
+battle/ui/blue_facebutton2
+  rotate: false
+  xy: 83, 0
+  size: 75, 148
+  orig: 75, 148
+  offset: 0, 0
+  index: -1
+battle/ui/dpad_down
+  rotate: false
+  xy: 287, 307
+  size: 60, 86
+  orig: 60, 86
+  offset: 0, 0
+  index: -1
+battle/ui/dpad_up
+  rotate: false
+  xy: 158, 62
+  size: 60, 86
+  orig: 60, 86
+  offset: 0, 0
+  index: -1
+battle/ui/dpad_left
+  rotate: false
+  xy: 363, 461
+  size: 86, 60
+  orig: 86, 60
+  offset: 0, 0
+  index: -1
+battle/ui/dpad_right
+  rotate: false
+  xy: 449, 461
+  size: 86, 60
+  orig: 86, 60
+  offset: 0, 0
+  index: -1
+
 pages-info7.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-battle/maps/battlemap2
+battle/entities/ghost
   rotate: false
-  xy: 0, 482
-  size: 800, 480
-  orig: 800, 480
+  xy: 0, 909
+  size: 1020, 90
+  orig: 1020, 90
   offset: 0, 0
   index: -1
-battle/maps/battlemap1
+battle/entities/terrex
+  rotate: false
+  xy: 0, 676
+  size: 846, 231
+  orig: 846, 231
+  offset: 0, 0
+  index: -1
+battle/entities/lightningclaw
+  rotate: false
+  xy: 0, 162
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+battle/entities/firelion_left
+  rotate: false
+  xy: 512, 162
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+battle/entities/turtle
   rotate: false
   xy: 0, 0
-  size: 800, 480
-  orig: 800, 480
+  size: 889, 160
+  orig: 889, 160
+  offset: 0, 0
+  index: -1
+battle/entities/fireball
+  rotate: false
+  xy: 846, 807
+  size: 102, 100
+  orig: 102, 100
   offset: 0, 0
   index: -1
 
@@ -262,17 +276,102 @@ pages-info8.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-char-sprites/female_spritesheet
+battle/entities/icetacle
   rotate: false
-  xy: 0, 258
-  size: 576, 256
-  orig: 576, 256
+  xy: 0, 467
+  size: 512, 512
+  orig: 512, 512
   offset: 0, 0
   index: -1
-char-sprites/male_spritesheet
+battle/entities/shield
+  rotate: false
+  xy: 512, 467
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+battle/entities/snake
+  rotate: false
+  xy: 0, 388
+  size: 934, 77
+  orig: 934, 77
+  offset: 0, 0
+  index: -1
+battle/entities/spikes
+  rotate: false
+  xy: 0, 130
+  size: 640, 256
+  orig: 640, 256
+  offset: 0, 0
+  index: -1
+battle/entities/bee
+  rotate: false
+  xy: 0, 50
+  size: 656, 78
+  orig: 656, 78
+  offset: 0, 0
+  index: -1
+battle/entities/clam
   rotate: false
   xy: 0, 0
-  size: 576, 256
-  orig: 576, 256
+  size: 288, 48
+  orig: 288, 48
+  offset: 0, 0
+  index: -1
+
+pages-info9.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+battle/entities/snakebite_side
+  rotate: false
+  xy: 0, 374
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+battle/entities/torrentacle
+  rotate: false
+  xy: 512, 374
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+battle/entities/lidia
+  rotate: false
+  xy: 0, 0
+  size: 520, 372
+  orig: 520, 372
+  offset: 0, 0
+  index: -1
+
+pages-info10.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+battle/entities/tornado
+  rotate: false
+  xy: 0, 0
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+pages-info11.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+splash-screen/splash
+  rotate: false
+  xy: 0, 193
+  size: 512, 307
+  orig: 512, 307
+  offset: 0, 0
+  index: -1
+splash-screen/menulogo
+  rotate: false
+  xy: 0, 0
+  size: 512, 191
+  orig: 512, 191
   offset: 0, 0
   index: -1

@@ -227,28 +227,28 @@ public class BattleScreen extends AbstractScreen {
             //TODO: Hero moves at a fixed pixel rate (A.k.a. magic numbers). It should instead move based on screen width.
             case 0:{ // Up
                 if((hero.getGridY()-1>-1)){
-                    grid.moveEntity(hero, hero.getGridX(), hero.getGridY()-1);
+                    grid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()-1);
                     
                 }
                 break;
             }
             case 1:{ // Down
                 if((hero.getGridY()+1<3)){
-                    grid.moveEntity(hero, hero.getGridX(), hero.getGridY()+1);
+                    grid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()+1);
                     
                 }
                 break;
             }
             case 2:{ // Left
                 if((hero.getGridX()-1>-1)){
-                    grid.moveEntity(hero, hero.getGridX()-1, hero.getGridY());
+                    grid.moveEntity(hero, hero.getGridXInt()-1, hero.getGridYInt());
                     
                 }
                 break;
             }
             case 3:{ // Right
                 if((hero.getGridX()+1<3)){
-                    grid.moveEntity(hero, hero.getGridX()+1, hero.getGridY());
+                    grid.moveEntity(hero, hero.getGridXInt()+1, hero.getGridYInt());
                 }
                 break;
             }

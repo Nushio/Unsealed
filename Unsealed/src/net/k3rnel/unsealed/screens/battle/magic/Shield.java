@@ -10,7 +10,7 @@ import net.k3rnel.unsealed.screens.battle.BattleEntity;
 public class Shield extends MagicEntity {
 
     public Shield(TextureAtlas atlas, BattleEntity entity) {
-        super(0,entity);
+        super(0,0,entity);
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/shield" );
         TextureRegion[][] spriteSheet = atlasRegion.split(128, 128);
         TextureRegion[] frames = new TextureRegion[6];
@@ -20,8 +20,8 @@ public class Shield extends MagicEntity {
         frames[3] = spriteSheet[2][2];
         frames[4] = spriteSheet[3][0];
         frames[5] = spriteSheet[3][1];
-        Animation blocking = new Animation(1f,frames);
-        blocking.setPlayMode(Animation.LOOP_RANDOM);
+        Animation blocking = new Animation(0.1f,frames);
+        blocking.setPlayMode(Animation.LOOP);
         this.animations.put("blocking",blocking);
         this.setState(BattleEntity.stateBlocking);
         this.setGrid(entity.getGridX(),entity.getGridY());

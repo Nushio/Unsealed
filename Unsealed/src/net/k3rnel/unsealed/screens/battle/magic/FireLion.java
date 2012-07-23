@@ -7,16 +7,16 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 import net.k3rnel.unsealed.screens.battle.BattleEntity;
 
-public class Blast extends MagicEntity {
+public class FireLion extends MagicEntity {
     
     /**
      * 0 = gray. 1 = blue. 2 = red. 3 = green.
      * @param color
      */
-    public Blast(TextureAtlas atlas, int color, int speed, BattleEntity entity) {
+    public FireLion(TextureAtlas atlas, int color, int speed, BattleEntity entity) {
         super(.1f,0,entity);
-        AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/fireball" );
-        TextureRegion[][] spriteSheet = atlasRegion.split(34, 25);
+        AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/firelion_left" );
+        TextureRegion[][] spriteSheet = atlasRegion.split(128, 128);
         TextureRegion[] frames = new TextureRegion[3];
         frames[0] = spriteSheet[color][0];
         frames[1] = spriteSheet[color][1];
@@ -27,7 +27,7 @@ public class Blast extends MagicEntity {
         this.setState(BattleEntity.stateAttacking);
         this.setGrid(entity.getGridX()+1,entity.getGridY());
 
-        this.setHeight(30);this.setWidth(30);
+        this.setHeight(128);this.setWidth(128);
         offsetX = -(int)entity.getWidth();
         offsetY = 30;
     }

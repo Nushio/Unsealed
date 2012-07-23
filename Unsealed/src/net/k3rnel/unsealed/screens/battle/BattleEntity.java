@@ -20,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer.Task;
 
 public class BattleEntity extends Image {
@@ -28,8 +27,8 @@ public class BattleEntity extends Image {
     private int hp;
     public Label hpLabel;
   
-    private int gridX;
-    private int gridY;
+    private float gridX;
+    private float gridY;
     private Skin skin;
   
     public static final int stateIdle = 0;
@@ -40,6 +39,7 @@ public class BattleEntity extends Image {
     public static final int statePassThrough = 5;
     public static final int stateHit = 6;
     public static final int stateMoving = 7;
+    public static final int stateInvulnerable = 8;
 
 
     public final HashMap<String, Animation> animations;
@@ -89,10 +89,16 @@ public class BattleEntity extends Image {
     /**
      * @return the gridX
      */
-    public int getGridX() {
+    public float getGridX() {
         return gridX;
     }
-    public void setGrid(int x, int y){
+    /**
+     * @return the gridX
+     */
+    public int getGridXInt() {
+        return (int)gridX;
+    }
+    public void setGrid(float x, float y){
         setGridX(x);
         setGridY(y);
     }
@@ -100,7 +106,7 @@ public class BattleEntity extends Image {
     @Override
     public void setX(float x) {
         super.setX(x);
-        hpLabel.setX(x+(this.hpLabel.getWidth()/2)+10);
+        hpLabel.setX(x+(this.hpLabel.getWidth()/2)+10+offsetX);
     }
 
     @Override
@@ -111,7 +117,7 @@ public class BattleEntity extends Image {
     /**
      * @param gridX the gridX to set
      */
-    public void setGridX(int gridX) {
+    public void setGridX(float gridX) {
         this.gridX = gridX;
 //        Gdx.app.log(Unsealed.LOG, "GridX:"+gridX);
         setX((gridX+1)*65+150 - offsetX);
@@ -119,13 +125,19 @@ public class BattleEntity extends Image {
     /**
      * @return the gridY
      */
-    public int getGridY() {
+    public float getGridY() {
         return gridY;
+    }
+    /**
+     * @return the gridY
+     */
+    public int getGridYInt() {
+        return (int)gridY;
     }
     /**
      * @param gridY the gridY to set
      */
-    public void setGridY(int gridY) {
+    public void setGridY(float gridY) {
         this.gridY = gridY;
 //        Gdx.app.log(Unsealed.LOG, "GridY:"+gridY);
         setY((gridY+1)*-40 + 230 - offsetY);
@@ -147,8 +159,8 @@ public class BattleEntity extends Image {
             this.hp = hp;
             this.hpLabel.setText(hp+"");
             //            this.hpBar = new Image(hpBarTextures[0][0]);
-            SequenceAction actions = sequence(fadeOut(0.90f),
-                    delay(0.01f),fadeIn(1f), run(new Runnable() {
+            SequenceAction actions = sequence(fadeOut(0.05f),
+                    delay(0.005f),fadeIn(1f), run(new Runnable() {
                         public void run() {
                             Gdx.app.log(Unsealed.LOG, "I'm hurt");
                         }
@@ -211,10 +223,6 @@ public class BattleEntity extends Image {
                 currentAnimation = animations.get("moving");
                 break;
         }
-    }
-
-    public boolean action(Array<BattleHero> heroes, float delta){
-        return false;
     }
 
     public Task nextTask(){

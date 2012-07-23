@@ -16,15 +16,15 @@ import net.k3rnel.unsealed.screens.battle.BattleGrid;
 import net.k3rnel.unsealed.screens.battle.BattleHero;
 import net.k3rnel.unsealed.screens.battle.magic.PeaDart;
 
-public class Clam extends BattleEnemy {
+public class Snake extends BattleEnemy {
 
     PeaDart dart;
     TextureAtlas atlas;
-    public Clam(TextureAtlas atlas, int x, int y) {
+    public Snake(TextureAtlas atlas, int x, int y) {
         super(30, x, y);
         this.atlas = atlas;
-        AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/clam" );
-        TextureRegion[][] spriteSheet = atlasRegion.split(41, 48);
+        AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/snake" );
+        TextureRegion[][] spriteSheet = atlasRegion.split(107, 77);
         TextureRegion[] frames = new TextureRegion[2];
         frames[0] = spriteSheet[0][0];
         frames[1] = spriteSheet[0][1];
@@ -52,8 +52,8 @@ public class Clam extends BattleEnemy {
         //        y = (int)((battleoverlay.getHeight())/3);
         //        this.setPosition(x*this.getGridX(),y*this.getGridY());
         this.setState(BattleEntity.stateBlocking);
-        this.setHeight(48);
-        this.setWidth(48);
+        this.setHeight(77);
+        this.setWidth(107);
         getDart();
     }
 
@@ -74,7 +74,7 @@ public class Clam extends BattleEnemy {
                 }else{
                     Gdx.app.log(Unsealed.LOG,"Setting state to blocking!");
                     setState(BattleEntity.stateBlocking);
-                    BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(4));
+                    BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(5));
                 }
                 break;
             case BattleEntity.stateAttacking:
@@ -82,7 +82,7 @@ public class Clam extends BattleEnemy {
                     showDart(true);
                     
                     setState(BattleEntity.stateBlocking);
-                    BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(4));
+                    BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(5));
                 }
                 break;
         }
@@ -111,10 +111,12 @@ public class Clam extends BattleEnemy {
         };
         return currentTask;
     }
+
+    
     
     public PeaDart getDart(){
         if(dart==null){
-            dart = new PeaDart(atlas,-1.1f,this);
+            dart = new PeaDart(atlas,-0.4f,this);
             dart.setVisible(false);
         }
         return dart;

@@ -7,13 +7,13 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 import net.k3rnel.unsealed.screens.battle.BattleEntity;
 
-public class Blast extends MagicEntity {
+public class Cannonball extends MagicEntity {
     
     /**
      * 0 = gray. 1 = blue. 2 = red. 3 = green.
      * @param color
      */
-    public Blast(TextureAtlas atlas, int color, int speed, BattleEntity entity) {
+    public Cannonball(TextureAtlas atlas, int color, int speed, BattleEntity entity) {
         super(.1f,0,entity);
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/fireball" );
         TextureRegion[][] spriteSheet = atlasRegion.split(34, 25);
