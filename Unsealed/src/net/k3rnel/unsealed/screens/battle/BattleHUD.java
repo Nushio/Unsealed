@@ -58,31 +58,31 @@ public class BattleHUD extends Stage {
         
         this.addActor(rightTrigger);
 
-        atlasRegion = atlas.findRegion("battle/ui/blue_facebutton1");
-        textures = atlasRegion.split(83,92);
-        aButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
-        aButton.setX( this.getWidth() - (aButton.getWidth()*aButton.getScaleX()) );
-        aButton.setY( this.getHeight() -(aButton.getHeight()*aButton.getScaleY()+ 100) ); 
-        this.addActor(aButton);
-
-        textures = atlasRegion.split(83,92);
-        xButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
-        xButton.setX( this.getWidth() - (xButton.getWidth()*xButton.getScaleX()) -160 );
-        xButton.setY( this.getHeight() -(xButton.getHeight()*xButton.getScaleY()+ 100) );
-        this.addActor(xButton);
-
-        textures = atlasRegion.split(83,92);
-        bButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
-        bButton.setX( this.getWidth() - (bButton.getWidth()*bButton.getScaleX()) -80 );
-        bButton.setY( this.getHeight() -(bButton.getHeight()*bButton.getScaleY()+ 160) ); 
-        this.addActor(bButton);
-
-        atlasRegion = atlas.findRegion("battle/ui/blue_facebutton2");
-        textures = atlasRegion.split(75,74);
-        yButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
-        yButton.setX( this.getWidth() - (yButton.getWidth()*yButton.getScaleX()) -84 );
-        yButton.setY( this.getHeight() -(yButton.getHeight()*yButton.getScaleY()+ 60) );
-        this.addActor(yButton);
+//        atlasRegion = atlas.findRegion("battle/ui/blue_facebutton1");
+//        textures = atlasRegion.split(83,92);
+//        aButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+//        aButton.setX( this.getWidth() - (aButton.getWidth()*aButton.getScaleX()) );
+//        aButton.setY( this.getHeight() -(aButton.getHeight()*aButton.getScaleY()+ 100) ); 
+//        this.addActor(aButton);
+//
+//        textures = atlasRegion.split(83,92);
+//        xButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+//        xButton.setX( this.getWidth() - (xButton.getWidth()*xButton.getScaleX()) -160 );
+//        xButton.setY( this.getHeight() -(xButton.getHeight()*xButton.getScaleY()+ 100) );
+//        this.addActor(xButton);
+//
+//        textures = atlasRegion.split(83,92);
+//        bButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+//        bButton.setX( this.getWidth() - (bButton.getWidth()*bButton.getScaleX()) -80 );
+//        bButton.setY( this.getHeight() -(bButton.getHeight()*bButton.getScaleY()+ 160) ); 
+//        this.addActor(bButton);
+//
+//        atlasRegion = atlas.findRegion("battle/ui/blue_facebutton2");
+//        textures = atlasRegion.split(75,74);
+//        yButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+//        yButton.setX( this.getWidth() - (yButton.getWidth()*yButton.getScaleX()) -84 );
+//        yButton.setY( this.getHeight() -(yButton.getHeight()*yButton.getScaleY()+ 60) );
+//        this.addActor(yButton);
 
         atlasRegion = atlas.findRegion("battle/ui/dpad_alt");
         dPad = new Image(new Image(atlasRegion).getDrawable());

@@ -34,7 +34,7 @@ public class BattleScreen extends AbstractScreen {
     private BattleGrid grid;
     private BattleHUD hud;
 
-    public BattleHero hero;
+    public static BattleHero hero;
 
     private Label roundLabel;
 
@@ -178,7 +178,7 @@ public class BattleScreen extends AbstractScreen {
         });
         this.stage.addActor(restartButton);
         cam.position.set(this.stage.getWidth() / 2, this.stage.getHeight() / 2, 0);
-        cam.zoom = 0.8f;
+        cam.zoom = 1f;
         this.stage.setCamera(cam);
         Gdx.input.setInputProcessor(new InputMultiplexer(this,stage,hud));
     } 

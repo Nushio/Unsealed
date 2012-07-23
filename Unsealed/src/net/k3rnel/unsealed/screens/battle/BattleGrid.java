@@ -69,7 +69,7 @@ public class BattleGrid extends Stage {
         unusedPositions.shuffle();
         cam = new OrthographicCamera(this.width, this.height);            
         cam.position.set(this.width / 2, this.height / 2, 0);
-        cam.zoom = 0.8f;
+        cam.zoom = 1f;
         this.setCamera(cam);
 
     }
@@ -189,6 +189,15 @@ public class BattleGrid extends Stage {
         
         Vector2 spawnPoint;
         BattleEntity enemy;
+        enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
+        unusedPositions = new Array<Vector2>();
+        // SizeX / 2 because we don't want enemies spawning on the hero-side.
+        for(int x = sizeX/2; x<sizeX;x++){
+            for(int y = 0; y<sizeY;y++){
+                unusedPositions.add(new Vector2(x,y));
+            }
+        }
+        unusedPositions.shuffle();
         for(int i = 0; i < random.nextInt(4)+1; i++){
             spawnPoint = getUnusedPosition();
             if(spawnPoint!=null){
@@ -213,6 +222,9 @@ public class BattleGrid extends Stage {
                 if(random.nextInt(bonus)/3>2&&enemies.size<9){
                     i--;
                 }
+                if(random.nextInt(bonus)/3>3){
+                    BattleScreen.hero.setHp(BattleScreen.hero.getHp()+30);
+                }
             }
         }
         BattleScreen.bonus++;
@@ -235,15 +247,6 @@ public class BattleGrid extends Stage {
         grid = new BattleEntity[sizeX][sizeY];
         random = new Random(System.currentTimeMillis());
         heroes = new Array<BattleHero>(3);
-        enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
-        unusedPositions = new Array<Vector2>();
-        // SizeX / 2 because we don't want enemies spawning on the hero-side.
-        for(int x = sizeX/2; x<sizeX;x++){
-            for(int y = 0; y<sizeY;y++){
-                unusedPositions.add(new Vector2(x,y));
-            }
-        }
-        unusedPositions.shuffle();
         this.getActors().clear();
         
     }
