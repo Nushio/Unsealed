@@ -45,6 +45,7 @@ public class BattleHUD extends Stage {
         atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
         AtlasRegion atlasRegion = atlas.findRegion("battle/ui/lefttrigger");
         TextureRegion[][] textures  = atlasRegion.split(181,57);
+        if(Gdx.app.getVersion()>1){
         leftTrigger = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
         leftTrigger.setPosition(0, this.getHeight()-leftTrigger.getHeight());
         
@@ -116,7 +117,7 @@ public class BattleHUD extends Stage {
         dPadRight.setPosition(138,this.getHeight()-194);
         
         this.addActor(dPadRight);
-
+        }
         atlasRegion = atlas.findRegion("battle/ui/mana_sphere");
         manasphere = atlasRegion.split(32,43);
         manasphere1 = new Image(manasphere[0][0]);

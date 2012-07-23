@@ -10,7 +10,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.PressedListener;
 
 import net.k3rnel.unsealed.Unsealed;
@@ -32,8 +36,12 @@ public class BattleScreen extends AbstractScreen {
 
     public BattleHero hero;
 
+    private Label roundLabel;
 
-    private int bonus = 1;
+    private Button restartButton;
+
+    public static int round = 0;
+    public static int bonus = 1;
 
     List<MagicEntity> magics = new ArrayList<MagicEntity>();
 
@@ -48,6 +56,7 @@ public class BattleScreen extends AbstractScreen {
     public void show() {
         super.show();
 
+     
         Gdx.input.setInputProcessor(new InputMultiplexer(this,stage));
         atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
 //        int battlemap = random.nextInt(6);
@@ -65,6 +74,7 @@ public class BattleScreen extends AbstractScreen {
 
         hud = new BattleHUD(this.stage.getWidth(), stage.getHeight());
         
+        if(Gdx.app.getVersion()>0){
         hud.leftTrigger.addListener(new PressedListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -128,7 +138,7 @@ public class BattleScreen extends AbstractScreen {
                 return true;
             }
         });
-        
+        }
         grid = new BattleGrid(this.stage.getWidth(), stage.getHeight(),6,3);
 
         hero = new BattleHero(getAtlas(),100);
@@ -137,10 +147,38 @@ public class BattleScreen extends AbstractScreen {
 
         grid.spawnEnemies(bonus);
         
+        roundLabel = new Label("Round "+round,getSkin());
+        roundLabel.setX(350);
+        roundLabel.setY(350);
+        this.stage.addActor(roundLabel);
         OrthographicCamera cam = new OrthographicCamera(this.stage.getWidth(), this.stage.getHeight());   
         
+        restartButton = new TextButton("Restart?", getSkin());
+        restartButton.setY(250);
+        restartButton.setX(320);
+        restartButton.setWidth(100);
+        restartButton.setHeight(50);
+        restartButton.setVisible(false);
+        restartButton.setDisabled(true);
+        restartButton.addListener(new ClickListener() {
+            
+            @Override
+            public void clicked(InputEvent arg0, float arg1, float arg2) {
+                hero = new BattleHero(getAtlas(),100);
+                hero.setGrid(1,1);
+                grid.reset();
+                grid.assignEntity(hero);     
+
+                grid.spawnEnemies(bonus);
+                bonus = 0;
+                round = 1;
+                restartButton.setVisible(false);
+                restartButton.setDisabled(true);
+            }
+        });
+        this.stage.addActor(restartButton);
         cam.position.set(this.stage.getWidth() / 2, this.stage.getHeight() / 2, 0);
-        cam.zoom = 0.76f;
+        cam.zoom = 0.8f;
         this.stage.setCamera(cam);
         Gdx.input.setInputProcessor(new InputMultiplexer(this,stage,hud));
     } 
@@ -148,18 +186,26 @@ public class BattleScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-        grid.act(delta);
-        hud.act(delta);
+        roundLabel.setText("Round "+round+"");
         
-        hud.fillMana(hero);
-        
-        grid.draw();
-        hud.draw();
 
        if(grid.checkState() == BattleGrid.battleWon){
            bonus++;
            grid.spawnEnemies(bonus);
+       }else if(grid.checkState() == BattleGrid.battleLost){
+           roundLabel.setX(330);
+           roundLabel.setText("You Lost at Round "+round+"!");
+           restartButton.setVisible(true);
+           
+       }else if(grid.checkState() == BattleGrid.battleStarted){
+           grid.act(delta);
+           hud.act(delta);
        }
+       
+       hud.fillMana(hero);
+       
+       grid.draw();
+       hud.draw();
     }
 
     @Override
@@ -227,28 +273,28 @@ public class BattleScreen extends AbstractScreen {
             //TODO: Hero moves at a fixed pixel rate (A.k.a. magic numbers). It should instead move based on screen width.
             case 0:{ // Up
                 if((hero.getGridY()-1>-1)){
-                    grid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()-1);
+                    BattleGrid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()-1);
                     
                 }
                 break;
             }
             case 1:{ // Down
                 if((hero.getGridY()+1<3)){
-                    grid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()+1);
+                    BattleGrid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()+1);
                     
                 }
                 break;
             }
             case 2:{ // Left
                 if((hero.getGridX()-1>-1)){
-                    grid.moveEntity(hero, hero.getGridXInt()-1, hero.getGridYInt());
+                    BattleGrid.moveEntity(hero, hero.getGridXInt()-1, hero.getGridYInt());
                     
                 }
                 break;
             }
             case 3:{ // Right
                 if((hero.getGridX()+1<3)){
-                    grid.moveEntity(hero, hero.getGridXInt()+1, hero.getGridYInt());
+                    BattleGrid.moveEntity(hero, hero.getGridXInt()+1, hero.getGridYInt());
                 }
                 break;
             }

@@ -4,7 +4,10 @@ package net.k3rnel.unsealed.screens.battle;
 import java.util.Random;
 
 import net.k3rnel.unsealed.Unsealed;
+import net.k3rnel.unsealed.screens.BattleScreen;
+import net.k3rnel.unsealed.screens.battle.enemies.Clam;
 import net.k3rnel.unsealed.screens.battle.enemies.Ghost;
+import net.k3rnel.unsealed.screens.battle.enemies.Terrex;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -66,7 +69,7 @@ public class BattleGrid extends Stage {
         unusedPositions.shuffle();
         cam = new OrthographicCamera(this.width, this.height);            
         cam.position.set(this.width / 2, this.height / 2, 0);
-        cam.zoom = 0.76f;
+        cam.zoom = 0.8f;
         this.setCamera(cam);
 
     }
@@ -182,24 +185,37 @@ public class BattleGrid extends Stage {
         return this.battleState;
     }
     public void spawnEnemies(int bonus) {
-        bonus += random.nextInt(3);
-        if(bonus > 5)
-            bonus = 5;
+        BattleScreen.round++;
+        
         Vector2 spawnPoint;
         BattleEntity enemy;
-        for(int i = 0; i < bonus; i++){
+        for(int i = 0; i < random.nextInt(4)+1; i++){
             spawnPoint = getUnusedPosition();
             if(spawnPoint!=null){
-//                if(spawnPoint.y==0)
-//                  enemy = new Clam(getAtlas(),(int)spawnPoint.x,(int)spawnPoint.y);
+                if(BattleScreen.round < 3){
+                    if(random.nextInt(100)<60)
+                        enemy = new Clam(getAtlas(),(int)spawnPoint.x,(int)spawnPoint.y);
+                    else
+                        enemy = new Ghost(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
 //                else if(spawnPoint.y==1)
-                    enemy = new Ghost(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
+                }else{
+                    if(random.nextInt(100)<30){
+                        enemy = new Ghost(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
+                    }else{
+                        enemy = new Terrex(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
+                    }
+                }
+                
 //                else
 //                  enemy = new Terrex(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
                 assignEntity(enemy);
                 timer.scheduleTask(enemy.nextTask(), random.nextInt(5));
+                if(random.nextInt(bonus)/3>2&&enemies.size<9){
+                    i--;
+                }
             }
         }
+        BattleScreen.bonus++;
         this.battleState = BattleGrid.battleStarted;
         reorderActors();
     }
@@ -212,5 +228,23 @@ public class BattleGrid extends Stage {
             atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
         }
         return atlas;
+    }
+
+    public void reset() {
+        timer = new Timer();
+        grid = new BattleEntity[sizeX][sizeY];
+        random = new Random(System.currentTimeMillis());
+        heroes = new Array<BattleHero>(3);
+        enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
+        unusedPositions = new Array<Vector2>();
+        // SizeX / 2 because we don't want enemies spawning on the hero-side.
+        for(int x = sizeX/2; x<sizeX;x++){
+            for(int y = 0; y<sizeY;y++){
+                unusedPositions.add(new Vector2(x,y));
+            }
+        }
+        unusedPositions.shuffle();
+        this.getActors().clear();
+        
     }
 }

@@ -42,12 +42,12 @@ public class CharSelectScreen extends AbstractScreen {
         table.setHeight(stage.getHeight());
         table.pad(10).defaults().spaceBottom(10);
         
-        final Label titleLabel = new Label("Select Player", skin);
+        final Label titleLabel = new Label("Select Game Mode", skin);
         table.padTop(40);
         table.add(titleLabel).expandX().align(Align.center).colspan(2);
         table.row();
         table.row();
-        final Label guyLabel = new Label("Overworld",skin);
+        final Label guyLabel = new Label("Survival",skin);
         final Label galLabel = new Label("Battle",skin);
         table.add(guyLabel).align(Align.center);
         table.add(galLabel).align(Align.center);

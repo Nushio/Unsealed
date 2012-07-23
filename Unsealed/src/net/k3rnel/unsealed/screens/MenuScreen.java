@@ -51,19 +51,22 @@ public class MenuScreen extends AbstractScreen {
         newGameButton.addListener( new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y ) {
-                game.setScreen( new CharSelectScreen( game ) );
+                //TODO: Move it back to char select screen
+//                game.setScreen( new CharSelectScreen( game ) );
+                game.setScreen( new BattleScreen( game ) );
             }
         } );
         table.add(newGameButton).size( 300, 60 ).uniform().spaceBottom(10);
         table.row();
         table.pad(10).defaults().spaceBottom(10);
-        TextButton optionsButton = new TextButton( "Options", skin );
-        optionsButton.addListener( new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y ) {
-                game.setScreen( new OptionsScreen( game ) );
-            }
-        } );
-        table.add(optionsButton).size( 300, 60 ).uniform().spaceBottom(10);
+//        TextButton optionsButton = new TextButton( "Options", skin );
+//        optionsButton.setDisabled(true);
+//        optionsButton.addListener( new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y ) {
+//                game.setScreen( new OptionsScreen( game ) );
+//            }
+//        } );
+//        table.add(optionsButton).size( 300, 60 ).uniform().spaceBottom(10);
     }
 }
