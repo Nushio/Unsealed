@@ -3,6 +3,7 @@ package net.k3rnel.unsealed.objects;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public abstract class MapActor extends Actor {
+	
 	public static final int groupMap = 1;
 	public static final int groupPlayer = 2;
 	public static final int groupNPC = 3;
