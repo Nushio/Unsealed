@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="70" height="70" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" source="tiles_/Exteriors.tsx"/>
+ <layer name="Ground" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer name="Ground" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt0KsNgFAURMEraIBeqABFLzSComYET/BZNCTMJOs3pwoAAAAA+IqpbensuLnuo2ptGzs7DgAAAAAAAAAA4C/6tw981NDGmS6ZLpkumS7ZcBk7XTJdMl2yaxdtdrpkumSpiza6PNkAnypGYQ==
+  </data>
+ </layer>
+ <layer name="Ground" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt0jENAEAIwEAGjKHubb8IBiC5U9ChEQAAAADAJi+nC7ik/AIAAAAAAAAAAAAAAABA0wfq+wDR
+  </data>
+ </layer>
+ <layer name="Decorations" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt2LENwCAMBEBAjMMgWZddGIiCihpLUchd8531hatPCQAAAIBb9bony6h7AgAAfMWT324AcfwzAAAA8Df2EAAAAAAATkTuzK3E3eIeE/DOBG0=
+  </data>
+ </layer>
+ <layer name="Decorations" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztzrENADAIwDAG/j+mPMjAEUXIXrImAgAAAICrKqcv/34AAAAAAAAAAAAAAAAAALBXA9C5AW4=
+  </data>
+ </layer>
+ <layer name="Cliffs" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt1EEKgCAQBdDO3V28a5sWEVOWhWP03kYQGWa+4jSdK+s6V87d8WatbCXYa50vqnXVFzLdz9ej55ZMs7Os9ZzV35P32UNrf9n3PaqjPOUV2+Ylo9jofwgAAAAAAAAAAAAAAAAAAAAA/NkCsRQLhA==
+  </data>
+ </layer>
+ <layer name="Cliffs" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt1eFNwzAQBtCsALtUbALqKHSWsiuuUBTLOifGCTiI96ST+iNJz5/s8zTV3VO9p7qlek31VtQ1eGd+fq2ib7VW9J+tWnqba8sjm4/KN8v1XbPn1+o7/R2R6ZxlS29ztYq+Wa5vq+ee/o7ItCfLPcr1bfXce37ys9OTaU+WR9rquff81PJsnTU9Wf6m3vNTyzPPa888/qtqeeZ57bnjjp4vo+V57bnjfnq+jLTnjhs9XwAAAAAAAAAAAAAAADiHp1TPo5s4qcvoBk5KLjG5xOQSe5nM3zX2TUwuMbnEHnPGjInZM193UHkPyWWRZ+EsLcos7JnFpfL7P/oEPrmv3g==
+  </data>
+ </layer>
+</map>
