@@ -16,6 +16,9 @@ import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.objects.Map;
 import net.k3rnel.unsealed.objects.MapActor;
 import net.k3rnel.unsealed.objects.MapCharacter;
+import net.k3rnel.unsealed.objects.MapListener;
+import net.k3rnel.unsealed.objects.MapWalkAction;
+import net.k3rnel.unsealed.objects.WarpTile;
 import net.k3rnel.unsealed.utils.MapLoader;
 
 public class OverworldScreen extends AbstractScreen {
@@ -32,9 +35,13 @@ public class OverworldScreen extends AbstractScreen {
 	private int state;
     
     private MapCharacter player;
+    private MapWalkAction walkAction;
     private String mapFileName = "";
     private Map gameMap;
     private int spawnX, spawnY;
+    
+    private final int[] underLayers = { 0, 1, 2 };
+    private final int[] overLayers = { 3, 4 };
     
     public OverworldScreen(Unsealed game) {
         super(game);
@@ -141,6 +148,30 @@ public class OverworldScreen extends AbstractScreen {
     }
     
     public void showMap() {
-    	
+		state = stateWalk;
+		gameMap = Unsealed.getInstance().getAssetManager().get(mapFileName, Map.class);
+		gameMap.setUnderLayers(underLayers);
+		gameMap.setOverLayers(overLayers);
+		
+		gameMap.setMapListener(new MapListener() {
+			@Override
+			public void collided(MapActor actor1, MapActor actor2) {
+			}
+
+			@Override
+			public void overlapped(MapActor actor1, MapActor actor2) {
+				if(actor1 == player && actor2 instanceof WarpTile) {
+					WarpTile warpTile = (WarpTile) actor2;
+					Unsealed.getInstance().getAssetManager().unload(mapFileName);
+					loadMap(warpTile.getMapFile(), warpTile.getSpawnX(), warpTile.getSpawnY());
+				}
+			}
+		});
+		
+		walkAction = new MapWalkAction();
+		player = createPlayer();
+		player.addAction(walkAction);
+		gameMap.addActor(player);
+		player.warp(spawnX, spawnY);    	
     }
 }

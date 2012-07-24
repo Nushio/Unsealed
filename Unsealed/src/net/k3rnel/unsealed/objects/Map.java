@@ -231,8 +231,8 @@ public class Map implements Disposable {
 		return listener;
 	}
 
-	public void setMapListener(MapListener listener) {
-		this.listener = listener;
+	public void setMapListener(MapListener mapListener) {
+		this.listener = mapListener;
 	}
 	
 	private static class MapActorComparator implements Comparator<Actor> {
