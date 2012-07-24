@@ -1,33 +1,46 @@
 package net.k3rnel.unsealed.screens.battle;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import net.k3rnel.unsealed.screens.battle.magic.Blast;
-import net.k3rnel.unsealed.screens.battle.magic.Cannonball;
 import net.k3rnel.unsealed.screens.battle.magic.FireLion;
+import net.k3rnel.unsealed.screens.battle.magic.MagicEntity;
 import net.k3rnel.unsealed.screens.battle.magic.Shield;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.utils.Timer.Task;
 
 public class BattleHero extends BattleEntity {
 
-    public boolean isCharging = false;
-    public boolean isShooting = false;
-
     private int mana;
-    
-    private FireLion lion;
-    private Cannonball ball;
-    private Blast blast;
+
     private Shield shield;
 
-    private TextureAtlas atlas;
+    public List<MagicEntity> magics;
+    private MagicEntity tmpMagic;
+    public int magicType;
     
+    private TextureAtlas atlas;
+
+    SequenceAction actions;
+    
+    private boolean hit = false;
+
     public BattleHero(TextureAtlas atlas, int hp) {
         this.atlas = atlas;
+        magics = new ArrayList<MagicEntity>();
         AtlasRegion atlasRegion = atlas.findRegion("battle/entities/lidia");
         TextureRegion[][] lidia = atlasRegion.split(65,93);
         TextureRegion[] frames = new TextureRegion[5]; 
@@ -42,20 +55,27 @@ public class BattleHero extends BattleEntity {
         Animation blocking = new Animation(1f,lidia[1][0]);
         blocking.setPlayMode(Animation.NORMAL);
         this.animations.put("blocking",blocking);
-        frames = new TextureRegion[5]; 
+        frames = new TextureRegion[8]; 
         frames[0] = lidia[2][0];
         frames[1] = lidia[2][1];
         frames[2] = lidia[2][2];
         frames[3] = lidia[2][3];
         frames[4] = lidia[2][4];
+        frames[5] = lidia[2][5];
+        frames[6] = lidia[2][6];
+        frames[7] = lidia[2][7];
         Animation attacking = new Animation(0.1f,frames);
         attacking.setPlayMode(Animation.NORMAL);
         this.animations.put("attacking",attacking);
 
-        frames = new TextureRegion[3]; 
-        frames[0] = lidia[2][5];
-        frames[1] = lidia[2][6];
-        frames[2] = lidia[2][7];
+        frames = new TextureRegion[7]; 
+        frames[0] = lidia[3][0];
+        frames[1] = lidia[3][1];
+        frames[2] = lidia[3][2];
+        frames[3] = lidia[3][3];
+        frames[4] = lidia[3][4];
+        frames[5] = lidia[3][5];
+        frames[6] = lidia[3][6];
         attacking = new Animation(0.1f,frames);
         attacking.setPlayMode(Animation.NORMAL);
         this.animations.put("altattacking",attacking);
@@ -76,93 +96,141 @@ public class BattleHero extends BattleEntity {
 
         this.setWidth(65);
         this.setHeight(93);
-        getBlast();
-        getLion();
-        getCannonball();
+        //        getCannonball();
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(blast.isVisible())
-            blast.act(delta);
-        if(ball.isVisible())
-            ball.act(delta);
-        if(this.getState() == BattleEntity.stateAttacking){
-            this.isShooting = true;
-        }else if(this.getState() == BattleEntity.stateBlocking){
-            if(shield.isVisible())
-                getShield().setGrid(this.getGridX(),this.getGridY());
-        }
-        if(this.getState() != BattleEntity.stateBlocking){
-            showShield(false);
-        }
+
         if(currentAnimation.isAnimationFinished(stateTime)){
             switch(this.getState()){
                 case BattleEntity.stateAttacking:
-                    setState(BattleEntity.stateAltAttacking);
+                    hit = false;
+                    setState(BattleEntity.stateIdle);
                     break;
                 case BattleEntity.stateAltAttacking:
+                    hit = false;
                     setState(BattleEntity.stateIdle);
                     break;
                 case BattleEntity.stateBlocking:
                     break;
             }
         }
-    }
-    public FireLion getLion(){
-        if(lion==null){
-            lion = new FireLion(atlas,0,1,this);
-            lion.setVisible(false);
+        if(this.getState() == BattleEntity.stateAttacking){
+            if(currentAnimation.animationDuration<stateTime+0.4f&&!hit){
+                hit = true;
+                switch(magicType){
+                    case 0:
+                        showBlast(true);
+                        break;
+                    case 1:
+                        showFireLion(true);
+                        break;
+                }
+            }
+        }else if(this.getState() == BattleEntity.stateBlocking){
+            if(shield.isVisible())
+                getShield().setGrid(this.getGridXInt(),this.getGridYInt());
+        }else if(this.getState() == BattleEntity.stateAltAttacking){
+            if(currentAnimation.animationDuration<stateTime+0.3f&&!hit){
+                hit = true;
+                if(BattleGrid.grid[this.getGridXInt()+1][this.getGridYInt()]!=null){
+                    BattleEntity entity = BattleGrid.grid[this.getGridXInt()+1][this.getGridYInt()];
+                    if(entity instanceof BattleEnemy){
+                        if(entity.getState() == BattleEntity.stateBlocking){
+                            if(entity.setHp(entity.getHp()-30)){
+                                entity.remove();
+                                BattleGrid.unusedPositions.add(new Vector2(entity.getGridXInt()+1,entity.getGridYInt()));
+                                BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
+                                BattleGrid.grid[this.getGridXInt()+1][this.getGridYInt()] = null;
+                                BattleGrid.checkState();
+                            }else{
+                                actions = 
+                                        sequence(color(Color.RED), delay(0.01f),
+                                                color(Color.ORANGE),delay(0.01f),
+                                                color(Color.RED),delay(0.01f),
+                                                color(Color.ORANGE),delay(0.01f),
+                                                color(Color.WHITE));
+                                entity.addAction( actions ) ;
+                            }
+                        }else{
+                            if(entity.setHp(entity.getHp()-60)){
+                                entity.remove();
+                                BattleGrid.unusedPositions.add(new Vector2(entity.getGridXInt()+1,entity.getGridYInt()));
+                                BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
+                                BattleGrid.grid[this.getGridXInt()+1][this.getGridYInt()] = null;
+                                BattleGrid.checkState();
+                            }else{
+                                actions = 
+                                        sequence(color(Color.RED), delay(0.01f),
+                                                color(Color.ORANGE),delay(0.01f),
+                                                color(Color.RED),delay(0.01f),
+                                                color(Color.ORANGE),delay(0.01f),
+                                                color(Color.WHITE));
+                                entity.addAction( actions ) ;
+                            }
+                        }
+                    }
+                }
+            }
         }
-        return lion;
-    }
-    public void showLion(boolean show){
-        lion.offsetY = -30;
-        lion.offsetX = -(int)this.getWidth();
-        lion.speedX = 0.01f;
-        lion.maxDistance = 2;
-        if(show)
-            lion.setGrid(this.getGridX(),this.getGridY());
-        lion.setVisible(show);
-    }
-    public Blast getBlast(){
-        if(blast==null){
-            blast = new Blast(atlas,0,1,this);
-            blast.setVisible(false);
+        for(int i = 0; i< magics.size(); i++){
+            if(magics.get(i).destroyMe){
+                magics.remove(i);
+                i--;
+            }else{
+                magics.get(i).act(delta);
+            }
+        }            
+        if(this.getState() != BattleEntity.stateBlocking){
+            showShield(false);
         }
-        return blast;
     }
+    public void showFireLion(boolean show){
+        tmpMagic = new FireLion(atlas,-0.3f,this);
+        tmpMagic.setVisible(false);
+        tmpMagic.offsetY = 0;
+        tmpMagic.offsetX = 0;
+        tmpMagic.maxDistance = 4;
+        tmpMagic.speedX = 0.2f;
+        if(show){  
+            tmpMagic.setGrid(this.getGridXInt()+1,this.getGridYInt());
+        }
+        tmpMagic.setVisible(show);
+        magics.add(tmpMagic);
+     }
     public void showBlast(boolean show){
-        if(blast==null)
-            getBlast();
-        blast.offsetY = -30;
-        blast.offsetX = -(int)this.getWidth();
-        blast.speedX = 0.5f;
-        if(show)
-            blast.setGrid(this.getGridX(),this.getGridY());
-        blast.setVisible(show);
+       tmpMagic = new Blast(atlas,0,0.6f,this);
+       tmpMagic.setVisible(false);
+       tmpMagic.offsetY = -30;
+       tmpMagic.offsetX = -(int)this.getWidth();
+       tmpMagic.speedX = 0.5f;
+       if(show)
+           tmpMagic.setGrid(this.getGridXInt(),this.getGridYInt());
+       tmpMagic.setVisible(show);
+       magics.add(tmpMagic);
     }
-    public Cannonball getCannonball(){
-        if(ball==null){
-            ball = new Cannonball(atlas,0,1,this);
-            ball.setVisible(false);
-        }
-        return ball;
-    }
-    public void showCannonball(boolean show){
-        if(ball==null)
-            getCannonball();
-        ball.offsetY = -30;
-        ball.offsetX = -(int)this.getWidth();
-        ball.speedX = 0.01f;
-        ball.isArc = true;
-        ball.initialPos = this.getY();
-        ball.maxDistance = this.getGridX()+2;
-        if(show)
-            ball.setGrid(this.getGridX(),this.getGridY());
-        ball.setVisible(show);
-    }
+    //    public Cannonball getCannonball(){
+    //        if(ball==null){
+    //            ball = new Cannonball(atlas,0,1,this);
+    //            ball.setVisible(false);
+    //        }
+    //        return ball;
+    //    }
+    //    public void showCannonball(boolean show){
+    //        if(ball==null)
+    //            getCannonball();
+    //        ball.offsetY = -30;
+    //        ball.offsetX = -(int)this.getWidth();
+    //        ball.speedX = 0.01f;
+    //        ball.isArc = true;
+    //        ball.initialPos = this.getY();
+    //        ball.maxDistance = this.getGridX()+2;
+    //        if(show)
+    //            ball.setGrid(this.getGridX(),this.getGridY());
+    //        ball.setVisible(show);
+    //    }
     public Shield getShield(){
         if(shield==null){
             shield = new Shield(atlas,this);
@@ -171,18 +239,17 @@ public class BattleHero extends BattleEntity {
         return shield;
     }
     public void showShield(boolean show){
-//        if(show)
-//            shield.setGrid(this.getGridX(),this.getGridY());
+        //        if(show)
+        //            shield.setGrid(this.getGridX(),this.getGridY());
         shield.setVisible(show);
     }
 
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if(blast.isVisible())
-            blast.draw(batch, parentAlpha);
-        if(ball.isVisible())
-            ball.draw(batch, parentAlpha);
+        for(MagicEntity magic : magics){
+            magic.draw(batch, parentAlpha);
+        }
     }
 
     /**

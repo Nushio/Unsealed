@@ -118,9 +118,10 @@ public class BattleEntity extends Image {
      * @param gridX the gridX to set
      */
     public void setGridX(float gridX) {
+        
         this.gridX = gridX;
 //        Gdx.app.log(Unsealed.LOG, "GridX:"+gridX);
-        setX((gridX+1)*65+150 - offsetX);
+        setX((this.gridX+1)*65+150 - offsetX);
     }
     /**
      * @return the gridY

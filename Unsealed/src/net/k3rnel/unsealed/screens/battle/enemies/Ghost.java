@@ -73,8 +73,8 @@ public class Ghost extends BattleEnemy {
             case BattleEntity.stateAltAttacking:
                 if(currentAnimation.isAnimationFinished(stateTime)){
                     for(BattleHero hero : BattleGrid.heroes){
-                        if(hero.getGridY() == getGridY()){
-                            if(hero.getGridX() == getGridX()-1){
+                        if(hero.getGridYInt() == getGridYInt()){
+                            if(hero.getGridXInt() == getGridXInt()-1){
                                 if(hero.getState()==BattleEntity.stateBlocking) 
                                     hero.setHp(hero.getHp()-10);
                                 else
@@ -130,7 +130,7 @@ public class Ghost extends BattleEnemy {
     }
     public PeaDart getDart(){
         if(dart==null){
-            dart = new PeaDart(atlas,-0.6f,this);
+            dart = new PeaDart(atlas,-0.5f,this);
             dart.setVisible(false);
         }
         return dart;
@@ -139,7 +139,7 @@ public class Ghost extends BattleEnemy {
         dart.offsetY = 0;
         dart.offsetX = (int)this.getWidth();
         if(show)
-            dart.setGrid(this.getGridX(),this.getGridY());
+            dart.setGrid(this.getGridXInt(),this.getGridYInt());
         dart.setVisible(show);
     }
     protected void moveCharacter() {

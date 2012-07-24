@@ -67,7 +67,7 @@ public class Snake extends BattleEnemy {
             case BattleEntity.stateIdle:
                 if(!currentAnimation.isAnimationFinished(stateTime)){
                     for(BattleHero hero : BattleGrid.heroes){
-                        if(hero.getGridY() == this.getGridY()){
+                        if(hero.getGridYInt() == this.getGridYInt()){
                             setState(BattleEntity.stateAttacking);
                         }
                     }
@@ -125,7 +125,7 @@ public class Snake extends BattleEnemy {
         dart.offsetY = 0;
         dart.offsetX = (int)this.getWidth();
         if(show)
-            dart.setGrid(this.getGridX(),this.getGridY());
+            dart.setGrid(this.getGridXInt(),this.getGridYInt());
         dart.setVisible(show);
     }
 }

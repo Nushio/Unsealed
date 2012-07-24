@@ -24,7 +24,7 @@ public class Shield extends MagicEntity {
         blocking.setPlayMode(Animation.LOOP);
         this.animations.put("blocking",blocking);
         this.setState(BattleEntity.stateBlocking);
-        this.setGrid(entity.getGridX(),entity.getGridY());
+        this.setGrid(entity.getGridXInt(),entity.getGridYInt());
         this.setHeight(128);
         this.setWidth(128);
         offsetX = 50;

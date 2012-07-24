@@ -25,7 +25,7 @@ public class Cannonball extends MagicEntity {
         attacking.setPlayMode(Animation.LOOP);
         this.animations.put("attacking",attacking);
         this.setState(BattleEntity.stateAttacking);
-        this.setGrid(entity.getGridX()+1,entity.getGridY());
+        this.setGrid(entity.getGridXInt()+1,entity.getGridYInt());
 
         this.setHeight(30);this.setWidth(30);
         offsetX = -(int)entity.getWidth();

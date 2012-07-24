@@ -100,128 +100,128 @@ filter: Nearest,Nearest
 repeat: none
 battle/ui/lifebar
   rotate: false
-  xy: 0, 474
+  xy: 0, 519
   size: 363, 482
   orig: 363, 482
   offset: 0, 0
   index: -1
 battle/ui/spells
   rotate: false
-  xy: 363, 828
-  size: 384, 128
-  orig: 384, 128
+  xy: 363, 809
+  size: 384, 192
+  orig: 384, 192
   offset: 0, 0
   index: -1
 battle/ui/field-3x3
   rotate: false
-  xy: 363, 701
+  xy: 363, 682
   size: 382, 125
   orig: 382, 125
   offset: 0, 0
   index: -1
 battle/ui/field-4x4
   rotate: false
-  xy: 0, 395
+  xy: 0, 440
   size: 351, 77
   orig: 351, 77
   offset: 0, 0
   index: -1
 battle/ui/field-3x4
   rotate: false
-  xy: 363, 639
+  xy: 363, 620
   size: 352, 60
   orig: 352, 60
   offset: 0, 0
   index: -1
 battle/ui/field-4x3
   rotate: false
-  xy: 747, 879
+  xy: 747, 924
   size: 265, 77
   orig: 265, 77
   offset: 0, 0
   index: -1
 battle/ui/enemy-lifebar
   rotate: false
-  xy: 0, 203
+  xy: 0, 248
   size: 106, 190
   orig: 106, 190
   offset: 0, 0
   index: -1
 battle/ui/lefttrigger
   rotate: false
-  xy: 363, 523
+  xy: 106, 324
   size: 181, 114
   orig: 181, 114
   offset: 0, 0
   index: -1
 battle/ui/righttrigger
   rotate: false
-  xy: 106, 279
+  xy: 747, 808
   size: 181, 114
   orig: 181, 114
   offset: 0, 0
   index: -1
 battle/ui/blue_facebutton1
   rotate: false
-  xy: 0, 17
+  xy: 0, 62
   size: 83, 184
   orig: 83, 184
   offset: 0, 0
   index: -1
 battle/ui/dpad_alt
   rotate: false
-  xy: 544, 510
+  xy: 745, 679
   size: 130, 127
   orig: 130, 127
   offset: 0, 0
   index: -1
 battle/ui/mana_sphere
   rotate: false
-  xy: 747, 834
+  xy: 363, 575
   size: 192, 43
   orig: 192, 43
   offset: 0, 0
   index: -1
 battle/ui/dpad
   rotate: false
-  xy: 106, 150
+  xy: 106, 195
   size: 130, 127
   orig: 130, 127
   offset: 0, 0
   index: -1
 battle/ui/blue_facebutton2
   rotate: false
-  xy: 83, 0
+  xy: 928, 774
   size: 75, 148
   orig: 75, 148
   offset: 0, 0
   index: -1
 battle/ui/dpad_down
   rotate: false
-  xy: 287, 307
-  size: 60, 86
-  orig: 60, 86
-  offset: 0, 0
-  index: -1
-battle/ui/dpad_up
-  rotate: false
-  xy: 158, 62
+  xy: 287, 352
   size: 60, 86
   orig: 60, 86
   offset: 0, 0
   index: -1
 battle/ui/dpad_left
   rotate: false
-  xy: 363, 461
+  xy: 0, 0
   size: 86, 60
   orig: 86, 60
   offset: 0, 0
   index: -1
 battle/ui/dpad_right
   rotate: false
-  xy: 449, 461
+  xy: 363, 513
   size: 86, 60
   orig: 86, 60
+  offset: 0, 0
+  index: -1
+battle/ui/dpad_up
+  rotate: false
+  xy: 236, 236
+  size: 60, 86
+  orig: 60, 86
   offset: 0, 0
   index: -1
 
@@ -250,7 +250,7 @@ battle/entities/lightningclaw
   orig: 512, 512
   offset: 0, 0
   index: -1
-battle/entities/firelion_left
+battle/entities/icetacle
   rotate: false
   xy: 512, 162
   size: 512, 512
@@ -276,14 +276,14 @@ pages-info8.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-battle/entities/icetacle
+battle/entities/shield
   rotate: false
   xy: 0, 467
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
-battle/entities/shield
+battle/entities/snakebite_side
   rotate: false
   xy: 512, 467
   size: 512, 512
@@ -311,6 +311,13 @@ battle/entities/bee
   orig: 656, 78
   offset: 0, 0
   index: -1
+battle/entities/firelion
+  rotate: false
+  xy: 640, 130
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
 battle/entities/clam
   rotate: false
   xy: 0, 0
@@ -323,14 +330,14 @@ pages-info9.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-battle/entities/snakebite_side
+battle/entities/torrentacle
   rotate: false
   xy: 0, 374
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
-battle/entities/torrentacle
+battle/entities/tornado
   rotate: false
   xy: 512, 374
   size: 512, 512
@@ -344,20 +351,15 @@ battle/entities/lidia
   orig: 520, 372
   offset: 0, 0
   index: -1
-
-pages-info10.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-battle/entities/tornado
+battle/entities/firelion_left
   rotate: false
-  xy: 0, 0
-  size: 512, 512
-  orig: 512, 512
+  xy: 520, 116
+  size: 256, 256
+  orig: 256, 256
   offset: 0, 0
   index: -1
 
-pages-info11.png
+pages-info10.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none

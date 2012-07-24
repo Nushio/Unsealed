@@ -1,9 +1,10 @@
 package net.k3rnel.unsealed.screens.battle;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.screens.BattleScreen;
 import net.k3rnel.unsealed.screens.battle.enemies.Clam;
 import net.k3rnel.unsealed.screens.battle.enemies.Ghost;
@@ -37,9 +38,9 @@ public class BattleGrid extends Stage {
     public static Array<BattleEnemy> enemies;
     public static Array<BattleHero> heroes;
 
-    public static Array<Vector2> unusedPositions;
+    public static List<Vector2> unusedPositions;
 
-    private int battleState;
+    public static int battleState;
 
     public static Timer timer;
 
@@ -59,14 +60,13 @@ public class BattleGrid extends Stage {
         random = new Random(System.currentTimeMillis());
         heroes = new Array<BattleHero>(3);
         enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
-        unusedPositions = new Array<Vector2>();
+        unusedPositions = new ArrayList<Vector2>();
         // SizeX / 2 because we don't want enemies spawning on the hero-side.
         for(int x = sizeX/2; x<sizeX;x++){
             for(int y = 0; y<sizeY;y++){
                 unusedPositions.add(new Vector2(x,y));
             }
         }
-        unusedPositions.shuffle();
         cam = new OrthographicCamera(this.width, this.height);            
         cam.position.set(this.width / 2, this.height / 2, 0);
         cam.zoom = 1f;
@@ -76,8 +76,8 @@ public class BattleGrid extends Stage {
 
     public boolean assignEntity(BattleEntity entity){
         if(grid[entity.getGridXInt()][entity.getGridYInt()]==null){
-            if(entity.getGridX()>sizeX/2)
-                unusedPositions.removeValue(new Vector2(entity.getGridX(),entity.getGridY()),false);
+            if(entity.getGridXInt()>sizeX/2)
+                unusedPositions.remove(new Vector2(entity.getGridXInt(),entity.getGridYInt()));
             grid[entity.getGridXInt()][entity.getGridYInt()] = entity;
             this.addActor(entity);
             if(entity instanceof BattleHero){
@@ -101,11 +101,11 @@ public class BattleGrid extends Stage {
         if(grid[newX][newY]==null){
            
             if(entity instanceof BattleEnemy){
-                if(entity.getGridX()>sizeX/2){
-                    unusedPositions.add(new Vector2(entity.getGridX(),entity.getGridY()));
-                    unusedPositions.removeValue(new Vector2(newX,newY),false);
+                if(entity.getGridXInt()>sizeX/2){
+                    unusedPositions.add(new Vector2(entity.getGridXInt(),entity.getGridYInt()));
+                    unusedPositions.remove(new Vector2(newX,newY));
                 }else{
-                    unusedPositions.removeValue(new Vector2(newX,newY),false);
+                    unusedPositions.remove(new Vector2(newX,newY));
                 }
             }
             grid[entity.getGridXInt()][entity.getGridYInt()] = null;
@@ -122,7 +122,7 @@ public class BattleGrid extends Stage {
         return enemies;
     }
     public static Vector2 getUnusedPosition(){
-        return unusedPositions.pop();
+        return unusedPositions.get(BattleGrid.random.nextInt(unusedPositions.size()));
     }
 
     @Override
@@ -139,33 +139,6 @@ public class BattleGrid extends Stage {
                 i--;
                 checkState();
             }
-            if(hero.isShooting){
-                hero.isShooting = false;
-                hero.showBlast(true);
-            }
-            if(hero.getBlast().isVisible()){
-                if(hero.getBlast().getGridX() >= 6){
-                    hero.showBlast(false);
-                }else{
-                    if(grid[hero.getBlast().getGridXInt()][hero.getBlast().getGridYInt()]!=null){
-                        BattleEntity entity = grid[hero.getBlast().getGridXInt()][hero.getBlast().getGridYInt()];
-                        if(entity instanceof BattleEnemy){
-                            if(entity.getState() == BattleEntity.stateBlocking){
-                                Gdx.app.log(Unsealed.LOG, "You hit me but it didn't hurt! Haha");
-                            }else{
-                                if(grid[hero.getBlast().getGridXInt()][hero.getBlast().getGridYInt()].setHp(grid[hero.getBlast().getGridXInt()][hero.getBlast().getGridYInt()].getHp()-10)){
-                                    this.getActors().removeValue(grid[hero.getBlast().getGridXInt()][hero.getBlast().getGridYInt()], false);
-                                    unusedPositions.add(new Vector2(entity.getGridX(),entity.getGridY()));
-                                    enemies.removeValue((BattleEnemy)grid[hero.getBlast().getGridXInt()][hero.getBlast().getGridYInt()],false);
-                                    grid[hero.getBlast().getGridXInt()][hero.getBlast().getGridYInt()] = null;
-                                    checkState();
-                                }
-                            }
-                            hero.showBlast(false);
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -174,15 +147,15 @@ public class BattleGrid extends Stage {
         super.draw();
 
     }
-
-    public int checkState() {
+    
+    public static int checkState() {
         if(enemies.size==0){
-            this.battleState = battleWon;
+            battleState = battleWon;
         }
         if(heroes.size==0){
-            this.battleState = battleLost;
+            battleState = battleLost;
         }
-        return this.battleState;
+        return battleState;
     }
     public void spawnEnemies(int bonus) {
         BattleScreen.round++;
@@ -190,14 +163,13 @@ public class BattleGrid extends Stage {
         Vector2 spawnPoint;
         BattleEntity enemy;
         enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
-        unusedPositions = new Array<Vector2>();
+        unusedPositions = new ArrayList<Vector2>();
         // SizeX / 2 because we don't want enemies spawning on the hero-side.
         for(int x = sizeX/2; x<sizeX;x++){
             for(int y = 0; y<sizeY;y++){
                 unusedPositions.add(new Vector2(x,y));
             }
         }
-        unusedPositions.shuffle();
         for(int i = 0; i < random.nextInt(4)+1; i++){
             spawnPoint = getUnusedPosition();
             if(spawnPoint!=null){
@@ -228,7 +200,7 @@ public class BattleGrid extends Stage {
             }
         }
         BattleScreen.bonus++;
-        this.battleState = BattleGrid.battleStarted;
+        battleState = BattleGrid.battleStarted;
         reorderActors();
     }
 

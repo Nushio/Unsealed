@@ -67,7 +67,7 @@ public class Clam extends BattleEnemy {
             case BattleEntity.stateIdle:
                 if(!currentAnimation.isAnimationFinished(stateTime)){
                     for(BattleHero hero : BattleGrid.heroes){
-                        if(hero.getGridY() == this.getGridY()){
+                        if(hero.getGridYInt() == this.getGridYInt()){
                             setState(BattleEntity.stateAttacking);
                         }
                     }
@@ -114,7 +114,7 @@ public class Clam extends BattleEnemy {
     
     public PeaDart getDart(){
         if(dart==null){
-            dart = new PeaDart(atlas,-1.1f,this);
+            dart = new PeaDart(atlas,-0.3f,this);
             dart.setVisible(false);
         }
         return dart;
@@ -123,7 +123,7 @@ public class Clam extends BattleEnemy {
         dart.offsetY = 0;
         dart.offsetX = (int)this.getWidth();
         if(show)
-            dart.setGrid(this.getGridX(),this.getGridY());
+            dart.setGrid(this.getGridXInt(),this.getGridYInt());
         dart.setVisible(show);
     }
 }

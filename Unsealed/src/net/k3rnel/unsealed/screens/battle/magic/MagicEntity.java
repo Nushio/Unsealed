@@ -12,6 +12,7 @@ public class MagicEntity extends BattleEntity {
     public float initialPos = 0;
     public float maxDistance = 1;
     BattleEntity entity;
+    public boolean destroyMe = false;
     
     public MagicEntity(float speedX, float speedY, BattleEntity entity) {
         super();
@@ -19,13 +20,14 @@ public class MagicEntity extends BattleEntity {
         this.speedY = speedY;
         this.entity = entity;
         setPosition(entity.getX(),entity.getY());
-        setGridX(entity.getGridX());
-        setGridY(entity.getGridY());
+        setGridX(entity.getGridXInt());
+        setGridY(entity.getGridYInt());
     }
     @Override
     public void act(float delta) {
         super.act(delta);
         this.setGridX(this.getGridX()+speedX);
+        
         // Lastplacer's law of uncertainty. 
         // p*sin(pi*x/q)
         // Where p is max height. q is max distance. x is where I'm standing. And I'm sitting down.

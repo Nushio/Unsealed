@@ -56,10 +56,10 @@ public class BattleScreen extends AbstractScreen {
     public void show() {
         super.show();
 
-     
+
         Gdx.input.setInputProcessor(new InputMultiplexer(this,stage));
         atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
-//        int battlemap = random.nextInt(6);
+        //        int battlemap = random.nextInt(6);
         AtlasRegion atlasRegion = atlas.findRegion( "battle/maps/battlemap-test");
         background = new Image(atlasRegion);
         background.setSize(stage.getWidth(), stage.getHeight());
@@ -73,71 +73,97 @@ public class BattleScreen extends AbstractScreen {
         stage.addActor(battleoverlay);
 
         hud = new BattleHUD(this.stage.getWidth(), stage.getHeight());
-        
-        if(Gdx.app.getVersion()>0){
-        hud.leftTrigger.addListener(new PressedListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchDown(event, x, y, pointer, button);
-                buttonPress(4,true); 
-                return true;
-            }
 
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
-                buttonPress(4,false); 
-            }
-        });
-        hud.rightTrigger.addListener(new PressedListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchDown(event, x, y, pointer, button);
-                buttonPress(5,true); 
-                return true;
-            }
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
-                buttonPress(5,false); 
-            }
-        });
-        
-        hud.dPadDown.addListener(new PressedListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchDown(event, x, y, pointer, button);
-                buttonPress(1,true); 
-                return true;
-            }
-        });
-        
-        hud.dPadUp.addListener(new PressedListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchDown(event, x, y, pointer, button);
-                buttonPress(0,true); 
-                return true;
-            }
-        });
-        
-        hud.dPadLeft.addListener(new PressedListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchDown(event, x, y, pointer, button);
-                buttonPress(2,true); 
-                return true;
-            }
-        });
-        
-        hud.dPadRight.addListener(new PressedListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchDown(event, x, y, pointer, button);
-                buttonPress(3,true); 
-                return true;
-            }
-        });
+        if(Gdx.app.getVersion()>0||Unsealed.DEBUG==true){
+            hud.leftTrigger.addListener(new PressedListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    super.touchDown(event, x, y, pointer, button);
+                    buttonPress(4,true); 
+                    return true;
+                }
+
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    super.touchUp(event, x, y, pointer, button);
+                    buttonPress(4,false); 
+                }
+            });
+            hud.rightTrigger.addListener(new PressedListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    super.touchDown(event, x, y, pointer, button);
+                    buttonPress(5,true); 
+                    return true;
+                }
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    super.touchUp(event, x, y, pointer, button);
+                    buttonPress(5,false); 
+                }
+            });
+            hud.xButton.addListener(new PressedListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    super.touchDown(event, x, y, pointer, button);
+                    buttonPress(6,true); 
+                    return true;
+                }
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    super.touchUp(event, x, y, pointer, button);
+                    buttonPress(6,false); 
+                }
+            });
+            hud.xButton.addListener(new PressedListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    super.touchDown(event, x, y, pointer, button);
+                    buttonPress(8,true); 
+                    return true;
+                }
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    super.touchUp(event, x, y, pointer, button);
+                    buttonPress(8,false); 
+                }
+            });
+
+            hud.dPadDown.addListener(new PressedListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    super.touchDown(event, x, y, pointer, button);
+                    buttonPress(1,true); 
+                    return true;
+                }
+            });
+
+            hud.dPadUp.addListener(new PressedListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    super.touchDown(event, x, y, pointer, button);
+                    buttonPress(0,true); 
+                    return true;
+                }
+            });
+
+            hud.dPadLeft.addListener(new PressedListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    super.touchDown(event, x, y, pointer, button);
+                    buttonPress(2,true); 
+                    return true;
+                }
+            });
+
+            hud.dPadRight.addListener(new PressedListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    super.touchDown(event, x, y, pointer, button);
+                    buttonPress(3,true); 
+                    return true;
+                }
+            });
         }
         grid = new BattleGrid(this.stage.getWidth(), stage.getHeight(),6,3);
 
@@ -146,13 +172,13 @@ public class BattleScreen extends AbstractScreen {
         grid.assignEntity(hero);     
 
         grid.spawnEnemies(bonus);
-        
+
         roundLabel = new Label("Round "+round,getSkin());
         roundLabel.setX(350);
         roundLabel.setY(350);
         this.stage.addActor(roundLabel);
         OrthographicCamera cam = new OrthographicCamera(this.stage.getWidth(), this.stage.getHeight());   
-        
+
         restartButton = new TextButton("Restart?", getSkin());
         restartButton.setY(250);
         restartButton.setX(320);
@@ -161,7 +187,7 @@ public class BattleScreen extends AbstractScreen {
         restartButton.setVisible(false);
         restartButton.setDisabled(true);
         restartButton.addListener(new ClickListener() {
-            
+
             @Override
             public void clicked(InputEvent arg0, float arg1, float arg2) {
                 hero = new BattleHero(getAtlas(),100);
@@ -187,25 +213,25 @@ public class BattleScreen extends AbstractScreen {
     public void render(float delta) {
         super.render(delta);
         roundLabel.setText("Round "+round+"");
-        
 
-       if(grid.checkState() == BattleGrid.battleWon){
-           bonus++;
-           grid.spawnEnemies(bonus);
-       }else if(grid.checkState() == BattleGrid.battleLost){
-           roundLabel.setX(330);
-           roundLabel.setText("You Lost at Round "+round+"!");
-           restartButton.setVisible(true);
-           
-       }else if(grid.checkState() == BattleGrid.battleStarted){
-           grid.act(delta);
-           hud.act(delta);
-       }
-       
-       hud.fillMana(hero);
-       
-       grid.draw();
-       hud.draw();
+
+        if(BattleGrid.checkState() == BattleGrid.battleWon){
+            bonus++;
+            grid.spawnEnemies(bonus);
+        }else if(BattleGrid.checkState() == BattleGrid.battleLost){
+            roundLabel.setX(330);
+            roundLabel.setText("You Lost at Round "+round+"!");
+            restartButton.setVisible(true);
+
+        }else if(BattleGrid.checkState() == BattleGrid.battleStarted){
+            grid.act(delta);
+            hud.act(delta);
+        }
+
+        hud.fillMana(hero);
+
+        grid.draw();
+        hud.draw();
     }
 
     @Override
@@ -241,6 +267,12 @@ public class BattleScreen extends AbstractScreen {
             case Input.Keys.O:
                 buttonPress(5,true);
                 return true;
+            case Input.Keys.J:
+                buttonPress(6,true);
+                return true;
+            case Input.Keys.L:
+                buttonPress(8,true);
+                return true;
         }
         return false;
     }
@@ -252,6 +284,12 @@ public class BattleScreen extends AbstractScreen {
                 return true;
             case Input.Keys.O:
                 buttonPress(5,false);
+                return true;
+            case Input.Keys.J:
+                buttonPress(6,false);
+                return true;
+            case Input.Keys.L:
+                buttonPress(8,false);
                 return true;
             case Input.Keys.BACK:
                 game.setScreen(new MenuScreen(game));
@@ -266,35 +304,44 @@ public class BattleScreen extends AbstractScreen {
     /**
      * 0 = up, 1 = down, 2 = left, 3 = right
      * 4 = shield, 5 = attack
+     * 6 = Skill1. 7 = Skill2. 8 = Skill3.
      * @param direction
      */
     public void buttonPress(int button,boolean pressed){
         switch(button){
             //TODO: Hero moves at a fixed pixel rate (A.k.a. magic numbers). It should instead move based on screen width.
             case 0:{ // Up
-                if((hero.getGridY()-1>-1)){
-                    BattleGrid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()-1);
-                    
+                if(hero.getState()==BattleEntity.stateIdle){
+                    if((hero.getGridYInt()-1>-1)){
+                        BattleGrid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()-1);
+
+                    }
                 }
                 break;
             }
             case 1:{ // Down
-                if((hero.getGridY()+1<3)){
-                    BattleGrid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()+1);
-                    
+                if(hero.getState()==BattleEntity.stateIdle){
+                    if((hero.getGridYInt()+1<3)){
+                        BattleGrid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()+1);
+
+                    }
                 }
                 break;
             }
             case 2:{ // Left
-                if((hero.getGridX()-1>-1)){
-                    BattleGrid.moveEntity(hero, hero.getGridXInt()-1, hero.getGridYInt());
-                    
+                if(hero.getState()==BattleEntity.stateIdle){
+                    if((hero.getGridXInt()-1>-1)){
+                        BattleGrid.moveEntity(hero, hero.getGridXInt()-1, hero.getGridYInt());
+
+                    }
                 }
                 break;
             }
             case 3:{ // Right
-                if((hero.getGridX()+1<3)){
-                    BattleGrid.moveEntity(hero, hero.getGridXInt()+1, hero.getGridYInt());
+                if(hero.getState()==BattleEntity.stateIdle){
+                    if((hero.getGridXInt()+1<3)){
+                        BattleGrid.moveEntity(hero, hero.getGridXInt()+1, hero.getGridYInt());
+                    }
                 }
                 break;
             }
@@ -313,20 +360,50 @@ public class BattleScreen extends AbstractScreen {
             }
             case 5:{ // Attack
                 if(pressed){
-                    hero.isCharging = true;
+
                 }else{
-                    if(!hero.getBlast().isVisible()){
-                        hero.setMana(hero.getMana()-1);
-                        hero.setState(BattleEntity.stateAttacking);
+                    if(hero.getState()==BattleEntity.stateIdle){
+                        if(hero.getMana()>1){
+                            hero.magicType=0;
+                            hero.setMana(hero.getMana()-1);
+                            hero.setState(BattleEntity.stateAttacking);
+                        }
                     }
+                }
+                break;
+            }
+            case 6:{ // Skill1
+                if(pressed){
+                    if(hero.getState()==BattleEntity.stateIdle){
+                        if(hero.getMana()>5){
+                            hero.setMana(hero.getMana()-5);
+                            hero.setState(BattleEntity.stateAltAttacking);
+                        }
+                    }
+                }else{
+
+                }
+                break;
+            }
+            case 8:{ // Skill3
+                if(pressed){
+                    if(hero.getState()==BattleEntity.stateIdle){
+                        if(hero.getMana()>10){
+                            hero.setMana(hero.getMana()-10);
+                            hero.magicType=1;
+                            hero.setState(BattleEntity.stateAttacking);
+                        }
+                    }
+                }else{
+
                 }
                 break;
             }
         }
     }
 
-   
 
-    
+
+
 
 }
