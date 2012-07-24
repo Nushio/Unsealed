@@ -1,5 +1,6 @@
 package net.k3rnel.unsealed;
 
+import net.k3rnel.unsealed.objects.Map;
 import net.k3rnel.unsealed.screens.MenuScreen;
 import net.k3rnel.unsealed.screens.OptionsScreen;
 import net.k3rnel.unsealed.screens.SplashScreen;
@@ -7,10 +8,13 @@ import net.k3rnel.unsealed.services.MusicManager;
 import net.k3rnel.unsealed.services.PreferencesManager;
 import net.k3rnel.unsealed.services.ProfileManager;
 import net.k3rnel.unsealed.services.SoundManager;
+import net.k3rnel.unsealed.utils.MapLoader;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.FPSLogger;
 
 public class Unsealed extends Game {
@@ -24,14 +28,21 @@ public class Unsealed extends Game {
     // Gets the current FPS. Useful for debugging. 
     private FPSLogger fpsLogger;
 
- // services
+    // services
     private PreferencesManager preferencesManager;
     private ProfileManager profileManager;
     private MusicManager musicManager;
     private SoundManager soundManager;
+    //Loads teh maps
+    private AssetManager assetManager;
+    
+    //The instance to our game.
+    private static Unsealed instance;
     
     public Unsealed(){
-
+    	instance = this;
+		assetManager = new AssetManager();
+		assetManager.setLoader(Map.class, new MapLoader(new InternalFileHandleResolver()));    	
     }
     
     // Service getters
@@ -61,6 +72,10 @@ public class Unsealed extends Game {
 
     public OptionsScreen getOptionsScreen(){
         return new OptionsScreen(this);
+    }
+    
+    public AssetManager getAssetManager() {
+    	return assetManager;
     }
 
     @Override
@@ -146,5 +161,8 @@ public class Unsealed extends Game {
         musicManager.dispose();
         soundManager.dispose();
     }
-
+    
+    public static Unsealed getInstance() {
+    	return instance;
+    }
 }

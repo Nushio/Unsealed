@@ -13,17 +13,28 @@ import com.badlogic.gdx.graphics.g2d.tiled.TiledLoader;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 
 import net.k3rnel.unsealed.Unsealed;
+import net.k3rnel.unsealed.objects.Map;
 import net.k3rnel.unsealed.objects.MapActor;
 import net.k3rnel.unsealed.objects.MapCharacter;
+import net.k3rnel.unsealed.utils.MapLoader;
 
 public class OverworldScreen extends AbstractScreen {
+	
+	public static final int stateLoading = 0;	
+	public static final int stateWalk = 1;	
+	public static final int stateDialog = 2;
 
     TileMapRenderer tileMapRenderer;
     private OrthographicCamera camera;
     TiledMap map;
     TileAtlas atlas;
     
+	private int state;
+    
     private MapCharacter player;
+    private String mapFileName = "";
+    private Map gameMap;
+    private int spawnX, spawnY;
     
     public OverworldScreen(Unsealed game) {
         super(game);
@@ -35,7 +46,6 @@ public class OverworldScreen extends AbstractScreen {
     public void show() {
         super.show();
         
-
         // Load the tmx file into map
         map = TiledLoader.createMap(Gdx.files.internal("assets/map-atlases/DungeonTest.tmx"));
 
@@ -113,5 +123,24 @@ public class OverworldScreen extends AbstractScreen {
         player.setCollisionGroup(MapActor.groupNPC);
         
         return player;
+    }
+    
+    public void loadMap(String fileName, int spawnX, int spawnY) {
+    	float width = Gdx.graphics.getWidth();
+    	float height = Gdx.graphics.getHeight();
+    	
+    	mapFileName = fileName;
+    	
+    	spawnX = spawnX;
+    	spawnY = spawnY;
+    	
+    	state = stateLoading;
+    	
+    	//TODO: Check if path is correct
+    	Unsealed.getInstance().getAssetManager().load(fileName, Map.class, new MapLoader.MapParameter("raw-resources/maps", width, height));
+    }
+    
+    public void showMap() {
+    	
     }
 }
