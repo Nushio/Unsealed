@@ -20,6 +20,7 @@ public class Clam extends BattleEnemy {
 
     PeaDart dart;
     TextureAtlas atlas;
+    boolean hit = false;
     public Clam(TextureAtlas atlas, int x, int y) {
         super(30, x, y);
         this.atlas = atlas;
@@ -28,26 +29,26 @@ public class Clam extends BattleEnemy {
         TextureRegion[] frames = new TextureRegion[2];
         frames[0] = spriteSheet[0][0];
         frames[1] = spriteSheet[0][1];
-        Animation blocking = new Animation(2f,frames);
-        blocking.setPlayMode(Animation.LOOP);
-        this.animations.put("blocking",blocking);
-        frames = new TextureRegion[4];
+        Animation animation = new Animation(1f,frames);
+        animation.setPlayMode(Animation.LOOP);
+        this.animations.put("blocking",animation);
+        frames = new TextureRegion[3];
+        frames[0] = spriteSheet[0][2];
+        frames[1] = spriteSheet[0][3];
+        frames[2] = spriteSheet[0][4];
+        animation = new Animation(0.85f,frames);
+        animation.setPlayMode(Animation.NORMAL);
+        this.animations.put("idle",animation);
+        frames = new TextureRegion[6];
         frames[0] = spriteSheet[0][4];
         frames[1] = spriteSheet[0][5];
         frames[2] = spriteSheet[0][6];
-        frames[3] = spriteSheet[0][0];
-        Animation attacking = new Animation(0.85f,frames);
-        attacking.setPlayMode(Animation.NORMAL);
-        frames = new TextureRegion[5];
-        frames[0] = spriteSheet[0][2];
-        frames[1] = spriteSheet[0][3];
-        frames[2] = spriteSheet[0][3];
-        frames[3] = spriteSheet[0][3];
+        frames[3] = spriteSheet[0][5];
         frames[4] = spriteSheet[0][3];
-        Animation idle = new Animation(0.4f,frames);
-        idle.setPlayMode(Animation.NORMAL);
-        this.animations.put("idle",idle);
-        this.animations.put("attacking",attacking);
+        frames[5] = spriteSheet[0][2];
+        animation = new Animation(0.2f,frames);
+        animation.setPlayMode(Animation.NORMAL);
+        this.animations.put("attacking",animation);
         //        x = (int)((battleoverlay.getWidth()/2)/6);
         //        y = (int)((battleoverlay.getHeight())/3);
         //        this.setPosition(x*this.getGridX(),y*this.getGridY());
@@ -69,6 +70,7 @@ public class Clam extends BattleEnemy {
                     for(BattleHero hero : BattleGrid.heroes){
                         if(hero.getGridYInt() == this.getGridYInt()){
                             setState(BattleEntity.stateAttacking);
+                            hit = false;
                         }
                     }
                 }else{
@@ -78,9 +80,13 @@ public class Clam extends BattleEnemy {
                 }
                 break;
             case BattleEntity.stateAttacking:
+                if(currentAnimation.isAnimationFinished(stateTime+0.3f)){
+                    if(!hit){
+                        hit = true;
+                        showDart(true);
+                    }
+                }
                 if(currentAnimation.isAnimationFinished(stateTime)){
-                    showDart(true);
-                    
                     setState(BattleEntity.stateBlocking);
                     BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(4));
                 }
@@ -114,7 +120,7 @@ public class Clam extends BattleEnemy {
     
     public PeaDart getDart(){
         if(dart==null){
-            dart = new PeaDart(atlas,-0.3f,this);
+            dart = new PeaDart(atlas,-0.2f,this);
             dart.setVisible(false);
         }
         return dart;

@@ -53,7 +53,10 @@ public class MenuScreen extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y ) {
                 //TODO: Move it back to char select screen
 //                game.setScreen( new CharSelectScreen( game ) );
-                game.setScreen( new BattleScreen( game ) );
+                if(Unsealed.DEBUG)
+                    game.setScreen( new BattleScreen( game ) );
+                else
+                    game.setScreen( new SplashScreen( game ) );
             }
         } );
         table.add(newGameButton).size( 300, 60 ).uniform().spaceBottom(10);

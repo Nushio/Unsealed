@@ -23,7 +23,7 @@ public class Unsealed extends Game {
     public static final String LOG = Unsealed.class.getSimpleName();
 
     // whether we are in development mode
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     
     // Gets the current FPS. Useful for debugging. 
     private FPSLogger fpsLogger;
@@ -112,11 +112,7 @@ public class Unsealed extends Game {
         // show the splash screen when the game is resized for the first time;
         // this approach avoids calling the screen's resize method repeatedly
         if( getScreen() == null ) {
-            if( DEBUG ) {
-                setScreen( new MenuScreen ( this ) );
-            } else {
-                setScreen( new SplashScreen( this ) );
-            }
+            setScreen( new MenuScreen ( this ) );
         }
     }
 

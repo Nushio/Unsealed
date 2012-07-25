@@ -22,9 +22,9 @@ public class PeaDart extends MagicEntity {
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/fireball" );
         TextureRegion[][] spriteSheet = atlasRegion.split(34, 25);
         TextureRegion[] frames = new TextureRegion[3];
-        frames[0] = spriteSheet[3][0];
-        frames[1] = spriteSheet[3][1];
-        frames[2] = spriteSheet[3][2];
+        frames[0] = spriteSheet[2][0];
+        frames[1] = spriteSheet[2][1];
+        frames[2] = spriteSheet[2][2];
         Animation attacking = new Animation(0.1f,frames);
         attacking.setPlayMode(Animation.LOOP);
         this.animations.put("attacking",attacking);

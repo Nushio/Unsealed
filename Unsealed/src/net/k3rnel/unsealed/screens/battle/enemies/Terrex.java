@@ -186,7 +186,7 @@ public class Terrex extends BattleEnemy {
         super.setState(state);
         switch(state){
             case BattleEntity.stateIdle:
-                BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(5));
+                BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(3)+1);
                 break;
         }
     }

@@ -78,7 +78,6 @@ public class FireLion extends MagicEntity {
                         }else{
                             if(entity.setHp(entity.getHp()-(int)maxDistance*10)){
                                 entity.remove();
-                                BattleGrid.unusedPositions.add(new Vector2(entity.getGridXInt(),entity.getGridYInt()));
                                 BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
                                 BattleGrid.grid[this.getGridXInt()][this.getGridYInt()] = null;
                                 BattleGrid.checkState();
@@ -108,7 +107,6 @@ public class FireLion extends MagicEntity {
                             }else{
                                 if(entity.setHp(entity.getHp()-(int)maxDistance*10)){
                                     entity.remove();
-                                    BattleGrid.unusedPositions.add(new Vector2(entity.getGridXInt(),entity.getGridYInt()));
                                     BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
                                     BattleGrid.grid[this.getGridXInt()][this.getGridYInt()] = null;
                                     BattleGrid.checkState();

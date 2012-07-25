@@ -311,7 +311,7 @@ public class BattleScreen extends AbstractScreen {
         switch(button){
             //TODO: Hero moves at a fixed pixel rate (A.k.a. magic numbers). It should instead move based on screen width.
             case 0:{ // Up
-                if(hero.getState()==BattleEntity.stateIdle){
+                if(hero.getState()!=BattleEntity.stateBlocking){
                     if((hero.getGridYInt()-1>-1)){
                         BattleGrid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()-1);
 
@@ -320,7 +320,7 @@ public class BattleScreen extends AbstractScreen {
                 break;
             }
             case 1:{ // Down
-                if(hero.getState()==BattleEntity.stateIdle){
+                if(hero.getState()!=BattleEntity.stateBlocking){
                     if((hero.getGridYInt()+1<3)){
                         BattleGrid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()+1);
 
@@ -329,7 +329,7 @@ public class BattleScreen extends AbstractScreen {
                 break;
             }
             case 2:{ // Left
-                if(hero.getState()==BattleEntity.stateIdle){
+                if(hero.getState()!=BattleEntity.stateBlocking){
                     if((hero.getGridXInt()-1>-1)){
                         BattleGrid.moveEntity(hero, hero.getGridXInt()-1, hero.getGridYInt());
 
@@ -338,7 +338,7 @@ public class BattleScreen extends AbstractScreen {
                 break;
             }
             case 3:{ // Right
-                if(hero.getState()==BattleEntity.stateIdle){
+                if(hero.getState()!=BattleEntity.stateBlocking){
                     if((hero.getGridXInt()+1<3)){
                         BattleGrid.moveEntity(hero, hero.getGridXInt()+1, hero.getGridYInt());
                     }
@@ -363,7 +363,7 @@ public class BattleScreen extends AbstractScreen {
 
                 }else{
                     if(hero.getState()==BattleEntity.stateIdle){
-                        if(hero.getMana()>1){
+                        if(hero.getMana()>=1){
                             hero.magicType=0;
                             hero.setMana(hero.getMana()-1);
                             hero.setState(BattleEntity.stateAttacking);
@@ -375,7 +375,7 @@ public class BattleScreen extends AbstractScreen {
             case 6:{ // Skill1
                 if(pressed){
                     if(hero.getState()==BattleEntity.stateIdle){
-                        if(hero.getMana()>5){
+                        if(hero.getMana()>=5){
                             hero.setMana(hero.getMana()-5);
                             hero.setState(BattleEntity.stateAltAttacking);
                         }
@@ -388,8 +388,8 @@ public class BattleScreen extends AbstractScreen {
             case 8:{ // Skill3
                 if(pressed){
                     if(hero.getState()==BattleEntity.stateIdle){
-                        if(hero.getMana()>10){
-                            hero.setMana(hero.getMana()-10);
+                        if(hero.getMana()>=5){
+                            hero.setMana(hero.getMana()-5);
                             hero.magicType=1;
                             hero.setState(BattleEntity.stateAttacking);
                         }

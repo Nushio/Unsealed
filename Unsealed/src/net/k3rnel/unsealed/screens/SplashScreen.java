@@ -27,7 +27,7 @@ public class SplashScreen extends AbstractScreen {
         super.show();
 
         // retrieve the splash image's region from the atlas
-        AtlasRegion splashRegion = getAtlas().findRegion( "splash-screen/splash" );
+        AtlasRegion splashRegion = getAtlas().findRegion( "splash-screen/tutorial" );
 
         // here we create the splash image actor; its size is set when the
         // resize() method gets called
@@ -40,12 +40,12 @@ public class SplashScreen extends AbstractScreen {
         splashImage.getColor().a = 0f;
         
         // configure the fade-in/out effect on the splash image
-        SequenceAction actions = sequence(fadeIn(0.75f), delay(1.75f), fadeOut(0.75f),
+        SequenceAction actions = sequence(fadeIn(0.75f), delay(2f), fadeOut(0.75f),
                         // when the image is faded out, move on to the next screen
                         run(new Runnable() {
                             @Override
                             public void run() {
-                                game.setScreen( new MenuScreen( game ) );
+                                game.setScreen( new BattleScreen( game ) );
                                 
                             }
                         }));

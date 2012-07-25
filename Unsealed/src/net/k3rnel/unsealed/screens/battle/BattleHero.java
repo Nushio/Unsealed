@@ -141,7 +141,6 @@ public class BattleHero extends BattleEntity {
                         if(entity.getState() == BattleEntity.stateBlocking){
                             if(entity.setHp(entity.getHp()-30)){
                                 entity.remove();
-                                BattleGrid.unusedPositions.add(new Vector2(entity.getGridXInt()+1,entity.getGridYInt()));
                                 BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
                                 BattleGrid.grid[this.getGridXInt()+1][this.getGridYInt()] = null;
                                 BattleGrid.checkState();
@@ -157,7 +156,6 @@ public class BattleHero extends BattleEntity {
                         }else{
                             if(entity.setHp(entity.getHp()-60)){
                                 entity.remove();
-                                BattleGrid.unusedPositions.add(new Vector2(entity.getGridXInt()+1,entity.getGridYInt()));
                                 BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
                                 BattleGrid.grid[this.getGridXInt()+1][this.getGridYInt()] = null;
                                 BattleGrid.checkState();

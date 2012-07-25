@@ -363,6 +363,13 @@ pages-info10.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+splash-screen/tutorial
+  rotate: false
+  xy: 0, 502
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
 splash-screen/splash
   rotate: false
   xy: 0, 193
