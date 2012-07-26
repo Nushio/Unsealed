@@ -149,10 +149,7 @@ public class Snake extends BattleEnemy {
         };
         return currentTask;
     }
-    public Snake getGhost(){
-        return this;
-    }
-
+   
     public void showDart(boolean show){
         tmpDart = new PoisonDart(atlas,3,-10.4f,this);
         tmpDart.setVisible(false);

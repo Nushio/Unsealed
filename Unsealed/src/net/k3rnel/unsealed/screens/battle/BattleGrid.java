@@ -7,6 +7,7 @@ import java.util.Random;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.screens.BattleScreen;
+import net.k3rnel.unsealed.screens.battle.enemies.Bee;
 import net.k3rnel.unsealed.screens.battle.enemies.Clam;
 import net.k3rnel.unsealed.screens.battle.enemies.Ghost;
 import net.k3rnel.unsealed.screens.battle.enemies.Snake;
@@ -202,10 +203,16 @@ public class BattleGrid extends Stage {
                 if(BattleScreen.round < 4){
                     if(random.nextInt(100)<40)
                         enemy = new Clam(getAtlas(),(int)spawnPoint.x,(int)spawnPoint.y);
-                    else  if(random.nextInt(100)<50)
+                    else 
                         enemy = new Ghost(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
-                    else
+                    
+                }else if(BattleScreen.round>4&&BattleScreen.round<7){
+                    if(random.nextInt(100)<40)
                         enemy = new Snake(getAtlas(),(int)spawnPoint.x,(int)spawnPoint.y);
+                    else if(random.nextInt(100)<50)
+                        enemy = new Bee(getAtlas(),(int)spawnPoint.x,(int)spawnPoint.y);
+                    else
+                        enemy = new Terrex(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
                 }else{
                     if(random.nextInt(100)<30){
                         enemy = new Clam(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
@@ -213,14 +220,16 @@ public class BattleGrid extends Stage {
                         enemy = new Terrex(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
                     }else if(random.nextInt(100)<40){
                         enemy = new Ghost(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
-                    }else{
+                    }else if(random.nextInt(100)<40){
                         enemy = new Snake(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
+                    }else{
+                        enemy = new Bee(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
                     }
                 }
 //                
 //                else
                 //Override below to only spawn this type of enemy
-//                  enemy = new Snake(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
+//                  enemy = new Bee(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
                 assignEntity(enemy);
                 timer.scheduleTask(enemy.nextTask(), random.nextInt(5));
                 

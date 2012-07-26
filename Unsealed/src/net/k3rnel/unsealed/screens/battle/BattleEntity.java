@@ -124,7 +124,7 @@ public class BattleEntity extends Image {
     @Override
     public void setY(float y) {
         super.setY(y);
-        hpLabel.setY(y-5);
+        hpLabel.setY(y-1);
     }
     /**
      * @param gridX the gridX to set
