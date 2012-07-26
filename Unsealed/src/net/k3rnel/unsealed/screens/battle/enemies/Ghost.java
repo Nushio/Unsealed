@@ -1,5 +1,8 @@
 package net.k3rnel.unsealed.screens.battle.enemies;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,15 +18,17 @@ import net.k3rnel.unsealed.screens.battle.magic.PeaDart;
 
 public class Ghost extends BattleEnemy {
 
-    PeaDart dart;
+    List<PeaDart> darts;
+    PeaDart tmpDart;
     TextureAtlas atlas;
-    
-    
+
+
     public Ghost(TextureAtlas atlas, int x, int y) {
         super(70, x, y);
         this.offsetX = 55;
         setGrid(x, y);
         this.atlas = atlas;
+        darts = new ArrayList<PeaDart>();
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/ghost" );
         TextureRegion[][] spriteSheet = atlasRegion.split(102, 90);
         TextureRegion[] frames = new TextureRegion[3];
@@ -45,7 +50,7 @@ public class Ghost extends BattleEnemy {
         frames[8] = spriteSheet[0][9];
         frames[9] = spriteSheet[0][8];
         frames[10] = spriteSheet[0][9];
-        Animation attacking = new Animation(0.2f,frames);
+        Animation attacking = new Animation(0.1f,frames);
         attacking.setPlayMode(Animation.NORMAL);
         this.animations.put("attacking",attacking);
         attacking = new Animation(0.1f,frames);
@@ -57,49 +62,54 @@ public class Ghost extends BattleEnemy {
         this.setState(BattleEntity.stateIdle);
         this.setHeight(90);
         this.setWidth(102);
-        getDart();
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        switch(getState()){
-            case BattleEntity.stateAttacking:
-                if(currentAnimation.isAnimationFinished(stateTime)){
-                    showDart(true);
-                    setState(BattleEntity.stateIdle);
-                }
-                break;
-            case BattleEntity.stateAltAttacking:
-                if(currentAnimation.isAnimationFinished(stateTime)){
-                    for(BattleHero hero : BattleGrid.heroes){
-                        if(hero.getGridYInt() == getGridYInt()){
-                            if(hero.getGridXInt() == getGridXInt()-1){
-                                if(hero.getState()==BattleEntity.stateBlocking) 
-                                    hero.setHp(hero.getHp()-10);
-                                else
-                                    hero.setHp(hero.getHp()-20);
-                                hero.setState(BattleEntity.stateIdle);
+        if(this.getStatus()!=BattleEntity.statusStunned)
+            switch(getState()){
+                case BattleEntity.stateAttacking:
+                    if(currentAnimation.isAnimationFinished(stateTime)){
+                        showDart(true);
+                        setState(BattleEntity.stateIdle);
+                    }
+                    break;
+                case BattleEntity.stateAltAttacking:
+                    if(currentAnimation.isAnimationFinished(stateTime)){
+                        for(BattleHero hero : BattleGrid.heroes){
+                            if(hero.getGridYInt() == getGridYInt()){
+                                if(hero.getGridXInt() == getGridXInt()-1){
+                                    if(hero.getState()==BattleEntity.stateBlocking) 
+                                        hero.setHp(hero.getHp()-10);
+                                    else
+                                        hero.setHp(hero.getHp()-20);
+                                    hero.setState(BattleEntity.stateIdle);
+                                }
                             }
                         }
+                        moveCharacter();
+                        setState(BattleEntity.stateIdle);
                     }
-                    moveCharacter();
-                    setState(BattleEntity.stateIdle);
-                }
-                break;
+                    break;
             }
-            if(dart!=null&&dart.isVisible())
-                dart.act(delta);   
-            if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt())==null){
-                this.remove();
+        for(int i = 0; i< darts.size(); i++){
+            if(darts.get(i).destroyMe){
+                darts.remove(i);
+                i--;
+            }else{
+                darts.get(i).act(delta);
             }
+        }  
+
     }
-    
+
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if(dart!=null&&dart.isVisible())
+        for(PeaDart dart : darts){
             dart.draw(batch, parentAlpha);
+        }
     }
     @Override
     public Task nextTask(){
@@ -131,19 +141,15 @@ public class Ghost extends BattleEnemy {
     public Ghost getGhost(){
         return this;
     }
-    public PeaDart getDart(){
-        if(dart==null){
-            dart = new PeaDart(atlas,3,-0.4f,this);
-            dart.setVisible(false);
-        }
-        return dart;
-    }
+
     public void showDart(boolean show){
-        dart.offsetY = 0;
-        dart.offsetX = (int)this.getWidth();
+        tmpDart = new PeaDart(atlas,3,-10.4f,this);
+        tmpDart.setVisible(false);
         if(show)
-            dart.setGrid(this.getGridXInt(),this.getGridYInt());
-        dart.setVisible(show);
+            tmpDart.setGrid(this.getGridXInt(),this.getGridYInt());
+        tmpDart.setVisible(show);
+
+        darts.add(tmpDart);
     }
     protected void moveCharacter() {
         BattleGrid.moveEntity(this,BattleGrid.getUnusedPosition());

@@ -1,6 +1,9 @@
 package net.k3rnel.unsealed.screens.battle.enemies;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -16,7 +19,8 @@ import net.k3rnel.unsealed.screens.battle.magic.PeaDart;
 
 public class Terrex extends BattleEnemy {
 
-    PeaDart dart;
+    List<PeaDart> darts;
+    PeaDart tmpDart;
     TextureAtlas atlas;
     public Terrex(TextureAtlas atlas, int x, int y) {
         super(100, x, y);
@@ -24,6 +28,7 @@ public class Terrex extends BattleEnemy {
         this.offsetY = 10;
         setGrid(x, y);
         this.atlas = atlas;
+        darts = new ArrayList<PeaDart>();
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/terrex" );
         TextureRegion[][] spriteSheet = atlasRegion.split(94, 77);
         TextureRegion[] frames = new TextureRegion[2];
@@ -41,8 +46,8 @@ public class Terrex extends BattleEnemy {
         frames[5] = spriteSheet[2][5];
         frames[6] = spriteSheet[2][6];
         frames[7] = spriteSheet[2][7];
-         animation = new Animation(0.2f,frames);
-         animation.setPlayMode(Animation.NORMAL);
+        animation = new Animation(0.2f,frames);
+        animation.setPlayMode(Animation.NORMAL);
         this.animations.put("attacking",animation);
         frames = new TextureRegion[7];
         frames[0] = spriteSheet[1][0];
@@ -52,8 +57,8 @@ public class Terrex extends BattleEnemy {
         frames[4] = spriteSheet[1][4];
         frames[5] = spriteSheet[1][5];
         frames[6] = spriteSheet[1][6];
-         animation = new Animation(0.2f,frames);
-         animation.setPlayMode(Animation.NORMAL);
+        animation = new Animation(0.2f,frames);
+        animation.setPlayMode(Animation.NORMAL);
         this.animations.put("altattacking",animation);
         //        x = (int)((battleoverlay.getWidth()/2)/6);
         //        y = (int)((battleoverlay.getHeight())/3);
@@ -61,47 +66,53 @@ public class Terrex extends BattleEnemy {
         this.setState(BattleEntity.stateIdle);
         this.setHeight(77);
         this.setWidth(94);
-        getDart();
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-       
-        switch(getState()){
-        case BattleEntity.stateAttacking:
-            if(currentAnimation.isAnimationFinished(stateTime)){
-                showDart(true);
-                setState(BattleEntity.stateIdle);
-            }
-            break;
-        case BattleEntity.stateAltAttacking:
-            if(currentAnimation.isAnimationFinished(stateTime)){
-                for(BattleHero hero : BattleGrid.heroes){
-                    if(hero.getGridYInt() == getGridYInt()){
-                        if(hero.getGridXInt() == getGridXInt()-1){
-                            if(hero.getState()==BattleEntity.stateBlocking) 
-                                hero.setHp(hero.getHp()-10);
-                            else
-                                hero.setHp(hero.getHp()-20);
-                            BattleGrid.moveEntity(hero,hero.getGridXInt()-1,hero.getGridYInt());
-                            hero.setState(BattleEntity.stateIdle);
-                        }
+        if(this.getStatus()!=BattleEntity.statusStunned)
+            switch(getState()){
+                case BattleEntity.stateAttacking:
+                    if(currentAnimation.isAnimationFinished(stateTime)){
+                        showDart(true);
+                        setState(BattleEntity.stateIdle);
                     }
-                }
-                setState(BattleEntity.stateIdle);
+                    break;
+                case BattleEntity.stateAltAttacking:
+                    if(currentAnimation.isAnimationFinished(stateTime)){
+                        for(BattleHero hero : BattleGrid.heroes){
+                            if(hero.getGridYInt() == getGridYInt()){
+                                if(hero.getGridXInt() == getGridXInt()-1){
+                                    if(hero.getState()==BattleEntity.stateBlocking) 
+                                        hero.setHp(hero.getHp()-10);
+                                    else
+                                        hero.setHp(hero.getHp()-20);
+                                    BattleGrid.moveEntity(hero,hero.getGridXInt()-1,hero.getGridYInt());
+                                    hero.setState(BattleEntity.stateIdle);
+                                }
+                            }
+                        }
+                        setState(BattleEntity.stateIdle);
+                    }
+                    break;
             }
-            break;
-        }
-        if(dart!=null&&dart.isVisible())
-            dart.act(delta);
+        for(int i = 0; i< darts.size(); i++){
+            if(darts.get(i).destroyMe){
+                darts.remove(i);
+                i--;
+            }else{
+                darts.get(i).act(delta);
+            }
+        }  
     }
 
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if(dart!=null&&dart.isVisible())
-            dart.draw(batch, 1);
+        for(PeaDart dart : darts){
+            dart.draw(batch, parentAlpha);
+        }
     }
     @Override
     public Task nextTask(){
@@ -160,12 +171,16 @@ public class Terrex extends BattleEnemy {
                 for(BattleHero hero : BattleGrid.heroes){
                     if(hero.getGridYInt() > getGridYInt() && getGridYInt()<3){
                         BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()+1);
+                    }else if(hero.getGridYInt() < getGridYInt() && getGridYInt()>=0){
+                        BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()-1);
                     }
                 }
                 break;
             case 5:
                 for(BattleHero hero : BattleGrid.heroes){
-                    if(hero.getGridYInt() < getGridYInt() && getGridYInt()>-1){
+                    if(hero.getGridYInt() > getGridYInt() && getGridYInt()<3){
+                        BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()+1);
+                    }else if(hero.getGridYInt() < getGridYInt() && getGridYInt()>=0){
                         BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()-1);
                     }
                 }
@@ -190,18 +205,13 @@ public class Terrex extends BattleEnemy {
                 break;
         }
     }
-    public PeaDart getDart(){
-        if(dart==null){
-            dart = new PeaDart(atlas,1,-0.5f,this);
-            dart.setVisible(false);
-        }
-        return dart;
-    }
     public void showDart(boolean show){
-        dart.offsetY = 0;
-        dart.offsetX = (int)this.getWidth();
+        tmpDart = new PeaDart(atlas,3,-12.5f,this);
+        tmpDart.setVisible(false);
         if(show)
-            dart.setGrid(this.getGridXInt(),this.getGridYInt());
-        dart.setVisible(show);
+            tmpDart.setGrid(this.getGridXInt(),this.getGridYInt());
+        tmpDart.setVisible(show);
+
+        darts.add(tmpDart);
     }
 }

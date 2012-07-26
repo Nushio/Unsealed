@@ -29,19 +29,19 @@ public class PeaDart extends MagicEntity {
         attacking.setPlayMode(Animation.LOOP);
         this.animations.put("attacking",attacking);
         this.setState(BattleEntity.stateAttacking);
-        this.setGrid(entity.getGridXInt()+1,entity.getGridYInt());
 
         this.setHeight(30);this.setWidth(30);
-        offsetX = (int)entity.getWidth();
-        offsetY = 30;
+        offsetX = (int)entity.getWidth()-120;
+        offsetY = 0;
+
+        this.setGrid(entity.getGridXInt()-1,entity.getGridYInt());
     }
     
     @Override
     public void act(float delta) {
-        // TODO Auto-generated method stub
         super.act(delta);
         if(this.getGridX()<0)
-            this.setVisible(false);
+            destroyMe=true;
         for(BattleHero hero : BattleGrid.heroes){
             if(hero.getGridYInt() == this.getGridYInt() && hero.getGridXInt() == this.getGridXInt()){
                 Gdx.app.log(Unsealed.LOG,"SMACK!");
@@ -53,7 +53,7 @@ public class PeaDart extends MagicEntity {
                         hero.setHp(0);
                     }
                 }
-                this.setVisible(false);
+                destroyMe=true;
             }
         }
     }

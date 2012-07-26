@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class BattleEnemy extends BattleEntity {
 
     public int rounds = 0;
-
+    public boolean hit = false;
     /**
      * Grid position of the enemy
      * @param x

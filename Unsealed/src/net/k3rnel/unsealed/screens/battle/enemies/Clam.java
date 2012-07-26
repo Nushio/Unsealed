@@ -1,6 +1,9 @@
 package net.k3rnel.unsealed.screens.battle.enemies;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,16 +17,18 @@ import net.k3rnel.unsealed.screens.battle.BattleEnemy;
 import net.k3rnel.unsealed.screens.battle.BattleEntity;
 import net.k3rnel.unsealed.screens.battle.BattleGrid;
 import net.k3rnel.unsealed.screens.battle.BattleHero;
+import net.k3rnel.unsealed.screens.battle.magic.MagicEntity;
 import net.k3rnel.unsealed.screens.battle.magic.PeaDart;
 
 public class Clam extends BattleEnemy {
 
-    PeaDart dart;
+    List<PeaDart> darts;
+    PeaDart tmpDart;
     TextureAtlas atlas;
-    boolean hit = false;
     public Clam(TextureAtlas atlas, int x, int y) {
         super(50, x, y);
         this.atlas = atlas;
+        darts = new ArrayList<PeaDart>();
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/clam" );
         TextureRegion[][] spriteSheet = atlasRegion.split(41, 48);
         TextureRegion[] frames = new TextureRegion[2];
@@ -56,15 +61,20 @@ public class Clam extends BattleEnemy {
         this.setState(BattleEntity.stateBlocking);
         this.setHeight(48);
         this.setWidth(48);
-        getDart();
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(dart!=null)
-            if(dart.isVisible())
-                dart.act(delta);
+        for(int i = 0; i< darts.size(); i++){
+            if(darts.get(i).destroyMe){
+                darts.remove(i);
+                i--;
+            }else{
+                darts.get(i).act(delta);
+            }
+        }  
+        if(this.getStatus()!=BattleEntity.statusStunned)
         switch(getState()){
             case BattleEntity.stateIdle:
                 if(!currentAnimation.isAnimationFinished(stateTime)){
@@ -81,11 +91,9 @@ public class Clam extends BattleEnemy {
                 }
                 break;
             case BattleEntity.stateAttacking:
-                if(currentAnimation.isAnimationFinished(stateTime+0.3f)){
-                    if(!hit){
+                if(currentAnimation.isAnimationFinished(stateTime+0.3f)&&!hit){
                         hit = true;
                         showDart(true);
-                    }
                 }
                 if(currentAnimation.isAnimationFinished(stateTime)){
                     setState(BattleEntity.stateBlocking);
@@ -93,16 +101,15 @@ public class Clam extends BattleEnemy {
                 }
                 break;
         }
-        if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt())==null){
-            this.remove();
-        }
+        
     }
     
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if(dart!=null&&dart.isVisible())
+        for(PeaDart dart : darts){
             dart.draw(batch, parentAlpha);
+        }
     }
     @Override
     public Task nextTask(){
@@ -122,18 +129,12 @@ public class Clam extends BattleEnemy {
         return currentTask;
     }
     
-    public PeaDart getDart(){
-        if(dart==null){
-            dart = new PeaDart(atlas,2,-0.2f,this);
-            dart.setVisible(false);
-        }
-        return dart;
-    }
     public void showDart(boolean show){
-        dart.offsetY = 0;
-        dart.offsetX = (int)this.getWidth();
+        tmpDart = new PeaDart(atlas,2,-8f,this);
+        tmpDart.setVisible(false);
         if(show)
-            dart.setGrid(this.getGridXInt(),this.getGridYInt());
-        dart.setVisible(show);
+            tmpDart.setVisible(show);
+
+        darts.add(tmpDart);
     }
 }

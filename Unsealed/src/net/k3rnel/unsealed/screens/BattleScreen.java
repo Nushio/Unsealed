@@ -181,7 +181,7 @@ public class BattleScreen extends AbstractScreen {
         }
         grid = new BattleGrid(this.stage.getWidth(), stage.getHeight(),6,3);
 
-        hero = new BattleHero(getAtlas(),100);
+        hero = new BattleHero(getAtlas(),150);
         hero.setGrid(1,1);
         grid.assignEntity(hero);     
 
@@ -204,8 +204,9 @@ public class BattleScreen extends AbstractScreen {
 
             @Override
             public void clicked(InputEvent arg0, float arg1, float arg2) {
-                hero = new BattleHero(getAtlas(),100);
+                hero = new BattleHero(getAtlas(),150);
                 hero.setGrid(1,1);
+                hero.reset();
                 grid.reset();
                 grid.assignEntity(hero);     
                 bonus = 1;
@@ -410,8 +411,8 @@ public class BattleScreen extends AbstractScreen {
             case 7:{ // Skill2
                 if(pressed){
                     if(hero.getState()==BattleEntity.stateIdle){
-                        if(hero.getMana()>=1){
-                            hero.setMana(hero.getMana()-1);
+                        if(hero.getMana()>=5){
+                            hero.setMana(hero.getMana()-5);
                             hero.magicType=2;
                             hero.setState(BattleEntity.stateAttacking);
                         }
@@ -424,8 +425,8 @@ public class BattleScreen extends AbstractScreen {
             case 8:{ // Skill3
                 if(pressed){
                     if(hero.getState()==BattleEntity.stateIdle){
-                        if(hero.getMana()>=1){
-                            hero.setMana(hero.getMana()-1);
+                        if(hero.getMana()>=5){
+                            hero.setMana(hero.getMana()-5);
                             hero.magicType=1;
                             hero.setState(BattleEntity.stateAttacking);
                         }

@@ -12,7 +12,7 @@ import net.k3rnel.unsealed.screens.battle.BattleGrid;
 public class Spikes extends MagicEntity {
 
     public Spikes(TextureAtlas atlas,int type, BattleEntity entity) {
-        super(0.02f,0,entity);
+        super(4.5f,0,entity);
         AtlasRegion atlasRegion = atlas.findRegion("battle/entities/spikes");
         TextureRegion[][] spriteSheet = atlasRegion.split(64,64);
         TextureRegion[] frames = new TextureRegion[9];
@@ -30,37 +30,36 @@ public class Spikes extends MagicEntity {
         this.animations.put("attacking",animation);
         this.setState(BattleEntity.stateAttacking);
         this.setHeight(64);this.setWidth(64);
-        offsetX = -(int)entity.getWidth();
-        offsetY = 0;
-        this.setGrid(entity.getGridX(),entity.getGridY());
+        offsetX = (int)entity.getWidth()/2;
+        offsetY = 10;
+        this.setGridY(entity.getGridY());
+        this.setX(entity.getX()+offsetX);
 
     }
     @Override
     public void act(float delta){
         super.act(delta);
-        if(this.getX() > 650){
+        if(this.getX() > 550){
             destroyMe=true;
         }else{
             if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt())!=null){
                 BattleEntity enemy = BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt());
                 if(enemy instanceof BattleEnemy){
+                    enemy.setStatus(BattleEntity.statusStunned);
                     if(enemy.getState() == BattleEntity.stateBlocking){
                         enemy.setState(BattleEntity.stateIdle);
-                        if(enemy.setHp(enemy.getHp()-10)){
-                            enemy.remove();
-                            BattleGrid.assignOnGrid(enemy.getGridXInt(),enemy.getGridYInt(),null);
+                        enemy.setStatus(BattleEntity.statusStunned);
+                        if(enemy.setHp(enemy.getHp()-20)){
+                           BattleGrid.enemies.removeValue((BattleEnemy)enemy, false);
+                            BattleGrid.clearGrid(enemy.getGridXInt(),enemy.getGridYInt());
                             BattleGrid.checkState();
-                            destroyMe=true;
-                        }else{
-                            destroyMe=true;
+                            
                         }
                     }else if(enemy.setHp(enemy.getHp()-30)){
-                        enemy.remove();
-                        BattleGrid.assignOnGrid(enemy.getGridXInt(),enemy.getGridYInt(),null);
+                        BattleGrid.clearGrid(enemy.getGridXInt(),enemy.getGridYInt());
                         BattleGrid.checkState();
-                        destroyMe=true;
                     }else{
-                        destroyMe=true;
+                        
                     }
                     destroyMe=true;
                 }

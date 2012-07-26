@@ -28,7 +28,7 @@ public class BattleEntity extends Image {
     private int hp;
     public Label hpLabel;
   
-    private float gridX;
+    public float gridX;
     private float gridY;
     private Skin skin;
   
@@ -46,6 +46,7 @@ public class BattleEntity extends Image {
     public static final int statusNormal = 0;
     public static final int statusBurned = 1;
     public static final int statusPoisoned = 2;
+    public static final int statusStunned = 3;
     
     private int status=statusNormal;
 
@@ -76,8 +77,8 @@ public class BattleEntity extends Image {
             Gdx.app.log(Unsealed.LOG,"No anim!");
             return;
         }
-    
-        this.setDrawable(new Image(this.currentAnimation.getKeyFrame(this.stateTime)).getDrawable());
+        if(getStatus()!=BattleEntity.statusStunned)
+            this.setDrawable(new Image(this.currentAnimation.getKeyFrame(this.stateTime)).getDrawable());
     }
 
     @Override
@@ -110,7 +111,7 @@ public class BattleEntity extends Image {
         return (int)gridX;
     }
     public void setGrid(float x, float y){
-        setGridX(x);
+        setGridX(x,true);
         setGridY(y);
     }
 
@@ -128,11 +129,12 @@ public class BattleEntity extends Image {
     /**
      * @param gridX the gridX to set
      */
-    public void setGridX(float gridX) {
+    public void setGridX(float gridX, boolean reset) {
         
         this.gridX = gridX;
 //        Gdx.app.log(Unsealed.LOG, "GridX:"+gridX);
-        setX((this.gridX+1)*65+150 - offsetX);
+        if(reset)
+            setX((this.gridX+1)*65+150 - offsetX);
     }
     /**
      * @return the gridY
@@ -180,13 +182,7 @@ public class BattleEntity extends Image {
             this.addAction(actions);
             return false;
         }else{
-            this.hp = 0;
-            try{
-                BattleGrid.assignOnGrid(this.getGridXInt(),this.getGridYInt(),null);
-                this.remove();
-                BattleGrid.checkState();
-            }catch(Exception e){e.printStackTrace();}
-            
+            this.hp = 0;            
             return true;
         }
     }
@@ -315,6 +311,100 @@ public class BattleEntity extends Image {
                                setState(BattleEntity.statusNormal);
                             }
                         }));
+                this.addAction( actions ) ;
+                break;
+            case BattleEntity.statusStunned: 
+                actions =     
+                
+                sequence(color(Color.YELLOW), delay(0.2f),
+                        color(Color.ORANGE),delay(0.1f),
+                        color(Color.YELLOW),delay(0.2f),
+                        color(Color.ORANGE),delay(0.1f),
+                        color(Color.YELLOW), delay(0.2f),
+                        color(Color.ORANGE),delay(0.1f),
+                        color(Color.YELLOW),delay(0.2f),
+                        color(Color.ORANGE),delay(0.1f),
+                        color(Color.WHITE),delay(0.1f),
+                        run(new Runnable() {
+                            
+                            @Override
+                            public void run() {
+                               setStatus(BattleEntity.statusNormal);
+                            }
+                        }));
+                this.addAction( actions ) ;
+                break;
+            case BattleEntity.statusPoisoned:
+                actions =     
+                sequence(color(Color.MAGENTA), delay(0.2f),
+                        color(Color.GREEN),delay(0.2f),
+                        color(Color.MAGENTA),delay(0.2f),
+                        color(Color.GREEN),delay(0.2f),
+                        color(Color.WHITE),
+                        fadeIn(0.3f),
+                        run(new Runnable() {
+                            @Override
+                            public void run() {
+                                setHp(getHp()-5);
+                            }
+                        }),
+                        
+                        color(Color.MAGENTA), delay(0.2f),
+                        color(Color.GREEN),delay(0.2f),
+                        color(Color.MAGENTA),delay(0.2f),
+                        color(Color.GREEN),delay(0.2f),
+                        color(Color.WHITE),
+                        fadeIn(0.3f),
+                        run(new Runnable() {
+                            @Override
+                            public void run() {
+                                setHp(getHp()-5);
+                            }
+                        }),
+                        color(Color.MAGENTA), delay(0.2f),
+                        color(Color.GREEN),delay(0.2f),
+                        color(Color.MAGENTA),delay(0.2f),
+                        color(Color.GREEN),delay(0.2f),
+                        color(Color.WHITE),
+                        fadeIn(0.3f),
+                        run(new Runnable() {
+                            @Override
+                            public void run() {
+                                setHp(getHp()-5);
+                            }
+                        }),
+                        color(Color.MAGENTA), delay(0.2f),
+                        color(Color.GREEN),delay(0.2f),
+                        color(Color.MAGENTA),delay(0.2f),
+                        color(Color.GREEN),delay(0.2f),
+                        color(Color.WHITE),
+                        fadeIn(0.3f),
+                        run(new Runnable() {
+                            @Override
+                            public void run() {
+                                setHp(getHp()-5);
+                            }
+                        }),
+                        color(Color.MAGENTA), delay(0.2f),
+                        color(Color.GREEN),delay(0.2f),
+                        color(Color.MAGENTA),delay(0.2f),
+                        color(Color.GREEN),delay(0.2f),
+                        color(Color.WHITE),
+                        fadeIn(0.3f),
+                        run(new Runnable() {
+                            @Override
+                            public void run() {
+                                setHp(getHp()-5);
+                            }
+                        }),
+                        color(Color.WHITE), run(new Runnable() {
+                            
+                            @Override
+                            public void run() {
+                               setState(BattleEntity.statusNormal);
+                            }
+                        }));
+                this.getActions().clear();
                 this.addAction( actions ) ;
                 break;
         }

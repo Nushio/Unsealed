@@ -28,8 +28,8 @@ public class FireLion extends MagicEntity {
         frames[2] = spriteSheet[1][2];
         frames[3] = spriteSheet[2][2];
         frames[4] = spriteSheet[2][3];
-        animation = new Animation(0.1f,frames);
-        animation.setPlayMode(Animation.NORMAL);
+        animation = new Animation(0.2f,frames);
+        animation.setPlayMode(Animation.LOOP);
         this.animations.put("attacking",animation);
 
         frames = new TextureRegion[4];
@@ -41,28 +41,33 @@ public class FireLion extends MagicEntity {
         animation.setPlayMode(Animation.NORMAL);
         this.animations.put("altattacking",animation);
         this.setState(BattleEntity.stateIdle);
-        this.setGrid(entity.getGridX()+1,entity.getGridY());
-
+        this.setGridY(entity.getGridY());
+        offsetX = (int)entity.getWidth()/2;
+        this.setX(entity.getX()+offsetX);
         this.setHeight(64);this.setWidth(64);
-        offsetX = (int)entity.getWidth();
+        
         offsetY = -30;
     }
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(this.getGridXInt() > 5){
+        if(this.getX() > 550){
             destroyMe=true;
         }else{
             if(this.getState()==BattleEntity.stateIdle){
                 if(this.getGridXInt()<5){
                     if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt())!=null){
-                        this.speedX = 0.1f;
-                        this.setGridX(getGridX());
-                        this.setState(stateAttacking);
+                        if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt()) instanceof BattleEnemy){
+                            this.speedX = 2.5f;
+                            this.setGridX(getGridX(),false);
+                            this.setState(stateAttacking);
+                        }
                     }else if(BattleGrid.checkGrid(this.getGridXInt()+1,this.getGridYInt())!=null){
-                        this.speedX = 0.1f;
-                        this.setGridX(getGridX()+1);
-                        this.setState(stateAttacking);
+                        if(BattleGrid.checkGrid(this.getGridXInt()+1,this.getGridYInt()) instanceof BattleEnemy){
+                            this.speedX = 2.5f;
+                            this.setGridX(getGridX()+1,false);
+                            this.setState(stateAttacking);
+                        }
                     }
                 }else{
                     destroyMe=true;  
@@ -78,8 +83,8 @@ public class FireLion extends MagicEntity {
                             setState(BattleEntity.stateAttacking);
                         }else{
                             if(enemy.setHp(enemy.getHp()-(int)maxDistance*10)){
-                                enemy.remove();
-                                BattleGrid.assignOnGrid(enemy.getGridXInt(),enemy.getGridYInt(),null);
+                                BattleGrid.enemies.removeValue((BattleEnemy)enemy,false);
+                                BattleGrid.clearGrid(enemy.getGridXInt(),enemy.getGridYInt());
                                 BattleGrid.checkState();
                                 maxDistance--;
                                 setState(BattleEntity.stateAttacking);

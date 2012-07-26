@@ -1,9 +1,5 @@
 package net.k3rnel.unsealed.screens.battle;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +10,6 @@ import net.k3rnel.unsealed.screens.battle.magic.MagicEntity;
 import net.k3rnel.unsealed.screens.battle.magic.Shield;
 import net.k3rnel.unsealed.screens.battle.magic.Spikes;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -90,18 +85,18 @@ public class BattleHero extends BattleEntity {
 
         setHp(hp);
         mana = 0;
-        setGridX(1);
+        setGridX(1,false);
         setGridY(1); 
 
         this.setWidth(65);
         this.setHeight(93);
-        //        getCannonball();
+        getShield();
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-
+        
         if(currentAnimation.isAnimationFinished(stateTime)){
             switch(this.getState()){
                 case BattleEntity.stateAttacking:
@@ -127,22 +122,12 @@ public class BattleHero extends BattleEntity {
                         showFireLion(true);
                         break;
                     case 2:
-                        showGroundSpikes(true);
-                        actions = 
-                                sequence(delay(0.1f),
-                                        run(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                showGroundSpikes(true);
-                                            }
-                                        }));
-                        this.addAction( actions ) ;
-                        
+                        showGroundSpikes(true);                        
                         break;
                 }
             }
         }else if(this.getState() == BattleEntity.stateBlocking){
-            if(shield.isVisible())
+            shield.act(delta);
                 getShield().setGrid(this.getGridXInt(),this.getGridYInt());
         }else if(this.getState() == BattleEntity.stateAltAttacking){
             if(currentAnimation.animationDuration<stateTime+0.3f&&!hit){
@@ -152,31 +137,19 @@ public class BattleHero extends BattleEntity {
                     if(entity instanceof BattleEnemy){
                         if(entity.getState() == BattleEntity.stateBlocking){
                             if(entity.setHp(entity.getHp()-30)){
-                                entity.remove();
-                                BattleGrid.assignOnGrid(entity.getGridXInt(),entity.getGridYInt(), null);
+                                BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
+                                BattleGrid.clearGrid(entity.getGridXInt(),entity.getGridYInt());
                                 BattleGrid.checkState();
                             }else{
-                                actions = 
-                                        sequence(color(Color.RED), delay(0.01f),
-                                                color(Color.ORANGE),delay(0.01f),
-                                                color(Color.RED),delay(0.01f),
-                                                color(Color.ORANGE),delay(0.01f),
-                                                color(Color.WHITE));
-                                entity.addAction( actions ) ;
+                               entity.setStatus(BattleEntity.statusBurned);
                             }
                         }else{
                             if(entity.setHp(entity.getHp()-60)){
-                                entity.remove();
-                                BattleGrid.assignOnGrid(entity.getGridXInt(),entity.getGridYInt(), null);
+                                BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
+                                BattleGrid.clearGrid(entity.getGridXInt(),entity.getGridYInt());
                                 BattleGrid.checkState();
                             }else{
-                                actions = 
-                                        sequence(color(Color.RED), delay(0.01f),
-                                                color(Color.ORANGE),delay(0.01f),
-                                                color(Color.RED),delay(0.01f),
-                                                color(Color.ORANGE),delay(0.01f),
-                                                color(Color.WHITE));
-                                entity.addAction( actions ) ;
+                                entity.setStatus(BattleEntity.statusBurned);
                             }
                         }
                     }
@@ -195,13 +168,15 @@ public class BattleHero extends BattleEntity {
             showShield(false);
         }
     }
+    public void reset(){
+        magics = new ArrayList<MagicEntity>();
+    }
     public void showFireLion(boolean show){
-        tmpMagic = new FireLion(atlas,-0.3f,this);
+        tmpMagic = new FireLion(atlas,4f,this);
         tmpMagic.setVisible(false);
         tmpMagic.offsetY = 0;
         tmpMagic.offsetX = 0;
         tmpMagic.maxDistance = 5;
-        tmpMagic.speedX = 0.2f;
         if(show){  
             tmpMagic.setGrid(this.getGridXInt()+1,this.getGridYInt());
         }
@@ -209,11 +184,10 @@ public class BattleHero extends BattleEntity {
         magics.add(tmpMagic);
      }
     public void showBlast(boolean show){
-       tmpMagic = new Blast(atlas,0,0.6f,this);
+       tmpMagic = new Blast(atlas,0,6.5f,this);
        tmpMagic.setVisible(false);
        tmpMagic.offsetY = -30;
        tmpMagic.offsetX = -(int)this.getWidth();
-       tmpMagic.speedX = 0.5f;
        if(show)
            tmpMagic.setGrid(this.getGridXInt(),this.getGridYInt());
        tmpMagic.setVisible(show);
@@ -226,7 +200,6 @@ public class BattleHero extends BattleEntity {
        if(show)
            tmpMagic.setGrid(this.getGridXInt(),this.getGridYInt());
        tmpMagic.setVisible(show);
-
        magics.add(tmpMagic);
     }
     //    public Cannonball getCannonball(){
@@ -268,6 +241,8 @@ public class BattleHero extends BattleEntity {
         for(MagicEntity magic : magics){
             magic.draw(batch, parentAlpha);
         }
+        if(this.getState()==BattleEntity.stateBlocking)
+            shield.draw(batch, parentAlpha);
     }
 
     /**
