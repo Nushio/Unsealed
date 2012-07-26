@@ -19,7 +19,7 @@ public class Terrex extends BattleEnemy {
     PeaDart dart;
     TextureAtlas atlas;
     public Terrex(TextureAtlas atlas, int x, int y) {
-        super(70, x, y);
+        super(100, x, y);
         this.offsetX = 32;
         this.offsetY = 10;
         setGrid(x, y);
@@ -134,25 +134,25 @@ public class Terrex extends BattleEnemy {
         switch(nextMove){
             case 0://Up
                 if(this.getGridYInt()+1<3)
-                    if(BattleGrid.grid[this.getGridXInt()][this.getGridYInt()+1]==null){
+                    if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt()+1)==null){
                         BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()+1);
                     }
                 break;
             case 1://Down
                 if(this.getGridYInt()-1>-1)
-                    if(BattleGrid.grid[this.getGridXInt()][this.getGridYInt()-1]==null){
+                    if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt()-1)==null){
                         BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()-1);
                     }
                 break;
             case 2://Left
                 if(this.getGridXInt()-1>2)
-                    if(BattleGrid.grid[this.getGridXInt()-1][this.getGridYInt()]==null){
+                    if(BattleGrid.checkGrid(this.getGridXInt()-1,this.getGridYInt())==null){
                         BattleGrid.moveEntity(this, this.getGridXInt()-1, this.getGridYInt());
                     }
                 break;
             case 3://Right
                 if(this.getGridXInt()+1<6)
-                    if(BattleGrid.grid[this.getGridXInt()+1][this.getGridYInt()]==null){
+                    if(BattleGrid.checkGrid(this.getGridXInt()+1,this.getGridYInt())==null){
                         BattleGrid.moveEntity(this, this.getGridXInt()+1, this.getGridYInt());
                     }
                 break;
@@ -192,7 +192,7 @@ public class Terrex extends BattleEnemy {
     }
     public PeaDart getDart(){
         if(dart==null){
-            dart = new PeaDart(atlas,-0.6f,this);
+            dart = new PeaDart(atlas,1,-0.5f,this);
             dart.setVisible(false);
         }
         return dart;

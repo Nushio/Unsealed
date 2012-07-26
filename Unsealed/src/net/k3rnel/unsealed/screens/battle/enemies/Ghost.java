@@ -20,7 +20,7 @@ public class Ghost extends BattleEnemy {
     
     
     public Ghost(TextureAtlas atlas, int x, int y) {
-        super(50, x, y);
+        super(70, x, y);
         this.offsetX = 55;
         setGrid(x, y);
         this.atlas = atlas;
@@ -89,7 +89,10 @@ public class Ghost extends BattleEnemy {
                 break;
             }
             if(dart!=null&&dart.isVisible())
-                dart.act(delta);        
+                dart.act(delta);   
+            if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt())==null){
+                this.remove();
+            }
     }
     
     @Override
@@ -109,7 +112,7 @@ public class Ghost extends BattleEnemy {
                             if(hero.getGridYInt() == getGridYInt()){
                                 setState(BattleEntity.stateAttacking);
                             }else if(BattleGrid.random.nextInt(100)>70){
-                                if(BattleGrid.grid[hero.getGridXInt()+1][hero.getGridYInt()]==null){
+                                if(BattleGrid.checkGrid(hero.getGridXInt()+1,hero.getGridYInt())==null){
                                     if(BattleGrid.moveEntity(getGhost(),hero.getGridXInt()+1,hero.getGridYInt()))
                                         setState(BattleEntity.stateAltAttacking);
                                 }
@@ -130,7 +133,7 @@ public class Ghost extends BattleEnemy {
     }
     public PeaDart getDart(){
         if(dart==null){
-            dart = new PeaDart(atlas,-0.5f,this);
+            dart = new PeaDart(atlas,3,-0.4f,this);
             dart.setVisible(false);
         }
         return dart;

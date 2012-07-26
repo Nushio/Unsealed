@@ -78,6 +78,10 @@ public class BattleHUD extends Stage {
         bButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
         bButton.setX( this.getWidth() - (bButton.getWidth()*bButton.getScaleX()) -80 );
         bButton.setY( this.getHeight() -(bButton.getHeight()*bButton.getScaleY()+ 160) ); 
+        temp = new Image(spells[1][3]);
+        temp.setY(10);
+        bButton.addActor(temp);
+
         this.addActor(bButton);
 
         atlasRegion = atlas.findRegion("battle/ui/blue_facebutton2");

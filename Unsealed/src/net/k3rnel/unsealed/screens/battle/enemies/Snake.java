@@ -116,7 +116,7 @@ public class Snake extends BattleEnemy {
     
     public PeaDart getDart(){
         if(dart==null){
-            dart = new PeaDart(atlas,-0.4f,this);
+            dart = new PeaDart(atlas,1,-0.4f,this);
             dart.setVisible(false);
         }
         return dart;

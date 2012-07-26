@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.math.Vector2;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.screens.battle.BattleEnemy;
@@ -42,16 +41,15 @@ public class Blast extends MagicEntity {
         if(this.getGridXInt() >= 6){
             destroyMe=true;
         }else{
-            if(BattleGrid.grid[this.getGridXInt()][this.getGridYInt()]!=null){
-                BattleEntity entity = BattleGrid.grid[this.getGridXInt()][this.getGridYInt()];
+            if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt())!=null){
+                BattleEntity entity = BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt());
                 if(entity instanceof BattleEnemy){
                     if(entity.getState() == BattleEntity.stateBlocking){
                         Gdx.app.log(Unsealed.LOG, "You hit me but it didn't hurt! Haha");
                     }else{
                         if(entity.setHp(entity.getHp()-10)){
                             entity.remove();
-                            BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
-                            BattleGrid.grid[this.getGridXInt()][this.getGridYInt()] = null;
+                            BattleGrid.assignOnGrid(this.getGridXInt(),this.getGridYInt(), null);
                             BattleGrid.checkState();
                         }
                     }

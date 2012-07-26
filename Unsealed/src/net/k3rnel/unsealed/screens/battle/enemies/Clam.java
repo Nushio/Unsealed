@@ -22,7 +22,7 @@ public class Clam extends BattleEnemy {
     TextureAtlas atlas;
     boolean hit = false;
     public Clam(TextureAtlas atlas, int x, int y) {
-        super(30, x, y);
+        super(50, x, y);
         this.atlas = atlas;
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/clam" );
         TextureRegion[][] spriteSheet = atlasRegion.split(41, 48);
@@ -32,10 +32,11 @@ public class Clam extends BattleEnemy {
         Animation animation = new Animation(1f,frames);
         animation.setPlayMode(Animation.LOOP);
         this.animations.put("blocking",animation);
-        frames = new TextureRegion[3];
+        frames = new TextureRegion[4];
         frames[0] = spriteSheet[0][2];
         frames[1] = spriteSheet[0][3];
-        frames[2] = spriteSheet[0][4];
+        frames[2] = spriteSheet[0][3];
+        frames[3] = spriteSheet[0][3];
         animation = new Animation(0.85f,frames);
         animation.setPlayMode(Animation.NORMAL);
         this.animations.put("idle",animation);
@@ -92,6 +93,9 @@ public class Clam extends BattleEnemy {
                 }
                 break;
         }
+        if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt())==null){
+            this.remove();
+        }
     }
     
     @Override
@@ -120,7 +124,7 @@ public class Clam extends BattleEnemy {
     
     public PeaDart getDart(){
         if(dart==null){
-            dart = new PeaDart(atlas,-0.2f,this);
+            dart = new PeaDart(atlas,2,-0.2f,this);
             dart.setVisible(false);
         }
         return dart;

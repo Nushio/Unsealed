@@ -1,6 +1,7 @@
 package net.k3rnel.unsealed.screens.battle;
 
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
@@ -41,6 +42,12 @@ public class BattleEntity extends Image {
     public static final int stateMoving = 7;
     public static final int stateInvulnerable = 8;
 
+    
+    public static final int statusNormal = 0;
+    public static final int statusBurned = 1;
+    public static final int statusPoisoned = 2;
+    
+    private int status=statusNormal;
 
     public final HashMap<String, Animation> animations;
     public Animation currentAnimation;
@@ -49,6 +56,9 @@ public class BattleEntity extends Image {
     protected Task currentTask;
 
     public int offsetX = 0, offsetY = 0;
+    
+
+    SequenceAction actions;
 
     public BattleEntity() {
         this.animations = new HashMap<String, Animation>();
@@ -66,6 +76,7 @@ public class BattleEntity extends Image {
             Gdx.app.log(Unsealed.LOG,"No anim!");
             return;
         }
+    
         this.setDrawable(new Image(this.currentAnimation.getKeyFrame(this.stateTime)).getDrawable());
     }
 
@@ -170,6 +181,12 @@ public class BattleEntity extends Image {
             return false;
         }else{
             this.hp = 0;
+            try{
+                BattleGrid.assignOnGrid(this.getGridXInt(),this.getGridYInt(),null);
+                this.remove();
+                BattleGrid.checkState();
+            }catch(Exception e){e.printStackTrace();}
+            
             return true;
         }
     }
@@ -244,4 +261,63 @@ public class BattleEntity extends Image {
     public HashMap<String, Animation> getAnimations() {
         return animations;
     }
+    /**
+     * @return the status
+     */
+    public int getStatus() {
+        return status;
+    }
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(int status) {
+        this.status = status;
+        switch(this.status){
+            case BattleEntity.statusNormal:
+                break;
+            case BattleEntity.statusBurned:
+                actions =     
+                    
+                sequence(color(Color.RED), delay(0.05f),
+                        color(Color.ORANGE),delay(0.05f),
+                        color(Color.RED),delay(0.05f),
+                        color(Color.ORANGE),delay(0.05f),
+                        run(new Runnable() {
+                            @Override
+                            public void run() {
+                                setHp(getHp()-10);
+                            }
+                        }),
+                        color(Color.RED), delay(0.05f),
+                        color(Color.ORANGE),delay(0.05f),
+                        color(Color.RED),delay(0.05f),
+                        color(Color.ORANGE),delay(0.05f),
+                        run(new Runnable() {
+                            @Override
+                            public void run() {
+                                setHp(getHp()-10);
+                            }
+                        }),
+                        color(Color.RED), delay(0.05f),
+                        color(Color.ORANGE),delay(0.05f),
+                        color(Color.RED),delay(0.05f),
+                        color(Color.ORANGE),delay(0.05f),
+                        run(new Runnable() {
+                            @Override
+                            public void run() {
+                                setHp(getHp()-10);
+                            }
+                        }),
+                        color(Color.WHITE), run(new Runnable() {
+                            
+                            @Override
+                            public void run() {
+                               setState(BattleEntity.statusNormal);
+                            }
+                        }));
+                this.addAction( actions ) ;
+                break;
+        }
+    }
+    
 }

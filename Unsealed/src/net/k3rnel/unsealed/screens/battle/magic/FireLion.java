@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.math.Vector2;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.screens.battle.BattleEnemy;
@@ -14,10 +13,6 @@ import net.k3rnel.unsealed.screens.battle.BattleGrid;
 
 public class FireLion extends MagicEntity {
 
-    /**
-     * 0 = gray. 1 = blue. 2 = red. 3 = green.
-     * @param color
-     */
     public FireLion(TextureAtlas atlas, float speed, BattleEntity entity) {
         super(speed,0,entity);
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/firelion" );
@@ -33,7 +28,7 @@ public class FireLion extends MagicEntity {
         frames[2] = spriteSheet[1][2];
         frames[3] = spriteSheet[2][2];
         frames[4] = spriteSheet[2][3];
-        animation = new Animation(0.2f,frames);
+        animation = new Animation(0.1f,frames);
         animation.setPlayMode(Animation.NORMAL);
         this.animations.put("attacking",animation);
 
@@ -60,7 +55,11 @@ public class FireLion extends MagicEntity {
         }else{
             if(this.getState()==BattleEntity.stateIdle){
                 if(this.getGridXInt()<5){
-                    if(BattleGrid.grid[this.getGridXInt()+1][this.getGridYInt()]!=null){
+                    if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt())!=null){
+                        this.speedX = 0.1f;
+                        this.setGridX(getGridX());
+                        this.setState(stateAttacking);
+                    }else if(BattleGrid.checkGrid(this.getGridXInt()+1,this.getGridYInt())!=null){
                         this.speedX = 0.1f;
                         this.setGridX(getGridX()+1);
                         this.setState(stateAttacking);
@@ -69,54 +68,30 @@ public class FireLion extends MagicEntity {
                     destroyMe=true;  
                 }
             }else if(this.getState()==stateAttacking){
-                if(BattleGrid.grid[this.getGridXInt()][this.getGridYInt()]!=null){
-                    BattleEntity entity = BattleGrid.grid[this.getGridXInt()][this.getGridYInt()];
-                    if(entity instanceof BattleEnemy){
-                        if(entity.getState() == BattleEntity.stateBlocking){
-                            Gdx.app.log(Unsealed.LOG, "You hit me but it didn't hurt! Haha");
-                            this.setState(stateAltAttacking);
+                if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt())!=null){
+                    BattleEntity enemy = BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt());
+                    if(enemy instanceof BattleEnemy){
+                        if(enemy.getState() == BattleEntity.stateBlocking){
+                            enemy.setStatus(BattleEntity.statusBurned);
+                            Gdx.app.log(Unsealed.LOG, "You burned me!");
+                            maxDistance = 0;
+                            setState(BattleEntity.stateAttacking);
                         }else{
-                            if(entity.setHp(entity.getHp()-(int)maxDistance*10)){
-                                entity.remove();
-                                BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
-                                BattleGrid.grid[this.getGridXInt()][this.getGridYInt()] = null;
+                            if(enemy.setHp(enemy.getHp()-(int)maxDistance*10)){
+                                enemy.remove();
+                                BattleGrid.assignOnGrid(enemy.getGridXInt(),enemy.getGridYInt(),null);
                                 BattleGrid.checkState();
-                                if(this.getGridXInt()+1<5){
-                                    if(BattleGrid.grid[this.getGridXInt()+1][this.getGridYInt()]==null)
-                                        this.setState(stateAltAttacking);
-                                }else
-                                    this.setState(stateAltAttacking);
+                                maxDistance--;
+                                setState(BattleEntity.stateAttacking);
                             }else{
-                                this.setState(stateAltAttacking);
+                                enemy.setStatus(BattleEntity.statusBurned);
+                                maxDistance--;
+                                setState(BattleEntity.stateAttacking);
                             }
                         }
                         maxDistance--;
                     }
                 }
-            }else{
-                this.setGridX(this.getGridX()-speedX);
-                if(BattleGrid.grid[this.getGridXInt()][this.getGridYInt()]!=null){
-                    BattleEntity entity = BattleGrid.grid[this.getGridXInt()][this.getGridYInt()];
-                    if(entity instanceof BattleEnemy){
-                        if(entity.getState() == BattleEntity.stateBlocking){
-                            Gdx.app.log(Unsealed.LOG, "You hit me but it didn't hurt! Haha");
-                            maxDistance = entity.getHp()/10 - maxDistance;
-                        }else{
-                            if(entity.getHp()-maxDistance*10<0){
-                                maxDistance = -1*((entity.getHp()-maxDistance*10)/10);
-                            }else{
-                                if(entity.setHp(entity.getHp()-(int)maxDistance*10)){
-                                    entity.remove();
-                                    BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
-                                    BattleGrid.grid[this.getGridXInt()][this.getGridYInt()] = null;
-                                    BattleGrid.checkState();
-                                    maxDistance = 0;
-                                }
-                            }
-                        }
-                    }
-                }
-                maxDistance--;
             }
             if(maxDistance<=0){
                 destroyMe=true;

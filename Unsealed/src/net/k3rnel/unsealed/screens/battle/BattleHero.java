@@ -3,6 +3,7 @@ package net.k3rnel.unsealed.screens.battle;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import net.k3rnel.unsealed.screens.battle.magic.Blast;
 import net.k3rnel.unsealed.screens.battle.magic.FireLion;
 import net.k3rnel.unsealed.screens.battle.magic.MagicEntity;
 import net.k3rnel.unsealed.screens.battle.magic.Shield;
+import net.k3rnel.unsealed.screens.battle.magic.Spikes;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -18,8 +20,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.utils.Timer.Task;
 
 public class BattleHero extends BattleEntity {
@@ -34,7 +34,6 @@ public class BattleHero extends BattleEntity {
     
     private TextureAtlas atlas;
 
-    SequenceAction actions;
     
     private boolean hit = false;
 
@@ -127,6 +126,19 @@ public class BattleHero extends BattleEntity {
                     case 1:
                         showFireLion(true);
                         break;
+                    case 2:
+                        showGroundSpikes(true);
+                        actions = 
+                                sequence(delay(0.1f),
+                                        run(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                showGroundSpikes(true);
+                                            }
+                                        }));
+                        this.addAction( actions ) ;
+                        
+                        break;
                 }
             }
         }else if(this.getState() == BattleEntity.stateBlocking){
@@ -135,14 +147,13 @@ public class BattleHero extends BattleEntity {
         }else if(this.getState() == BattleEntity.stateAltAttacking){
             if(currentAnimation.animationDuration<stateTime+0.3f&&!hit){
                 hit = true;
-                if(BattleGrid.grid[this.getGridXInt()+1][this.getGridYInt()]!=null){
-                    BattleEntity entity = BattleGrid.grid[this.getGridXInt()+1][this.getGridYInt()];
+                if(BattleGrid.checkGrid(this.getGridXInt()+1,this.getGridYInt())!=null){
+                    BattleEntity entity = BattleGrid.checkGrid(this.getGridXInt()+1,this.getGridYInt());
                     if(entity instanceof BattleEnemy){
                         if(entity.getState() == BattleEntity.stateBlocking){
                             if(entity.setHp(entity.getHp()-30)){
                                 entity.remove();
-                                BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
-                                BattleGrid.grid[this.getGridXInt()+1][this.getGridYInt()] = null;
+                                BattleGrid.assignOnGrid(entity.getGridXInt(),entity.getGridYInt(), null);
                                 BattleGrid.checkState();
                             }else{
                                 actions = 
@@ -156,8 +167,7 @@ public class BattleHero extends BattleEntity {
                         }else{
                             if(entity.setHp(entity.getHp()-60)){
                                 entity.remove();
-                                BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
-                                BattleGrid.grid[this.getGridXInt()+1][this.getGridYInt()] = null;
+                                BattleGrid.assignOnGrid(entity.getGridXInt(),entity.getGridYInt(), null);
                                 BattleGrid.checkState();
                             }else{
                                 actions = 
@@ -190,7 +200,7 @@ public class BattleHero extends BattleEntity {
         tmpMagic.setVisible(false);
         tmpMagic.offsetY = 0;
         tmpMagic.offsetX = 0;
-        tmpMagic.maxDistance = 4;
+        tmpMagic.maxDistance = 5;
         tmpMagic.speedX = 0.2f;
         if(show){  
             tmpMagic.setGrid(this.getGridXInt()+1,this.getGridYInt());
@@ -207,6 +217,16 @@ public class BattleHero extends BattleEntity {
        if(show)
            tmpMagic.setGrid(this.getGridXInt(),this.getGridYInt());
        tmpMagic.setVisible(show);
+       magics.add(tmpMagic);
+    }
+
+    public void showGroundSpikes(boolean show){
+       tmpMagic = new Spikes(atlas,1,this);
+       tmpMagic.setVisible(false);
+       if(show)
+           tmpMagic.setGrid(this.getGridXInt(),this.getGridYInt());
+       tmpMagic.setVisible(show);
+
        magics.add(tmpMagic);
     }
     //    public Cannonball getCannonball(){
@@ -239,7 +259,7 @@ public class BattleHero extends BattleEntity {
     public void showShield(boolean show){
         //        if(show)
         //            shield.setGrid(this.getGridX(),this.getGridY());
-        shield.setVisible(show);
+//        shield.setVisible(show);
     }
 
     @Override
