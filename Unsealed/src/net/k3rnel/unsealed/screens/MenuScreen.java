@@ -36,40 +36,29 @@ public class MenuScreen extends AbstractScreen {
         table.add(logo).fill(false);
         table.row();
         table.pad(10).defaults().spaceBottom(10);
-        TextButton continueButton = new TextButton( "Continue", skin );
-        continueButton.setVisible(false);
-        continueButton.addListener( new ClickListener() {
+        TextButton storyModeButton = new TextButton( "Story Mode", skin );
+        storyModeButton.setVisible(true);
+        storyModeButton.addListener( new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y ) {
-//                game.setScreen( new StartGameScreen( game ) );
+                game.setScreen( new LevelSelectScreen( game ) );
             }
         } );
-        table.add(continueButton).size( 300, 60 ).uniform().spaceBottom(10);
+        table.add(storyModeButton).size( 300, 60 ).uniform().spaceBottom(10);
         table.row();
         table.pad(10).defaults().spaceBottom(10);
-        TextButton newGameButton = new TextButton( "New game", skin );
-        newGameButton.addListener( new ClickListener() {
+        TextButton battleArenaButton = new TextButton( "Battle Arena", skin );
+        battleArenaButton.addListener( new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y ) {
-                //TODO: Move it back to char select screen
-//                game.setScreen( new CharSelectScreen( game ) );
                 if(Unsealed.DEBUG)
                     game.setScreen( new BattleScreen( game ) );
                 else
                     game.setScreen( new SplashScreen( game ) );
             }
         } );
-        table.add(newGameButton).size( 300, 60 ).uniform().spaceBottom(10);
+        table.add(battleArenaButton).size( 300, 60 ).uniform().spaceBottom(10);
         table.row();
         table.pad(10).defaults().spaceBottom(10);
-//        TextButton optionsButton = new TextButton( "Options", skin );
-//        optionsButton.setDisabled(true);
-//        optionsButton.addListener( new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y ) {
-//                game.setScreen( new OptionsScreen( game ) );
-//            }
-//        } );
-//        table.add(optionsButton).size( 300, 60 ).uniform().spaceBottom(10);
     }
 }

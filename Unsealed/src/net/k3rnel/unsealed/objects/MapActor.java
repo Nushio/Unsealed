@@ -1,5 +1,7 @@
 package net.k3rnel.unsealed.objects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public abstract class MapActor extends Actor {
@@ -14,6 +16,8 @@ public abstract class MapActor extends Actor {
 	private int group;
 	private int collisionGroup;
 	private boolean mapCollidable;
+	
+	private TextureAtlas atlas;
 	
 	public MapActor() {
 		this.tileX = -1;
@@ -101,4 +105,10 @@ public abstract class MapActor extends Actor {
 	public void setMapCollidable(boolean mapCollidable) {
 		this.mapCollidable = mapCollidable;
 	}
+	 public TextureAtlas getAtlas() {
+	        if( atlas == null ) {
+	            atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
+	        }
+	        return atlas;
+	    }
 }

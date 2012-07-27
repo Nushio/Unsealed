@@ -3,7 +3,14 @@ pages-info.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-char-sprites/female_spritesheet
+char-sprites/whisperer_spritesheet
+  rotate: false
+  xy: 0, 516
+  size: 576, 256
+  orig: 576, 256
+  offset: 0, 0
+  index: -1
+char-sprites/lidia_spritesheet
   rotate: false
   xy: 0, 258
   size: 576, 256
@@ -22,6 +29,19 @@ pages-info2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+maps/dialog-box
+  rotate: false
+  xy: 0, 0
+  size: 512, 64
+  split: 28, 30, 8, 7
+  orig: 512, 64
+  offset: 0, 0
+  index: -1
+
+pages-info3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
 battle/maps/battlemap-test
   rotate: false
   xy: 0, 482
@@ -37,7 +57,7 @@ battle/maps/battlemap2
   offset: 0, 0
   index: -1
 
-pages-info3.png
+pages-info4.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -56,7 +76,7 @@ battle/maps/battlemap6
   offset: 0, 0
   index: -1
 
-pages-info4.png
+pages-info5.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -75,7 +95,7 @@ battle/maps/battlemap4
   offset: 0, 0
   index: -1
 
-pages-info5.png
+pages-info6.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -94,7 +114,7 @@ battle/maps/battlemap0
   offset: 0, 0
   index: -1
 
-pages-info6.png
+pages-info7.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -225,7 +245,7 @@ battle/ui/dpad_up
   offset: 0, 0
   index: -1
 
-pages-info7.png
+pages-info8.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -272,61 +292,68 @@ battle/entities/fireball
   offset: 0, 0
   index: -1
 
-pages-info8.png
+pages-info9.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 battle/entities/snake
   rotate: false
-  xy: 0, 902
+  xy: 0, 906
   size: 963, 77
   orig: 963, 77
   offset: 0, 0
   index: -1
 battle/entities/shield
   rotate: false
-  xy: 0, 388
+  xy: 0, 392
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
 battle/entities/snakebite_side
   rotate: false
-  xy: 512, 388
+  xy: 512, 392
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
-battle/entities/spikes
+battle/entities/sand-snake
   rotate: false
-  xy: 0, 130
-  size: 640, 256
-  orig: 640, 256
+  xy: 0, 236
+  size: 749, 154
+  orig: 749, 154
+  offset: 0, 0
+  index: -1
+battle/entities/snake-1
+  rotate: false
+  xy: 0, 80
+  size: 749, 154
+  orig: 749, 154
   offset: 0, 0
   index: -1
 battle/entities/bee
   rotate: false
-  xy: 0, 50
+  xy: 0, 0
   size: 656, 78
   orig: 656, 78
   offset: 0, 0
   index: -1
 battle/entities/firelion
   rotate: false
-  xy: 640, 130
+  xy: 749, 134
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 battle/entities/clam
   rotate: false
-  xy: 0, 0
+  xy: 656, 30
   size: 288, 48
   orig: 288, 48
   offset: 0, 0
   index: -1
 
-pages-info9.png
+pages-info10.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -359,7 +386,19 @@ battle/entities/firelion_left
   offset: 0, 0
   index: -1
 
-pages-info10.png
+pages-info11.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+battle/entities/spikes
+  rotate: false
+  xy: 0, 0
+  size: 640, 256
+  orig: 640, 256
+  offset: 0, 0
+  index: -1
+
+pages-info12.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none

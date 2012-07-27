@@ -13,15 +13,15 @@ public class MapCharacter extends MapActor {
 	public static final int dirLeft = 3;
 	public static final int dirRight = 4;
 	
-	private final HashMap<String, Animation> animations;
+	public HashMap<String, Animation> animations;
 	private Animation currentAnimation;
 	private float animTime;
 	private int direction;
 	private boolean walking;
 	private float speed;
 	
-	public MapCharacter(HashMap<String, Animation> animations) {
-		this.animations = new HashMap<String, Animation>(animations);
+	public MapCharacter() {
+		this.animations = new HashMap<String, Animation>();
 		this.direction = dirDown;
 		this.walking = false;
 		updateAnimation();

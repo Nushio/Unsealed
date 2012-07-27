@@ -23,7 +23,7 @@ public class Unsealed extends Game {
     public static final String LOG = Unsealed.class.getSimpleName();
 
     // whether we are in development mode
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
     
     // Gets the current FPS. Useful for debugging. 
     private FPSLogger fpsLogger;
