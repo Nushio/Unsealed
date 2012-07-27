@@ -1,23 +1,10 @@
 Unsealed: Whispers of Wisdom
 
-The easiest way to run this project, you need to clone the git repository to a 
-local folder or download the entire project's source.
+You need to set up Java 1.6, as well as ant 1.7 (Or greater). 
 
-After downloading it, open Eclipse and import both Unsealed and Unsealed-android.
+Building the Java version is as simple as typing in 'ant' under the Unsealed directory. It should generate a runnable jar. 
 
-Unsealed contains all the game's logic, as well as the DesktopLauncher.
-Unsealed-android is an empty shell that links to Unsealed, and executes on 
-Android. You need the Android SDK as well as the Android plugin on Eclipse to
-build the application easily for Android. 
-
-To execute, just right click Unsealed (Or Unsealed-android) and click on Run As.
-A couple of options should show up, look for the one that says DesktopLauncher,
-if you're running the Desktop version, or select Android Application if you're
-running the Android version, and launch it to the emulator or device.
-
-The project is in an extremely early alpha, so build at your own risk. 
-
-At this point, I accept no bugs, only bugfixes. 
+---
 
 Share & Enjoy. 
 -Nushio

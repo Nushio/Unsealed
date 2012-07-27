@@ -169,15 +169,14 @@ public class BattleGrid extends Stage {
     public void draw() {
         super.draw();
         this.getSpriteBatch().begin();
-        for(int i = 0; i<heroes.size; i++){
-            BattleHero hero = heroes.get(i);
-            hero.draw(this.getSpriteBatch(), 1);
-            
+        for(int x = 0; x<sizeX;x++){
+            for(int y = 0;y<sizeY;y++){
+                if(grid[x][y]!=null){
+                    grid[x][y].draw(this.getSpriteBatch(),1);
+                }
+            }
         }
-        for(int i = 0; i<enemies.size; i++){
-            BattleEnemy enemy = enemies.get(i);
-            enemy.draw(this.getSpriteBatch(), 1);
-        }
+        
         this.getSpriteBatch().end();
     }
     
@@ -197,7 +196,7 @@ public class BattleGrid extends Stage {
         BattleEntity enemy;
         enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
        
-        for(int i = 0; i < random.nextInt(2)+1; i++){
+        for(int i = 0; i < random.nextInt(4)+1; i++){
             spawnPoint = getUnusedPosition();
             if(spawnPoint!=null){
                 if(BattleScreen.round < 4){
