@@ -1,43 +1,22 @@
-package net.k3rnel.unsealed.screens.chapters;
+package net.k3rnel.unsealed.screens.story.chapters;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
-import com.badlogic.gdx.graphics.g2d.tiled.TileAtlas;
-import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledLoader;
-import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.objects.MapCharacter;
-import net.k3rnel.unsealed.objects.MapWalkAction;
-import net.k3rnel.unsealed.objects.StyledTable;
-import net.k3rnel.unsealed.screens.AbstractScreen;
+import net.k3rnel.unsealed.screens.story.characters.Lidia;
+import net.k3rnel.unsealed.screens.story.characters.Whisperer;
 
-public class Chapter1 extends AbstractScreen {
+public class Chapter1 extends AbstractChapter {
 
-    TiledMap map;
-    TileAtlas atlas;
-    TileMapRenderer tileMapRenderer;
-    OrthographicCamera camera;
-    List<MapCharacter> characters;
-    MapCharacter tmpChar;
-    private StyledTable.TableStyle textBoxStyle;
-    protected int act;
-    SequenceAction actions;
-    
+      
     /**
      * Chapter One: New Girl in Town
      * @param game
@@ -51,27 +30,7 @@ public class Chapter1 extends AbstractScreen {
         super.show();
         // Load the tmx file into map
         map = TiledLoader.createMap(Gdx.files.internal("assets/map-atlases/RouteOneDungeon.tmx"));
-        
-        act = 0;
-        // Load the tiles into atlas
-        atlas = new TileAtlas(map, Gdx.files.internal("assets/map-atlases/"));
-
-        // Create the renderer
-        tileMapRenderer = new TileMapRenderer(map, atlas, map.width, map.height);
-
-        // Create the camera
-        camera = new OrthographicCamera(MENU_VIEWPORT_WIDTH,MENU_VIEWPORT_HEIGHT);
-        camera.position.set(this.stage.getWidth() / 2, this.stage.getHeight() / 2, 0);
-        
-        NinePatch patch = getAtlas().createPatch("maps/dialog-box");
-        
-        textBoxStyle = new StyledTable.TableStyle();
-        textBoxStyle.background = new NinePatchDrawable(patch);
-        textBoxStyle.font = new BitmapFont();
-        textBoxStyle.padX = 8;
-        textBoxStyle.padY = 4;
-        
-        characters = new ArrayList<MapCharacter>();
+          
         tmpChar = new Lidia();
         tmpChar.setPosition(115,140);
         tmpChar.setDirection(MapCharacter.dirDown);
@@ -83,14 +42,13 @@ public class Chapter1 extends AbstractScreen {
         tmpChar.setPosition(1330,440);
         tmpChar.setVisible(false);
         characters.add(tmpChar);
-        stage.setCamera(camera);
     }
     @Override
     public void render(float delta) {
-        // TODO Auto-generated method stub
         super.render(delta);
-        tileMapRenderer.render(camera);
+     
         stage.getSpriteBatch().begin();
+      
         //This is probably the bestest "Scene Director" ever made. 
         //Valve should totally hire me. 
         for(MapCharacter character : characters){
@@ -205,31 +163,5 @@ public class Chapter1 extends AbstractScreen {
             character.draw(stage.getSpriteBatch(), 1);
         }
         stage.getSpriteBatch().end();
-    }
-    
-    public void centerCamera(MapCharacter character) {
-        float x = character.getX();
-        float y = character.getY();
-        float halfW = Gdx.graphics.getWidth() / 2;
-        float halfH = Gdx.graphics.getHeight() / 2;
-        float mapW = map.width*map.tileWidth;
-        float mapH = map.height*map.tileHeight;
-
-        if (x < halfW)
-            x = halfW;
-        else if (x > mapW - halfW)
-            x = mapW - halfW;
-
-        if (y < halfH) {
-            y = halfH;
-        } else if (y > mapH - halfH) {
-            y = mapH - halfH;
-        }
-        camera.position.set(x, y, 0);
-        camera.update();
-    }
-    
-    private void setAct(int act){
-        this.act = act;
-    }
+    }    
 }

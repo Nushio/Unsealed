@@ -2,9 +2,9 @@ package net.k3rnel.unsealed.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-public abstract class MapActor extends Actor {
+public abstract class MapActor extends Image {
 	
 	public static final int groupMap = 1;
 	public static final int groupPlayer = 2;

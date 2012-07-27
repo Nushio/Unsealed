@@ -1,4 +1,4 @@
-package net.k3rnel.unsealed.screens.chapters;
+package net.k3rnel.unsealed.screens.story.characters;
 
 import net.k3rnel.unsealed.objects.MapCharacter;
 
@@ -6,15 +6,15 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
-public class Whisperer extends MapCharacter {
+public class Lidia extends MapCharacter {
 
-    public Whisperer() {
+    public Lidia() {
         createPlayer();
     }
     
     public void createPlayer() {
         // Get our character images to create animations.
-        TextureRegion[][] tmp = getAtlas().findRegion("char-sprites/whisperer_spritesheet").split(64, 64);
+        TextureRegion[][] tmp = getAtlas().findRegion("char-sprites/lidia_spritesheet").split(64, 64);
         
         //Create our animations
         Animation standUp = new Animation(1f, new TextureRegion[]{ tmp[0][0] });

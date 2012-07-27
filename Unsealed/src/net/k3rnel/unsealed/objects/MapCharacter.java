@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class MapCharacter extends MapActor {
 	public static final int dirUp = 1;
@@ -28,11 +29,17 @@ public class MapCharacter extends MapActor {
 	}
 	
 	@Override
+	public void act(float delta) {
+	    super.act(delta);
+	    animTime += delta;
+        
+        if(currentAnimation != null)
+            this.setDrawable(new Image(currentAnimation.getKeyFrame(animTime)).getDrawable());
+
+	}
+	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		animTime += Gdx.graphics.getDeltaTime();
-		
-		if(currentAnimation != null)
-			batch.draw(currentAnimation.getKeyFrame(animTime), getX(), getY());
+	    super.draw(batch, parentAlpha);
 	}
 	
 	@Override
