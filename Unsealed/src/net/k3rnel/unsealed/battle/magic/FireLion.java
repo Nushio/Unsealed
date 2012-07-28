@@ -45,7 +45,7 @@ public class FireLion extends MagicEntity {
         offsetX = (int)entity.getWidth()/2;
         this.setX(entity.getX()+offsetX);
         this.setHeight(64);this.setWidth(64);
-        
+       
         offsetY = -30;
     }
     @Override

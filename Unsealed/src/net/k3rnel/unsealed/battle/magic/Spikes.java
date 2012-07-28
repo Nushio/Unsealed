@@ -30,7 +30,7 @@ public class Spikes extends MagicEntity {
         this.animations.put("attacking",animation);
         this.setState(BattleEntity.stateAttacking);
         this.setHeight(64);this.setWidth(64);
-        offsetX = (int)entity.getWidth()/2;
+        offsetX = -(int)entity.getWidth()/2;
         offsetY = 10;
         this.setGridY(entity.getGridY());
         this.setX(entity.getX()+offsetX);
@@ -61,7 +61,6 @@ public class Spikes extends MagicEntity {
                     }else{
                         
                     }
-                    destroyMe=true;
                 }
             }
         }

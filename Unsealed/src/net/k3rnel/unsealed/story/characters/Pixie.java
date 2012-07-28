@@ -22,7 +22,7 @@ public class Pixie extends MapCharacter {
         
         //Create our animations
         Animation animation = new Animation(1f, new TextureRegion[]{ tmp[0][4] });
-        animation.setPlayMode(Animation.LOOP_PINGPONG);
+        animation.setPlayMode(Animation.LOOP);
         animations.put("frozen", animation);
 
         animation = new Animation(0.1f, new TextureRegion[]{ tmp[0][0], tmp[0][1], tmp[0][2], tmp[0][3],tmp[0][2],tmp[0][1],tmp[0][0] });

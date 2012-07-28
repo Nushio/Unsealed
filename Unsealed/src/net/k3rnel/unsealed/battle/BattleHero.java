@@ -164,9 +164,7 @@ public class BattleHero extends BattleEntity {
                 magics.get(i).act(delta);
             }
         }            
-        if(this.getState() != BattleEntity.stateBlocking){
-            showShield(false);
-        }
+       
     }
     public void reset(){
         magics = new ArrayList<MagicEntity>();
@@ -228,11 +226,6 @@ public class BattleHero extends BattleEntity {
             shield.setVisible(false);
         }
         return shield;
-    }
-    public void showShield(boolean show){
-        //        if(show)
-        //            shield.setGrid(this.getGridX(),this.getGridY());
-//        shield.setVisible(show);
     }
 
     @Override

@@ -1,17 +1,18 @@
 package net.k3rnel.unsealed.story.chapters;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.graphics.Color;
 
 import net.k3rnel.unsealed.Unsealed;
+import net.k3rnel.unsealed.screens.BattleScreen;
+import net.k3rnel.unsealed.story.characters.FireLionMap;
+import net.k3rnel.unsealed.story.characters.Kid;
 import net.k3rnel.unsealed.story.characters.Lidia;
-import net.k3rnel.unsealed.story.characters.Pixie;
-import net.k3rnel.unsealed.story.characters.Whisperer;
 import net.k3rnel.unsealed.story.helpers.MapCharacter;
 
 public class Chapter1_2 extends AbstractChapter {
@@ -31,9 +32,32 @@ public class Chapter1_2 extends AbstractChapter {
         super.show();
 
         tmpChar = new Lidia();
-        tmpChar.setPosition(1824,608);
+        tmpChar.setPosition(1924,1608);
         tmpChar.updateAnimation();
-        actions = new SequenceAction();
+        characters.add(tmpChar);
+        
+        tmpChar = new Kid(0);
+        tmpChar.setPosition(1040,970);
+        tmpChar.setDirection(MapCharacter.dirRight);
+        tmpChar.updateAnimation();
+        characters.add(tmpChar);
+        
+        tmpChar = new Kid(1);
+        tmpChar.setDirection(MapCharacter.dirUp);
+        tmpChar.setPosition(1100,900);
+        characters.add(tmpChar);
+        
+        tmpChar = new Kid(2);
+        tmpChar.setPosition(1000,930);
+        tmpChar.setDirection(MapCharacter.dirRight);
+        tmpChar.updateAnimation();
+        characters.add(tmpChar);
+        
+        tmpChar = new FireLionMap();
+        tmpChar.setPosition(1080,950);
+        tmpChar.setDirection(MapCharacter.dirUp);
+        tmpChar.updateAnimation();
+        tmpChar.setVisible(false);
         characters.add(tmpChar);
         
     }
@@ -49,8 +73,11 @@ public class Chapter1_2 extends AbstractChapter {
             if(character instanceof Lidia){
                 switch(act){
                     case 0:
+                        centerCamera(character);
+                        character.setDirection(MapCharacter.dirLeft);
                         character.getColor().a = 0;
                         character.setWalking(false);
+                        
                         actions = sequence(fadeIn(0.75f),delay(0.75f),run(new Runnable() {
                             @Override
                             public void run() {
@@ -61,171 +88,102 @@ public class Chapter1_2 extends AbstractChapter {
                         character.setWalking(true);
                         break;
                     case 1:
-                        if(character.getY()>110){
-                            character.setY(character.getY()-1);
+                        if(character.getX()>1050){
+                            character.setX(character.getX()-1);
                             centerCamera(character);
                         }else{
-                            character.setDirection(MapCharacter.dirRight);
-                            setAct(2);
+                            character.setWalking(false);
+                            dialog.setText("Lidia: I can hear some children playing nearby");
+                            dialog.setVisible(true);
                         }
                         break;
                     case 2:
-                        if(character.getX()<291){
+                        dialog.setVisible(false);
+                        character.setWalking(true);
+                        character.setDirection(MapCharacter.dirRight);
+                        setAct(3);
+                        break;
+                    case 3:
+                        if(character.getX()<1140){
                             character.setX(character.getX()+1);
                             centerCamera(character);
                         }else{
-                            character.setDirection(MapCharacter.dirUp);
-                            setAct(3);
-                        }
-                        break;
-                    case 3:
-                        if(character.getY()<400){
-                            character.setY(character.getY()+1);
-                            centerCamera(character);
-                        }else{
-                            character.setDirection(MapCharacter.dirUp);
-                            character.setWalking(false);
+                            character.setDirection(MapCharacter.dirDown);
                             setAct(4);
                         }
                         break;
-                    case 11:
-                        if(character.getY()<470){
-                            character.setWalking(true);
-                            character.setY(character.getY()+1);
-                            centerCamera(character);
-                        }else{
-                            character.setDirection(MapCharacter.dirLeft);
-                            setAct(12);
-                        }
-                        break;
-                    case 12:
-                        if(character.getX()>70){
-                            character.setX(character.getX()-1);
-                            centerCamera(character);
-                        }else{
-                            character.setDirection(MapCharacter.dirUp);
-                            setAct(13);
-                        }
-                        break;
-                    case 13:
-                        if(character.getY()<580){
-                            character.setY(character.getY()+1);
+                    case 4:
+                        if(character.getY()>1000){
+                            character.setY(character.getY()-1);
                             centerCamera(character);
                         }else{
                             character.setWalking(false);
-                            setAct(14);
+                            setAct(5);
                         }
-                        break;
-                    case 14:
-                        dialog.setText("Lidia: You poor thing....");
+                    case 5:
+                        dialog.setText("Maria: Watch this! Watch this!");
                         dialog.setVisible(true);
                         break;
-                    case 15:
-                        dialog.setVisible(false);
-                        setAct(16);
-                        break;
-
+                }
+                
+            }
+            if(character instanceof Kid){
+                if(((Kid)character).kid==0){
+                    switch(act){
+                        case 6:
+                            dialog.setVisible(false);
+                            actions = sequence(color(Color.RED),delay(0.3f),color(Color.WHITE));
+                            character.addAction(actions);
+                            setAct(7);
+                            break;
+                    }
+                }
+                if(((Kid)character).kid==1){
+                   
+                }
+                if(((Kid)character).kid==2){
                 }
             }
-            if(character instanceof Whisperer){
+            if(character instanceof FireLionMap){
                 switch(act){
-                    case 4:
-                        character.getColor().a = 0;
-                        actions = sequence(fadeIn(0.75f),run(new Runnable() {
-                            @Override
-                            public void run() {
-                                setAct(5);
-                            }
-                        }));
-                        character.addAction(actions);
-                        character.setVisible(true);
-                        break;
-                    case 5:
-                        dialog.setText("Lidia: I was wondering when you'd show up. \n" +
-                                "I still don't understand why the citizens don't fight for the use of magic.");
-                        dialog.setVisible(true);
-                        break;
-                    case 6:
-                        dialog.setText("Whisperer: It's been 3 generations since Pixies disappeared.  ");
-                        break;
                     case 7:
-                        dialog.setText("Lidia: You mean locked up? They didn't didn't leave!\n" +
-                                "\n" +
-                                "Didn't you try and talk to them about it? ");
+                        character.setVisible(true);
+                        if(character.getX()<1130){
+                            character.setX(character.getX()+2);
+                        }else{
+                            character.setVisible(false);
+                            setAct(8);
+                        }
                         break;
                     case 8:
-                        dialog.setText("Whisperer: They didn't want to listen");
+                        dialog.setText("George: Wow! That's amazing!");
+                        dialog.setVisible(true);
                         break;
                     case 9:
-                        dialog.setText("Lidia: You could've shouted...");
+                        dialog.setText("Mimi: Do it again! Do it again!");
                         break;
                     case 10:
+                        dialog.setText("Lidia: Wait!\n" +
+                        		"Magic can be dangerous, specially at first!");
+                        break;
+                    case 11:
+                        dialog.setText("Maria: You know how to do magic? \n" +
+                        		"Can you teach us, lady?");
+                        break;
+                    case 12:
+                        dialog.setText("Lidia: You can call me Lidia, and I came here to do so. ");
+                        break;
+                    case 13:
+                        dialog.setText("George: Thank you!\n" +
+                        		"Mimi: Thanks Miss!\n" +
+                        		"Maria: Yaaay! ^__^ ");
+                        break;
+                    case 14:
                         dialog.setVisible(false);
-                        actions = sequence(fadeOut(0.75f),run(new Runnable() {
-                            @Override
-                            public void run() {
-                                setAct(11);
-                            }
-                        }));
-                        character.addAction(actions);
+                        setAct(15);
                         break;
-                }
-            }
-            if(character instanceof Pixie){
-                switch(act){
-                    case 16:
-                        actions = sequence(fadeOut(0.75f),
-                                run(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        setAct(17);
-                                    }
-                                }));
-                        character.addAction(actions);
-                        break;
-                    case 17:
-                        character.setWalking(true);
-                        setAct(18);
-                        break;
-                    case 18:
-                        if(character.getX()>31){
-                            character.setX(character.getX()-1);
-
-                        }else if(character.getY()>530){
-                            character.setY(character.getY()-1);
-                        }else{
-                            //                         character.setPosition(80,660);
-                            setAct(19);
-                        }
-                        break;
-                    case 19:
-                        //                        character.setPosition(151,300);
-                        if(character.getX()<141){
-                            character.setX(character.getX()+1);
-                        }else if(character.getY()<660){
-                            character.setY(character.getY()+1);
-                        }else{
-                            setAct(20);
-                        }
-                        break;
-                    case 20:
-                        dialog.setText("Pixie: Thank you, foreign one.");
-                        dialog.setVisible(true);
-                        break;
-                    case 21:
-                        dialog.setVisible(false);
-                        if(character.getY()<900){
-                            character.setY(character.getY()+3);
-                        }else{
-                            setAct(22);
-                        }
-                        break;
-                    case 22:
-                        dialog.setText("Lidia: It's time to meet the neighbors...");
-                        dialog.setVisible(true);
-                        break;
-                    case 23:
-                        game.setScreen( new Chapter1_2( game ) );
+                    case 15:
+                        game.setScreen( new BattleScreen( game,true ,"TownOne" ) );
                         break;
                 }
             }

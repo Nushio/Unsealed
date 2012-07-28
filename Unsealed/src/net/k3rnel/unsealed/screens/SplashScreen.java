@@ -45,7 +45,7 @@ public class SplashScreen extends AbstractScreen {
                         run(new Runnable() {
                             @Override
                             public void run() {
-                                game.setScreen( new BattleScreen( game ) );
+                                game.setScreen( new BattleScreen( game,false ,"TownOne") );
                                 
                             }
                         }));

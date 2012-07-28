@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Scaling;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.story.chapters.Chapter1_1;
+import net.k3rnel.unsealed.story.chapters.Chapter1_2;
 
 public class LevelSelectScreen extends AbstractScreen {
 
@@ -92,7 +93,7 @@ public class LevelSelectScreen extends AbstractScreen {
             
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen( new BattleScreen( game ) );
+                game.setScreen( new Chapter1_2( game ) );
                 
             }
         });
@@ -109,7 +110,7 @@ public class LevelSelectScreen extends AbstractScreen {
             
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen( new BattleScreen( game ) );
+                game.setScreen( new BattleScreen( game,true ,"TownOne") );
                 
             }
         });

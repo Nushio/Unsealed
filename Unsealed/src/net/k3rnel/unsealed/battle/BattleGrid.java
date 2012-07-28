@@ -81,7 +81,7 @@ public class BattleGrid extends Stage {
             if(entity instanceof BattleHero){
                 BattleHero hero = (BattleHero)entity;
                 heroes.add(hero);
-                timer.scheduleTask(hero.nextTask(), 0f, 1.4f);
+                timer.scheduleTask(hero.nextTask(), 0f, 1.2f);
             }
             if(entity instanceof BattleEnemy){
                 enemies.add((BattleEnemy)entity);
@@ -188,6 +188,22 @@ public class BattleGrid extends Stage {
         }
         return battleState;
     }
+    
+    public void spawnEnemies(BattleEnemy... spawnies){
+        Vector2 spawnPoint;
+        BattleEntity enemy;
+        enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
+        for(int i = 0; i < spawnies.length; i++){
+            spawnPoint = getUnusedPosition();
+            enemy = spawnies[i];
+            enemy.setGrid(spawnPoint.x, spawnPoint.y);
+            assignEntity(enemy);
+            timer.scheduleTask(enemy.nextTask(), random.nextInt(5));
+        }
+        Gdx.app.log(Unsealed.LOG, "Spawned "+enemies.size+" enemies");
+        battleState = BattleGrid.battleStarted;
+        
+    }
     public void spawnEnemies(int bonus) {
         BattleScreen.round++;
         
@@ -244,12 +260,8 @@ public class BattleGrid extends Stage {
         Gdx.app.log(Unsealed.LOG, "Spawned "+enemies.size+" enemies");
         BattleScreen.bonus++;
         battleState = BattleGrid.battleStarted;
-        reorderActors();
     }
 
-    public void reorderActors(){
-
-    }
     public TextureAtlas getAtlas() {
         if( atlas == null ) {
             atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );

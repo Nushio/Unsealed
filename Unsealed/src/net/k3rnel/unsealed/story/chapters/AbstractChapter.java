@@ -24,8 +24,8 @@ import net.k3rnel.unsealed.story.helpers.TextBox;
 
 public class AbstractChapter extends AbstractScreen {
 
-    TiledMap map;
-    TileAtlas atlas;
+    TiledMap tileMap;
+    TileAtlas tileAtlas;
     TileMapRenderer tileMapRenderer;
     OrthographicCamera camera;
     List<MapCharacter> characters;
@@ -44,60 +44,58 @@ public class AbstractChapter extends AbstractScreen {
         super.show();
         act = 0;
         // Load the tmx file into map
-        map = TiledLoader.createMap(Gdx.files.internal("assets/map-atlases/"+mapname+".tmx"));
-       
+        tileMap = TiledLoader.createMap(Gdx.files.internal("assets/map-atlases/"+mapname+".tmx"));
+
         // Load the tiles into atlas
-        atlas = new TileAtlas(map, Gdx.files.internal("assets/map-atlases/"));
+        tileAtlas = new TileAtlas(tileMap, Gdx.files.internal("assets/map-atlases/"));
 
         // Create the renderer
-        tileMapRenderer = new TileMapRenderer(map, atlas, map.width, map.height);
+        tileMapRenderer = new TileMapRenderer(tileMap, tileAtlas, tileMap.width, tileMap.height);
 
         // Create the camera
         camera = new OrthographicCamera(MENU_VIEWPORT_WIDTH,MENU_VIEWPORT_HEIGHT);
         camera.position.set(this.stage.getWidth() / 2, this.stage.getHeight() / 2, 0);
-        
+
         NinePatch patch = getAtlas().createPatch("maps/dialog-box");
-        
+
         textBoxStyle = new StyledTable.TableStyle();
         textBoxStyle.background = new NinePatchDrawable(patch);
         textBoxStyle.font = new BitmapFont();
         textBoxStyle.padX = 8;
         textBoxStyle.padY = 4;
-        
+
         characters = new ArrayList<MapCharacter>();
-       
+
         stage.setCamera(camera);
-        
+
         dialog = new TextBox("", textBoxStyle);
         dialog.setWidth(Gdx.graphics.getWidth());
         dialog.setHeight(Gdx.graphics.getHeight() / 4);
         dialog.setVisible(false);
-        
+
         hud.addActor(dialog);
         Gdx.input.setInputProcessor(new InputMultiplexer(this,hud) );
     }
-    
-    
-    
-    
+
     @Override
     public void render(float delta) {
         // TODO Auto-generated method stub
         super.render(delta);
         tileMapRenderer.render(camera);
+       
         if(dialog.isVisible()){
             hud.act(delta);
             hud.draw();
         }
     }
-    
+
     public void centerCamera(MapCharacter character) {
         float x = character.getX();
         float y = character.getY();
         float halfW = Gdx.graphics.getWidth() / 2;
         float halfH = Gdx.graphics.getHeight() / 2;
-        float mapW = map.width*map.tileWidth;
-        float mapH = map.height*map.tileHeight;
+        float mapW = tileMap.width*tileMap.tileWidth;
+        float mapH = tileMap.height*tileMap.tileHeight;
 
         if (x < halfW)
             x = halfW;
@@ -112,7 +110,7 @@ public class AbstractChapter extends AbstractScreen {
         camera.position.set(x, y, 0);
         camera.update();
     }
-    
+
     public void setAct(int act){
         this.act = act;
     }

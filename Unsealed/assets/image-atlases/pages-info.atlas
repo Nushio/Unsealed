@@ -5,28 +5,63 @@ filter: Nearest,Nearest
 repeat: none
 char-sprites/whisperer_spritesheet
   rotate: false
-  xy: 0, 516
+  xy: 0, 688
   size: 576, 256
   orig: 576, 256
   offset: 0, 0
   index: -1
 char-sprites/lidia_spritesheet
   rotate: false
-  xy: 0, 258
+  xy: 0, 430
   size: 576, 256
   orig: 576, 256
   offset: 0, 0
   index: -1
 char-sprites/male_spritesheet
   rotate: false
-  xy: 0, 0
+  xy: 0, 172
   size: 576, 256
   orig: 576, 256
   offset: 0, 0
   index: -1
+char-sprites/combat_dummy
+  rotate: false
+  xy: 0, 42
+  size: 512, 128
+  orig: 512, 128
+  offset: 0, 0
+  index: -1
+char-sprites/tiny_spritesheet
+  rotate: false
+  xy: 576, 752
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+char-sprites/whitey_spritesheet
+  rotate: false
+  xy: 576, 558
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+char-sprites/abi_spritesheet
+  rotate: false
+  xy: 768, 752
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+char-sprites/george_spritesheet
+  rotate: false
+  xy: 576, 364
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
 char-sprites/pixie_spritesheet
   rotate: false
-  xy: 576, 732
+  xy: 0, 0
   size: 190, 40
   orig: 190, 40
   offset: 0, 0

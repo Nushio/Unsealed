@@ -32,15 +32,15 @@ public class Lidia extends MapCharacter {
         Animation walkRight = new Animation(0.1f, new TextureRegion[]{ tmp[3][1], tmp[3][2], tmp[3][3], tmp[3][4], tmp[3][5], tmp[3][6], tmp[3][7], tmp[3][8] });
         
         //Set the playmode
-        standUp.setPlayMode(Animation.LOOP_PINGPONG);
-        standLeft.setPlayMode(Animation.LOOP_PINGPONG);
-        standDown.setPlayMode(Animation.LOOP_PINGPONG);
-        standRight.setPlayMode(Animation.LOOP_PINGPONG);
+        standUp.setPlayMode(Animation.LOOP);
+        standLeft.setPlayMode(Animation.LOOP);
+        standDown.setPlayMode(Animation.LOOP);
+        standRight.setPlayMode(Animation.LOOP);
         
-        walkUp.setPlayMode(Animation.LOOP_PINGPONG);
-        walkLeft.setPlayMode(Animation.LOOP_PINGPONG);
-        walkDown.setPlayMode(Animation.LOOP_PINGPONG);
-        walkRight.setPlayMode(Animation.LOOP_PINGPONG);
+        walkUp.setPlayMode(Animation.LOOP);
+        walkLeft.setPlayMode(Animation.LOOP);
+        walkDown.setPlayMode(Animation.LOOP);
+        walkRight.setPlayMode(Animation.LOOP);
         
         //Fill our map containing all animations with the animations.
         animations.put("stand_up", standUp);

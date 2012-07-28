@@ -6,8 +6,6 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.story.characters.Lidia;
 import net.k3rnel.unsealed.story.characters.Pixie;
@@ -33,7 +31,6 @@ public class Chapter1_1 extends AbstractChapter {
         tmpChar = new Lidia();
         tmpChar.setPosition(115,140);
         tmpChar.updateAnimation();
-        actions = new SequenceAction();
         characters.add(tmpChar);
         tmpChar = new Whisperer();
         tmpChar.updateAnimation();

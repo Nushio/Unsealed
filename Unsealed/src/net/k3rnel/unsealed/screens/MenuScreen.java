@@ -52,7 +52,7 @@ public class MenuScreen extends AbstractScreen {
             @Override
             public void clicked(InputEvent event, float x, float y ) {
                 if(Unsealed.DEBUG)
-                    game.setScreen( new BattleScreen( game ) );
+                    game.setScreen( new BattleScreen( game, false ,"TownOne" ) );
                 else
                     game.setScreen( new SplashScreen( game ) );
             }
