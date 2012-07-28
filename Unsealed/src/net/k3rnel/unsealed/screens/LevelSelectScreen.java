@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
 
 import net.k3rnel.unsealed.Unsealed;
-import net.k3rnel.unsealed.screens.story.chapters.Chapter1;
+import net.k3rnel.unsealed.story.chapters.Chapter1_1;
 
 public class LevelSelectScreen extends AbstractScreen {
 
@@ -72,7 +72,7 @@ public class LevelSelectScreen extends AbstractScreen {
         chapterButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen( new Chapter1( game ) );
+                game.setScreen( new Chapter1_1( game ) );
                 
             }
         });

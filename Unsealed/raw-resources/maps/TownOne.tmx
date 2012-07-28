@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="70" height="70" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="Exteriors" tilewidth="32" tileheight="32">
-  <image source="tiles_/exteriors.png" width="1120" height="1728"/>
+  <image source="tiles_/exteriors.png" width="1120" height="1568"/>
  </tileset>
  <tileset firstgid="1891" name="collisionator" tilewidth="32" tileheight="32">
   <image source="tiles_/collisionator.png" width="128" height="128"/>
@@ -154,11 +154,6 @@
  <layer name="Tree Tops" width="70" height="70">
   <data encoding="base64" compression="zlib">
    eJzt10EKwjAUBNCuPIN6EkE9hwtBPYcLz+7fmcUgIpSm7XswdFs+ySQZBqBH28qusq8cNhP/TCcuNYdjfU+Vc+W68Lm0a+CbZ83hVt975VF5LXwu7Rrgo10DMAe/dtza6LhMx/XF/s3s38z+BQCAPnjLZd5ymbccc6XrMl2X6TqmoqsyXZXpKhifXs70cqaXAf7jvM2ct5nzFgDG5W6WuZtl7mYAAADr9Qa1shcZ
-  </data>
- </layer>
- <layer name="Collisions" width="70" height="70" visible="0" opacity="0.57">
-  <data encoding="base64" compression="zlib">
-   eJztm9tOwzAMhrnri3YqaENse/8LVLGIyNiJHTt2UvpLEYOmjv3VzqHA29upU7Z6X2zbUWQZy6xcrJ4xdc+sOWTh4/aK9YNpa3YuXP9buIyeRxFctON56OSCK2J+KfkyyvpvZf/Wyc/SOtdjrBHnOkzeXKT9o9aPI3Gh+kl+vjHGsFZuk2M/goskBiuNxGVtrM/RuGDfU/05n2+EbUkMVmqxKfFdwoVizvXFUh7ryIzizPf/UScLXBZcSmsUt0XHAO3t7WLg1xG5eJ99Z+HypcyZo3LR5gwn5lm5aHImgkt+T08umpzB4s+v5V9r/SVjYp8tBLm05kwtLzg/145pKcxX7RzsJcv5qWZ7JjbWLKBtqmFzTU9fpIriguXMyQVnc3IZf66J5tKLzWh7XGg7is1RuFiz2e2tAlvUvrCHpFwSm9WIj+T32J5zfguXHny4vnpJwwXygVqX39Z65sK+35h+aSSJ/7H85P2d6Yc2t7RcvN6zpXPB9cUnb/cKF8iHw0jLRcOqhQumK5OLJocsuHDZSGroU5iXpZqT8IG1quWC1Xwrl9b3eHnN1RhRNQbjOAIXGIeEUWLTgwtnbpPWkPQZYNeer3tKfBKbHlxqvrfkClyLUpNwSX/ncmWwgXU1KheLfIF2JHU1AhdsHZLmC2fMWt7kz4fTV9qw95KSXCnd08olKa1dVMy5Lz1yJvenhYsmX+C4mKh86F1LXC4tezkrUXGn5xTJpWXP8my8b1d+JqdyZmQuVjVas4fF7sHlUrmec4FxULLqR3FJc0xPLqX2WP766c1lb1QtRXHB9nLeXPY17omwieRSeu/vmS9YPUVywXLGk0t+DeNS2wPOziX9/0ipH1yzvfa9kVzSubrWbyP8iuBCzTHedTQaFypnorl4nZO4bRQu+fMaab0egUvyS/JevTcbSV5Z9cPOkbDGR1qbtCrlChRVS9T1mblI5MnlG0p1N7I=
   </data>
  </layer>
 </map>

@@ -1,6 +1,5 @@
 package net.k3rnel.unsealed;
 
-import net.k3rnel.unsealed.objects.Map;
 import net.k3rnel.unsealed.screens.MenuScreen;
 import net.k3rnel.unsealed.screens.OptionsScreen;
 import net.k3rnel.unsealed.screens.SplashScreen;
@@ -8,13 +7,11 @@ import net.k3rnel.unsealed.services.MusicManager;
 import net.k3rnel.unsealed.services.PreferencesManager;
 import net.k3rnel.unsealed.services.ProfileManager;
 import net.k3rnel.unsealed.services.SoundManager;
-import net.k3rnel.unsealed.utils.MapLoader;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.FPSLogger;
 
 public class Unsealed extends Game {
@@ -23,7 +20,7 @@ public class Unsealed extends Game {
     public static final String LOG = Unsealed.class.getSimpleName();
 
     // whether we are in development mode
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     
     // Gets the current FPS. Useful for debugging. 
     private FPSLogger fpsLogger;
@@ -41,8 +38,7 @@ public class Unsealed extends Game {
     
     public Unsealed(){
     	instance = this;
-		assetManager = new AssetManager();
-		assetManager.setLoader(Map.class, new MapLoader(new InternalFileHandleResolver()));    	
+		assetManager = new AssetManager(); 	
     }
     
     // Service getters

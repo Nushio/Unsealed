@@ -24,6 +24,13 @@ char-sprites/male_spritesheet
   orig: 576, 256
   offset: 0, 0
   index: -1
+char-sprites/pixie_spritesheet
+  rotate: false
+  xy: 576, 732
+  size: 190, 40
+  orig: 190, 40
+  offset: 0, 0
+  index: -1
 
 pages-info2.png
 format: RGBA8888

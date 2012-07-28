@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="68" height="29" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="Exteriors" tilewidth="32" tileheight="32">
-  <image source="tiles_/exteriors.png" width="1120" height="1728"/>
+  <image source="tiles_/exteriors.png" width="1120" height="1568"/>
  </tileset>
  <tileset firstgid="1891" name="collisionator" tilewidth="32" tileheight="32">
   <image source="tiles_/collisionator.png" width="128" height="128"/>
@@ -88,7 +88,7 @@
  </layer>
  <layer name="Ground" width="68" height="29">
   <data encoding="base64" compression="zlib">
-   eJztmFEOwiAMhnlTr6JexXiV4VXm7mt5aFLJxhjQUrRf0mwPo8C/v6Sbc4bxOzwgnr0XscLcad4J4uZ0anKEsA8P8WqUZ2RNgsfvEGeIpTIX6tFC217gHmq1oLm4PBLytnhvUoRz6w1xccc94snVbzwTco+iBYWeR75RlHKqGLsHrYcU6JPFffuFWw/Ova+Rq0dqnLQ/NKJRD2kvUbB+9iJVV/9IykeaiNfJ1WuNokfcV3D147PbrhmNSPTjsfa1ekj1cNxzxLVjGIZhGLmUfh9K/gPBNUpA+y+u/LX9B66xJfG35JXcS+pfyiQ8l3Y9gkekapTDjxqo+b+S68cP+p9dPg==
+   eJztmE0SwiAMhXGl3sOVehXHqxSvUntfYcFMZAot5AfQfDOZurAhvL60aY1RlN/h4eLZuogV5kbrTi5upk9NSvD7sC5eRHlG1sR7/O7i5GJB5gp6UGjbirAHrBYwF5dHfF6K6yaFv2+9XZxNuUcsONrEf3zuUbSAwPuRJYpajohzt4D9kCP4ZDHffuHWg3Pva+zVI3eetD96pEc9pL0ECf2zFbm++kdyPuqJuE6uWWsUPeK5gmsen026Z0o5ENaVQmIej7XH+kNqhuNeI+4dRVFoubQuQFEYqX0/lPwGEmqUAM5fXPmx80eokZL4XfIKfkvqX8skvBZWD+7niveIVI9y+LEHMN9X9vrxA38BXYc=
   </data>
  </layer>
  <layer name="Water" width="68" height="29">
@@ -113,7 +113,7 @@
  </layer>
  <layer name="Decorations" width="68" height="29">
   <data encoding="base64" compression="zlib">
-   eJzt18sRgCAMRVHsTpqiOgtzD8zgD5M87tm40kkeoDEle8W6gI+o9KHA41p4rOlvFhnk7d396ut2THimemZAfW5mnCMPPPTF+wQj7JGWeib7jdlOPYurSnVdnUoOT/9zet93lUwAAEAsoxlkxRml13PEHCLWDP9O1usOig==
+   eJzt180NgCAMBWDcxWF0FndgOgfzYEwIAf+wvNq+7+JJUgoNbQh4ER3AR6zswwKNZ6Expt4QOZiHtv+tn9sqsKb1nElj/vTL60aijmp63o+e+6pZ0AEoNaIDUOCohbM74ilPabtTyomlWpoe9HZ8U3cx+3qX5qFxVIB6O+eU3nfeDSIiIgxPM0vJVQ/isUe5M8/9oYf1eHYkbwMaDxB/
   </data>
  </layer>
 </map>

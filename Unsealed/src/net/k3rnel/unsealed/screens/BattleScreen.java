@@ -18,12 +18,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.PressedListener;
 
 import net.k3rnel.unsealed.Unsealed;
+import net.k3rnel.unsealed.battle.BattleEntity;
+import net.k3rnel.unsealed.battle.BattleGrid;
+import net.k3rnel.unsealed.battle.BattleHUD;
+import net.k3rnel.unsealed.battle.BattleHero;
+import net.k3rnel.unsealed.battle.magic.MagicEntity;
 import net.k3rnel.unsealed.screens.AbstractScreen;
-import net.k3rnel.unsealed.screens.battle.BattleEntity;
-import net.k3rnel.unsealed.screens.battle.BattleHUD;
-import net.k3rnel.unsealed.screens.battle.BattleHero;
-import net.k3rnel.unsealed.screens.battle.BattleGrid;
-import net.k3rnel.unsealed.screens.battle.magic.MagicEntity;
 
 public class BattleScreen extends AbstractScreen {
 
