@@ -155,7 +155,7 @@ public class Chapter1_1 extends AbstractChapter {
                         dialog.setText("Whisperer: It's been 3 generations since Pixies disappeared.  ");
                         break;
                     case 7:
-                        dialog.setText("Lidia: You mean locked up? They didn't didn't leave!\n" +
+                        dialog.setText("Lidia: You mean locked up? They didn't leave!\n" +
                                 "\n" +
                                 "Didn't you try and talk to them about it? ");
                         break;
