@@ -83,9 +83,6 @@ public class FireLion extends MagicEntity {
                             setState(BattleEntity.stateAttacking);
                         }else{
                             if(enemy.setHp(enemy.getHp()-(int)maxDistance*10)){
-                                BattleGrid.enemies.removeValue((BattleEnemy)enemy,false);
-                                BattleGrid.clearGrid(enemy.getGridXInt(),enemy.getGridYInt());
-                                BattleGrid.checkState();
                                 maxDistance--;
                                 setState(BattleEntity.stateAttacking);
                             }else{

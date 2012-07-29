@@ -9,6 +9,7 @@ import net.k3rnel.unsealed.battle.magic.FireLion;
 import net.k3rnel.unsealed.battle.magic.MagicEntity;
 import net.k3rnel.unsealed.battle.magic.Shield;
 import net.k3rnel.unsealed.battle.magic.Spikes;
+import net.k3rnel.unsealed.battle.skills.AbstractSkill;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -29,6 +30,13 @@ public class BattleHero extends BattleEntity {
     
     private TextureAtlas atlas;
 
+    private AbstractSkill skill1;
+    private AbstractSkill skill2;
+    private AbstractSkill skill3;
+    private AbstractSkill skill4;
+    private AbstractSkill skill5;
+    private AbstractSkill skill6;
+    private AbstractSkill tmpSkill;
     
     private boolean hit = false;
 
@@ -119,11 +127,14 @@ public class BattleHero extends BattleEntity {
                         showBlast(true);
                         break;
                     case 1:
-                        showFireLion(true);
-                        break;
+//                        showRyuKen(true); //Haha
                     case 2:
                         showGroundSpikes(true);                        
                         break;
+                    case 3:
+                        showFireLion(true);
+                        break;
+                    
                 }
             }
         }else if(this.getState() == BattleEntity.stateBlocking){
@@ -278,4 +289,88 @@ public class BattleHero extends BattleEntity {
         };
         return currentTask;
     }
+
+    /**
+     * @return the skill1
+     */
+    public AbstractSkill getSkill1() {
+        return skill1;
+    }
+
+    /**
+     * @param skill1 the skill1 to set
+     */
+    public void setSkill1(AbstractSkill skill1) {
+        this.skill1 = skill1;
+    }
+
+    /**
+     * @return the skill2
+     */
+    public AbstractSkill getSkill2() {
+        return skill2;
+    }
+
+    /**
+     * @param skill2 the skill2 to set
+     */
+    public void setSkill2(AbstractSkill skill2) {
+        this.skill2 = skill2;
+    }
+
+    /**
+     * @return the skill3
+     */
+    public AbstractSkill getSkill3() {
+        return skill3;
+    }
+
+    /**
+     * @param skill3 the skill3 to set
+     */
+    public void setSkill3(AbstractSkill skill3) {
+        this.skill3 = skill3;
+    }
+
+    /**
+     * @return the skill4
+     */
+    public AbstractSkill getSkill4() {
+        return skill4;
+    }
+
+    /**
+     * @param skill4 the skill4 to set
+     */
+    public void setSkill4(AbstractSkill skill4) {
+        this.skill4 = skill4;
+    }
+
+    /**
+     * @return the skill5
+     */
+    public AbstractSkill getSkill5() {
+        return skill5;
+    }
+
+    /**
+     * @param skill5 the skill5 to set
+     */
+    public void setSkill5(AbstractSkill skill5) {
+        this.skill5 = skill5;
+    }
+
+    /**
+     * @return the skill6
+     */
+    public AbstractSkill getSkill6() {
+        return skill6;
+    }
+
+    /**
+     * @param skill6 the skill6 to set
+     */
+    public void setSkill6(AbstractSkill skill6) {
+        this.skill6 = skill6;
+    }    
 }

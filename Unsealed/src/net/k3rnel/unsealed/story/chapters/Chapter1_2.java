@@ -9,7 +9,6 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 import com.badlogic.gdx.graphics.Color;
 
 import net.k3rnel.unsealed.Unsealed;
-import net.k3rnel.unsealed.screens.BattleScreen;
 import net.k3rnel.unsealed.story.characters.FireLionMap;
 import net.k3rnel.unsealed.story.characters.Kid;
 import net.k3rnel.unsealed.story.characters.Lidia;
@@ -31,29 +30,29 @@ public class Chapter1_2 extends AbstractChapter {
     public void show() {
         super.show();
 
-        tmpChar = new Lidia();
+        tmpChar = new Lidia(getAtlas());
         tmpChar.setPosition(1924,1608);
         tmpChar.updateAnimation();
         characters.add(tmpChar);
         
-        tmpChar = new Kid(0);
+        tmpChar = new Kid(getAtlas(),0);
         tmpChar.setPosition(1040,970);
         tmpChar.setDirection(MapCharacter.dirRight);
         tmpChar.updateAnimation();
         characters.add(tmpChar);
         
-        tmpChar = new Kid(1);
+        tmpChar = new Kid(getAtlas(),1);
         tmpChar.setDirection(MapCharacter.dirUp);
         tmpChar.setPosition(1100,900);
         characters.add(tmpChar);
         
-        tmpChar = new Kid(2);
+        tmpChar = new Kid(getAtlas(),2);
         tmpChar.setPosition(1000,930);
         tmpChar.setDirection(MapCharacter.dirRight);
         tmpChar.updateAnimation();
         characters.add(tmpChar);
         
-        tmpChar = new FireLionMap();
+        tmpChar = new FireLionMap(getAtlas());
         tmpChar.setPosition(1080,950);
         tmpChar.setDirection(MapCharacter.dirUp);
         tmpChar.updateAnimation();
@@ -121,8 +120,10 @@ public class Chapter1_2 extends AbstractChapter {
                             setAct(5);
                         }
                     case 5:
-                        dialog.setText("Maria: Watch this! Watch this!");
-                        dialog.setVisible(true);
+                        if(character.getY()==1000){
+                            dialog.setText("Maria: Watch this! Watch this!");
+                            dialog.setVisible(true);
+                        }
                         break;
                 }
                 
@@ -160,14 +161,14 @@ public class Chapter1_2 extends AbstractChapter {
                         dialog.setVisible(true);
                         break;
                     case 9:
-                        dialog.setText("Mimi: Do it again! Do it again!");
+                        dialog.setText("Maria: Do it again! Do it again!");
                         break;
                     case 10:
                         dialog.setText("Lidia: Wait!\n" +
                         		"Magic can be dangerous, specially at first!");
                         break;
                     case 11:
-                        dialog.setText("Maria: You know how to do magic? \n" +
+                        dialog.setText("Mimi: You know how to do magic? \n" +
                         		"Can you teach us, lady?");
                         break;
                     case 12:
@@ -183,7 +184,7 @@ public class Chapter1_2 extends AbstractChapter {
                         setAct(15);
                         break;
                     case 15:
-                        game.setScreen( new BattleScreen( game,true ,"TownOne" ) );
+                        game.setScreen( new Chapter1_3( game ) );
                         break;
                 }
             }
@@ -192,6 +193,11 @@ public class Chapter1_2 extends AbstractChapter {
                 character.draw(stage.getSpriteBatch(), 1);
         }
         stage.getSpriteBatch().end();
+        
+        if(dialog.isVisible()){
+            hud.act(delta);
+            hud.draw();
+        }
     }   
 
     @Override

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
@@ -21,7 +22,8 @@ public class MapCharacter extends MapActor {
 	private boolean walking;
 	private float speed;
 	
-	public MapCharacter() {
+	public MapCharacter(TextureAtlas atlas) {
+	    super(atlas);
 		this.animations = new HashMap<String, Animation>();
 		this.direction = dirDown;
 		this.walking = false;

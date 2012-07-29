@@ -15,6 +15,7 @@ import net.k3rnel.unsealed.battle.BattleEntity;
 import net.k3rnel.unsealed.battle.BattleGrid;
 import net.k3rnel.unsealed.battle.BattleHero;
 import net.k3rnel.unsealed.battle.magic.MagicEntity;
+import net.k3rnel.unsealed.battle.magic.PeaDart;
 import net.k3rnel.unsealed.battle.magic.PoisonDart;
 
 public class Snake extends BattleEnemy {
@@ -23,9 +24,10 @@ public class Snake extends BattleEnemy {
     MagicEntity tmpDart;
     TextureAtlas atlas;
 
-
-    public Snake(TextureAtlas atlas, int x, int y) {
-        super(70, x, y);
+    int attackType = 0;
+ 
+    public Snake(TextureAtlas atlas, int hp, int x, int y) {
+        super(hp,x,y);
         this.offsetX = 20;
         this.offsetY = 10;
         setGrid(x, y);
@@ -68,8 +70,12 @@ public class Snake extends BattleEnemy {
         if(this.getStatus()!=BattleEntity.statusStunned)
             switch(getState()){
                 case BattleEntity.stateAttacking:
-                    if(currentAnimation.isAnimationFinished(stateTime)){
-                        showDart(true);
+                    if(currentAnimation.isAnimationFinished(stateTime)&&!hit){
+                        hit = true;
+                        if(attackType==1)
+                            showDart(true);
+                        else
+                            showPoisonDart(true);
                         setState(BattleEntity.stateIdle);
                     }
                     break;
@@ -131,11 +137,15 @@ public class Snake extends BattleEnemy {
                     case BattleEntity.stateIdle:
                         for(BattleHero hero : BattleGrid.heroes){
                             if(hero.getGridYInt() == getGridYInt()){
-                                if(BattleGrid.random.nextInt(100)>60){
+                                hit = false;
+                                if(BattleGrid.random.nextInt(100)>70){
+                                    attackType = 2;
                                     setState(BattleEntity.stateAttacking);
                                 }else{
-                                    BattleGrid.clearGrid(getGridXInt(), getGridYInt());
-                                    setState(BattleEntity.stateAltAttacking);
+                                    attackType = 1;
+                                    setState(BattleEntity.stateAttacking);
+//                                    BattleGrid.clearGrid(getGridXInt(), getGridYInt());
+//                                    setState(BattleEntity.stateAltAttacking);
                                 }
                             }else{
                                 moveCharacter(BattleGrid.random.nextInt(4));
@@ -151,7 +161,16 @@ public class Snake extends BattleEnemy {
     }
    
     public void showDart(boolean show){
-        tmpDart = new PoisonDart(atlas,3,-10.4f,this);
+        tmpDart = new PeaDart(atlas,3,-10.4f,this);
+        tmpDart.setVisible(false);
+        if(show)
+            tmpDart.setGrid(this.getGridXInt(),this.getGridYInt());
+        tmpDart.setVisible(show);
+
+        darts.add(tmpDart);
+    }
+    public void showPoisonDart(boolean show){
+        tmpDart = new PoisonDart(atlas,3,-8.4f,this);
         tmpDart.setVisible(false);
         if(show)
             tmpDart.setGrid(this.getGridXInt(),this.getGridYInt());

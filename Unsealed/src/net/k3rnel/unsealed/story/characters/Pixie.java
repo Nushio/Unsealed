@@ -3,13 +3,14 @@ package net.k3rnel.unsealed.story.characters;
 import net.k3rnel.unsealed.story.helpers.MapCharacter;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
 public class Pixie extends MapCharacter {
 
-    public Pixie() {
-        super();
+    public Pixie(TextureAtlas atlas) {
+        super(atlas);
         createPlayer();
     }
     

@@ -3,25 +3,11 @@ pages-info.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-char-sprites/whisperer_spritesheet
-  rotate: false
-  xy: 0, 688
-  size: 576, 256
-  orig: 576, 256
-  offset: 0, 0
-  index: -1
-char-sprites/lidia_spritesheet
-  rotate: false
-  xy: 0, 430
-  size: 576, 256
-  orig: 576, 256
-  offset: 0, 0
-  index: -1
-char-sprites/male_spritesheet
+char-sprites/citizen_10_spritesheet
   rotate: false
   xy: 0, 172
-  size: 576, 256
-  orig: 576, 256
+  size: 576, 832
+  orig: 576, 832
   offset: 0, 0
   index: -1
 char-sprites/combat_dummy
@@ -33,28 +19,28 @@ char-sprites/combat_dummy
   index: -1
 char-sprites/tiny_spritesheet
   rotate: false
-  xy: 576, 752
+  xy: 576, 812
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
   index: -1
 char-sprites/whitey_spritesheet
   rotate: false
-  xy: 576, 558
+  xy: 576, 618
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
   index: -1
 char-sprites/abi_spritesheet
   rotate: false
-  xy: 768, 752
+  xy: 768, 812
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
   index: -1
 char-sprites/george_spritesheet
   rotate: false
-  xy: 576, 364
+  xy: 576, 424
   size: 192, 192
   orig: 192, 192
   offset: 0, 0
@@ -66,8 +52,41 @@ char-sprites/pixie_spritesheet
   orig: 190, 40
   offset: 0, 0
   index: -1
+char-sprites/snake_spritesheet
+  rotate: false
+  xy: 768, 682
+  size: 96, 128
+  orig: 96, 128
+  offset: 0, 0
+  index: -1
 
 pages-info2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+char-sprites/whisperer_spritesheet
+  rotate: false
+  xy: 0, 516
+  size: 576, 256
+  orig: 576, 256
+  offset: 0, 0
+  index: -1
+char-sprites/lidia_spritesheet
+  rotate: false
+  xy: 0, 258
+  size: 576, 256
+  orig: 576, 256
+  offset: 0, 0
+  index: -1
+char-sprites/citizen_0_spritesheet
+  rotate: false
+  xy: 0, 0
+  size: 576, 256
+  orig: 576, 256
+  offset: 0, 0
+  index: -1
+
+pages-info3.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -80,7 +99,7 @@ maps/dialog-box
   offset: 0, 0
   index: -1
 
-pages-info3.png
+pages-info4.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -99,7 +118,7 @@ battle/maps/battlemap2
   offset: 0, 0
   index: -1
 
-pages-info4.png
+pages-info5.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -118,7 +137,7 @@ battle/maps/battlemap6
   offset: 0, 0
   index: -1
 
-pages-info5.png
+pages-info6.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -137,7 +156,7 @@ battle/maps/battlemap4
   offset: 0, 0
   index: -1
 
-pages-info6.png
+pages-info7.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -156,7 +175,7 @@ battle/maps/battlemap0
   offset: 0, 0
   index: -1
 
-pages-info7.png
+pages-info8.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -287,7 +306,7 @@ battle/ui/dpad_up
   offset: 0, 0
   index: -1
 
-pages-info8.png
+pages-info9.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -334,7 +353,7 @@ battle/entities/fireball
   offset: 0, 0
   index: -1
 
-pages-info9.png
+pages-info10.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -395,7 +414,7 @@ battle/entities/clam
   offset: 0, 0
   index: -1
 
-pages-info10.png
+pages-info11.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -428,7 +447,7 @@ battle/entities/firelion_left
   offset: 0, 0
   index: -1
 
-pages-info11.png
+pages-info12.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -440,7 +459,7 @@ battle/entities/spikes
   offset: 0, 0
   index: -1
 
-pages-info12.png
+pages-info13.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none

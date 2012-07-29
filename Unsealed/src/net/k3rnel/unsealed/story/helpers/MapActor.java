@@ -1,6 +1,5 @@
 package net.k3rnel.unsealed.story.helpers;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -10,8 +9,8 @@ public abstract class MapActor extends Image {
 
     private TextureAtlas atlas;
 
-    public MapActor() {
-
+    public MapActor(TextureAtlas atlas) {
+        this.atlas = atlas;
     }
 
     @Override
@@ -22,10 +21,9 @@ public abstract class MapActor extends Image {
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
     }
-    public TextureAtlas getAtlas() {
-        if( atlas == null ) {
-            atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
-        }
+    
+    public TextureAtlas getAtlas(){
         return atlas;
     }
+   
 }

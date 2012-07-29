@@ -13,6 +13,7 @@ public class Spikes extends MagicEntity {
 
     public Spikes(TextureAtlas atlas,int type, BattleEntity entity) {
         super(4.5f,0,entity);
+
         AtlasRegion atlasRegion = atlas.findRegion("battle/entities/spikes");
         TextureRegion[][] spriteSheet = atlasRegion.split(64,64);
         TextureRegion[] frames = new TextureRegion[9];
@@ -47,24 +48,24 @@ public class Spikes extends MagicEntity {
                 if(enemy instanceof BattleEnemy){
                     enemy.setStatus(BattleEntity.statusStunned);
                     if(enemy.getState() == BattleEntity.stateBlocking){
-                        enemy.setState(BattleEntity.stateIdle);
-                        enemy.setStatus(BattleEntity.statusStunned);
-                        if(enemy.setHp(enemy.getHp()-20)){
-                           BattleGrid.enemies.removeValue((BattleEnemy)enemy, false);
-                            BattleGrid.clearGrid(enemy.getGridXInt(),enemy.getGridYInt());
-                            BattleGrid.checkState();
-                            
+                        if(enemy.setHp(enemy.getHp()-5)){
+
+                        }else{
+                            enemy.setStatus(BattleEntity.statusStunned);
+                            enemy.setState(BattleEntity.stateIdle);
                         }
-                    }else if(enemy.setHp(enemy.getHp()-30)){
-                        BattleGrid.clearGrid(enemy.getGridXInt(),enemy.getGridYInt());
-                        BattleGrid.checkState();
                     }else{
-                        
+                        if(enemy.setHp(enemy.getHp()-3)){
+
+                        }else{
+                            enemy.setStatus(BattleEntity.statusStunned);
+                            enemy.setState(BattleEntity.stateIdle);
+                        }
                     }
                 }
             }
         }
     }
-
 }
+
 

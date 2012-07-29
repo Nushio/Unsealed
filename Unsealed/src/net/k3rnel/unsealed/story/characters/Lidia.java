@@ -3,13 +3,14 @@ package net.k3rnel.unsealed.story.characters;
 import net.k3rnel.unsealed.story.helpers.MapCharacter;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
 public class Lidia extends MapCharacter {
 
-    public Lidia() {
-        super();
+    public Lidia(TextureAtlas atlas) {
+        super(atlas);
         createPlayer();
     }
     

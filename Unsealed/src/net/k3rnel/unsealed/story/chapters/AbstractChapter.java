@@ -79,21 +79,17 @@ public class AbstractChapter extends AbstractScreen {
 
     @Override
     public void render(float delta) {
-        // TODO Auto-generated method stub
         super.render(delta);
         tileMapRenderer.render(camera);
-       
-        if(dialog.isVisible()){
-            hud.act(delta);
-            hud.draw();
-        }
+
+        
     }
 
     public void centerCamera(MapCharacter character) {
         float x = character.getX();
         float y = character.getY();
-        float halfW = Gdx.graphics.getWidth() / 2;
-        float halfH = Gdx.graphics.getHeight() / 2;
+        float halfW = MENU_VIEWPORT_WIDTH / 2;
+        float halfH = MENU_VIEWPORT_HEIGHT / 2;
         float mapW = tileMap.width*tileMap.tileWidth;
         float mapH = tileMap.height*tileMap.tileHeight;
 

@@ -48,9 +48,7 @@ public class Blast extends MagicEntity {
                         Gdx.app.log(Unsealed.LOG, "You hit me but it didn't hurt! Haha");
                     }else{
                         if(entity.setHp(entity.getHp()-10)){
-                            BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
-                            BattleGrid.clearGrid(this.getGridXInt(),this.getGridYInt());
-                            BattleGrid.checkState();
+                          
                         }
                     }
                     destroyMe=true;

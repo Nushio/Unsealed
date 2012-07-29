@@ -28,17 +28,17 @@ public class Chapter1_1 extends AbstractChapter {
     public void show() {
         super.show();
 
-        tmpChar = new Lidia();
+        tmpChar = new Lidia(getAtlas());
         tmpChar.setPosition(115,140);
         tmpChar.updateAnimation();
         characters.add(tmpChar);
-        tmpChar = new Whisperer();
+        tmpChar = new Whisperer(getAtlas());
         tmpChar.updateAnimation();
         tmpChar.addAction(fadeIn(0.75f));
         tmpChar.setPosition(291,470);
         tmpChar.setVisible(false);
         characters.add(tmpChar);
-        tmpChar = new Pixie();
+        tmpChar = new Pixie(getAtlas());
         tmpChar.updateAnimation();
         tmpChar.setPosition(82,660);
         characters.add(tmpChar);
@@ -123,7 +123,9 @@ public class Chapter1_1 extends AbstractChapter {
                         }
                         break;
                     case 14:
-                        dialog.setText("Lidia: You poor thing....");
+                        dialog.setText("Lidia: You poor thing....\n" +
+                        		"Awaken from your slumber. Let the seal be broken.\n" +
+                        		"I, Lidia Terious, Unseal you!");
                         dialog.setVisible(true);
                         break;
                     case 15:
@@ -155,7 +157,7 @@ public class Chapter1_1 extends AbstractChapter {
                         dialog.setText("Whisperer: It's been 3 generations since Pixies disappeared.  ");
                         break;
                     case 7:
-                        dialog.setText("Lidia: You mean locked up? They didn't leave!\n" +
+                        dialog.setText("Lidia: You mean sealed? They didn't leave!\n" +
                                 "\n" +
                                 "Didn't you try and talk to them about it? ");
                         break;
@@ -195,19 +197,19 @@ public class Chapter1_1 extends AbstractChapter {
                         break;
                     case 18:
                         if(character.getX()>31){
-                            character.setX(character.getX()-1);
+                            character.setX(character.getX()-3);
 
                         }else if(character.getY()>530){
-                            character.setY(character.getY()-1);
+                            character.setY(character.getY()-3);
                         }else{
                             setAct(19);
                         }
                         break;
                     case 19:
                         if(character.getX()<141){
-                            character.setX(character.getX()+1);
+                            character.setX(character.getX()+3);
                         }else if(character.getY()<660){
-                            character.setY(character.getY()+1);
+                            character.setY(character.getY()+3);
                         }else{
                             setAct(20);
                         }
@@ -219,7 +221,7 @@ public class Chapter1_1 extends AbstractChapter {
                     case 21:
                         dialog.setVisible(false);
                         if(character.getY()<900){
-                            character.setY(character.getY()+3);
+                            character.setY(character.getY()+5);
                         }else{
                             setAct(22);
                         }
@@ -238,6 +240,11 @@ public class Chapter1_1 extends AbstractChapter {
                 character.draw(stage.getSpriteBatch(), 1);
         }
         stage.getSpriteBatch().end();
+        
+        if(dialog.isVisible()){
+            hud.act(delta);
+            hud.draw();
+        }
     }   
 
     @Override

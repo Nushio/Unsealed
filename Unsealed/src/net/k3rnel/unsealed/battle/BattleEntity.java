@@ -59,7 +59,7 @@ public class BattleEntity extends Image {
     public int offsetX = 0, offsetY = 0;
     
 
-    SequenceAction actions;
+    public SequenceAction actions;
 
     public BattleEntity() {
         this.animations = new HashMap<String, Animation>();
@@ -167,6 +167,7 @@ public class BattleEntity extends Image {
 
     /**
      * @param hp the hp to set
+     * returns true if dead
      */
     public boolean setHp(int hp) {
         if(hp>0){

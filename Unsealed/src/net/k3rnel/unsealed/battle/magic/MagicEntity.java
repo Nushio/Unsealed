@@ -15,7 +15,7 @@ public class MagicEntity extends BattleEntity {
     public boolean destroyMe = false;
     
     public MagicEntity(float speedX, float speedY, BattleEntity entity) {
-        super();
+        super(); 
         this.speedX = speedX;
         this.speedY = speedY;
         this.entity = entity;

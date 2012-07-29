@@ -45,16 +45,16 @@ public class BattleScreen extends AbstractScreen {
     TiledMap tileMap;
     TileAtlas tileAtlas;
     TileMapRenderer tileMapRenderer;
-    OrthographicCamera camera;
+    public OrthographicCamera camera;
 
     public BattleGrid grid;
-    private BattleHUD hud;
+    public BattleHUD hud;
 
     public static BattleHero hero;
 
-    private Label roundLabel;
+    public Label roundLabel;
 
-    private Button restartButton;
+    protected Button restartButton;
 
     public static int round = 0;
     public static int bonus = 1;
@@ -63,7 +63,7 @@ public class BattleScreen extends AbstractScreen {
     public int act;
     public float stateTime;
 
-    List<MapCharacter> characters;
+    public List<MapCharacter> characters;
     MapCharacter tmpChar;
 
     public TextBox dialog;
@@ -105,12 +105,12 @@ public class BattleScreen extends AbstractScreen {
 
         // Create the camera
         camera = new OrthographicCamera(MENU_VIEWPORT_WIDTH,MENU_VIEWPORT_HEIGHT);
-        camera.position.set(this.stage.getWidth() / 2, this.stage.getHeight() / 2, 0);
+        camera.position.set(1300,1220, 0);
 
         AtlasRegion atlasRegion = atlas.findRegion( "battle/ui/field-3x3" );
         battleoverlay = new Image(atlasRegion);
-        battleoverlay.setX( stage.getWidth()/2 - battleoverlay.getWidth()/2 );
-        battleoverlay.setY( stage.getHeight()/2 -battleoverlay.getHeight()- 25); 
+        battleoverlay.setX( MENU_VIEWPORT_WIDTH/2 - battleoverlay.getWidth()/2 );
+        battleoverlay.setY( MENU_VIEWPORT_HEIGHT/2-battleoverlay.getHeight()- 25); 
         stage.addActor(battleoverlay);
 
         stateTime = 0;
@@ -304,21 +304,16 @@ public class BattleScreen extends AbstractScreen {
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 
         // draw the actors
-        camera.position.set(1300,1220, 0);
-        camera.update();
-        tileMapRenderer.render(camera);
+       tileMapRenderer.render(camera);
 
         stage.draw();
-        roundLabel.setText("Round "+round+"");
-
-        for(MapCharacter character : characters){
-            if(character.isVisible())
-                character.draw(stage.getSpriteBatch(), 1);
-        }
+       
 
         if(!scriptedBattle)
             if(BattleGrid.checkState() == BattleGrid.battleWon){
                 bonus++;
+                hero.reset();
+                grid.reset();
                 grid.spawnEnemies(bonus);
             }else if(BattleGrid.checkState() == BattleGrid.battleLost){
                 roundLabel.setX(330);
@@ -332,6 +327,14 @@ public class BattleScreen extends AbstractScreen {
         hud.fillMana(hero);
 
         grid.draw();
+        stage.getSpriteBatch().begin();
+        for(MapCharacter character : characters){
+            if(character.isVisible()){
+                character.act(delta);
+                character.draw(stage.getSpriteBatch(), 1);
+            }
+        }
+        stage.getSpriteBatch().end();
         hud.draw();
     }
 
@@ -384,30 +387,30 @@ public class BattleScreen extends AbstractScreen {
     @Override
     public boolean keyUp(int keycode) {
         if(!disableInput)
-        switch(keycode) {
-            case Input.Keys.U:
-                buttonPress(4,false);
-                return true;
-            case Input.Keys.O:
-                buttonPress(5,false);
-                return true;
-            case Input.Keys.J:
-                buttonPress(6,false);
-                return true;
-            case Input.Keys.K:
-                buttonPress(7,false);
-                return true;
+            switch(keycode) {
+                case Input.Keys.U:
+                    buttonPress(4,false);
+                    return true;
+                case Input.Keys.O:
+                    buttonPress(5,false);
+                    return true;
+                case Input.Keys.J:
+                    buttonPress(6,false);
+                    return true;
+                case Input.Keys.K:
+                    buttonPress(7,false);
+                    return true;
 
-            case Input.Keys.L:
-                buttonPress(8,false);
-                return true;
-            case Input.Keys.BACK:
-                game.setScreen(new MenuScreen(game));
-                return true;
-            case Input.Keys.ESCAPE:
-                game.setScreen(new MenuScreen(game));
-                return true;
-        }
+                case Input.Keys.L:
+                    buttonPress(8,false);
+                    return true;
+                case Input.Keys.BACK:
+                    game.setScreen(new MenuScreen(game));
+                    return true;
+                case Input.Keys.ESCAPE:
+                    game.setScreen(new MenuScreen(game));
+                    return true;
+            }
         return false;
     }
 
@@ -419,110 +422,114 @@ public class BattleScreen extends AbstractScreen {
      */
     public void buttonPress(int button,boolean pressed){
         if(!disableInput)
-        switch(button){
-            //TODO: Hero moves at a fixed pixel rate (A.k.a. magic numbers). It should instead move based on screen width.
-            case 0:{ // Up
-                if(hero.getState()!=BattleEntity.stateBlocking){
-                    if((hero.getGridYInt()-1>-1)){
-                        BattleGrid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()-1);
-
-                    }
-                }
-                break;
-            }
-            case 1:{ // Down
-                if(hero.getState()!=BattleEntity.stateBlocking){
-                    if((hero.getGridYInt()+1<3)){
-                        BattleGrid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()+1);
-
-                    }
-                }
-                break;
-            }
-            case 2:{ // Left
-                if(hero.getState()!=BattleEntity.stateBlocking){
-                    if((hero.getGridXInt()-1>-1)){
-                        BattleGrid.moveEntity(hero, hero.getGridXInt()-1, hero.getGridYInt());
-
-                    }
-                }
-                break;
-            }
-            case 3:{ // Right
-                if(hero.getState()!=BattleEntity.stateBlocking){
-                    if((hero.getGridXInt()+1<3)){
-                        BattleGrid.moveEntity(hero, hero.getGridXInt()+1, hero.getGridYInt());
-                    }
-                }
-                break;
-            }
-            case 4:{ // Shield
-                if(pressed){
+            switch(button){
+                //TODO: Hero moves at a fixed pixel rate (A.k.a. magic numbers). It should instead move based on screen width.
+                case 0:{ // Up
                     if(hero.getState()!=BattleEntity.stateBlocking){
-                        hero.setState(BattleEntity.stateBlocking);
+                        if((hero.getGridYInt()-1>-1)){
+                            BattleGrid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()-1);
 
-                        hero.setMana(hero.getMana()-1);
+                        }
                     }
-                }else{
-                    hero.setState(BattleEntity.stateIdle);
+                    break;
                 }
-                break;
-            }
-            case 5:{ // Attack
-                if(pressed){
+                case 1:{ // Down
+                    if(hero.getState()!=BattleEntity.stateBlocking){
+                        if((hero.getGridYInt()+1<3)){
+                            BattleGrid.moveEntity(hero, hero.getGridXInt(), hero.getGridYInt()+1);
 
-                }else{
-                    if(hero.getState()==BattleEntity.stateIdle){
-                        if(hero.getMana()>=1){
-                            hero.magicType=0;
+                        }
+                    }
+                    break;
+                }
+                case 2:{ // Left
+                    if(hero.getState()!=BattleEntity.stateBlocking){
+                        if((hero.getGridXInt()-1>-1)){
+                            BattleGrid.moveEntity(hero, hero.getGridXInt()-1, hero.getGridYInt());
+
+                        }
+                    }
+                    break;
+                }
+                case 3:{ // Right
+                    if(hero.getState()!=BattleEntity.stateBlocking){
+                        if((hero.getGridXInt()+1<3)){
+                            BattleGrid.moveEntity(hero, hero.getGridXInt()+1, hero.getGridYInt());
+                        }
+                    }
+                    break;
+                }
+                case 4:{ // Shield
+                    if(pressed){
+                        if(hero.getState()!=BattleEntity.stateBlocking){
+                            hero.setState(BattleEntity.stateBlocking);
+
                             hero.setMana(hero.getMana()-1);
-                            hero.setState(BattleEntity.stateAttacking);
                         }
+                    }else{
+                        hero.setState(BattleEntity.stateIdle);
                     }
+                    break;
                 }
-                break;
-            }
-            case 6:{ // Skill1
-                if(pressed){
-                    if(hero.getState()==BattleEntity.stateIdle){
-                        if(hero.getMana()>=5){
-                            hero.setMana(hero.getMana()-5);
-                            hero.setState(BattleEntity.stateAltAttacking);
-                        }
-                    }
-                }else{
+                case 5:{ // Attack
+                    if(pressed){
 
-                }
-                break;
-            }
-            case 7:{ // Skill2
-                if(pressed){
-                    if(hero.getState()==BattleEntity.stateIdle){
-                        if(hero.getMana()>=5){
-                            hero.setMana(hero.getMana()-5);
-                            hero.magicType=2;
-                            hero.setState(BattleEntity.stateAttacking);
+                    }else{
+                        if(hero.getState()==BattleEntity.stateIdle){
+                            if(hero.getMana()>=1){
+                                hero.magicType=0;
+                                hero.setMana(hero.getMana()-1);
+                                hero.setState(BattleEntity.stateAttacking);
+                            }
                         }
                     }
-                }else{
-
+                    break;
                 }
-                break;
-            }
-            case 8:{ // Skill3
-                if(pressed){
-                    if(hero.getState()==BattleEntity.stateIdle){
-                        if(hero.getMana()>=5){
-                            hero.setMana(hero.getMana()-5);
-                            hero.magicType=1;
-                            hero.setState(BattleEntity.stateAttacking);
+                case 6:{ // Skill1
+                    if(pressed){
+                        if(hero.getState()==BattleEntity.stateIdle){
+                            if(hero.getSkill1()!=null)
+                                if(hero.getMana()>=hero.getSkill1().manaCost){
+                                    hero.setMana(hero.getMana()-hero.getMana()-hero.getSkill1().manaCost);
+                                    hero.setState(hero.getSkill1().stance);
+                                    hero.magicType = hero.getSkill1().id;
+                                }
                         }
-                    }
-                }else{
+                    }else{
 
+                    }
+                    break;
                 }
-                break;
+                case 7:{ // Skill2
+                    if(pressed){
+                        if(hero.getState()==BattleEntity.stateIdle){
+                            if(hero.getSkill2()!=null)
+                                if(hero.getMana()>=hero.getMana()-hero.getSkill2().manaCost){
+                                    hero.setMana(hero.getMana()-hero.getSkill2().manaCost);
+                                    hero.magicType = hero.getSkill2().id;
+                                    hero.setState(hero.getSkill2().stance);
+                                }
+                        }
+                    }else{
+
+                    }
+                    break;
+                }
+                case 8:{ // Skill3
+                    if(pressed){
+                        if(hero.getState()==BattleEntity.stateIdle){
+                            if(hero.getSkill3()!=null)
+                                if(hero.getMana()>=hero.getSkill3().manaCost){
+                                    hero.setMana(hero.getMana()-hero.getSkill3().manaCost);
+                                    hero.magicType = hero.getSkill3().id;
+                                    hero.setState(hero.getSkill3().stance);
+                                }
+                        }
+                    }else{
+
+                    }
+                    break;
+                }
             }
-        }
     }
 }

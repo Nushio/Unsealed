@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -47,18 +46,11 @@ public class BattleHUD extends Stage {
     private void init() {
         //TODO: Non-hardcoded field sizes
         atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
-        Actor temp;
-        AtlasRegion atlasRegion = atlas.findRegion("battle/ui/spells");
-        spells = atlasRegion.split(64,64);
-        
-        atlasRegion = atlas.findRegion("battle/ui/blue_facebutton1");
+       
+        AtlasRegion atlasRegion = atlas.findRegion("battle/ui/blue_facebutton1");
         TextureRegion[][] textures = atlasRegion.split(83,92);
       
-        
         aButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
-        temp = new Image(spells[0][0]);
-        temp.setY(10);
-        aButton.addActor(temp);
         aButton.setSize(83,92);
         aButton.setX( this.getWidth() - (aButton.getWidth()*aButton.getScaleX()) );
         aButton.setY( this.getHeight() -(aButton.getHeight()*aButton.getScaleY()+ 100) ); 
@@ -66,9 +58,6 @@ public class BattleHUD extends Stage {
         //
         textures = atlasRegion.split(83,92);
         xButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
-        temp = new Image(spells[2][0]);
-        temp.setY(10);
-        xButton.addActor(temp);
         xButton.setSize(83,92);
         xButton.setX( this.getWidth() - (xButton.getWidth()*xButton.getScaleX()) -160 );
         xButton.setY( this.getHeight() -(xButton.getHeight()*xButton.getScaleY()+ 100) );
@@ -78,10 +67,6 @@ public class BattleHUD extends Stage {
         bButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
         bButton.setX( this.getWidth() - (bButton.getWidth()*bButton.getScaleX()) -80 );
         bButton.setY( this.getHeight() -(bButton.getHeight()*bButton.getScaleY()+ 160) ); 
-        temp = new Image(spells[1][3]);
-        temp.setY(10);
-        bButton.addActor(temp);
-
         this.addActor(bButton);
 
         atlasRegion = atlas.findRegion("battle/ui/blue_facebutton2");

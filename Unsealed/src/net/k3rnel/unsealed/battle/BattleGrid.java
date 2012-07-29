@@ -8,6 +8,7 @@ import java.util.Random;
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.battle.enemies.Bee;
 import net.k3rnel.unsealed.battle.enemies.Clam;
+import net.k3rnel.unsealed.battle.enemies.Dummy;
 import net.k3rnel.unsealed.battle.enemies.Ghost;
 import net.k3rnel.unsealed.battle.enemies.Snake;
 import net.k3rnel.unsealed.battle.enemies.Terrex;
@@ -43,7 +44,10 @@ public class BattleGrid extends Stage {
 
     private static List<Vector2> unusedPositions;
     public static int battleState;
-
+    
+    private BattleEnemy tmpBattleEnemy;
+    private BattleHero tmpBattleHero;
+    
     public static Timer timer;
 
     public static Random random;
@@ -139,26 +143,33 @@ public class BattleGrid extends Stage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        for(int i = 0; i<heroes.size; i++){
-            
-            BattleHero hero = heroes.get(i);
-            hero.act(delta);
-            if(hero.getHp()<=0){
-                clearGrid(hero.getGridXInt(),hero.getGridYInt());
-                heroes.removeIndex(i);
-                i--;
-                checkState();
-            }
-        }
-        for(int i = 0; i<enemies.size; i++){
-            
-            BattleEnemy enemy = enemies.get(i);
-            enemy.act(delta);
-            if(enemy.getHp()<=0){
-                clearGrid(enemy.getGridXInt(),enemy.getGridYInt());
-                enemies.removeIndex(i);
-                i--;
-                checkState();
+        for(int x = 0; x<sizeX;x++){
+            for(int y = 0;y<sizeY;y++){
+                if(grid[x][y]!=null){
+                    grid[x][y].act(delta);
+                    if(grid[x][y].getHp()<=0){
+                        if(grid[x][y] instanceof BattleHero){
+                            tmpBattleHero = (BattleHero)grid[x][y];
+                            clearGrid(x,y);
+                            heroes.removeValue(tmpBattleHero, false);
+                            checkState();
+                        }
+                        if(grid[x][y] instanceof BattleEnemy){
+                            tmpBattleEnemy = (BattleEnemy)grid[x][y];
+                            if(tmpBattleEnemy instanceof Dummy){
+                                if(tmpBattleEnemy.currentAnimation.isAnimationFinished(tmpBattleEnemy.stateTime)){
+                                    clearGrid(x,y);
+                                    enemies.removeValue(tmpBattleEnemy,false);
+                                    checkState();
+                                }
+                            }else{
+                                clearGrid(x,y);
+                                enemies.removeValue(tmpBattleEnemy,false);
+                                checkState();
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -190,13 +201,10 @@ public class BattleGrid extends Stage {
     }
     
     public void spawnEnemies(BattleEnemy... spawnies){
-        Vector2 spawnPoint;
         BattleEntity enemy;
         enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
         for(int i = 0; i < spawnies.length; i++){
-            spawnPoint = getUnusedPosition();
             enemy = spawnies[i];
-            enemy.setGrid(spawnPoint.x, spawnPoint.y);
             assignEntity(enemy);
             timer.scheduleTask(enemy.nextTask(), random.nextInt(5));
         }
@@ -222,7 +230,7 @@ public class BattleGrid extends Stage {
                     
                 }else if(BattleScreen.round>4&&BattleScreen.round<7){
                     if(random.nextInt(100)<40)
-                        enemy = new Snake(getAtlas(),(int)spawnPoint.x,(int)spawnPoint.y);
+                        enemy = new Snake(getAtlas(),70,(int)spawnPoint.x,(int)spawnPoint.y);
                     else if(random.nextInt(100)<50)
                         enemy = new Bee(getAtlas(),(int)spawnPoint.x,(int)spawnPoint.y);
                     else
@@ -235,7 +243,7 @@ public class BattleGrid extends Stage {
                     }else if(random.nextInt(100)<40){
                         enemy = new Ghost(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
                     }else if(random.nextInt(100)<40){
-                        enemy = new Snake(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
+                        enemy = new Snake(getAtlas(), 70,(int)spawnPoint.x,(int)spawnPoint.y);
                     }else{
                         enemy = new Bee(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
                     }
