@@ -1,8 +1,5 @@
 package net.k3rnel.unsealed.battle.enemies;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -14,12 +11,10 @@ import net.k3rnel.unsealed.battle.BattleEnemy;
 import net.k3rnel.unsealed.battle.BattleEntity;
 import net.k3rnel.unsealed.battle.BattleGrid;
 import net.k3rnel.unsealed.battle.BattleHero;
-import net.k3rnel.unsealed.battle.magic.PeaDart;
 
 public class Bee extends BattleEnemy {
 
     TextureAtlas atlas;
-
 
     public Bee(TextureAtlas atlas, int x, int y) {
         super(50, x, y);
@@ -111,7 +106,6 @@ public class Bee extends BattleEnemy {
     public Bee getBee(){
         return this;
     }
-
    
     protected void moveCharacter() {
         BattleGrid.moveEntity(this,BattleGrid.getUnusedPosition());

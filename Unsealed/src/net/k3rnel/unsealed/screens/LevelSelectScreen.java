@@ -14,9 +14,8 @@ import com.badlogic.gdx.utils.Scaling;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.story.chapters.Chapter1_1;
-import net.k3rnel.unsealed.story.chapters.Chapter1_3;
-import net.k3rnel.unsealed.story.chapters.Chapter1_4;
 import net.k3rnel.unsealed.story.chapters.Chapter1_5;
+import net.k3rnel.unsealed.story.chapters.Chapter2_1;
 
 public class LevelSelectScreen extends AbstractScreen {
 
@@ -56,9 +55,9 @@ public class LevelSelectScreen extends AbstractScreen {
         Label chapterLabel = new Label("Chapter 1\nNew Girl in Town",skin);
         chapterLabel.setAlignment(Align.center);
         table.add(chapterLabel).align(Align.center);
-        chapterLabel = new Label("Chapter 2\nBlahBlah",skin);
+        chapterLabel = new Label("Chapter 2\nOld Friends",skin);
         table.add(chapterLabel).align(Align.center);
-        chapterLabel = new Label("Chapter 3\nDeeDee",skin);
+        chapterLabel = new Label("Chapter 3\n",skin);
         table.add(chapterLabel).align(Align.center);
         table.add();
         table.add();
@@ -95,7 +94,7 @@ public class LevelSelectScreen extends AbstractScreen {
             
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen( new Chapter1_4( game ) );
+                game.setScreen( new Chapter2_1( game ) );
                 
             }
         });

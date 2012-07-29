@@ -22,13 +22,13 @@ import net.k3rnel.unsealed.battle.magic.PeaDart;
 
 public class Clam extends BattleEnemy {
 
-    List<PeaDart> darts;
-    PeaDart tmpDart;
+    List<MagicEntity> darts;
+    MagicEntity tmpDart;
     TextureAtlas atlas;
     public Clam(TextureAtlas atlas, int x, int y) {
         super(50, x, y);
         this.atlas = atlas;
-        darts = new ArrayList<PeaDart>();
+        darts = new ArrayList<MagicEntity>();
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/clam" );
         TextureRegion[][] spriteSheet = atlasRegion.split(41, 48);
         TextureRegion[] frames = new TextureRegion[2];
@@ -107,7 +107,7 @@ public class Clam extends BattleEnemy {
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        for(PeaDart dart : darts){
+        for(MagicEntity dart : darts){
             dart.draw(batch, parentAlpha);
         }
     }
