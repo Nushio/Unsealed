@@ -84,44 +84,47 @@ public class Chapter1_2 extends AbstractChapter {
                             }
                         }));
                         character.addAction(actions);
-                        character.setWalking(true);
                         break;
                     case 1:
+                        dialog.setText("Lidia: So this is New Lion? I wonder if anyone has noticed any new skills they can use...");
+                        dialog.setVisible(true);
+                        break;
+                    case 2:
+                        character.setWalking(true);
                         if(character.getX()>1050){
                             character.setX(character.getX()-1);
                             centerCamera(character);
                         }else{
                             character.setWalking(false);
-                            dialog.setText("Lidia: I can hear some children playing nearby");
-                            dialog.setVisible(true);
+                            dialog.setText("Lidia: Hmm, there are some kids nearby. Better check them out.");
                         }
                         break;
-                    case 2:
+                    case 3:
                         dialog.setVisible(false);
                         character.setWalking(true);
                         character.setDirection(MapCharacter.dirRight);
-                        setAct(3);
+                        setAct(4);
                         break;
-                    case 3:
+                    case 4:
                         if(character.getX()<1140){
                             character.setX(character.getX()+1);
                             centerCamera(character);
                         }else{
                             character.setDirection(MapCharacter.dirDown);
-                            setAct(4);
+                            setAct(5);
                         }
                         break;
-                    case 4:
+                    case 5:
                         if(character.getY()>1000){
                             character.setY(character.getY()-1);
                             centerCamera(character);
                         }else{
                             character.setWalking(false);
-                            setAct(5);
+                            setAct(6);
                         }
-                    case 5:
+                    case 6:
                         if(character.getY()==1000){
-                            dialog.setText("Maria: Watch this! Watch this!");
+                            dialog.setText("Mimi: Watch this! Watch this!");
                             dialog.setVisible(true);
                         }
                         break;
@@ -131,11 +134,11 @@ public class Chapter1_2 extends AbstractChapter {
             if(character instanceof Kid){
                 if(((Kid)character).kid==0){
                     switch(act){
-                        case 6:
+                        case 7:
                             dialog.setVisible(false);
                             actions = sequence(color(Color.RED),delay(0.3f),color(Color.WHITE));
                             character.addAction(actions);
-                            setAct(7);
+                            setAct(8);
                             break;
                     }
                 }
@@ -147,43 +150,48 @@ public class Chapter1_2 extends AbstractChapter {
             }
             if(character instanceof FireLionMap){
                 switch(act){
-                    case 7:
+                    case 8:
                         character.setVisible(true);
                         if(character.getX()<1130){
                             character.setX(character.getX()+2);
                         }else{
                             character.setVisible(false);
-                            setAct(8);
+                            setAct(9);
                         }
                         break;
-                    case 8:
+                    case 9:
                         dialog.setText("George: Wow! That's amazing!");
                         dialog.setVisible(true);
                         break;
-                    case 9:
+                    case 10:
                         dialog.setText("Maria: Do it again! Do it again!");
                         break;
-                    case 10:
+                    case 11:
                         dialog.setText("Lidia: Wait!\n" +
                         		"Magic can be dangerous, specially at first!");
                         break;
-                    case 11:
-                        dialog.setText("Mimi: You know how to do magic? \n" +
-                        		"Can you teach us, lady?");
-                        break;
                     case 12:
-                        dialog.setText("Lidia: You can call me Lidia, and I came here to do so. ");
+                        dialog.setText("George: Who are you? Where did you come from?");
                         break;
                     case 13:
-                        dialog.setText("George: Thank you!\n" +
-                        		"Mimi: Thanks Miss!\n" +
-                        		"Maria: Yaaay! ^__^ ");
+                        dialog.setText("Mimi: Look at those clothes! She's not from around here!");
                         break;
                     case 14:
-                        dialog.setVisible(false);
-                        setAct(15);
+                        dialog.setText("Lidia: You can call me Lidia, and you're right. I'm a Traveller.\n" +
+                        		"We travel through the lands, guiding those that want to hear us");
                         break;
                     case 15:
+                        dialog.setText("Maria: Can you teach us how to do magic?\n" +
+                        		"Mimi: Yeah, can you? Pleeeeeeasseeeeeee!");
+                        break;
+                    case 16:
+                        dialog.setText("Lidia: Sure. Stand back, everyone.");
+                        break;
+                    case 17:
+                        dialog.setVisible(false);
+                        setAct(18);
+                        break;
+                    case 18:
                         game.setScreen( new Chapter1_3( game ) );
                         break;
                 }
