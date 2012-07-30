@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -44,10 +45,10 @@ public class AbstractChapter extends AbstractScreen {
         super.show();
         act = 0;
         // Load the tmx file into map
-        tileMap = TiledLoader.createMap(Gdx.files.internal("assets/map-atlases/"+mapname+".tmx"));
+        tileMap = TiledLoader.createMap(Gdx.files.internal("map-atlases/"+mapname+".tmx"));
 
         // Load the tiles into atlas
-        tileAtlas = new TileAtlas(tileMap, Gdx.files.internal("assets/map-atlases/"));
+        tileAtlas = new TileAtlas(tileMap, Gdx.files.internal("map-atlases/"));
 
         // Create the renderer
         tileMapRenderer = new TileMapRenderer(tileMap, tileAtlas, tileMap.width, tileMap.height);
@@ -88,8 +89,8 @@ public class AbstractChapter extends AbstractScreen {
     public void centerCamera(MapCharacter character) {
         float x = character.getX();
         float y = character.getY();
-        float halfW = MENU_VIEWPORT_WIDTH / 2;
-        float halfH = MENU_VIEWPORT_HEIGHT / 2;
+        float halfW = (MENU_VIEWPORT_WIDTH*camera.zoom) / 2;
+        float halfH = (MENU_VIEWPORT_HEIGHT*camera.zoom) / 2;
         float mapW = tileMap.width*tileMap.tileWidth;
         float mapH = tileMap.height*tileMap.tileHeight;
 
@@ -109,5 +110,43 @@ public class AbstractChapter extends AbstractScreen {
 
     public void setAct(int act){
         this.act = act;
+    }
+    
+    @Override
+    public boolean touchUp(int x, int y, int pointer, int button) {
+        if(dialog.isVisible()){
+            setAct(act+1);
+        }
+        return super.touchUp(x, y, pointer, button);
+    }
+    @Override
+    public boolean keyUp(int keycode) {
+        if(dialog.isVisible()){
+            switch(keycode) {
+                case Input.Keys.U:
+                    setAct(act+1);
+                    return true;
+                case Input.Keys.O:
+                    setAct(act+1);
+                    return true;
+                case Input.Keys.J:
+                    setAct(act+1);
+                    return true;
+                case Input.Keys.K:
+                    setAct(act+1);
+                    return true;
+                case Input.Keys.L:
+                    setAct(act+1);
+                    return true;
+                case Input.Keys.SPACE:
+                    setAct(act+1);
+                    return true;
+                case Input.Keys.I:
+                    setAct(act+1);
+                    return true;
+            }
+        return false;
+        }
+        return super.keyUp(keycode);
     }
 }

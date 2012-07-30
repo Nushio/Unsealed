@@ -200,11 +200,4 @@ public class Chapter1_2 extends AbstractChapter {
         }
     }   
 
-    @Override
-    public boolean touchUp(int x, int y, int pointer, int button) {
-        if(dialog.isVisible()){
-            setAct(act+1);
-        }
-        return super.touchUp(x, y, pointer, button);
-    }
 }

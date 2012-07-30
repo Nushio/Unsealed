@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="70" height="70" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="Exteriors" tilewidth="32" tileheight="32">
-  <image source="tiles_/exteriors.png" width="1120" height="1728"/>
+  <image source="tiles_/exteriors.png" width="1120" height="1568"/>
  </tileset>
  <layer name="Ground" width="70" height="70">
   <data encoding="base64" compression="zlib">
@@ -35,7 +35,7 @@
  </layer>
  <layer name="Cliffs" width="70" height="70">
   <data encoding="base64" compression="zlib">
-   eJzt1eFNwzAQBtCsALtUbALqKHSWsiuuUBTLOifGCTiI96ST+iNJz5/s8zTV3VO9p7qlek31VtQ1eGd+fq2ib7VW9J+tWnqba8sjm4/KN8v1XbPn1+o7/R2R6ZxlS29ztYq+Wa5vq+ee/o7ItCfLPcr1bfXce37ys9OTaU+WR9rquff81PJsnTU9Wf6m3vNTyzPPa888/qtqeeZ57bnjjp4vo+V57bnjfnq+jLTnjhs9XwAAAAAAAAAAAAAAADiHp1TPo5s4qcvoBk5KLjG5xOQSe5nM3zX2TUwuMbnEHnPGjInZM193UHkPyWWRZ+EsLcos7JnFpfL7P/oEPrmv3g==
+   eJzt1dENgjAQxnEeWEAT3cSorw6hIbqITuAQuqslpKFprlwtxWL4/5JLfCh4fOGOqgp7mbqbepg6m7p41QjX2PNDJd0rtqT/jBXTmy1Nm807cE//+Rrn/FB901+OTG2WMb3ZiiXd038+reeU/nJkmpLlGP7zaT2nzo87OymZpmSZk9Zz6vyE8ozdNSlZ/lLq/ITydPMas4//VShPNy9tRjemtsqZXPulNDcvbUYPpo7Kman2S0najF5N3ZQzpfYLAAAApvOsuwJinOquAAAAAAAAAAAAAAAAAADLtTK1Lt3ETO1KNzBT5CIjFxm5yPYV+3cI742MXGTkImv3DDtGxjvTfYP87xC59NwsmKWenwXvTG8X+L1EH/bqr/k=
   </data>
  </layer>
 </map>

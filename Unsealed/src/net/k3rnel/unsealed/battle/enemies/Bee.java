@@ -16,8 +16,8 @@ public class Bee extends BattleEnemy {
 
     TextureAtlas atlas;
 
-    public Bee(TextureAtlas atlas, int x, int y) {
-        super(50, x, y);
+    public Bee(TextureAtlas atlas, int hp, int x, int y) {
+        super(hp, x, y);
         this.offsetX = 25;
         this.offsetY = 20;
         setGrid(x, y);

@@ -162,7 +162,7 @@ public class Chapter1_1 extends AbstractChapter {
                                 "Didn't you try and talk to them about it? ");
                         break;
                     case 8:
-                        dialog.setText("Whisperer: They didn't want to listen");
+                        dialog.setText("Whisperer: They wouldn't listen");
                         break;
                     case 9:
                         dialog.setText("Lidia: You could've shouted...");
@@ -227,7 +227,7 @@ public class Chapter1_1 extends AbstractChapter {
                         }
                         break;
                     case 22:
-                        dialog.setText("Lidia: It's time to meet the neighbors...");
+                        dialog.setText("Lidia: I guess it's time to head to the town");
                         dialog.setVisible(true);
                         break;
                     case 23:
@@ -247,11 +247,5 @@ public class Chapter1_1 extends AbstractChapter {
         }
     }   
 
-    @Override
-    public boolean touchUp(int x, int y, int pointer, int button) {
-        if(dialog.isVisible()){
-            setAct(act+1);
-        }
-        return super.touchUp(x, y, pointer, button);
-    }
+   
 }

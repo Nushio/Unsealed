@@ -94,10 +94,10 @@ public class BattleScreen extends AbstractScreen {
         atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
 
         // Load the tmx file into map
-        tileMap = TiledLoader.createMap(Gdx.files.internal("assets/map-atlases/"+mapname+".tmx"));
+        tileMap = TiledLoader.createMap(Gdx.files.internal("map-atlases/"+mapname+".tmx"));
 
         // Load the tiles into atlas
-        tileAtlas = new TileAtlas(tileMap, Gdx.files.internal("assets/map-atlases/"));
+        tileAtlas = new TileAtlas(tileMap, Gdx.files.internal("map-atlases/"));
 
 
         // Create the renderer
@@ -490,7 +490,7 @@ public class BattleScreen extends AbstractScreen {
                         if(hero.getState()==BattleEntity.stateIdle){
                             if(hero.getSkill1()!=null)
                                 if(hero.getMana()>=hero.getSkill1().manaCost){
-                                    hero.setMana(hero.getMana()-hero.getMana()-hero.getSkill1().manaCost);
+                                    hero.setMana(hero.getMana()-hero.getSkill1().manaCost);
                                     hero.setState(hero.getSkill1().stance);
                                     hero.magicType = hero.getSkill1().id;
                                 }
@@ -504,7 +504,7 @@ public class BattleScreen extends AbstractScreen {
                     if(pressed){
                         if(hero.getState()==BattleEntity.stateIdle){
                             if(hero.getSkill2()!=null)
-                                if(hero.getMana()>=hero.getMana()-hero.getSkill2().manaCost){
+                                if(hero.getMana()>=hero.getSkill2().manaCost){
                                     hero.setMana(hero.getMana()-hero.getSkill2().manaCost);
                                     hero.magicType = hero.getSkill2().id;
                                     hero.setState(hero.getSkill2().stance);

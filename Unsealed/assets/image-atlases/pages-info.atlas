@@ -90,6 +90,18 @@ pages-info3.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+char-sprites/shura_spritesheet
+  rotate: false
+  xy: 0, 0
+  size: 576, 256
+  orig: 576, 256
+  offset: 0, 0
+  index: -1
+
+pages-info4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
 maps/dialog-box
   rotate: false
   xy: 0, 0
@@ -99,7 +111,7 @@ maps/dialog-box
   offset: 0, 0
   index: -1
 
-pages-info4.png
+pages-info5.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -118,7 +130,7 @@ battle/maps/battlemap2
   offset: 0, 0
   index: -1
 
-pages-info5.png
+pages-info6.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -137,7 +149,7 @@ battle/maps/battlemap6
   offset: 0, 0
   index: -1
 
-pages-info6.png
+pages-info7.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -156,7 +168,7 @@ battle/maps/battlemap4
   offset: 0, 0
   index: -1
 
-pages-info7.png
+pages-info8.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -175,7 +187,7 @@ battle/maps/battlemap0
   offset: 0, 0
   index: -1
 
-pages-info8.png
+pages-info9.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -306,7 +318,7 @@ battle/ui/dpad_up
   offset: 0, 0
   index: -1
 
-pages-info9.png
+pages-info10.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -353,7 +365,7 @@ battle/entities/fireball
   offset: 0, 0
   index: -1
 
-pages-info10.png
+pages-info11.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -414,7 +426,7 @@ battle/entities/clam
   offset: 0, 0
   index: -1
 
-pages-info11.png
+pages-info12.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -447,7 +459,7 @@ battle/entities/firelion_left
   offset: 0, 0
   index: -1
 
-pages-info12.png
+pages-info13.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -459,7 +471,7 @@ battle/entities/spikes
   offset: 0, 0
   index: -1
 
-pages-info13.png
+pages-info14.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none

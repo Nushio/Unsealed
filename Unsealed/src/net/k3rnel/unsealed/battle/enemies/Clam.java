@@ -25,8 +25,8 @@ public class Clam extends BattleEnemy {
     List<MagicEntity> darts;
     MagicEntity tmpDart;
     TextureAtlas atlas;
-    public Clam(TextureAtlas atlas, int x, int y) {
-        super(50, x, y);
+    public Clam(TextureAtlas atlas, int hp, int x, int y) {
+        super(hp, x, y);
         this.atlas = atlas;
         darts = new ArrayList<MagicEntity>();
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/clam" );

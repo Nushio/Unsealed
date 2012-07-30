@@ -33,7 +33,7 @@ public class BattleGrid extends Stage {
 
     protected TextureAtlas atlas;
 
-    
+
     public static int sizeX;
     public static int sizeY;
 
@@ -44,17 +44,17 @@ public class BattleGrid extends Stage {
 
     private static List<Vector2> unusedPositions;
     public static int battleState;
-    
+
     private BattleEnemy tmpBattleEnemy;
     private BattleHero tmpBattleHero;
-    
+
     public static Timer timer;
 
     public static Random random;
 
     private OrthographicCamera cam;
-    
-    
+
+
     public BattleGrid(float width, float height, int sizeX, int sizeY) {
         this.width = width;
         this.height = height;
@@ -78,7 +78,7 @@ public class BattleGrid extends Stage {
             grid[x][y] = null;
         }
     }
-    
+
     public boolean assignEntity(BattleEntity entity){
         if(checkGrid(entity.getGridXInt(),entity.getGridYInt())==null){
             grid[entity.getGridXInt()][entity.getGridYInt()] = entity;
@@ -105,7 +105,7 @@ public class BattleGrid extends Stage {
         if(checkGrid(newX,newY)==null){
             if(grid[entity.getGridXInt()][entity.getGridYInt()]!=null){
                 if(grid[entity.getGridXInt()][entity.getGridYInt()]!=entity){
-                    
+
                 }else{
                     grid[entity.getGridXInt()][entity.getGridYInt()] = null;
                 }
@@ -147,25 +147,27 @@ public class BattleGrid extends Stage {
             for(int y = 0;y<sizeY;y++){
                 if(grid[x][y]!=null){
                     grid[x][y].act(delta);
-                    if(grid[x][y].getHp()<=0){
-                        if(grid[x][y] instanceof BattleHero){
-                            tmpBattleHero = (BattleHero)grid[x][y];
-                            clearGrid(x,y);
-                            heroes.removeValue(tmpBattleHero, false);
-                            checkState();
-                        }
-                        if(grid[x][y] instanceof BattleEnemy){
-                            tmpBattleEnemy = (BattleEnemy)grid[x][y];
-                            if(tmpBattleEnemy instanceof Dummy){
-                                if(tmpBattleEnemy.currentAnimation.isAnimationFinished(tmpBattleEnemy.stateTime)){
+                    if(grid[x][y]!=null){
+                        if(grid[x][y].getHp()<=0){
+                            if(grid[x][y] instanceof BattleHero){
+                                tmpBattleHero = (BattleHero)grid[x][y];
+                                clearGrid(x,y);
+                                heroes.removeValue(tmpBattleHero, false);
+                                checkState();
+                            }
+                            if(grid[x][y] instanceof BattleEnemy){
+                                tmpBattleEnemy = (BattleEnemy)grid[x][y];
+                                if(tmpBattleEnemy instanceof Dummy){
+                                    if(tmpBattleEnemy.currentAnimation.isAnimationFinished(tmpBattleEnemy.stateTime)){
+                                        clearGrid(x,y);
+                                        enemies.removeValue(tmpBattleEnemy,false);
+                                        checkState();
+                                    }
+                                }else{
                                     clearGrid(x,y);
                                     enemies.removeValue(tmpBattleEnemy,false);
                                     checkState();
                                 }
-                            }else{
-                                clearGrid(x,y);
-                                enemies.removeValue(tmpBattleEnemy,false);
-                                checkState();
                             }
                         }
                     }
@@ -174,7 +176,7 @@ public class BattleGrid extends Stage {
         }
     }
 
-    
+
     @Override
     public void draw() {
         super.draw();
@@ -186,10 +188,10 @@ public class BattleGrid extends Stage {
                 }
             }
         }
-        
+
         this.getSpriteBatch().end();
     }
-    
+
     public static int checkState() {
         if(enemies.size==0){
             battleState = battleWon;
@@ -199,7 +201,7 @@ public class BattleGrid extends Stage {
         }
         return battleState;
     }
-    
+
     public void spawnEnemies(BattleEnemy... spawnies){
         BattleEntity enemy;
         enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
@@ -210,34 +212,34 @@ public class BattleGrid extends Stage {
         }
         Gdx.app.log(Unsealed.LOG, "Spawned "+enemies.size+" enemies");
         battleState = BattleGrid.battleStarted;
-        
+
     }
     public void spawnEnemies(int bonus) {
         BattleScreen.round++;
-        
+
         Vector2 spawnPoint;
         BattleEntity enemy;
         enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
-       
+
         for(int i = 0; i < random.nextInt(4)+1; i++){
             spawnPoint = getUnusedPosition();
             if(spawnPoint!=null){
                 if(BattleScreen.round < 4){
                     if(random.nextInt(100)<40)
-                        enemy = new Clam(getAtlas(),(int)spawnPoint.x,(int)spawnPoint.y);
+                        enemy = new Clam(getAtlas(),50, (int)spawnPoint.x,(int)spawnPoint.y);
                     else 
                         enemy = new Ghost(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
-                    
+
                 }else if(BattleScreen.round>4&&BattleScreen.round<7){
                     if(random.nextInt(100)<40)
                         enemy = new Snake(getAtlas(),70,(int)spawnPoint.x,(int)spawnPoint.y);
                     else if(random.nextInt(100)<50)
-                        enemy = new Bee(getAtlas(),(int)spawnPoint.x,(int)spawnPoint.y);
+                        enemy = new Bee(getAtlas(),50,(int)spawnPoint.x,(int)spawnPoint.y);
                     else
                         enemy = new Terrex(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
                 }else{
                     if(random.nextInt(100)<30){
-                        enemy = new Clam(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
+                        enemy = new Clam(getAtlas(), 60,(int)spawnPoint.x,(int)spawnPoint.y);
                     }else if(random.nextInt(100)<40){
                         enemy = new Terrex(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
                     }else if(random.nextInt(100)<40){
@@ -245,22 +247,22 @@ public class BattleGrid extends Stage {
                     }else if(random.nextInt(100)<40){
                         enemy = new Snake(getAtlas(), 70,(int)spawnPoint.x,(int)spawnPoint.y);
                     }else{
-                        enemy = new Bee(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
+                        enemy = new Bee(getAtlas(),70, (int)spawnPoint.x,(int)spawnPoint.y);
                     }
                 }
-//                
-//                else
+                //                
+                //                else
                 //Override below to only spawn this type of enemy
-//                  enemy = new Bee(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
+                //                  enemy = new Bee(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
                 assignEntity(enemy);
                 timer.scheduleTask(enemy.nextTask(), random.nextInt(5));
-                
+
                 if(random.nextInt(bonus+1)/3>2&&enemies.size<9){
                     i--;
                 }
-                
+
             }
-           
+
         }
         if(random.nextInt(bonus)/3>3){
             BattleScreen.hero.setHp(BattleScreen.hero.getHp()+30);
@@ -282,19 +284,19 @@ public class BattleGrid extends Stage {
         grid = new BattleEntity[sizeX][sizeY];
         random = new Random(System.currentTimeMillis());
         heroes = new Array<BattleHero>(3);
-        
+
     }
-//    public static boolean assignOnGrid(int x, int y,BattleEntity entity){
-//        if(x<sizeX&&x>=0&&y<sizeY&&y>=0){
-//            if(entity!=null)
-//                grid[x][y] = entity;
-//            else
-//                grid[x][y] = null;
-//            return true;
-//        }else{
-//            return false;
-//        }
-//    }
+    //    public static boolean assignOnGrid(int x, int y,BattleEntity entity){
+    //        if(x<sizeX&&x>=0&&y<sizeY&&y>=0){
+    //            if(entity!=null)
+    //                grid[x][y] = entity;
+    //            else
+    //                grid[x][y] = null;
+    //            return true;
+    //        }else{
+    //            return false;
+    //        }
+    //    }
     public static BattleEntity checkGrid(int x, int y){
         if(x<sizeX&&x>=0&&y<sizeY&&y>=0){
             if(grid[x][y] instanceof BattleHero){
