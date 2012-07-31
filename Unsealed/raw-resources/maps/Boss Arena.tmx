@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="25" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Exteriors" tilewidth="32" tileheight="32">
+  <image source="tiles_/exteriors.png" width="1120" height="1568"/>
+ </tileset>
+ <layer name="Ground" width="25" height="15">
+  <data encoding="base64" compression="zlib">
+   eJx1lEkOACEIBH00nwM/N3OQpFKBg3EBmq0xzjn3X/mveOfCPd6Z8pBu77bPd7848631CrjUCcgDdvZvWQm7gFmwL/gIvTt+2na8KZs7+OFewmt947IO7SPP3gfHf7WnZKw5+zLV2O/EtJ5541yZx8QL5zDlQc5tPr1PcVg+1dQy83er31SvrW7mkvltLlBuvSkfct9zZyz3YevNFBvnxtzxnJF//ge2OfU8eSZTi3L/aebPxlHPCXM0nn2X8Kb/auKx3zdu8G9zj/r+Acp28XI=
+  </data>
+ </layer>
+ <layer name="Pit of Doom" width="25" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBh+QIaRgUGWSliOEbv5v4G0AyN18C8GTHvsoXLXgexkRvLxDQbs9sD8ADI/BYsfSQFJaPY4MqL6wZFC85HtgfkrhUZ2YAPUtgM5fcLiAxaG2NICOeYjp09kd9sjpQVK8gWy+ehpCD09UIpxpVHk9EAppjQPDEYAAD6QNGY=
+  </data>
+ </layer>
+ <layer name="Decorations" width="25" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAE5SwIdiETFgUEABcRemaxEFYDAgFEmFVOpFmUAJB7d5ARFqNgFIwC6gB/Ouc/PxrbR2zZCirfiC3jdiKZCQBqNAaD
+  </data>
+ </layer>
+ <layer name="Tree Trunk" width="25" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAEvIwMDHxAzM+IRRINGADVGAKxER612MwiRh8MBAPVhABxKBa1MLdiMwufPlIAzK3UMAsXgLl1FIyCoQpIKTfIBaSUG+QCYsqNwexXmNsAnfoIUg==
+  </data>
+ </layer>
+ <layer name="Tree Top" width="25" height="15">
+  <data encoding="base64" compression="zlib">
+   eJyzYWBgsGVABXFAHA/ECQyUAWsgtqGSWbgAzK2jYBQMVSABxJJALEVDO2B5ET2vUxMQU24MZr/C3EYMILeMhLmNlgDmNgCO2wkn
+  </data>
+ </layer>
+ <layer name="Decorations" width="25" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwzZGHACgxxiJMCQliws0fBKBgF9AX0zH+DIa9To/yihT30chcoDgDSmQLC
+  </data>
+ </layer>
+</map>
