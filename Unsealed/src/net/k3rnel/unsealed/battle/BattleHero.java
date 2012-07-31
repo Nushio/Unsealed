@@ -9,6 +9,9 @@ import net.k3rnel.unsealed.battle.magic.FireLion;
 import net.k3rnel.unsealed.battle.magic.MagicEntity;
 import net.k3rnel.unsealed.battle.magic.Shield;
 import net.k3rnel.unsealed.battle.magic.Spikes;
+import net.k3rnel.unsealed.battle.magic.IcePrison;
+import net.k3rnel.unsealed.battle.magic.ThunderClaw;
+import net.k3rnel.unsealed.battle.magic.Wind;
 import net.k3rnel.unsealed.battle.skills.AbstractSkill;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -134,6 +137,27 @@ public class BattleHero extends BattleEntity {
                     case 3:
                         showFireLion(true);
                         break;
+                    case 4:
+                        showWind(true);
+                        break;
+                    case 5:
+                        showWater(true);
+                        break;
+                    case 6:{
+                        if(this.getGridYInt()==0){
+                            showThunder(true,0);
+                            showThunder(true,1);
+                        }
+                        else if(this.getGridYInt()==1){
+                            showThunder(true,0);
+                            showThunder(true,1);
+                            showThunder(true,2);
+                        }else{
+                            showThunder(true,1);
+                            showThunder(true,2);
+                        }
+                    }
+                        break;
                     
                 }
             }
@@ -211,6 +235,25 @@ public class BattleHero extends BattleEntity {
        tmpMagic.setVisible(show);
        magics.add(tmpMagic);
     }
+    public void showWind(boolean show){
+        tmpMagic = new Wind(atlas,this);
+        tmpMagic.setVisible(false);
+        if(show)
+            tmpMagic.setGrid(this.getGridXInt(),this.getGridYInt());
+        tmpMagic.setVisible(show);
+        magics.add(tmpMagic);
+     }
+    public void showWater(boolean show){
+        tmpMagic = new IcePrison(atlas,this);
+        tmpMagic.setVisible(show);
+        magics.add(tmpMagic);
+     }
+    public void showThunder(boolean show,int pos){
+        tmpMagic = new ThunderClaw(atlas,this);
+        tmpMagic.setVisible(show);
+        tmpMagic.setGridY(pos);
+        magics.add(tmpMagic);
+     }
     //    public Cannonball getCannonball(){
     //        if(ball==null){
     //            ball = new Cannonball(atlas,0,1,this);
@@ -372,5 +415,21 @@ public class BattleHero extends BattleEntity {
      */
     public void setSkill6(AbstractSkill skill6) {
         this.skill6 = skill6;
+    }
+
+    public void skillSwitch() {
+        
+        tmpSkill = skill1;
+        skill1 = skill4;
+        skill4 = tmpSkill;
+        
+        tmpSkill = skill2;
+        skill2 = skill5;
+        skill5 = tmpSkill;
+        
+        tmpSkill = skill3;
+        skill3 = skill6;
+        skill6 = tmpSkill;
+        
     }    
 }

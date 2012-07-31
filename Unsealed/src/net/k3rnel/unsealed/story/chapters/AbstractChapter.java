@@ -62,7 +62,6 @@ public class AbstractChapter extends AbstractScreen {
         textBoxStyle = new StyledTable.TableStyle();
         textBoxStyle.background = new NinePatchDrawable(patch);
         textBoxStyle.font = new BitmapFont();
-        textBoxStyle.font.setScale(1.5f);
         textBoxStyle.padX = 8;
         textBoxStyle.padY = 4;
 

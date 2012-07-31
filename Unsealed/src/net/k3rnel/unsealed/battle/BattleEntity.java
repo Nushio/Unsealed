@@ -47,6 +47,7 @@ public class BattleEntity extends Image {
     public static final int statusBurned = 1;
     public static final int statusPoisoned = 2;
     public static final int statusStunned = 3;
+    public static final int statusFrozen = 4;
     
     private int status=statusNormal;
 
@@ -334,6 +335,48 @@ public class BattleEntity extends Image {
                             }
                         }));
                 this.addAction( actions ) ;
+                break;
+            case BattleEntity.statusFrozen:
+                this.status = statusStunned;
+                actions =     
+                        
+                        sequence(color(Color.BLUE), delay(0.05f),
+                                color(Color.CLEAR),delay(0.05f),
+                                color(Color.BLUE),delay(0.05f),
+                                color(Color.CLEAR),delay(0.05f),
+                                run(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        setHp(getHp()-10);
+                                    }
+                                }),
+                                color(Color.BLUE), delay(0.05f),
+                                color(Color.CLEAR),delay(0.05f),
+                                color(Color.BLUE),delay(0.05f),
+                                color(Color.CLEAR),delay(0.05f),
+                                run(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        setHp(getHp()-10);
+                                    }
+                                }),
+                                color(Color.BLUE), delay(0.05f),
+                                color(Color.CLEAR),delay(0.05f),
+                                color(Color.BLUE),delay(0.05f),
+                                color(Color.CLEAR),delay(0.05f),
+                                run(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        setHp(getHp()-10);
+                                    }
+                                }),
+                                color(Color.WHITE), run(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                       setState(BattleEntity.statusNormal);
+                                    }
+                                }));
+                        this.addAction( actions ) ;
                 break;
             case BattleEntity.statusPoisoned:
                 actions =     

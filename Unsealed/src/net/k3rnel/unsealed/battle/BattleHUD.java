@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -24,11 +25,12 @@ public class BattleHUD extends Stage {
     public Button dPadLeft;
     public Button dPadRight;
     TextureRegion[][] spells; 
-    public Button aButton;
-    public Button bButton;
+    public ImageButton aButton;
+    public ImageButton bButton;
     public ImageButton xButton;
-    public Button yButton;
-
+    public ImageButton yButton;
+    public TextureRegion[][] blankButton;
+    
     TextureRegion[][] manasphere; 
     private Image manasphere1;
     private Image manasphere2;
@@ -49,7 +51,7 @@ public class BattleHUD extends Stage {
        
         AtlasRegion atlasRegion = atlas.findRegion("battle/ui/blue_facebutton1");
         TextureRegion[][] textures = atlasRegion.split(83,92);
-      
+
         aButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
         aButton.setSize(83,92);
         aButton.setX( this.getWidth() - (aButton.getWidth()*aButton.getScaleX()) );
@@ -57,6 +59,7 @@ public class BattleHUD extends Stage {
         this.addActor(aButton);
         //
         textures = atlasRegion.split(83,92);
+        blankButton = textures;
         xButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
         xButton.setSize(83,92);
         xButton.setX( this.getWidth() - (xButton.getWidth()*xButton.getScaleX()) -160 );
@@ -72,6 +75,10 @@ public class BattleHUD extends Stage {
         atlasRegion = atlas.findRegion("battle/ui/blue_facebutton2");
         textures = atlasRegion.split(75,74);
         yButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+        textures = atlas.findRegion("battle/ui/spells").split(64,64);
+        Image actor = new Image(textures[2][1]);
+        actor.setY(0);
+        yButton.addActor(actor);
         yButton.setX( this.getWidth() - (yButton.getWidth()*yButton.getScaleX()) -84 );
         yButton.setY( this.getHeight() -(yButton.getHeight()*yButton.getScaleY()+ 60) );
         this.addActor(yButton);
@@ -90,8 +97,6 @@ public class BattleHUD extends Stage {
             rightTrigger.setPosition(this.getWidth()-rightTrigger.getWidth(), this.getHeight()-rightTrigger.getHeight());
 
             this.addActor(rightTrigger);
-
-
 
             atlasRegion = atlas.findRegion("battle/ui/dpad_alt");
             dPad = new Image(new Image(atlasRegion).getDrawable());

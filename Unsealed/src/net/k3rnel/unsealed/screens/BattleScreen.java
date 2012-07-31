@@ -19,6 +19,7 @@ import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -31,6 +32,12 @@ import net.k3rnel.unsealed.battle.BattleGrid;
 import net.k3rnel.unsealed.battle.BattleHUD;
 import net.k3rnel.unsealed.battle.BattleHero;
 import net.k3rnel.unsealed.battle.magic.MagicEntity;
+import net.k3rnel.unsealed.battle.skills.EarthSpikes;
+import net.k3rnel.unsealed.battle.skills.FireLion;
+import net.k3rnel.unsealed.battle.skills.FirePunch;
+import net.k3rnel.unsealed.battle.skills.ThunderClaw;
+import net.k3rnel.unsealed.battle.skills.TornadoVacuum;
+import net.k3rnel.unsealed.battle.skills.IceTentacle;
 import net.k3rnel.unsealed.screens.AbstractScreen;
 import net.k3rnel.unsealed.story.helpers.MapCharacter;
 import net.k3rnel.unsealed.story.helpers.StyledTable;
@@ -105,7 +112,9 @@ public class BattleScreen extends AbstractScreen {
 
         // Create the camera
         camera = new OrthographicCamera(MENU_VIEWPORT_WIDTH,MENU_VIEWPORT_HEIGHT);
-        camera.position.set(1300,1220, 0);
+        camera.position.set(850,1265, 0);
+        camera.update();
+
 
         AtlasRegion atlasRegion = atlas.findRegion( "battle/ui/field-3x3" );
         battleoverlay = new Image(atlasRegion);
@@ -228,8 +237,19 @@ public class BattleScreen extends AbstractScreen {
 
         hero = new BattleHero(getAtlas(),150);
         hero.setGrid(1,1);
+        hero.setSkill1(new EarthSpikes(getAtlas()));
+        hud.xButton.addActor(hero.getSkill1());
+
+        hero.setSkill2(new TornadoVacuum(getAtlas()));
+        hud.bButton.addActor(hero.getSkill2());
+
+        hero.setSkill3(new FireLion(getAtlas()));
+        hud.aButton.addActor(hero.getSkill3());
         grid.assignEntity(hero);     
 
+        hero.setSkill4(new ThunderClaw(getAtlas()));
+        hero.setSkill5(new IceTentacle(getAtlas()));
+        hero.setSkill6(new FirePunch(getAtlas()));
         if(!scriptedBattle)
             grid.spawnEnemies(bonus);
 
@@ -238,11 +258,12 @@ public class BattleScreen extends AbstractScreen {
         roundLabel.setY(350);
         this.stage.addActor(roundLabel);
 
-        restartButton = new TextButton("Restart?", getSkin());
-        restartButton.setY(250);
-        restartButton.setX(320);
-        restartButton.setWidth(100);
-        restartButton.setHeight(50);
+        atlasRegion = atlas.findRegion( "battle/ui/continue" );
+        restartButton = new ImageButton(new Image(atlasRegion).getDrawable());
+        restartButton.setY(140);
+        restartButton.setX(170);
+        restartButton.setWidth(426);
+        restartButton.setHeight(165);
         restartButton.setVisible(false);
         restartButton.setDisabled(true);
         restartButton.addListener(new ClickListener() {
@@ -252,6 +273,9 @@ public class BattleScreen extends AbstractScreen {
                 hero = new BattleHero(getAtlas(),150);
                 hero.setGrid(1,1);
                 hero.reset();
+                hero.setSkill1(new EarthSpikes(getAtlas()));
+                hero.setSkill2(new TornadoVacuum(getAtlas()));
+                hero.setSkill3(new FireLion(getAtlas()));
                 grid.reset();
                 grid.assignEntity(hero);     
                 bonus = 1;
@@ -263,7 +287,7 @@ public class BattleScreen extends AbstractScreen {
 
             }
         });
-        this.stage.addActor(restartButton);
+//        this.stage.addActor(restartButton);
 
         NinePatch patch = getAtlas().createPatch("maps/dialog-box");
 
@@ -290,10 +314,9 @@ public class BattleScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         // (1) process the game logic
-
         // update the actors
         stage.act( delta );
-
+        
         // (2) draw the result
 
         if(scriptedBattle)
@@ -304,16 +327,17 @@ public class BattleScreen extends AbstractScreen {
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 
         // draw the actors
-       tileMapRenderer.render(camera);
+        tileMapRenderer.render(camera);
 
         stage.draw();
-       
+
 
         if(!scriptedBattle)
             if(BattleGrid.checkState() == BattleGrid.battleWon){
                 bonus++;
                 hero.reset();
                 grid.reset();
+                grid.assignEntity(hero);
                 grid.spawnEnemies(bonus);
             }else if(BattleGrid.checkState() == BattleGrid.battleLost){
                 roundLabel.setX(330);
@@ -326,6 +350,9 @@ public class BattleScreen extends AbstractScreen {
         hud.act(delta);
         hud.fillMana(hero);
 
+        restartButton.setY(40);
+        restartButton.setX(170);
+        
         grid.draw();
         stage.getSpriteBatch().begin();
         for(MapCharacter character : characters){
@@ -334,8 +361,17 @@ public class BattleScreen extends AbstractScreen {
                 character.draw(stage.getSpriteBatch(), 1);
             }
         }
-        stage.getSpriteBatch().end();
+        
         hud.draw();
+        
+        stage.getSpriteBatch().end();
+        if(restartButton.isVisible()){
+            this.getBatch().begin();
+            restartButton.draw(this.getBatch(), 1);
+            this.getBatch().end();
+        }
+        
+        
     }
 
     @Override
@@ -381,6 +417,9 @@ public class BattleScreen extends AbstractScreen {
                 case Input.Keys.L:
                     buttonPress(8,true);
                     return true;
+                case Input.Keys.I:
+                    buttonPress(9,true);
+                    return true;
             }
         return false;
     }
@@ -400,9 +439,11 @@ public class BattleScreen extends AbstractScreen {
                 case Input.Keys.K:
                     buttonPress(7,false);
                     return true;
-
                 case Input.Keys.L:
                     buttonPress(8,false);
+                    return true;
+                case Input.Keys.I:
+                    buttonPress(9,false);
                     return true;
                 case Input.Keys.BACK:
                     game.setScreen(new MenuScreen(game));
@@ -418,6 +459,7 @@ public class BattleScreen extends AbstractScreen {
      * 0 = up, 1 = down, 2 = left, 3 = right
      * 4 = shield, 5 = attack
      * 6 = Skill1. 7 = Skill2. 8 = Skill3.
+     * 9 = next-skill-page
      * @param direction
      */
     public void buttonPress(int button,boolean pressed){
@@ -524,6 +566,100 @@ public class BattleScreen extends AbstractScreen {
                                     hero.magicType = hero.getSkill3().id;
                                     hero.setState(hero.getSkill3().stance);
                                 }
+                        }
+                    }else{
+
+                    }
+                    break;
+                }
+                case 9:{ // SkillSwitch
+                    if(pressed){
+                        hero.skillSwitch();
+                        
+                        //Reload y,b,a
+                        if(hero.getSkill1()!=null){
+                            hud.xButton.clear();
+                            hud.xButton = new ImageButton(new Image(hud.blankButton[0][0]).getDrawable(),new Image(hud.blankButton[1][0]).getDrawable());
+                            hud.xButton.setSize(83,92);
+                            hud.xButton.setX( hud.getWidth() - (hud.xButton.getWidth()*hud.xButton.getScaleX()) -160 );
+                            hud.xButton.setY( hud.getHeight() -(hud.xButton.getHeight()*hud.xButton.getScaleY()+ 100) );
+                            hud.xButton.addActor(hero.getSkill1());
+                            hud.xButton.addListener(new PressedListener() {
+                                @Override
+                                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                    super.touchDown(event, x, y, pointer, button);
+                                    buttonPress(6,true); 
+                                    return true;
+                                }
+                                @Override
+                                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                                    super.touchUp(event, x, y, pointer, button);
+                                    buttonPress(6,false); 
+                                }
+                            });
+                            hud.addActor(hud.xButton);
+                        }else{
+                            hud.xButton = new ImageButton(new Image(hud.blankButton[0][0]).getDrawable(),new Image(hud.blankButton[1][0]).getDrawable());
+                            hud.xButton.setSize(83,92);
+                            hud.xButton.setX( hud.getWidth() - (hud.xButton.getWidth()*hud.xButton.getScaleX()) -160 );
+                            hud.xButton.setY( hud.getHeight() -(hud.xButton.getHeight()*hud.xButton.getScaleY()+ 100) );
+                            hud.addActor(hud.xButton);
+                        }
+                        if(hero.getSkill2()!=null){
+                            hud.bButton.clear();
+                            hud.bButton = new ImageButton(new Image(hud.blankButton[0][0]).getDrawable(),new Image(hud.blankButton[1][0]).getDrawable());
+                            hud.bButton.setSize(83,92);
+                            hud.bButton.setX( hud.getWidth() - (hud.bButton.getWidth()*hud.bButton.getScaleX()) - 80 );
+                            hud.bButton.setY( hud.getHeight() -(hud.bButton.getHeight()*hud.bButton.getScaleY() + 160) );
+                            hud.bButton.addActor(hero.getSkill2());
+                            hud.bButton.addListener(new PressedListener() {
+                                @Override
+                                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                    super.touchDown(event, x, y, pointer, button);
+                                    buttonPress(7,true); 
+                                    return true;
+                                }
+                                @Override
+                                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                                    super.touchUp(event, x, y, pointer, button);
+                                    buttonPress(7,false); 
+                                }
+                            });
+                            hud.addActor(hud.bButton);
+                        }else{
+                            hud.bButton = new ImageButton(new Image(hud.blankButton[0][0]).getDrawable(),new Image(hud.blankButton[1][0]).getDrawable());
+                            hud.bButton.setSize(83,92);
+                            hud.bButton.setX( hud.getWidth() - (hud.bButton.getWidth()*hud.bButton.getScaleX()) - 80 );
+                            hud.bButton.setY( hud.getHeight() -(hud.bButton.getHeight()*hud.bButton.getScaleY() + 160) );
+                            hud.addActor(hud.bButton);
+                        }
+                        if(hero.getSkill3()!=null){
+                            hud.aButton.clear();
+                            hud.aButton = new ImageButton(new Image(hud.blankButton[0][0]).getDrawable(),new Image(hud.blankButton[1][0]).getDrawable());
+                            hud.aButton.setSize(83,92);
+                            hud.aButton.setX( hud.getWidth() - (hud.aButton.getWidth()*hud.aButton.getScaleX()) );
+                            hud.aButton.setY( hud.getHeight() -(hud.aButton.getHeight()*hud.aButton.getScaleY() + 100) );
+                            hud.aButton.addActor(hero.getSkill3());
+                            hud.aButton.addListener(new PressedListener() {
+                                @Override
+                                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                                    super.touchDown(event, x, y, pointer, button);
+                                    buttonPress(8,true); 
+                                    return true;
+                                }
+                                @Override
+                                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                                    super.touchUp(event, x, y, pointer, button);
+                                    buttonPress(8,false); 
+                                }
+                            });
+                            hud.addActor(hud.aButton);
+                        }else{
+                            hud.aButton = new ImageButton(new Image(hud.blankButton[0][0]).getDrawable(),new Image(hud.blankButton[1][0]).getDrawable());
+                            hud.aButton.setSize(83,92);
+                            hud.aButton.setX( hud.getWidth() - (hud.aButton.getWidth()*hud.aButton.getScaleX())  );
+                            hud.aButton.setY( hud.getHeight() -(hud.aButton.getHeight()*hud.aButton.getScaleY() + 100) );
+                            hud.addActor(hud.aButton);
                         }
                     }else{
 

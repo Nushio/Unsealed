@@ -28,7 +28,7 @@ public class Lidia extends MapCharacter {
         Animation standRight = new Animation(1f, new TextureRegion[]{ tmp[3][0] });
         
         Animation walkUp = new Animation(0.1f, new TextureRegion[]{ tmp[0][1], tmp[0][2], tmp[0][3], tmp[0][4], tmp[0][5], tmp[0][6], tmp[0][7], tmp[0][8] });
-        Animation walkLeft = new Animation(0.1f, new TextureRegion[]{ tmp[1][1], tmp[1][2], tmp[1][3], tmp[1][4], tmp[1][5], tmp[1][6], tmp[1][7], tmp[1][8] });
+        Animation walkLeft = new Animation(0.1f, new TextureRegion[]{ tmp[1][8], tmp[1][7], tmp[1][6], tmp[1][5], tmp[1][4], tmp[1][3], tmp[1][2], tmp[1][1] });
         Animation walkDown = new Animation(0.1f, new TextureRegion[]{ tmp[2][1], tmp[2][2], tmp[2][3], tmp[2][4], tmp[2][5], tmp[2][6], tmp[2][7], tmp[2][8] });
         Animation walkRight = new Animation(0.1f, new TextureRegion[]{ tmp[3][1], tmp[3][2], tmp[3][3], tmp[3][4], tmp[3][5], tmp[3][6], tmp[3][7], tmp[3][8] });
         

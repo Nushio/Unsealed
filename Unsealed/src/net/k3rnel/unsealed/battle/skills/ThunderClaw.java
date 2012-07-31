@@ -7,16 +7,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import net.k3rnel.unsealed.battle.BattleEntity;
 
 
-public class FirePunch extends AbstractSkill {
+public class ThunderClaw extends AbstractSkill {
 
-     public FirePunch(TextureAtlas atlas) {
+     public ThunderClaw(TextureAtlas atlas) {
         super(atlas);
-        id = 1;
-        manaCost=5;
-        this.setY(10);
-        stance = BattleEntity.stateAltAttacking;
+        id = 6;
+        manaCost = 5;
+        this.setY(18);
+        this.setX(5);
+        stance = BattleEntity.stateAttacking;
         TextureRegion[][] spells =  atlasRegion.split(64,64);
-        this.setDrawable(new Image(spells[2][0]).getDrawable());
+        this.setDrawable(new Image(spells[0][3]).getDrawable());
     }
    
 }

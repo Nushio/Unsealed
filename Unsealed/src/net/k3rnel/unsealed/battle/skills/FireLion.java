@@ -13,6 +13,7 @@ public class FireLion extends AbstractSkill {
         super(atlas);
         id = 3;
         manaCost = 5;
+        this.setY(10);
         stance = BattleEntity.stateAttacking;
         TextureRegion[][] spells =  atlasRegion.split(64,64);
         this.setDrawable(new Image(spells[0][0]).getDrawable());

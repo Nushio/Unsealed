@@ -31,7 +31,7 @@ public class Wind extends MagicEntity {
         this.setState(BattleEntity.stateAttacking);
         this.setHeight(64);this.setWidth(64);
         offsetX = -(int)entity.getWidth()/2;
-        offsetY = 10;
+//        offsetY = 10;
         this.setGridY(entity.getGridY());
         this.setX(entity.getX()+offsetX);
 
