@@ -1,3 +1,21 @@
+/**
+ * Unsealed: Whispers of Wisdom. 
+ * 
+ * Copyright (C) 2012 - Juan 'Nushio' Rodriguez
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 of 
+ * the License as published by the Free Software Foundation
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
 package net.k3rnel.unsealed.battle.magic;
 
 import com.badlogic.gdx.Gdx;
@@ -13,7 +31,7 @@ import net.k3rnel.unsealed.battle.BattleHero;
 
 public class TreeRoot extends MagicEntity {
     
-    public TreeRoot(TextureAtlas atlas, float speed, BattleEntity entity) {
+    public TreeRoot(TextureAtlas atlas, int y, float speed, BattleEntity entity) {
         super(speed,0,entity);
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/treeroot" );
         TextureRegion[][] spriteSheet = atlasRegion.split(88, 88);
@@ -35,7 +53,7 @@ public class TreeRoot extends MagicEntity {
         offsetX = (int)entity.getWidth()-320;
         offsetY = 30;
 
-        this.setGrid(entity.getGridXInt()-1,entity.getGridYInt());
+        this.setGrid(entity.getGridXInt()-1,y);
     }
     
     @Override

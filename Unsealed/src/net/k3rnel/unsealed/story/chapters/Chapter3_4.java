@@ -1,3 +1,21 @@
+/**
+ * Unsealed: Whispers of Wisdom. 
+ * 
+ * Copyright (C) 2012 - Juan 'Nushio' Rodriguez
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 of 
+ * the License as published by the Free Software Foundation
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
 package net.k3rnel.unsealed.story.chapters;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
@@ -13,10 +31,12 @@ import net.k3rnel.unsealed.battle.skills.EarthSpikes;
 import net.k3rnel.unsealed.battle.skills.FireLion;
 import net.k3rnel.unsealed.battle.skills.FirePunch;
 import net.k3rnel.unsealed.battle.skills.IceTentacle;
+import net.k3rnel.unsealed.battle.skills.SuperFirePunch;
 import net.k3rnel.unsealed.battle.skills.ThunderClaw;
 import net.k3rnel.unsealed.battle.skills.TornadoVacuum;
 import net.k3rnel.unsealed.screens.BattleScreen;
-import net.k3rnel.unsealed.screens.LevelSelectScreen;
+import net.k3rnel.unsealed.screens.ChapterSelectScreen;
+import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
 
 public class Chapter3_4 extends BattleScreen {
 
@@ -30,11 +50,12 @@ public class Chapter3_4 extends BattleScreen {
     @Override
     public void show() {
         super.show();
+        game.getMusicManager().play( UnsealedMusic.BOSSBATTLE );
         hero.setHp(250);
         hero.setSkill1(new EarthSpikes(getAtlas()));
         hud.xButton.addActor(hero.getSkill1());
         
-        hero.setSkill2(new FirePunch(getAtlas()));
+        hero.setSkill2(new SuperFirePunch(getAtlas()));
         hud.bButton.addActor(hero.getSkill2());
         
         hero.setSkill3(new ThunderClaw(getAtlas()));
@@ -132,7 +153,7 @@ public class Chapter3_4 extends BattleScreen {
                 }
                 break;
             case 3:
-                game.setScreen(new LevelSelectScreen(game));
+                game.setScreen(new ChapterSelectScreen(game));
                 break;
         }
     }

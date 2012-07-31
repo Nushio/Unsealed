@@ -1,8 +1,28 @@
+/**
+ * Unsealed: Whispers of Wisdom. 
+ * 
+ * Copyright (C) 2012 - Juan 'Nushio' Rodriguez
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 of 
+ * the License as published by the Free Software Foundation
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
 package net.k3rnel.unsealed.story.chapters;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import net.k3rnel.unsealed.Unsealed;
@@ -12,6 +32,7 @@ import net.k3rnel.unsealed.battle.enemies.Snake;
 import net.k3rnel.unsealed.battle.skills.EarthSpikes;
 import net.k3rnel.unsealed.battle.skills.FireLion;
 import net.k3rnel.unsealed.screens.BattleScreen;
+import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
 
 public class Chapter2_3 extends BattleScreen {
 
@@ -25,17 +46,20 @@ public class Chapter2_3 extends BattleScreen {
     @Override
     public void show() {
         super.show();
+        game.getMusicManager().play( UnsealedMusic.BATTLE );
+        
         hero.setSkill1(new EarthSpikes(getAtlas()));
         hud.xButton.addActor(hero.getSkill1());
         
         hero.setSkill3(new FireLion(getAtlas()));
         hud.aButton.addActor(hero.getSkill3());
         
-        restartButton = new TextButton("Restart?", getSkin());
-        restartButton.setY(250);
-        restartButton.setX(320);
-        restartButton.setWidth(100);
-        restartButton.setHeight(50);
+        AtlasRegion atlasRegion = atlas.findRegion( "battle/ui/continue" );
+        restartButton = new ImageButton(new Image(atlasRegion).getDrawable(),new Image(atlasRegion).getDrawable());
+        restartButton.setY(140);
+        restartButton.setX(170);
+        restartButton.setWidth(426);
+        restartButton.setHeight(165);
         restartButton.setVisible(false);
         restartButton.setDisabled(true);
         restartButton.addListener(new ClickListener() {

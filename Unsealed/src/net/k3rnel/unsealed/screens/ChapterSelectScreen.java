@@ -1,5 +1,26 @@
+/**
+ * Unsealed: Whispers of Wisdom. 
+ * 
+ * Copyright (C) 2012 - Juan 'Nushio' Rodriguez
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 of 
+ * the License as published by the Free Software Foundation
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
 package net.k3rnel.unsealed.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -17,11 +38,11 @@ import net.k3rnel.unsealed.story.chapters.Chapter1_1;
 import net.k3rnel.unsealed.story.chapters.Chapter2_1;
 import net.k3rnel.unsealed.story.chapters.Chapter3_4;
 
-public class LevelSelectScreen extends AbstractScreen {
+public class ChapterSelectScreen extends AbstractScreen {
 
     private Table table;
     
-    public LevelSelectScreen(Unsealed game) {
+    public ChapterSelectScreen(Unsealed game) {
         super(game);
     }
     
@@ -38,7 +59,7 @@ public class LevelSelectScreen extends AbstractScreen {
         Skin skin = super.getSkin();
 
         // create the table actor and add it to the stage
-        table = new Table( skin );
+        table = super.getTable();
         if(Unsealed.DEBUG)
             table.debug();
         table.setWidth(stage.getWidth());
@@ -47,19 +68,17 @@ public class LevelSelectScreen extends AbstractScreen {
         
         Label titleLabel = new Label("Select Chapter", skin);
         table.padTop(40);
-        table.add(titleLabel).expandX().align(Align.center).colspan(7);
+        table.add(titleLabel).expandX().align(Align.center).colspan(5);
         table.row();
         table.row();
-        table.add();
         table.add();
         Label chapterLabel = new Label("Chapter 1\nNew Girl in Town",skin);
         chapterLabel.setAlignment(Align.center);
         table.add(chapterLabel).align(Align.center);
         chapterLabel = new Label("Chapter 2\nOld Friends",skin);
         table.add(chapterLabel).align(Align.center);
-        chapterLabel = new Label("Chapter 3\n",skin);
+        chapterLabel = new Label("Chapter 3\nWalled Gardens",skin);
         table.add(chapterLabel).align(Align.center);
-        table.add();
         table.add();
         table.row();
         AtlasRegion charRegion = getAtlas().findRegion( "char-sprites/lidia_spritesheet" );
@@ -78,7 +97,6 @@ public class LevelSelectScreen extends AbstractScreen {
                 
             }
         });
-        table.add(new Button(new Label("<",skin),skin)).height(128).width(32);
         table.add().height(128).width(32);
         table.add(chapterButton).height(128).width(128);
         charRegion = getAtlas().findRegion( "char-sprites/lidia_spritesheet" );
@@ -118,13 +136,24 @@ public class LevelSelectScreen extends AbstractScreen {
         chap3Button.size(128,128);
         table.add(chap3Button).height(128).width(128);
         table.add().height(128).width(32);
-        table.add(new Button(new Label(">",skin),skin)).height(128).width(32);
-        stage.addActor( table );
+        
+        Gdx.input.setInputProcessor(new InputMultiplexer(this,stage));
     }
     
+    /**
+     * On key press
+     */
     @Override
-    public void render(float delta) {
-        super.render(delta);
-//        Table.drawDebug(stage);
+    public boolean keyUp(int keycode) {
+        switch(keycode) {
+            case Input.Keys.BACK:
+                game.setScreen(new MenuScreen(game));
+                return true;
+            case Input.Keys.ESCAPE:
+                game.setScreen(new MenuScreen(game));
+                return true;
+
+        }
+        return false;
     }
 }

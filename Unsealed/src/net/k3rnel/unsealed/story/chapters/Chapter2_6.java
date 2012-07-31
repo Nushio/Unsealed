@@ -1,16 +1,33 @@
+/**
+ * Unsealed: Whispers of Wisdom. 
+ * 
+ * Copyright (C) 2012 - Juan 'Nushio' Rodriguez
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 of 
+ * the License as published by the Free Software Foundation
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
 package net.k3rnel.unsealed.story.chapters;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import net.k3rnel.unsealed.Unsealed;
+import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
 import net.k3rnel.unsealed.story.characters.Lidia;
-import net.k3rnel.unsealed.story.characters.Shura;
 import net.k3rnel.unsealed.story.helpers.MapCharacter;
 
 public class Chapter2_6 extends AbstractChapter {
@@ -31,6 +48,8 @@ public class Chapter2_6 extends AbstractChapter {
     public void show() {
         super.show();
 
+        game.getMusicManager().play( UnsealedMusic.DOJO );
+        
         tmpChar = new Lidia(getAtlas());
         tmpChar.setPosition(1100,100);
         tmpChar.updateAnimation();

@@ -1,3 +1,21 @@
+/**
+ * Unsealed: Whispers of Wisdom. 
+ * 
+ * Copyright (C) 2012 - Juan 'Nushio' Rodriguez
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 of 
+ * the License as published by the Free Software Foundation
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
 package net.k3rnel.unsealed.screens;
 
 import java.util.ArrayList;
@@ -6,6 +24,7 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -17,11 +36,9 @@ import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledLoader;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.PressedListener;
@@ -39,6 +56,7 @@ import net.k3rnel.unsealed.battle.skills.ThunderClaw;
 import net.k3rnel.unsealed.battle.skills.TornadoVacuum;
 import net.k3rnel.unsealed.battle.skills.IceTentacle;
 import net.k3rnel.unsealed.screens.AbstractScreen;
+import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
 import net.k3rnel.unsealed.story.helpers.MapCharacter;
 import net.k3rnel.unsealed.story.helpers.StyledTable;
 import net.k3rnel.unsealed.story.helpers.TextBox;
@@ -98,6 +116,8 @@ public class BattleScreen extends AbstractScreen {
     public void show() {
         super.show();
 
+        if(!scriptedBattle)
+            game.getMusicManager().play( UnsealedMusic.BATTLE );
         atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
 
         // Load the tmx file into map
@@ -167,7 +187,7 @@ public class BattleScreen extends AbstractScreen {
                 buttonPress(8,false); 
             }
         });
-        if(Gdx.app.getVersion()>0||Unsealed.DEBUG==true){
+        if(Gdx.app.getType()==ApplicationType.Android||Unsealed.DEBUG==true){
             hud.leftTrigger.addListener(new PressedListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

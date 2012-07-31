@@ -1,11 +1,30 @@
+/**
+ * Unsealed: Whispers of Wisdom. 
+ * 
+ * Copyright (C) 2012 - Juan 'Nushio' Rodriguez
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 of 
+ * the License as published by the Free Software Foundation
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package net.k3rnel.unsealed;
 
 import net.k3rnel.unsealed.screens.MenuScreen;
 import net.k3rnel.unsealed.screens.OptionsScreen;
+import net.k3rnel.unsealed.screens.QuickTutorialScreen;
 import net.k3rnel.unsealed.screens.SplashScreen;
 import net.k3rnel.unsealed.services.MusicManager;
 import net.k3rnel.unsealed.services.PreferencesManager;
-import net.k3rnel.unsealed.services.ProfileManager;
 import net.k3rnel.unsealed.services.SoundManager;
 
 import com.badlogic.gdx.Game;
@@ -20,14 +39,13 @@ public class Unsealed extends Game {
     public static final String LOG = Unsealed.class.getSimpleName();
 
     // whether we are in development mode
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     
     // Gets the current FPS. Useful for debugging. 
     private FPSLogger fpsLogger;
 
     // services
     private PreferencesManager preferencesManager;
-    private ProfileManager profileManager;
     private MusicManager musicManager;
     private SoundManager soundManager;
     //Loads teh maps
@@ -46,10 +64,6 @@ public class Unsealed extends Game {
         return preferencesManager;
     }
 
-    public ProfileManager getProfileManager() {
-        return profileManager;
-    }
-
     public MusicManager getMusicManager() {
         return musicManager;
     }
@@ -58,8 +72,8 @@ public class Unsealed extends Game {
         return soundManager;
     }
     
-    public SplashScreen getSplashScreen() {
-        return new SplashScreen(this);
+    public QuickTutorialScreen getSplashScreen() {
+        return new QuickTutorialScreen(this);
     }
 
     public MenuScreen getMenuScreen() {
@@ -91,12 +105,9 @@ public class Unsealed extends Game {
         soundManager.setVolume( preferencesManager.getVolume() );
         soundManager.setEnabled( preferencesManager.isSoundEnabled() );
 
-        // create the profile manager
-        profileManager = new ProfileManager();
-        profileManager.retrieveProfile();
-
         // create the helper objects
-        fpsLogger = new FPSLogger();
+        if(Unsealed.DEBUG)
+            fpsLogger = new FPSLogger();
 
     }
 
@@ -108,7 +119,10 @@ public class Unsealed extends Game {
         // show the splash screen when the game is resized for the first time;
         // this approach avoids calling the screen's resize method repeatedly
         if( getScreen() == null ) {
-            setScreen( new MenuScreen ( this ) );
+            if(Unsealed.DEBUG)
+                setScreen( new MenuScreen ( this ) );
+            else
+                setScreen( new SplashScreen( this ) );
         }
     }
 
@@ -127,9 +141,6 @@ public class Unsealed extends Game {
         super.pause();
         Gdx.app.log( Unsealed.LOG, "Pausing game" );
 
-        // persist the profile, because we don't know if the player will come
-        // back to the game
-        profileManager.persist();
     }
 
     @Override

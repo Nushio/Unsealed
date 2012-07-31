@@ -1,3 +1,21 @@
+/**
+ * Unsealed: Whispers of Wisdom. 
+ * 
+ * Copyright (C) 2012 - Juan 'Nushio' Rodriguez
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 of 
+ * the License as published by the Free Software Foundation
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
 package net.k3rnel.unsealed.battle;
 
 
@@ -30,7 +48,7 @@ public class BattleHero extends BattleEntity {
     public List<MagicEntity> magics;
     private MagicEntity tmpMagic;
     public int magicType;
-    
+
     private TextureAtlas atlas;
 
     private AbstractSkill skill1;
@@ -40,7 +58,7 @@ public class BattleHero extends BattleEntity {
     private AbstractSkill skill5;
     private AbstractSkill skill6;
     private AbstractSkill tmpSkill;
-    
+
     private boolean hit = false;
 
     public BattleHero(TextureAtlas atlas, int hp) {
@@ -107,7 +125,7 @@ public class BattleHero extends BattleEntity {
     @Override
     public void act(float delta) {
         super.act(delta);
-        
+
         if(currentAnimation.isAnimationFinished(stateTime)){
             switch(this.getState()){
                 case BattleEntity.stateAttacking:
@@ -130,7 +148,7 @@ public class BattleHero extends BattleEntity {
                         showBlast(true);
                         break;
                     case 1:
-//                        showRyuKen(true); //Haha
+                        //                        showRyuKen(true); //Haha
                     case 2:
                         showGroundSpikes(true);                        
                         break;
@@ -157,37 +175,69 @@ public class BattleHero extends BattleEntity {
                             showThunder(true,2);
                         }
                     }
-                        break;
-                    
+                    break;
+
                 }
             }
         }else if(this.getState() == BattleEntity.stateBlocking){
             shield.act(delta);
-                getShield().setGrid(this.getGridXInt(),this.getGridYInt());
+            getShield().setGrid(this.getGridXInt(),this.getGridYInt());
         }else if(this.getState() == BattleEntity.stateAltAttacking){
             if(currentAnimation.animationDuration<stateTime+0.3f&&!hit){
                 hit = true;
-                if(BattleGrid.checkGrid(this.getGridXInt()+1,this.getGridYInt())!=null){
-                    BattleEntity entity = BattleGrid.checkGrid(this.getGridXInt()+1,this.getGridYInt());
-                    if(entity instanceof BattleEnemy){
-                        if(entity.getState() == BattleEntity.stateBlocking){
-                            if(entity.setHp(entity.getHp()-30)){
-                                BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
-                                BattleGrid.clearGrid(entity.getGridXInt(),entity.getGridYInt());
-                                BattleGrid.checkState();
-                            }else{
-                               entity.setStatus(BattleEntity.statusBurned);
-                            }
-                        }else{
-                            if(entity.setHp(entity.getHp()-60)){
-                                BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
-                                BattleGrid.clearGrid(entity.getGridXInt(),entity.getGridYInt());
-                                BattleGrid.checkState();
-                            }else{
-                                entity.setStatus(BattleEntity.statusBurned);
+                switch(magicType){
+                    case 1:{
+
+                        if(BattleGrid.checkGrid(this.getGridXInt()+1,this.getGridYInt())!=null){
+                            BattleEntity entity = BattleGrid.checkGrid(this.getGridXInt()+1,this.getGridYInt());
+                            if(entity instanceof BattleEnemy){
+                                if(entity.getState() == BattleEntity.stateBlocking){
+                                    if(entity.setHp(entity.getHp()-30)){
+                                        BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
+                                        BattleGrid.clearGrid(entity.getGridXInt(),entity.getGridYInt());
+                                        BattleGrid.checkState();
+                                    }else{
+                                        entity.setStatus(BattleEntity.statusBurned);
+                                    }
+                                }else{
+                                    if(entity.setHp(entity.getHp()-60)){
+                                        BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
+                                        BattleGrid.clearGrid(entity.getGridXInt(),entity.getGridYInt());
+                                        BattleGrid.checkState();
+                                    }else{
+                                        entity.setStatus(BattleEntity.statusBurned);
+                                    }
+                                }
                             }
                         }
+                        break;
+                        
                     }
+                    case 7:
+                        if(BattleGrid.checkGrid(this.getGridXInt()+2,this.getGridYInt())!=null){
+                            BattleEntity entity = BattleGrid.checkGrid(this.getGridXInt()+2,this.getGridYInt());
+                            if(entity instanceof BattleEnemy){
+                                if(entity.getState() == BattleEntity.stateBlocking){
+                                    if(entity.setHp(entity.getHp()-30)){
+                                        BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
+                                        BattleGrid.clearGrid(entity.getGridXInt(),entity.getGridYInt());
+                                        BattleGrid.checkState();
+                                    }else{
+                                        entity.setStatus(BattleEntity.statusBurned);
+                                    }
+                                }else{
+                                    if(entity.setHp(entity.getHp()-60)){
+                                        BattleGrid.enemies.removeValue((BattleEnemy)entity,false);
+                                        BattleGrid.clearGrid(entity.getGridXInt(),entity.getGridYInt());
+                                        BattleGrid.checkState();
+                                    }else{
+                                        entity.setStatus(BattleEntity.statusBurned);
+                                    }
+                                }
+                            }
+                        }
+                        break;
+
                 }
             }
         }
@@ -199,7 +249,7 @@ public class BattleHero extends BattleEntity {
                 magics.get(i).act(delta);
             }
         }            
-       
+
     }
     public void reset(){
         magics = new ArrayList<MagicEntity>();
@@ -215,25 +265,25 @@ public class BattleHero extends BattleEntity {
         }
         tmpMagic.setVisible(show);
         magics.add(tmpMagic);
-     }
+    }
     public void showBlast(boolean show){
-       tmpMagic = new Blast(atlas,0,6.5f,this);
-       tmpMagic.setVisible(false);
-       tmpMagic.offsetY = -30;
-       tmpMagic.offsetX = -(int)this.getWidth();
-       if(show)
-           tmpMagic.setGrid(this.getGridXInt(),this.getGridYInt());
-       tmpMagic.setVisible(show);
-       magics.add(tmpMagic);
+        tmpMagic = new Blast(atlas,0,6.5f,this);
+        tmpMagic.setVisible(false);
+        tmpMagic.offsetY = -30;
+        tmpMagic.offsetX = -(int)this.getWidth();
+        if(show)
+            tmpMagic.setGrid(this.getGridXInt(),this.getGridYInt());
+        tmpMagic.setVisible(show);
+        magics.add(tmpMagic);
     }
 
     public void showGroundSpikes(boolean show){
-       tmpMagic = new Spikes(atlas,1,this);
-       tmpMagic.setVisible(false);
-       if(show)
-           tmpMagic.setGrid(this.getGridXInt(),this.getGridYInt());
-       tmpMagic.setVisible(show);
-       magics.add(tmpMagic);
+        tmpMagic = new Spikes(atlas,1,this);
+        tmpMagic.setVisible(false);
+        if(show)
+            tmpMagic.setGrid(this.getGridXInt(),this.getGridYInt());
+        tmpMagic.setVisible(show);
+        magics.add(tmpMagic);
     }
     public void showWind(boolean show){
         tmpMagic = new Wind(atlas,this);
@@ -242,18 +292,18 @@ public class BattleHero extends BattleEntity {
             tmpMagic.setGrid(this.getGridXInt(),this.getGridYInt());
         tmpMagic.setVisible(show);
         magics.add(tmpMagic);
-     }
+    }
     public void showWater(boolean show){
         tmpMagic = new IcePrison(atlas,this);
         tmpMagic.setVisible(show);
         magics.add(tmpMagic);
-     }
+    }
     public void showThunder(boolean show,int pos){
         tmpMagic = new ThunderClaw(atlas,this);
         tmpMagic.setVisible(show);
         tmpMagic.setGridY(pos);
         magics.add(tmpMagic);
-     }
+    }
     //    public Cannonball getCannonball(){
     //        if(ball==null){
     //            ball = new Cannonball(atlas,0,1,this);
@@ -418,18 +468,18 @@ public class BattleHero extends BattleEntity {
     }
 
     public void skillSwitch() {
-        
+
         tmpSkill = skill1;
         skill1 = skill4;
         skill4 = tmpSkill;
-        
+
         tmpSkill = skill2;
         skill2 = skill5;
         skill5 = tmpSkill;
-        
+
         tmpSkill = skill3;
         skill3 = skill6;
         skill6 = tmpSkill;
-        
+
     }    
 }

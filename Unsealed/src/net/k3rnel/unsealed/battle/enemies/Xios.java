@@ -1,3 +1,21 @@
+/**
+ * Unsealed: Whispers of Wisdom. 
+ * 
+ * Copyright (C) 2012 - Juan 'Nushio' Rodriguez
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 of 
+ * the License as published by the Free Software Foundation
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
 package net.k3rnel.unsealed.battle.enemies;
 
 
@@ -23,10 +41,14 @@ import net.k3rnel.unsealed.battle.BattleEntity;
 import net.k3rnel.unsealed.battle.BattleGrid;
 import net.k3rnel.unsealed.battle.BattleHero;
 import net.k3rnel.unsealed.battle.magic.MagicEntity;
-import net.k3rnel.unsealed.battle.magic.PeaDart;
 import net.k3rnel.unsealed.battle.magic.TreeRoot;
 import net.k3rnel.unsealed.battle.magic.TreeTrunk;
 
+/**
+ * Only a cat with a different cloak a Lion still has claws... 
+ * @author Nushio
+ *
+ */
 public class Xios extends BattleEnemy {
 
     List<MagicEntity> darts;
@@ -67,13 +89,13 @@ public class Xios extends BattleEnemy {
         this.setY(100);
         this.hpLabel.setX(470);
     }
-    
+
     @Override
     public void act(float delta) {
         super.act(delta);
-//        setGrid(4,1);
-//        this.setX(320);
-//        this.setY(100);
+        //        setGrid(4,1);
+        //        this.setX(320);
+        //        this.setY(100);
         this.setVisible(true);
         for(int i = 0; i< darts.size(); i++){
             if(darts.get(i).destroyMe){
@@ -84,48 +106,48 @@ public class Xios extends BattleEnemy {
             }
         }  
         if(this.getStatus()!=BattleEntity.statusStunned)
-        switch(getState()){
-            case BattleEntity.stateIdle:
-                if(!currentAnimation.isAnimationFinished(stateTime)){
-                    for(BattleHero hero : BattleGrid.heroes){
-                        if(hero.getGridYInt() == this.getGridYInt()){
-                            setState(BattleEntity.stateAttacking);
-                            hit = false;
+            switch(getState()){
+                case BattleEntity.stateIdle:
+                    if(!currentAnimation.isAnimationFinished(stateTime)){
+                        for(BattleHero hero : BattleGrid.heroes){
+                            if(hero.getGridYInt() == this.getGridYInt()){
+                                setState(BattleEntity.stateAttacking);
+                                hit = false;
+                            }
                         }
+                    }else{
+                        Gdx.app.log(Unsealed.LOG,"Setting state to idle!");
+                        setState(BattleEntity.stateIdle);
+                        BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(4));
                     }
-                }else{
-                    Gdx.app.log(Unsealed.LOG,"Setting state to idle!");
-                    setState(BattleEntity.stateIdle);
-                    BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(4));
-                }
-                break;
-            case BattleEntity.stateAttacking:
-                if(currentAnimation.isAnimationFinished(stateTime+0.3f)&&!hit){
+                    break;
+                case BattleEntity.stateAttacking:
+                    if(currentAnimation.isAnimationFinished(stateTime+0.3f)&&!hit){
                         hit = true;
                         showRoot(true);
-                }
-                if(currentAnimation.isAnimationFinished(stateTime)){
-                    setState(BattleEntity.stateIdle);
-                    BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(4));
-                }
-                break;
-            case BattleEntity.stateAltAttacking:
-                if(currentAnimation.isAnimationFinished(stateTime+0.3f)&&!hit){
+                    }
+                    if(currentAnimation.isAnimationFinished(stateTime)){
+                        setState(BattleEntity.stateIdle);
+                        BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(4));
+                    }
+                    break;
+                case BattleEntity.stateAltAttacking:
+                    if(currentAnimation.isAnimationFinished(stateTime+0.3f)&&!hit){
                         hit = true;
                         showTrunk(BattleGrid.random.nextInt(3),BattleGrid.random.nextInt(3),true);
                         showTrunk(BattleGrid.random.nextInt(3),BattleGrid.random.nextInt(3),true);
                         showTrunk(BattleGrid.random.nextInt(3),BattleGrid.random.nextInt(3),true);
-//                        showTrunk(1,1,true);
-                }
-                if(currentAnimation.isAnimationFinished(stateTime)){
-                    setState(BattleEntity.stateIdle);
-                    BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(4));
-                }
-                break;
-        }
-        
+                        //                        showTrunk(1,1,true);
+                    }
+                    if(currentAnimation.isAnimationFinished(stateTime)){
+                        setState(BattleEntity.stateIdle);
+                        BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(4));
+                    }
+                    break;
+            }
+
     }
-    
+
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
@@ -140,16 +162,14 @@ public class Xios extends BattleEnemy {
             public void run() {
                 switch(getState()){
                     case BattleEntity.stateIdle:
-                        for(BattleHero hero : BattleGrid.heroes){
-                            if(hero.getGridYInt() == getGridYInt()){
-                                hit = false;
-                                setState(BattleEntity.stateAttacking);
-                            }else if(BattleGrid.random.nextInt(100)>30){
-                                hit = false;
-                                setState(BattleEntity.stateAltAttacking);
-                            }else{
-                                setState(BattleEntity.stateIdle);
-                            }
+                        if(BattleGrid.random.nextInt(100)>30){
+                            hit = false;
+                            setState(BattleEntity.stateAttacking);
+                        }else if(BattleGrid.random.nextInt(100)>30){
+                            hit = false;
+                            setState(BattleEntity.stateAltAttacking);
+                        }else{
+                            setState(BattleEntity.stateIdle);
                         }
                         break; 
                 }
@@ -158,9 +178,9 @@ public class Xios extends BattleEnemy {
         };
         return currentTask;
     }
-    
+
     public void showRoot(boolean show){
-        tmpDart = new TreeRoot(atlas,-9f,this);
+        tmpDart = new TreeRoot(atlas,BattleGrid.random.nextInt(3),-9f,this);
         tmpDart.setVisible(show);
         darts.add(tmpDart);
     }
@@ -181,25 +201,21 @@ public class Xios extends BattleEnemy {
                         color(Color.ORANGE),delay(0.1f),
                         color(Color.YELLOW),delay(0.2f),
                         color(Color.ORANGE),delay(0.1f),
-                        color(Color.YELLOW), delay(0.2f),
-                        color(Color.ORANGE),delay(0.1f),
-                        color(Color.YELLOW),delay(0.2f),
-                        color(Color.ORANGE),delay(0.1f),
                         color(Color.WHITE),delay(0.1f));
                 this.addAction(actions);
                 break;
             case BattleEntity.stateAltAttacking:
-                actions = sequence(color(Color.BLUE), delay(0.2f),
-                        color(Color.GREEN),delay(0.1f),
-                        color(Color.BLUE),delay(0.2f),
-                        color(Color.GREEN),delay(0.1f),
-                        color(Color.BLUE), delay(0.2f),
-                        color(Color.GREEN),delay(0.1f),
-                        color(Color.BLUE),delay(0.2f),
-                        color(Color.GREEN),delay(0.1f),
+                actions = sequence(color(Color.GREEN), delay(0.2f),
+                        color(Color.YELLOW),delay(0.1f),
+                        color(Color.GREEN),delay(0.2f),
+                        color(Color.YELLOW),delay(0.1f),
                         color(Color.WHITE),delay(0.1f));
                 this.addAction(actions);
                 break;
         }
+    }
+    @Override
+    public void setStatus(int status) {
+
     }
 }
