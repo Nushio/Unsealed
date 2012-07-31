@@ -6,6 +6,8 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.story.characters.Lidia;
 import net.k3rnel.unsealed.story.characters.Shura;
@@ -14,7 +16,8 @@ import net.k3rnel.unsealed.story.helpers.MapCharacter;
 public class Chapter2_6 extends AbstractChapter {
 
     final int[] overLayers = { 12 };
-
+    Image dojo;
+    
     /**
      * Chapter Two: Old Friends
      * @param game
@@ -34,6 +37,10 @@ public class Chapter2_6 extends AbstractChapter {
         tmpChar.setDirection(MapCharacter.dirUp);
         characters.add(tmpChar);
         
+        //Backup plan due to libgdx not rendering friggin' flipped tiles
+        dojo = new Image(getAtlas().findRegion("maps/dojo to render"));
+        dojo.setX(540);
+        dojo.setY(1344);
        
     }
     
@@ -41,8 +48,9 @@ public class Chapter2_6 extends AbstractChapter {
     public void render(float delta) {
         super.render(delta);
 
+      
         stage.getSpriteBatch().begin();
-
+        dojo.draw(stage.getSpriteBatch(), 1);
         //This is probably the bestest "Scene Director" ever made. 
         //Valve should totally hire me. 
         for(MapCharacter character : characters){
@@ -94,7 +102,9 @@ public class Chapter2_6 extends AbstractChapter {
                             character.setY(character.getY()+1);
                             centerCamera(character);
                         }else{
-                            camera.zoom = 2f;
+                            character.setY(1400);
+                            centerCamera(character);
+                            camera.zoom = 1f;
                             camera.update();
                             character.setDirection(MapCharacter.dirUp);
                             character.setWalking(false);

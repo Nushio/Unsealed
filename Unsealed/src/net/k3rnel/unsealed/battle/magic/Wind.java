@@ -31,7 +31,7 @@ public class Wind extends MagicEntity {
         this.setState(BattleEntity.stateAttacking);
         this.setHeight(64);this.setWidth(64);
         offsetX = -(int)entity.getWidth()/2;
-//        offsetY = 10;
+        //        offsetY = 10;
         this.setGridY(entity.getGridY());
         this.setX(entity.getX()+offsetX);
 
@@ -61,9 +61,11 @@ public class Wind extends MagicEntity {
 
                         }else{
                             enemy.setState(BattleEntity.stateIdle);
-                            if(enemy.getGridXInt()-1>=3){
-                                if(BattleGrid.checkGrid(enemy.getGridXInt()-1,enemy.getGridYInt())==null){
-                                    BattleGrid.moveEntity(enemy, enemy.getGridXInt()-1, enemy.getGridYInt());
+                            if(enemy.canBeMoved){
+                                if(enemy.getGridXInt()-1>=3){
+                                    if(BattleGrid.checkGrid(enemy.getGridXInt()-1,enemy.getGridYInt())==null){
+                                        BattleGrid.moveEntity(enemy, enemy.getGridXInt()-1, enemy.getGridYInt());
+                                    }
                                 }
                             }
                         }

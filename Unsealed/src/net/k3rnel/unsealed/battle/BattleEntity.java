@@ -60,12 +60,13 @@ public class BattleEntity extends Image {
     public int offsetX = 0, offsetY = 0;
     
 
+    public boolean canBeMoved;
     public SequenceAction actions;
 
     public BattleEntity() {
         this.animations = new HashMap<String, Animation>();
         this.currentAnimation = null;
-
+        canBeMoved=true;
         hpLabel = new Label("",getSkin());
         hpLabel.setColor(Color.WHITE);
 

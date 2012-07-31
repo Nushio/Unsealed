@@ -61,7 +61,7 @@ public class BattleScreen extends AbstractScreen {
 
     public Label roundLabel;
 
-    protected Button restartButton;
+    protected ImageButton restartButton;
 
     public static int round = 0;
     public static int bonus = 1;
@@ -259,7 +259,7 @@ public class BattleScreen extends AbstractScreen {
         this.stage.addActor(roundLabel);
 
         atlasRegion = atlas.findRegion( "battle/ui/continue" );
-        restartButton = new ImageButton(new Image(atlasRegion).getDrawable());
+        restartButton = new ImageButton(new Image(atlasRegion).getDrawable(),new Image(atlasRegion).getDrawable());
         restartButton.setY(140);
         restartButton.setX(170);
         restartButton.setWidth(426);
@@ -287,8 +287,8 @@ public class BattleScreen extends AbstractScreen {
 
             }
         });
-//        this.stage.addActor(restartButton);
-
+        this.stage.addActor(restartButton);
+        
         NinePatch patch = getAtlas().createPatch("maps/dialog-box");
 
         textBoxStyle = new StyledTable.TableStyle();
@@ -343,6 +343,7 @@ public class BattleScreen extends AbstractScreen {
                 roundLabel.setX(330);
                 roundLabel.setText("You Lost at Round "+round+"!");
                 restartButton.setVisible(true);
+                restartButton.setDisabled(false);
 
             }
 
@@ -350,8 +351,7 @@ public class BattleScreen extends AbstractScreen {
         hud.act(delta);
         hud.fillMana(hero);
 
-        restartButton.setY(40);
-        restartButton.setX(170);
+        
         
         grid.draw();
         stage.getSpriteBatch().begin();

@@ -188,7 +188,8 @@ public class BattleGrid extends Stage {
                 }
             }
         }
-        BattleScreen.hero.draw(this.getSpriteBatch(), 1);
+        if(BattleScreen.hero.getHp()>0)
+            BattleScreen.hero.draw(this.getSpriteBatch(), 1);
 
         this.getSpriteBatch().end();
     }
