@@ -174,6 +174,7 @@ public class Chapter2_2 extends AbstractChapter {
                         dialog.setText("Shura: Oh, shut it, Terius. I'm hunting Clams now");
                         break;
                     case 16:
+                        //TODO Expand on dialog
                         dialog.setText("Lidia: Alright, well, I'm heading for Hikari, would you like to join me?");
                         break;
                     case 17:

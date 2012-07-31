@@ -86,7 +86,7 @@ public class Chapter1_5 extends BattleScreen {
                 }
                 break;
             case 2:
-                dialog.setText("I can't let my guard down... Here come some more!");
+                dialog.setText("I can't let my guard down. Here come some more!");
                 dialog.setVisible(true);
                 if(stateTime>4){
                     act=3;
@@ -95,6 +95,7 @@ public class Chapter1_5 extends BattleScreen {
             case 3:
                 dialog.setVisible(false);
                 grid.reset();
+                hero.setMana(0);
                 grid.assignEntity(hero);
                 grid.spawnEnemies(new Snake(getAtlas(),50,3,1),new Snake(getAtlas(),60,4,0),new Snake(getAtlas(),70,5,2));
                 act = 4;
@@ -119,6 +120,7 @@ public class Chapter1_5 extends BattleScreen {
             case 6:
                 dialog.setVisible(false);
                 grid.reset();
+                hero.setMana(0);
                 grid.assignEntity(hero);
                 grid.spawnEnemies(new Snake(getAtlas(),70,3,1),new Snake(getAtlas(),70,4,0),new Snake(getAtlas(),70,4,1),new Snake(getAtlas(),80,5,2),new Snake(getAtlas(),80,5,0));
                 act = 7;
@@ -135,7 +137,7 @@ public class Chapter1_5 extends BattleScreen {
                 }
                 break;
             case 8:
-                dialog.setText("Looks like this is the last batch of them");
+                dialog.setText("Looks like this is the last batch of them!");
                 dialog.setVisible(true);
                 if(stateTime>4){
                     act=9;
@@ -144,6 +146,7 @@ public class Chapter1_5 extends BattleScreen {
             case 9:
                 dialog.setVisible(false);
                 grid.reset();
+                hero.setMana(0);
                 grid.assignEntity(hero);
                 grid.spawnEnemies(new Snake(getAtlas(),80,3,1),new Snake(getAtlas(),80,4,1),new Snake(getAtlas(),70,4,2),new Snake(getAtlas(),80,5,1),new Snake(getAtlas(),100,5,0));
                 act = 10;
@@ -160,7 +163,7 @@ public class Chapter1_5 extends BattleScreen {
                 }
                 break;
             case 11:
-                dialog.setText("The town should be safe now. I'll let them know");
+                dialog.setText("The town should be safe now. I'll let them know.");
                 dialog.setVisible(true);
                 if(stateTime>4){
                     act=12;

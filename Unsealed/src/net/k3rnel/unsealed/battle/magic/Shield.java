@@ -11,7 +11,7 @@ public class Shield extends MagicEntity {
 
     public Shield(TextureAtlas atlas, BattleEntity entity) {
         super(0,0,entity);
-        AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/shield" );
+        AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/shield-blue" );
         TextureRegion[][] spriteSheet = atlasRegion.split(128, 128);
         TextureRegion[] frames = new TextureRegion[6];
         frames[0] = spriteSheet[1][3];

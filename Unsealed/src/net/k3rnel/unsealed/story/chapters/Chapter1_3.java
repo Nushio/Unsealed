@@ -95,7 +95,7 @@ public class Chapter1_3 extends BattleScreen {
                 break;
             case 5:
                 dialog.setText("You can shoot enemies using O");
-                if(stateTime>2){
+                if(stateTime>3){
                     disableInput = false;
                     buttonPress(5,false);
                     disableInput = true;

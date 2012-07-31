@@ -3,191 +3,29 @@ pages-info.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-char-sprites/citizen_10_spritesheet
+splash-screen/tutorial
   rotate: false
-  xy: 0, 172
-  size: 576, 832
-  orig: 576, 832
+  xy: 0, 502
+  size: 800, 480
+  orig: 800, 480
   offset: 0, 0
   index: -1
-char-sprites/combat_dummy
+splash-screen/splash
   rotate: false
-  xy: 0, 42
-  size: 512, 128
-  orig: 512, 128
+  xy: 0, 193
+  size: 512, 307
+  orig: 512, 307
   offset: 0, 0
   index: -1
-char-sprites/tiny_spritesheet
-  rotate: false
-  xy: 576, 812
-  size: 192, 192
-  orig: 192, 192
-  offset: 0, 0
-  index: -1
-char-sprites/whitey_spritesheet
-  rotate: false
-  xy: 576, 618
-  size: 192, 192
-  orig: 192, 192
-  offset: 0, 0
-  index: -1
-char-sprites/abi_spritesheet
-  rotate: false
-  xy: 768, 812
-  size: 192, 192
-  orig: 192, 192
-  offset: 0, 0
-  index: -1
-char-sprites/george_spritesheet
-  rotate: false
-  xy: 576, 424
-  size: 192, 192
-  orig: 192, 192
-  offset: 0, 0
-  index: -1
-char-sprites/pixie_spritesheet
+splash-screen/menulogo
   rotate: false
   xy: 0, 0
-  size: 190, 40
-  orig: 190, 40
-  offset: 0, 0
-  index: -1
-char-sprites/snake_spritesheet
-  rotate: false
-  xy: 768, 682
-  size: 96, 128
-  orig: 96, 128
+  size: 512, 191
+  orig: 512, 191
   offset: 0, 0
   index: -1
 
 pages-info2.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-char-sprites/whisperer_spritesheet
-  rotate: false
-  xy: 0, 516
-  size: 576, 256
-  orig: 576, 256
-  offset: 0, 0
-  index: -1
-char-sprites/lidia_spritesheet
-  rotate: false
-  xy: 0, 258
-  size: 576, 256
-  orig: 576, 256
-  offset: 0, 0
-  index: -1
-char-sprites/citizen_0_spritesheet
-  rotate: false
-  xy: 0, 0
-  size: 576, 256
-  orig: 576, 256
-  offset: 0, 0
-  index: -1
-
-pages-info3.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-char-sprites/shura_spritesheet
-  rotate: false
-  xy: 0, 0
-  size: 576, 256
-  orig: 576, 256
-  offset: 0, 0
-  index: -1
-
-pages-info4.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-maps/dialog-box
-  rotate: false
-  xy: 0, 0
-  size: 512, 64
-  split: 28, 30, 8, 7
-  orig: 512, 64
-  offset: 0, 0
-  index: -1
-
-pages-info5.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-battle/maps/battlemap-test
-  rotate: false
-  xy: 0, 482
-  size: 800, 480
-  orig: 800, 480
-  offset: 0, 0
-  index: -1
-battle/maps/battlemap2
-  rotate: false
-  xy: 0, 0
-  size: 800, 480
-  orig: 800, 480
-  offset: 0, 0
-  index: -1
-
-pages-info6.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-battle/maps/battlemap5
-  rotate: false
-  xy: 0, 482
-  size: 800, 480
-  orig: 800, 480
-  offset: 0, 0
-  index: -1
-battle/maps/battlemap6
-  rotate: false
-  xy: 0, 0
-  size: 800, 480
-  orig: 800, 480
-  offset: 0, 0
-  index: -1
-
-pages-info7.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-battle/maps/battlemap3
-  rotate: false
-  xy: 0, 482
-  size: 800, 480
-  orig: 800, 480
-  offset: 0, 0
-  index: -1
-battle/maps/battlemap4
-  rotate: false
-  xy: 0, 0
-  size: 800, 480
-  orig: 800, 480
-  offset: 0, 0
-  index: -1
-
-pages-info8.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-battle/maps/battlemap1
-  rotate: false
-  xy: 0, 482
-  size: 800, 480
-  orig: 800, 480
-  offset: 0, 0
-  index: -1
-battle/maps/battlemap0
-  rotate: false
-  xy: 0, 0
-  size: 800, 480
-  orig: 800, 480
-  offset: 0, 0
-  index: -1
-
-pages-info9.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -289,28 +127,28 @@ battle/ui/blue_facebutton2
   orig: 75, 148
   offset: 0, 0
   index: -1
-battle/ui/dpad_down
+battle/ui/dpad_up
   rotate: false
   xy: 287, 352
   size: 60, 86
   orig: 60, 86
   offset: 0, 0
   index: -1
-battle/ui/dpad_left
+battle/ui/dpad_right
   rotate: false
   xy: 0, 0
   size: 86, 60
   orig: 86, 60
   offset: 0, 0
   index: -1
-battle/ui/dpad_right
+battle/ui/dpad_left
   rotate: false
   xy: 363, 513
   size: 86, 60
   orig: 86, 60
   offset: 0, 0
   index: -1
-battle/ui/dpad_up
+battle/ui/dpad_down
   rotate: false
   xy: 236, 236
   size: 60, 86
@@ -318,7 +156,7 @@ battle/ui/dpad_up
   offset: 0, 0
   index: -1
 
-pages-info10.png
+pages-info3.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -336,14 +174,14 @@ battle/entities/terrex
   orig: 846, 231
   offset: 0, 0
   index: -1
-battle/entities/lightningclaw
+battle/entities/snakebite_side
   rotate: false
   xy: 0, 162
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
-battle/entities/icetacle
+battle/entities/shield-blue
   rotate: false
   xy: 512, 162
   size: 512, 512
@@ -365,7 +203,7 @@ battle/entities/fireball
   offset: 0, 0
   index: -1
 
-pages-info11.png
+pages-info4.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -376,14 +214,14 @@ battle/entities/snake
   orig: 963, 77
   offset: 0, 0
   index: -1
-battle/entities/shield
+battle/entities/icetacle
   rotate: false
   xy: 0, 392
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
-battle/entities/snakebite_side
+battle/entities/turtleshell_side
   rotate: false
   xy: 512, 392
   size: 512, 512
@@ -411,7 +249,7 @@ battle/entities/bee
   orig: 656, 78
   offset: 0, 0
   index: -1
-battle/entities/firelion
+battle/entities/firelion_left
   rotate: false
   xy: 749, 134
   size: 256, 256
@@ -426,18 +264,18 @@ battle/entities/clam
   offset: 0, 0
   index: -1
 
-pages-info12.png
+pages-info5.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-battle/entities/torrentacle
+battle/entities/tornado
   rotate: false
   xy: 0, 374
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
-battle/entities/tornado
+battle/entities/shield
   rotate: false
   xy: 512, 374
   size: 512, 512
@@ -451,7 +289,7 @@ battle/entities/lidia
   orig: 520, 372
   offset: 0, 0
   index: -1
-battle/entities/firelion_left
+battle/entities/firelion
   rotate: false
   xy: 520, 116
   size: 256, 256
@@ -459,10 +297,24 @@ battle/entities/firelion_left
   offset: 0, 0
   index: -1
 
-pages-info13.png
+pages-info6.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+battle/entities/shield-shura
+  rotate: false
+  xy: 0, 258
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+battle/entities/lightningclaw
+  rotate: false
+  xy: 512, 258
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
 battle/entities/spikes
   rotate: false
   xy: 0, 0
@@ -471,28 +323,209 @@ battle/entities/spikes
   offset: 0, 0
   index: -1
 
-pages-info14.png
+pages-info7.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-splash-screen/tutorial
+battle/entities/torrentacle
   rotate: false
-  xy: 0, 502
+  xy: 0, 281
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+battle/entities/shura
+  rotate: false
+  xy: 0, 0
+  size: 520, 279
+  orig: 520, 279
+  offset: 0, 0
+  index: -1
+
+pages-info8.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+battle/maps/battlemap6
+  rotate: false
+  xy: 0, 482
   size: 800, 480
   orig: 800, 480
   offset: 0, 0
   index: -1
-splash-screen/splash
-  rotate: false
-  xy: 0, 193
-  size: 512, 307
-  orig: 512, 307
-  offset: 0, 0
-  index: -1
-splash-screen/menulogo
+battle/maps/battlemap5
   rotate: false
   xy: 0, 0
-  size: 512, 191
-  orig: 512, 191
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+
+pages-info9.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+battle/maps/battlemap3
+  rotate: false
+  xy: 0, 482
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+battle/maps/battlemap4
+  rotate: false
+  xy: 0, 0
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+
+pages-info10.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+battle/maps/battlemap-test
+  rotate: false
+  xy: 0, 482
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+battle/maps/battlemap0
+  rotate: false
+  xy: 0, 0
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+
+pages-info11.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+battle/maps/battlemap2
+  rotate: false
+  xy: 0, 482
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+battle/maps/battlemap1
+  rotate: false
+  xy: 0, 0
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+
+pages-info12.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+maps/dialog-box
+  rotate: false
+  xy: 0, 0
+  size: 512, 64
+  split: 28, 30, 8, 7
+  orig: 512, 64
+  offset: 0, 0
+  index: -1
+
+pages-info13.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+char-sprites/citizen_10_spritesheet
+  rotate: false
+  xy: 0, 172
+  size: 576, 832
+  orig: 576, 832
+  offset: 0, 0
+  index: -1
+char-sprites/combat_dummy
+  rotate: false
+  xy: 0, 42
+  size: 512, 128
+  orig: 512, 128
+  offset: 0, 0
+  index: -1
+char-sprites/abi_spritesheet
+  rotate: false
+  xy: 576, 812
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+char-sprites/george_spritesheet
+  rotate: false
+  xy: 576, 618
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+char-sprites/tiny_spritesheet
+  rotate: false
+  xy: 768, 812
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+char-sprites/whitey_spritesheet
+  rotate: false
+  xy: 576, 424
+  size: 192, 192
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+char-sprites/pixie_spritesheet
+  rotate: false
+  xy: 0, 0
+  size: 190, 40
+  orig: 190, 40
+  offset: 0, 0
+  index: -1
+char-sprites/snake_spritesheet
+  rotate: false
+  xy: 768, 682
+  size: 96, 128
+  orig: 96, 128
+  offset: 0, 0
+  index: -1
+
+pages-info14.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+char-sprites/shura_spritesheet
+  rotate: false
+  xy: 0, 516
+  size: 576, 256
+  orig: 576, 256
+  offset: 0, 0
+  index: -1
+char-sprites/whisperer_spritesheet
+  rotate: false
+  xy: 0, 258
+  size: 576, 256
+  orig: 576, 256
+  offset: 0, 0
+  index: -1
+char-sprites/lidia_spritesheet
+  rotate: false
+  xy: 0, 0
+  size: 576, 256
+  orig: 576, 256
+  offset: 0, 0
+  index: -1
+
+pages-info15.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+char-sprites/citizen_0_spritesheet
+  rotate: false
+  xy: 0, 0
+  size: 576, 256
+  orig: 576, 256
   offset: 0, 0
   index: -1

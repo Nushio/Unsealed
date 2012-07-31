@@ -62,6 +62,7 @@ public class AbstractChapter extends AbstractScreen {
         textBoxStyle = new StyledTable.TableStyle();
         textBoxStyle.background = new NinePatchDrawable(patch);
         textBoxStyle.font = new BitmapFont();
+        textBoxStyle.font.setScale(1.5f);
         textBoxStyle.padX = 8;
         textBoxStyle.padY = 4;
 
@@ -82,8 +83,11 @@ public class AbstractChapter extends AbstractScreen {
     public void render(float delta) {
         super.render(delta);
         tileMapRenderer.render(camera);
-
-        
+//        textBoxStyle.font.setScale(1.2f);
+//        textBoxStyle.font.setScale(2f);
+//        dialog = new TextBox("", textBoxStyle);
+//        dialog.setWidth(Gdx.graphics.getWidth());
+//        dialog.setHeight(Gdx.graphics.getHeight() / 4);
     }
 
     public void centerCamera(MapCharacter character) {

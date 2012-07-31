@@ -123,41 +123,42 @@ public class Chapter1_4 extends AbstractChapter {
                 switch(act){
                     case 0:
                         centerCamera(character);
-                        dialog.setText("Lidia: Thank you for coming, everyone!\n" +
+                        dialog.setText("Lidia: Thank you for coming everyone!\n" +
                                 "My name is Lidia Terius, and I came here to explain some things...");
                         dialog.setVisible(true);
                         break;
                     case 1:
-                        dialog.setText("Townsfolk Ramsey: Are you the reason some have started to use Magic again?");
+                        dialog.setText("Townsfolk Ramsey: Are you the reason some have started to use magic again?");
                         break;
                     case 2:
-                        dialog.setText("Townsfolk Hashbang: My daugther has been doing all sorts of Fire Magic!\n" +
-                        		"It's really dangerous, you have to stop it!");
+                        dialog.setText("Townsfolk Hashbang: My daughter has been doing all sorts of fire magic!\n" +
+                        		"It's really dangerous, she could get hurt!");
                         break;
                     case 3:
                         dialog.setText("Townsfolk Terranova: I think we should hear her out, I'm interested in what she has to say.");
                         break;
                     case 4:
+                        //TODO: Expand on Xios
                         dialog.setText("Lidia: *Ahem* Let's see... About 300 years ago, everyone was capable of using Magic, like Mimi\n" +
-                        		"That was until Xios decided he wanted to be the only one using Magic, and Sealed the Pixies\n" +
-                        		"The Pixies are the source of Magic of the land. I recently Unsealed the one that protects this area.");
+                        		"That was until Xios decided he wanted to be the only one using magic, and sealed the Pixies\n" +
+                        		"The Pixies are the source of magic of the land. I recently unsealed the one that protects this area.");
                         break;
                     case 5:
                         dialog.setText("Townsfolk Forthwind: Under whose authority?");
                         break;
                     case 6:
-                        dialog.setText("Lidia: The Free Speallweaver Foundation. \n" +
-                        		"The Great and Powerful Sorcerers that help and guide everyone regarding the uses of Magic");
+                        dialog.setText("Lidia: The Free Spellweaver Foundation. \n" +
+                        		"They are Great and Powerful Sorcerers that help and guide everyone regarding the uses of magic");
                         break;
                     case 7:
-                        dialog.setText("Lidia: Their rules are quite simple, if you allow me to explain them....");
+                        dialog.setText("Lidia: Their rules are quite simple, if you allow me to explain them -");
                         break;
                     case 8:
                         dialog.setVisible(false);
                         setAct(9);
                         break;
                     case 11:
-                        dialog.setText("Lidia: Stay calm, everyone. I'll handle this");
+                        dialog.setText("Lidia: Stay calm, everyone, I'll handle this");
                         break;
                     case 12:
                         dialog.setVisible(false);

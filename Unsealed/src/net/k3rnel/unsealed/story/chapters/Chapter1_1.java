@@ -153,13 +153,13 @@ public class Chapter1_1 extends AbstractChapter {
                         dialog.setVisible(true);
                         break;
                     case 6:
-                        dialog.setText("Whisperer: You know I'm just a Whisper away from being summoned");
+                        dialog.setText("Whisperer: You know I'm just a whisper away from being summoned");
                         break;
                     case 7:
                         dialog.setText("Lidia: The next Pixie is up ahead, I can sense it.");
                         break;
                     case 8:
-                        dialog.setText("Whisperer: It is calling out for you. It's been sealed for too long. ");
+                        dialog.setText("Whisperer: It is calling out for you. It's been sealed for so long. ");
                         break;
                     case 9:
                         dialog.setText("Lidia: If I was sealed for 300 years I wouldn't just whisper for help... I'd shout too.");
@@ -169,10 +169,10 @@ public class Chapter1_1 extends AbstractChapter {
                         		"It's always up to a Traveler to set things right");
                         break;
                     case 11:
-                        dialog.setText("Whisperer: The Free Spellweaver Foundation doesn't grant just great powers...");
+                        dialog.setText("Whisperer: There's a reason the Free Spellweaver Foundation granted you the ability to -");
                         break;
                     case 12:
-                        dialog.setText("Lidia: They also give us the opportunity to use them to help others, I know. ");
+                        dialog.setText("Lidia: Yes, to help others, spread the values, and make sure that magic stays free. I know. ");
                         break;
                     case 13:
                         dialog.setText("Whisperer: The Pixie awaits. We can continue the discussion later");
@@ -225,13 +225,13 @@ public class Chapter1_1 extends AbstractChapter {
                         }
                         break;
                     case 24:
-                        dialog.setText("Pixie: Wheeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!" +
+                        dialog.setText("Pixie: Wheeee!" +
                         		"Thank you, Traveler!");
                         dialog.setVisible(true);
                         break;
                     case 25:
-                        dialog.setText("Pixie: I will restore their Magic to everyone in the area.\n" +
-                        		"I'm Freeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!!!!");
+                        dialog.setText("Pixie: I will restore their magic to everyone in the area.\n" +
+                        		"I'm Free!");
                         dialog.setVisible(true);
                         break;
                     case 26:
@@ -243,7 +243,7 @@ public class Chapter1_1 extends AbstractChapter {
                         }
                         break;
                     case 27:
-                        dialog.setText("Lidia: I guess it's time to head to the town");
+                        dialog.setText("Lidia: I guess it's time to meet the people of New Lion Town");
                         dialog.setVisible(true);
                         break;
                     case 28:

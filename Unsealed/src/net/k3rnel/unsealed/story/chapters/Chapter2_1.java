@@ -151,11 +151,11 @@ public class Chapter2_1 extends AbstractChapter {
                         break;
                     case 7:
                         dialog.setText("Lidia: Shura! It's been a while since I last saw you. \n" +
-                                "Did you change your mind and decide to help me Unseal the Pixies?");
+                                "Did you change your mind and decide to help me unseal the Pixies?");
                         dialog.setVisible(true);
                         break;
                     case 8:
-                        dialog.setText("Shura: Help you Unseal Pixies? Hahahaha. No.");
+                        dialog.setText("Shura: Help you unseal Pixies? Hahahaha. No.");
                         break;
                     case 9:
                         dialog.setText("Lidia: What were you doing in that cave then?");
@@ -164,7 +164,7 @@ public class Chapter2_1 extends AbstractChapter {
                         dialog.setText("Shura: It's really none of your business, but if you must know, I was hunting Terrex\n" +
                         		"They are mostly wanted for their horns here, but imagine if I took them back home!");
                         break;
-                    case 11:
+                    case 11://TODO Drop a mention about pixies and magic
                         dialog.setText("Shura: I couldn't find any in the caves, apparently they fled towards the mountain.\n " +
                         		"I'll catch you later, gotta go!");
                         break;

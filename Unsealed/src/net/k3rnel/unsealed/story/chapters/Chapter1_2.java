@@ -86,17 +86,19 @@ public class Chapter1_2 extends AbstractChapter {
                         character.addAction(actions);
                         break;
                     case 1:
-                        dialog.setText("Lidia: So this is New Lion? I wonder if anyone has noticed any new skills they can use...");
+                        dialog.setText("Lidia: So this is New Lion? I wonder if magic has returned here already.");
                         dialog.setVisible(true);
                         break;
                     case 2:
+                        dialog.setVisible(false);
                         character.setWalking(true);
                         if(character.getX()>1050){
                             character.setX(character.getX()-1);
                             centerCamera(character);
                         }else{
                             character.setWalking(false);
-                            dialog.setText("Lidia: Hmm, there are some kids nearby. Better check them out.");
+                            dialog.setText("Lidia: Hmm, I wonder what that noise was. I better check it out.");
+                            dialog.setVisible(true);
                         }
                         break;
                     case 3:
@@ -160,7 +162,7 @@ public class Chapter1_2 extends AbstractChapter {
                         }
                         break;
                     case 9:
-                        dialog.setText("George: Wow! That's amazing!");
+                        dialog.setText("Leon: Wow! That's amazing!");
                         dialog.setVisible(true);
                         break;
                     case 10:
@@ -168,24 +170,25 @@ public class Chapter1_2 extends AbstractChapter {
                         break;
                     case 11:
                         dialog.setText("Lidia: Wait!\n" +
-                        		"Magic can be dangerous, specially at first!");
+                        		"Magic can be dangerous. If you don't know what you're doing, you might hurt someone!");
                         break;
                     case 12:
-                        dialog.setText("George: Who are you? Where did you come from?");
+                        dialog.setText("Mimi: Look at those clothes! She's not from around here!");
+                        
                         break;
                     case 13:
-                        dialog.setText("Mimi: Look at those clothes! She's not from around here!");
+                        dialog.setText("Leon: Who are you and where did you come from?");
                         break;
                     case 14:
-                        dialog.setText("Lidia: You can call me Lidia, and you're right. I'm a Traveller.\n" +
+                        dialog.setText("Lidia: You can call me Lidia, and you're right. I'm a Traveler.\n" +
                         		"We travel through the lands, guiding those that want to hear us");
                         break;
                     case 15:
-                        dialog.setText("Maria: Can you teach us how to do magic?\n" +
-                        		"Mimi: Yeah, can you? Pleeeeeeasseeeeeee!");
+                        dialog.setText("Maria: Can you teach us how to use magic?\n" +
+                        		"Mimi: Yeah, can you? Pwease?");
                         break;
                     case 16:
-                        dialog.setText("Lidia: Sure. Stand back, everyone.");
+                        dialog.setText("Lidia: Sure. Stand back everyone.");
                         break;
                     case 17:
                         dialog.setVisible(false);

@@ -127,34 +127,34 @@ public class Chapter1_6 extends AbstractChapter {
                         dialog.setVisible(true);
                         break;
                     case 1:
-                        dialog.setText("Townsfolk Ramsey: Those are some great fighting skills, please, teach us, or at least our children");
+                        dialog.setText("Townsfolk Ramsey: Those are some great fighting skills. Miss Terius, please teach us, or at least teach our children");
                         break;
                     case 2:
-                        dialog.setText("Townsfolk Hashbang: We owe you a great debt, Miss Terius");
+                        dialog.setText("Townsfolk Hashbang: We owe you a great debt Miss Terius");
                         break;
                     case 3:
                         dialog.setText("Lidia: You're welcome, everyone. Now, let's begin the first lesson of Spellcasting...");
                         break;
                     case 4:
                         dialog.setText("Lidia: Everyone can be a Spellcaster if you desire it. \n" +
-                        		"Now that the Pixie has been released, Magic will start flowing more naturally.\n");
+                        		"Now that the Pixie has been released, magic will start flowing more naturally.\n");
                         break;
                     case 5:
-                        dialog.setText("Lidia: Magic is a very powerful tool, and it's important that it remains Free to Use and Study\n." +
-                        		"That's the reason the Pixie was sealed for so long. The Knowledge was Propietary among a few selected Elders\n" +
-                        		"They did not pass on their secrets, and in time, the use of Magic was completely forgotten. ");
+                        dialog.setText("Lidia: Magic is a very powerful tool, and it's important that it remains Free to use and study\n." +
+                        		"That's the reason the Pixie was sealed for so long. Only a few select elders knew about the connection between Pixies and magic\n" +
+                        		"They did not pass on their secrets, and in time, the use of magic was completely forgotten. ");
                         break;
                     case 6:
-                        dialog.setText("Lidia: That's why the Free Speallweaver Foundation set a few basic rules to ensure that the knowledge is preserved. \n" +
-                        		"The First Freedom is the Freedom to Use Magic. Using Magic should not be forbidden. It should be encouraged!\n" +
-                        		"The Second Freedom is the Freedom to Study the Spell. This is a requirement to weave new, more powerful Spells");
+                        dialog.setText("Lidia: That's why the Free Spellweaver Foundation set a few basic rules to ensure that the knowledge is preserved. \n" +
+                        		"The First Freedom is the Freedom to use magic. Using magic should not be forbidden. It should be encouraged!\n" +
+                        		"The Second Freedom is the Freedom to study the spell. This is a requirement to weave new, more powerful spells");
                         break;
                     case 7:
                         dialog.setText("Lidia: The Third Freedom is the Freedom to teach others how to do Spells. \n" +
                         		"And last but not least, The Final Freedom is the Freedom to share the Spells you weave");
                         break;
                     case 8:
-                        dialog.setText("Lidia: These are very basic rules, and I'm free to answer any questions you might have... ");
+                        dialog.setText("Lidia: These are the basic rules, and I'm free to answer any questions you might have. ");
                         break;
                     case 9:
                         dialog.setVisible(false);

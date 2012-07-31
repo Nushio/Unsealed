@@ -106,28 +106,28 @@ public class Chapter1_7 extends AbstractChapter {
                         }
                         break;
                     case 4:
-                        dialog.setText("Lidia: Sorry, but I already stayed here too long");
+                        dialog.setText("Lidia: Sorry, but I've already stayed here too long");
                         break;
                     case 5:
                         dialog.setText("Mimi: Thank you for everything you've done.\n" +
-                        		"You really changed everyone in town.");
+                        		"You've really changed everyone in town.");
                         break;
                     case 6:
                         dialog.setText("Lidia: I'm glad to hear that. ^_^\n" +
                         		"Just don't forget the rules!");
                         break;
                     case 7:
-                        dialog.setText("Mimi: I know! I know! The Four Freedoms of Magic!");
+                        dialog.setText("Mimi: I know! I know! The Four Freedoms of magic!");
                         break;
                     case 8:
-                        dialog.setText("Mimi: The Freedom to Cast any Spell. \n" +
-                        		"The Freedom to study the Spell, and weave it into something new!\n" +
-                        		"The Freedom to teach others how to do the Spell\n" +
+                        dialog.setText("Mimi: The Freedom to cast any spell. \n" +
+                        		"The Freedom to study the spell, and weave it into something new!\n" +
+                        		"The Freedom to teach others how to do the spell\n" +
                         		"And the Freedom to let others pass on the knowledge");
                         break;
                     case 9:
                         dialog.setText("Mimi: We know about the Pixies now. \n" +
-                        		"We'll make sure they aren't forgotten. We'll fight for them!");
+                        		"We'll make sure they aren't forgotten. We'll even fight for them!");
                         break;
                     case 10:
                         dialog.setText("Lidia: Then my job here is done.");
@@ -147,23 +147,23 @@ public class Chapter1_7 extends AbstractChapter {
                         }else{
                             character.setDirection(MapCharacter.dirRight);
                             character.setWalking(false);
-                            actions = sequence(color(Color.RED),delay(0.3f),color(Color.WHITE));
+                            actions = sequence(delay(1f),color(Color.RED),delay(0.3f),color(Color.WHITE));
                             character.addAction(actions);
                             act = 14;
                         }
                         break;
                     case 15:
-                        actions = sequence(delay(0.6f),color(Color.RED),delay(0.3f),color(Color.WHITE));
+                        actions = sequence(delay(0.8f),color(Color.RED),delay(0.3f),color(Color.WHITE));
                         character.addAction(actions);
                         act = 16;
                         break;
                     case 17:
-                        actions = sequence(delay(0.6f),color(Color.RED),delay(0.3f),color(Color.WHITE));
+                        actions = sequence(delay(0.8f),color(Color.RED),delay(0.3f),color(Color.WHITE));
                         character.addAction(actions);
                         act = 18;
                         break;
                     case 19:
-                        actions = sequence(delay(0.6f),color(Color.RED),delay(0.3f),color(Color.WHITE));
+                        actions = sequence(delay(0.8f),color(Color.RED),delay(0.3f),color(Color.WHITE));
                         character.addAction(actions);
                         act = 20;
                         break;
