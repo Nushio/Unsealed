@@ -30,7 +30,7 @@ import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
 import net.k3rnel.unsealed.story.characters.Lidia;
 import net.k3rnel.unsealed.story.helpers.MapCharacter;
 
-public class Chapter2_8 extends AbstractChapter {
+public class Chapter2_10 extends AbstractChapter {
 
     final int[] overLayers = { 12 };
     Image dojo;
@@ -39,7 +39,7 @@ public class Chapter2_8 extends AbstractChapter {
      * Chapter Two: Old Friends
      * @param game
      */
-    public Chapter2_8(Unsealed game) {
+    public Chapter2_10(Unsealed game) {
         super(game);
         mapname="Asia Town";
     }
@@ -51,11 +51,16 @@ public class Chapter2_8 extends AbstractChapter {
         game.getMusicManager().play( UnsealedMusic.DOJO );
         
         tmpChar = new Lidia(getAtlas());
-        tmpChar.setPosition(1100,100);
+        tmpChar.setPosition(1100,1400);
         tmpChar.updateAnimation();
         tmpChar.setDirection(MapCharacter.dirUp);
         characters.add(tmpChar);
         
+        tmpChar = new Lidia(getAtlas());
+        tmpChar.setPosition(1100,1400);
+        tmpChar.updateAnimation();
+        tmpChar.setDirection(MapCharacter.dirUp);
+        characters.add(tmpChar);
         //Backup plan due to libgdx not rendering friggin' flipped tiles
         dojo = new Image(getAtlas().findRegion("maps/dojo to render"));
         dojo.setX(540);
@@ -88,7 +93,7 @@ public class Chapter2_8 extends AbstractChapter {
                         character.addAction(actions);
                         break;
                     case 1:
-                        dialog.setText("Lidia: I finally made it to Ryuken. ");
+                        dialog.setText("Lidia: Is anyone there?");
                         dialog.setVisible(true);
                        break;
                     case 2:
@@ -97,7 +102,7 @@ public class Chapter2_8 extends AbstractChapter {
                         act = 3;
                         break;
                     case 3:
-                        if(character.getY()<800){
+                        if(character.getY()<1600){
                             character.setY(character.getY()+1);
                             centerCamera(character);
                         }else{

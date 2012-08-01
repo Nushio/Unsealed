@@ -41,8 +41,8 @@ public class Ghost extends BattleEnemy {
     TextureAtlas atlas;
 
 
-    public Ghost(TextureAtlas atlas, int x, int y) {
-        super(70, x, y);
+    public Ghost(TextureAtlas atlas, int hp, int x, int y) {
+        super(hp, x, y);
         this.offsetX = 55;
         setGrid(x, y);
         this.atlas = atlas;

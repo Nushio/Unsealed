@@ -248,7 +248,7 @@ public class BattleGrid extends Stage {
                     if(random.nextInt(100)<40)
                         enemy = new Clam(getAtlas(),50, (int)spawnPoint.x,(int)spawnPoint.y);
                     else 
-                        enemy = new Ghost(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
+                        enemy = new Ghost(getAtlas(), 80,(int)spawnPoint.x,(int)spawnPoint.y);
 
                 }else if(BattleScreen.round>4&&BattleScreen.round<7){
                     if(random.nextInt(100)<40)
@@ -263,7 +263,7 @@ public class BattleGrid extends Stage {
                     }else if(random.nextInt(100)<40){
                         enemy = new Terrex(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
                     }else if(random.nextInt(100)<40){
-                        enemy = new Ghost(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
+                        enemy = new Ghost(getAtlas(), 80,(int)spawnPoint.x,(int)spawnPoint.y);
                     }else if(random.nextInt(100)<40){
                         enemy = new Snake(getAtlas(), 70,(int)spawnPoint.x,(int)spawnPoint.y);
                     }else{
