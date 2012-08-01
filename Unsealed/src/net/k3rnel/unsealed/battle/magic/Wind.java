@@ -75,18 +75,21 @@ public class Wind extends MagicEntity {
                             }
                         }
                     }else{
-                        if(enemy.setHp(enemy.getHp()-20)){
+                        if(enemy.canBeMoved){
+                            if(enemy.setHp(enemy.getHp()-20)){
 
-                        }else{
-                            enemy.setState(BattleEntity.stateIdle);
-                            if(enemy.canBeMoved){
+                            }else{
+                                enemy.setState(BattleEntity.stateIdle);
                                 if(enemy.getGridXInt()-1>=3){
                                     if(BattleGrid.checkGrid(enemy.getGridXInt()-1,enemy.getGridYInt())==null){
                                         BattleGrid.moveEntity(enemy, enemy.getGridXInt()-1, enemy.getGridYInt());
                                     }
                                 }
                             }
+                        }else{
+                            enemy.setHp(enemy.getHp()-5);
                         }
+
                     }
                 }
             }

@@ -45,6 +45,7 @@ public class MusicManager implements Disposable {
         BATTLE( "music/hold the line_1.ogg" ),
         DOJO( "music/14 - Tragedy.ogg" ),
         GRASS("music/The Adventure Begins 8-bit remix.ogg"),
+        VICTORY( "music/victory-theme.ogg" ),
         BOSSBATTLE( "music/07 - Overworld.ogg" );
 
         private String fileName;

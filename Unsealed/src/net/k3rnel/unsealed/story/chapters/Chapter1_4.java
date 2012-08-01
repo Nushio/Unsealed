@@ -145,91 +145,100 @@ public class Chapter1_4 extends AbstractChapter {
                     case 0:
                         centerCamera(character);
                         dialog.setText("Lidia: Thank you for coming everyone!\n" +
-                                "My name is Lidia Terius, and I came here to explain some things...");
+                                "My name is Lidia Terius, I am a Spellweaver. I came here to explain some things -");
                         dialog.setVisible(true);
                         break;
                     case 1:
                         dialog.setText("Townsfolk Ramsey: Are you the reason some have started to use magic again?");
                         break;
                     case 2:
-                        dialog.setText("Townsfolk Hashbang: My daughter has been doing all sorts of fire magic!\n" +
+                        dialog.setText("Townsfolk Hashbang: My daughter has been doing all sorts of fire magic.\n" +
                         		"It's really dangerous, she could get hurt!");
                         break;
                     case 3:
-                        dialog.setText("Townsfolk Terranova: I think we should hear her out, I'm interested in what she has to say.");
+                        dialog.setText("Townsfolk Terranova: I think we should hear her out, I'm interested in what she has to say.\n" +
+                        		"This town used to be kind to Spellweavers");
                         break;
                     case 4:
-                        //TODO: Expand on Xios
-                        dialog.setText("Lidia: *Ahem* Let's see... About 300 years ago, everyone was capable of using Magic, like Mimi\n" +
-                        		"That was until Xios decided he wanted to be the only one using magic, and sealed the Pixies\n" +
-                        		"The Pixies are the source of magic of the land. I recently unsealed the one that protects this area.");
+                        dialog.setText("Townsfolk Calico: That was before Xios outlawed magic! This town has suffered enough from Xios,\n" +
+                        		"She shouldn't be welcome here.");
                         break;
                     case 5:
-                        dialog.setText("Townsfolk Forthwind: Under whose authority?");
+                        dialog.setText("Lidia: *Ahem* Things have changed now. Everyone is now able to use magic, just like Mimi\n" +
+                        		"What Xios did was wrong. He sealed up your source of magic, locking away your abilities.\n" +
+                        		"Imagine being petrified for 300 years, unable to move. Unable to protect those you were supposed to.\n");
                         break;
                     case 6:
-                        dialog.setText("Lidia: The Free Spellweaver Foundation. \n" +
-                        		"They are Great and Powerful Sorcerers that help and guide everyone regarding the uses of magic");
+                        dialog.setText("Lidia: I unsealed Arch, your Guardian Penguin.\n" +
+                        		"He was adorable! The poor creature didn't deserve being sealed up. \n");
                         break;
                     case 7:
-                        dialog.setText("Lidia: Their rules are quite simple, if you allow me to explain them -");
+                        dialog.setText("Townsfolk Forthwind: Under whose authority?");
                         break;
                     case 8:
-                        dialog.setVisible(false);
-                        setAct(9);
+                        dialog.setText("Lidia: The Free Spellweaver Foundation. \n" +
+                        		"They are Great and Powerful Spellweavers that help and guide everyone regarding the uses of magic}n" +
+                        		"I was sent to Altera to Unseal the Penguins and restore the magic to the land");
                         break;
-                    case 11:
-                        dialog.setText("Lidia: Stay calm, everyone, I'll handle this");
+                    case 9:
+                        dialog.setText("Townsfolk Hashbang: What do you mean you're not from Altera?");
                         break;
-                    case 12:
+                    case 10:
                         dialog.setVisible(false);
-                        character.setWalking(true);
-                        act = 13;
+                        setAct(11);
                         break;
                     case 13:
+                        dialog.setText("Lidia: Stay calm, everyone, I'll handle this");
+                        break;
+                    case 14:
+                        dialog.setVisible(false);
+                        character.setWalking(true);
+                        act = 15;
+                        break;
+                    case 15:
                         if(character.getY()>1240){
                             character.setY(character.getY()-2);
                             centerCamera(character);                            
                         }else{
                             character.setDirection(MapCharacter.dirLeft);
-                            act = 14;
+                            act = 16;
                         }
                         break;
-                    case 14:
+                    case 16:
                         if(character.getX()>600){
                             character.setX(character.getX()-2);
                             centerCamera(character);
                         }else{
                             character.setDirection(MapCharacter.dirDown);
-                            act = 15;
+                            act = 17;
                         }
                         break;
-                    case 15:
+                    case 17:
                         if(character.getY()>500){
                             character.setY(character.getY()-2);
                             centerCamera(character); 
                         }else{
                             character.setWalking(false);
                             character.setDirection(MapCharacter.dirLeft);
-                            act =16;
+                            act =18;
                             
                         }
                         break;
-                    case 16:
+                    case 18:
                         character.setDirection(MapCharacter.dirRight);
                         
-                        act = 17;
+                        act = 19;
                         
                        break;
-                    case 17:
+                    case 19:
                         character.setDirection(MapCharacter.dirDown);
-                        act = 18;
+                        act = 20;
                         break;
-                    case 18:
+                    case 20:
                         dialog.setText("Lidia: This is gonna be fun");
                         dialog.setVisible(true);
                         break;
-                    case 19:
+                    case 21:
                         dialog.setVisible(false);
                         game.setScreen( new Chapter1_5( game ) );
                         break;
@@ -237,7 +246,7 @@ public class Chapter1_4 extends AbstractChapter {
             }
             if(character instanceof Kid){
                 switch(act){
-                    case 5:
+                    case 12:
                         character.setDirection(MapCharacter.dirLeft);
                         break;
                 }
@@ -245,22 +254,22 @@ public class Chapter1_4 extends AbstractChapter {
             if(character instanceof Citizen){
                 if(((Citizen)character).citizen!=10){
                     switch(act){
-                        case 10:
+                        case 12:
                             character.setDirection(MapCharacter.dirLeft);
                             break;
                     }
                 }
                 if(((Citizen)character).citizen==10){
                     switch(act){
-                        case 9:
+                        case 11:
                             if(character.getY()<1140){
                                 character.setY(character.getY()+2);
                             }else{
                                 character.setWalking(false);
-                                act = 10;
+                                act = 12;
                             }
                             break;
-                        case 10:
+                        case 12:
                             dialog.setText("EEEEEEEEKKKKKKKKKKK!\n" +
                                     "Please Help! Hurry! \n" +
                                     "Snakes are invading our crops again! ");

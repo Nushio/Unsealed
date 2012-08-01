@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.PressedListener;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.battle.BattleGrid;
@@ -43,14 +44,14 @@ public class Chapter3_4 extends BattleScreen {
     protected ImageButton restartButton;
 
     public Chapter3_4(Unsealed game) {
-        super(game,true, "Boss area");
+        super(game,true, "Boss Arena");
 
     }
 
     @Override
     public void show() {
         super.show();
-        game.getMusicManager().play( UnsealedMusic.BOSSBATTLE );
+        game.getMusicManager().play( UnsealedMusic.BATTLE );
         hero.setHp(250);
         hero.setSkill1(new EarthSpikes(getAtlas()));
         hud.xButton.addActor(hero.getSkill1());
@@ -59,12 +60,13 @@ public class Chapter3_4 extends BattleScreen {
         hud.bButton.addActor(hero.getSkill2());
         
         hero.setSkill3(new ThunderClaw(getAtlas()));
-        hud.aButton.addActor(hero.getSkill3());
         
         hero.setSkill4(new FireLion(getAtlas()));
         hero.setSkill5(new IceTentacle(getAtlas()));
         hero.setSkill6(new TornadoVacuum(getAtlas()));
         
+        buttonPress(9,true);
+        buttonPress(9,true);
         AtlasRegion atlasRegion = atlas.findRegion( "battle/ui/continue" );
         restartButton = new ImageButton(new Image(atlasRegion).getDrawable(),new Image(atlasRegion).getDrawable());
         restartButton.setY(140);
@@ -78,6 +80,7 @@ public class Chapter3_4 extends BattleScreen {
             @Override
             public void clicked(InputEvent arg0, float arg1, float arg2) {
                act = -1;
+               hero.reset();
                hero.setHp(250);
                hero.setMana(0);
                hero.setGrid(1,1);
@@ -93,6 +96,7 @@ public class Chapter3_4 extends BattleScreen {
                hero.setSkill4(new FireLion(getAtlas()));
                hero.setSkill5(new IceTentacle(getAtlas()));
                hero.setSkill6(new TornadoVacuum(getAtlas()));
+               grid.reset();
                grid.assignEntity(hero);
                restartButton.setVisible(false);
             }
@@ -104,6 +108,9 @@ public class Chapter3_4 extends BattleScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
+        camera.position.set(1000, 1000, 0);
+        camera.zoom = 100f;
+        camera.update();
         if(restartButton.isVisible()){
             this.getBatch().begin();
             restartButton.draw(this.getBatch(), 1);
@@ -113,11 +120,13 @@ public class Chapter3_4 extends BattleScreen {
     @Override
     public void checkScene(float delta){
         this.stateTime+=delta;
-        camera.position.set(950, 1700, 0);
+        camera.position.set(510, 280, 0);
         camera.zoom = 1f;
         camera.update();
         switch(act){
             case -1:
+                buttonPress(9,true);
+                buttonPress(9,true);
                 dialog.setVisible(true);
                 dialog.setText("I need to concentrate and use my Skills appropriately");
                 if(stateTime>4){
@@ -153,6 +162,16 @@ public class Chapter3_4 extends BattleScreen {
                 }
                 break;
             case 3:
+                dialog.setText("Evil Xios has been slayed!");
+                game.getMusicManager().play( UnsealedMusic.VICTORY );
+                dialog.setVisible(true);
+                if(stateTime>5){
+                    act = 4;
+                    stateTime = 0;
+                }
+                break;
+            case 4:
+                game.getMusicManager().play( UnsealedMusic.MENU );
                 game.setScreen(new ChapterSelectScreen(game));
                 break;
         }

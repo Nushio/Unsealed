@@ -21,6 +21,7 @@ package net.k3rnel.unsealed.story.chapters;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 import com.badlogic.gdx.graphics.Color;
@@ -35,7 +36,7 @@ import net.k3rnel.unsealed.story.helpers.MapCharacter;
 
 public class Chapter1_7 extends AbstractChapter {
 
-
+    final int[] overLayers = { 15 };
     /**
      * Chapter One: New Girl in Town
      * @param game
@@ -90,22 +91,22 @@ public class Chapter1_7 extends AbstractChapter {
                         dialog.setText("Mimi: Wait! Don't go!");
                         act = 2;
                         break;
-                    case 26:
+                    case 28:
                         character.setDirection(MapCharacter.dirRight);
                         character.setWalking(true);
-                        act = 27;
+                        act = 29;
                         break;
-                    case 27:
+                    case 29:
                         if(character.getX()<1730){
                             character.setX(character.getX()+1);
                             centerCamera(character);
                         }else{
                             actions = sequence(fadeOut(0.85f));
                             character.addAction(actions);
-                            act = 28;
+                            act = 30;
                         }
                         break;
-                    case 28:
+                    case 30:
                         game.setScreen( new ChapterSelectScreen( game ) );
                         break;
                 }
@@ -127,7 +128,7 @@ public class Chapter1_7 extends AbstractChapter {
                         }
                         break;
                     case 4:
-                        dialog.setText("Lidia: Sorry, but I've already stayed here too long");
+                        dialog.setText("Lidia: Sorry, but I've already stayed more than the week I promised to.");
                         break;
                     case 5:
                         dialog.setText("Mimi: Thank you for everything you've done.\n" +
@@ -135,10 +136,10 @@ public class Chapter1_7 extends AbstractChapter {
                         break;
                     case 6:
                         dialog.setText("Lidia: I'm glad to hear that. ^_^\n" +
-                        		"Just don't forget the rules!");
+                        		"Just don't forget about the laws!");
                         break;
                     case 7:
-                        dialog.setText("Mimi: I know! I know! The Four Freedoms of magic!");
+                        dialog.setText("Mimi: I know! I know! They grant us our Four Freedoms of magic!");
                         break;
                     case 8:
                         dialog.setText("Mimi: The Freedom to cast any spell. \n" +
@@ -147,8 +148,7 @@ public class Chapter1_7 extends AbstractChapter {
                         		"And the Freedom to let others pass on the knowledge");
                         break;
                     case 9:
-                        dialog.setText("Mimi: We know about the Pixies now. \n" +
-                        		"We'll make sure they aren't forgotten. We'll even fight for them!");
+                        dialog.setText("Mimi: I've heard the grownups say that we'll join the fight against Xios.");
                         break;
                     case 10:
                         dialog.setText("Lidia: Then my job here is done.");
@@ -168,25 +168,45 @@ public class Chapter1_7 extends AbstractChapter {
                         }else{
                             character.setDirection(MapCharacter.dirRight);
                             character.setWalking(false);
-                            actions = sequence(delay(1f),color(Color.RED),delay(0.3f),color(Color.WHITE));
+                            actions = sequence(delay(0.5f),color(Color.RED),delay(0.3f),color(Color.WHITE),delay(0.3f),run(new Runnable() {
+                                @Override
+                                public void run() {
+                                    setAct(14);
+                                    
+                                }
+                            }));
                             character.addAction(actions);
-                            act = 14;
                         }
                         break;
                     case 15:
-                        actions = sequence(delay(0.8f),color(Color.RED),delay(0.3f),color(Color.WHITE));
+                        actions = sequence(delay(0.6f),color(Color.RED),delay(0.3f),color(Color.WHITE),delay(0.3f),run(new Runnable() {
+                            @Override
+                            public void run() {
+                                setAct(16);
+                                
+                            }
+                        }));
                         character.addAction(actions);
-                        act = 16;
                         break;
                     case 17:
-                        actions = sequence(delay(0.8f),color(Color.RED),delay(0.3f),color(Color.WHITE));
+                        actions = sequence(delay(0.5f),color(Color.RED),delay(0.3f),color(Color.WHITE),delay(0.3f),run(new Runnable() {
+                            @Override
+                            public void run() {
+                                setAct(18);
+                                
+                            }
+                        }));
                         character.addAction(actions);
-                        act = 18;
                         break;
                     case 19:
-                        actions = sequence(delay(0.8f),color(Color.RED),delay(0.3f),color(Color.WHITE));
+                        actions = sequence(delay(0.5f),color(Color.RED),delay(0.3f),color(Color.WHITE),delay(0.3f),run(new Runnable() {
+                            @Override
+                            public void run() {
+                                setAct(20);
+                                
+                            }
+                        }));
                         character.addAction(actions);
-                        act = 20;
                         break;
                     case 21:
                         dialog.setText("Lidia: Wow! Great job!");
@@ -194,17 +214,25 @@ public class Chapter1_7 extends AbstractChapter {
                         break;
                     case 22:
                         dialog.setText("Mimi: Thank you! I've been working very hard!\n" +
-                        		"I wanted to give you something in return for all the things you've done for us");
+                        		"I wanted to give you something in return for all the things you've done for us.\n" +
+                        		"I've already Enchanted the spell, so that the spell cannot be forgotten");
                         break;
                     case 23:
-                        dialog.setText("Lidia learned Fire Lion! You can now use that Skill in battle");
+                        dialog.setText("Lidia learned Fire Lion! You can now use the Spell in battle");
                         break;
                     case 24:
-                        dialog.setText("Lidia: Thank you Mimi, I'll never forget your town");
+                        dialog.setText("Lidia: Thank you Mimi, I'll never forget you.");
                         break;
                     case 25:
+                        dialog.setText("Mimi: When you have time, could you head to Ryuken? We haven't heard from them in a long time.\n" +
+                        		"It's just past the desert. ");
+                        break;
+                    case 26:
+                        dialog.setText("Lidia: Sure. I'll check out the town.");
+                        break;
+                    case 27:
                         dialog.setVisible(false);
-                        act = 26;
+                        act = 28;
                         break;
                 }
             }
@@ -245,7 +273,7 @@ public class Chapter1_7 extends AbstractChapter {
                         break;
                     case 20:
                         character.setVisible(true);
-                        if(character.getX()<1450){
+                        if(character.getX()<1460){
                             character.setX(character.getX()+1);
                         }else{
                             character.setVisible(false);
@@ -261,7 +289,7 @@ public class Chapter1_7 extends AbstractChapter {
                 character.draw(stage.getSpriteBatch(), 1);
         }
         stage.getSpriteBatch().end();
-        
+        tileMapRenderer.render(camera,overLayers);
         if(dialog.isVisible()){
             hud.act(delta);
             hud.draw();

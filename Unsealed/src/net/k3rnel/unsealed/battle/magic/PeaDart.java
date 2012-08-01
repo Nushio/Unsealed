@@ -49,7 +49,7 @@ public class PeaDart extends MagicEntity {
         this.setState(BattleEntity.stateAttacking);
 
         this.setHeight(30);this.setWidth(30);
-        offsetX = (int)entity.getWidth()-120;
+        offsetX = (int)entity.getWidth()-80;
         offsetY = 0;
 
         this.setGrid(entity.getGridXInt()-1,entity.getGridYInt());

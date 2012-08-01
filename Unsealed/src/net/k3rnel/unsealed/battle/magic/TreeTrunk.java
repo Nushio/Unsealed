@@ -37,25 +37,35 @@ public class TreeTrunk extends MagicEntity {
 
         AtlasRegion atlasRegion = atlas.findRegion("battle/entities/treetrunk");
         TextureRegion[][] spriteSheet = atlasRegion.split(21,91);
-        TextureRegion[] frames = new TextureRegion[8];
+        TextureRegion[] frames = new TextureRegion[6];
         frames[0] = spriteSheet[0][0];
         frames[1] = spriteSheet[0][1];
-        frames[2] = spriteSheet[0][2];
-        frames[3] = spriteSheet[0][3];
-        frames[4] = spriteSheet[0][4];
-        frames[5] = spriteSheet[0][5];
-        frames[6] = spriteSheet[0][6];
-        frames[7] = spriteSheet[0][7];
+        frames[2] = spriteSheet[0][0];
+        frames[3] = spriteSheet[0][1];
+        frames[4] = spriteSheet[0][0];
+        frames[5] = spriteSheet[0][1];
         Animation animation = new Animation(0.1f,frames);
         animation.setPlayMode(Animation.NORMAL);
+        this.animations.put("blocking",animation);
+        frames = new TextureRegion[8];
+        frames[0] = spriteSheet[0][2];
+        frames[1] = spriteSheet[0][3];
+        frames[2] = spriteSheet[0][4];
+        frames[3] = spriteSheet[0][5];
+        frames[4] = spriteSheet[0][6];
+        frames[5] = spriteSheet[0][7];
+        frames[6] = spriteSheet[0][8];
+        frames[7] = spriteSheet[0][9];
+        animation = new Animation(0.1f,frames);
+        animation.setPlayMode(Animation.NORMAL);
         this.animations.put("attacking",animation);
-        this.setState(BattleEntity.stateAttacking);
+        this.setState(BattleEntity.stateBlocking);
         this.setHeight(91);this.setWidth(21);
         offsetX = -13;
         offsetY = 15;
         this.setGridX(x, true);
         this.setGridY(y);
-       
+
 
     }
     @Override
@@ -66,18 +76,25 @@ public class TreeTrunk extends MagicEntity {
             return;
         }
         this.setDrawable(new Image(this.currentAnimation.getKeyFrame(this.stateTime)).getDrawable());
-        if(this.getState()==BattleEntity.stateAttacking){
+        if(this.getState()==BattleEntity.stateBlocking){
             if(currentAnimation.isAnimationFinished(stateTime)){
-                if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt())!=null){
-                    BattleEntity hero = BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt());
-                    if(hero instanceof BattleHero){
-                        if(hero.setHp(hero.getHp()-40)){
-                        }else{
-                        }
+                setState(stateAttacking);
+            }
+        }
+        if(this.getState()==BattleEntity.stateAttacking){
+            if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt())!=null){
+                BattleEntity hero = BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt());
+                if(hero instanceof BattleHero){
+                    if(hero.setHp(hero.getHp()-40)){
+                    }else{
                     }
+                    destroyMe=true;
                 }
+            }
+            if(currentAnimation.isAnimationFinished(stateTime)){
                 destroyMe=true;
             }
+
         }
 
 

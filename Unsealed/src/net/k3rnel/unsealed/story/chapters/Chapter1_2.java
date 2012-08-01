@@ -28,6 +28,7 @@ import com.badlogic.gdx.graphics.Color;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
+import net.k3rnel.unsealed.services.SoundManager.UnsealedSound;
 import net.k3rnel.unsealed.story.characters.FireLionMap;
 import net.k3rnel.unsealed.story.characters.Kid;
 import net.k3rnel.unsealed.story.characters.Lidia;
@@ -117,6 +118,7 @@ public class Chapter1_2 extends AbstractChapter {
                             character.setX(character.getX()-1);
                             centerCamera(character);
                         }else{
+                            game.getSoundManager().play(UnsealedSound.FIRE);
                             character.setWalking(false);
                             dialog.setText("Lidia: Hmm, I wonder what that noise was. I better check it out.");
                             dialog.setVisible(true);
@@ -187,7 +189,7 @@ public class Chapter1_2 extends AbstractChapter {
                         dialog.setVisible(true);
                         break;
                     case 10:
-                        dialog.setText("Maria: Do it again! Do it again!");
+                        dialog.setText("Nina: Do it again! Do it again!");
                         break;
                     case 11:
                         dialog.setText("Lidia: Wait!\n" +
@@ -195,17 +197,17 @@ public class Chapter1_2 extends AbstractChapter {
                         break;
                     case 12:
                         dialog.setText("Mimi: Look at those clothes! She's not from around here!");
-                        
                         break;
                     case 13:
                         dialog.setText("Leon: Who are you and where did you come from?");
                         break;
                     case 14:
-                        dialog.setText("Lidia: You can call me Lidia, and you're right. I'm a Traveler.\n" +
-                        		"We travel through the lands, guiding those that want to hear us");
+                        dialog.setText("Lidia: You can call me Lidia, and you're right. I'm not from around here.\n" +
+                        		"I'm a Traveler.\n" +
+                        		"We travel through the lands, watching over magic, and it's usage");
                         break;
                     case 15:
-                        dialog.setText("Maria: Can you teach us how to use magic?\n" +
+                        dialog.setText("Nina: You know how to use magic? Can you teach us??\n" +
                         		"Mimi: Yeah, can you? Pwease?");
                         break;
                     case 16:

@@ -85,7 +85,7 @@ public class ThunderClaw extends MagicEntity {
                  if(BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt())!=null){
                     BattleEntity enemy = BattleGrid.checkGrid(this.getGridXInt(),this.getGridYInt());
                     if(enemy instanceof BattleEnemy){
-                        if(enemy.setHp(enemy.getHp()-40)){
+                        if(enemy.setHp(enemy.getHp()-60)){
                         }else{
                             enemy.setStatus(BattleEntity.statusNormal);
                         }

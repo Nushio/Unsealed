@@ -18,7 +18,10 @@
  */
 package net.k3rnel.unsealed.battle.magic;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -29,31 +32,30 @@ import net.k3rnel.unsealed.battle.BattleEntity;
 import net.k3rnel.unsealed.battle.BattleGrid;
 import net.k3rnel.unsealed.battle.BattleHero;
 
-public class TreeRoot extends MagicEntity {
+public class TranquilDart extends MagicEntity {
     
-    public TreeRoot(TextureAtlas atlas, int y, float speed, BattleEntity entity) {
+    /**
+     * 0 = gray. 1 = blue. 2 = red. 3 = green.
+     * @param color
+     */
+    public TranquilDart(TextureAtlas atlas, int color, float speed, BattleEntity entity) {
         super(speed,0,entity);
-        AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/treeroot" );
-        TextureRegion[][] spriteSheet = atlasRegion.split(88, 88);
-        TextureRegion[] frames = new TextureRegion[8];
-        frames[0] = spriteSheet[0][0];
-        frames[1] = spriteSheet[0][1];
-        frames[2] = spriteSheet[0][2];
-        frames[3] = spriteSheet[0][3];
-        frames[4] = spriteSheet[0][4];
-        frames[5] = spriteSheet[0][5];
-        frames[6] = spriteSheet[0][6];
-        frames[7] = spriteSheet[0][7];
+        AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/fireball" );
+        TextureRegion[][] spriteSheet = atlasRegion.split(34, 25);
+        TextureRegion[] frames = new TextureRegion[3];
+        frames[0] = spriteSheet[color][0];
+        frames[1] = spriteSheet[color][1];
+        frames[2] = spriteSheet[color][2];
         Animation attacking = new Animation(0.1f,frames);
         attacking.setPlayMode(Animation.LOOP);
         this.animations.put("attacking",attacking);
         this.setState(BattleEntity.stateAttacking);
 
-        this.setHeight(88);this.setWidth(88);
-        offsetX = (int)entity.getWidth()-320;
-        offsetY = 30;
-
-        this.setGrid(entity.getGridXInt()-1,y);
+        this.setHeight(30);this.setWidth(30);
+        offsetX = (int)entity.getWidth()-120;
+        offsetY = 0;
+        this.addAction(color(Color.MAGENTA));
+        this.setGrid(entity.getGridXInt()-1,entity.getGridYInt());
     }
     
     @Override
@@ -65,14 +67,13 @@ public class TreeRoot extends MagicEntity {
             if(hero.getGridYInt() == this.getGridYInt() && hero.getGridXInt() == this.getGridXInt()){
                 Gdx.app.log(Unsealed.LOG,"SMACK!");
                 if(hero.getState()==BattleEntity.stateBlocking){
-                    hero.setHp(hero.getHp()-10);
+                    
                 }else{
-                    if( hero.setHp(hero.getHp()-20)){
+                    if( hero.setHp(hero.getHp()-15)){
                         Gdx.app.log(Unsealed.LOG, "The clams have avenged themselves! You died a miserable death");
                         hero.setHp(0);
-                    }else{
-                        hero.setStatus(BattleEntity.statusPoisoned);
                     }
+                    hero.setStatus(BattleEntity.statusStunned);
                 }
                 destroyMe=true;
             }

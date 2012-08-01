@@ -23,7 +23,6 @@ import net.k3rnel.unsealed.battle.BattleGrid;
 import net.k3rnel.unsealed.battle.enemies.Dummy;
 import net.k3rnel.unsealed.battle.skills.EarthSpikes;
 import net.k3rnel.unsealed.screens.BattleScreen;
-import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
 import net.k3rnel.unsealed.story.characters.Kid;
 import net.k3rnel.unsealed.story.helpers.MapCharacter;
 
@@ -39,12 +38,15 @@ public class Chapter1_3 extends BattleScreen {
     public void show() {
         super.show();
         
-        game.getMusicManager().play( UnsealedMusic.BATTLE );
-        
         camera.position.set(1300,1220, 0);
         camera.update();
-        
+        hero.setSkill1(null);
         hero.setSkill2(new EarthSpikes(getAtlas()));
+        hero.setSkill3(null);
+        hero.setSkill4(null);
+        hero.setSkill5(new EarthSpikes(getAtlas()));
+        hero.setSkill6(null);
+        buttonPress(9,true);
         hud.bButton.addActor(hero.getSkill2());
         MapCharacter character = new Kid(getAtlas(),0);
         character.setVisible(true);
@@ -149,7 +151,7 @@ public class Chapter1_3 extends BattleScreen {
                 }
                 break;
             case 8:
-                dialog.setText("Skills can be used with J K L");
+                dialog.setText("Spells can be used with J K L");
                 hero.setMana(20);
                 act = 9;
                 disableInput = false;
@@ -166,7 +168,7 @@ public class Chapter1_3 extends BattleScreen {
                 }
                 break;
             case 10:
-                dialog.setText("New Skills will be unlocked as the game progresses. ");
+                dialog.setText("New Spells will be unlocked as the game progresses. ");
                 if(stateTime>3){
                     stateTime = 0;
                     act = 11;
@@ -194,16 +196,25 @@ public class Chapter1_3 extends BattleScreen {
                 break;
             case 14:
                 dialog.setVisible(true);
-                dialog.setText("Kids: Wow! That was impressive!");
+                dialog.setText("Kids: Wow! That was impressive!\n" +
+                		"Mimi: Looks like someone's coming!\n" +
+                		"Leon: Brace yourselves, the grownups are coming!");
                 if(stateTime>6){
+                    stateTime = 0;
                     act=15;
                 }
                 break;
             case 15:
-                dialog.setVisible(false);
-                act = 16;
+                dialog.setText("Lidia: Ah, great. It's time I've talked with everyone here.");
+                if(stateTime>6){
+                    act=16;
+                }
                 break;
             case 16:
+                dialog.setVisible(false);
+                act = 17;
+                break;
+            case 17:
                 game.setScreen(new Chapter1_4(game));
                 break;
         }

@@ -23,8 +23,6 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
 import net.k3rnel.unsealed.story.characters.Lidia;
@@ -32,34 +30,28 @@ import net.k3rnel.unsealed.story.helpers.MapCharacter;
 
 public class Chapter2_6 extends AbstractChapter {
 
-    final int[] overLayers = { 12 };
-    Image dojo;
-    
+
     /**
      * Chapter Two: Old Friends
      * @param game
      */
     public Chapter2_6(Unsealed game) {
         super(game);
-        mapname="Asia Town";
+        mapname="RouteOne";
     }
 
     @Override
     public void show() {
         super.show();
 
-        game.getMusicManager().play( UnsealedMusic.DOJO );
+        game.getMusicManager().play( UnsealedMusic.GRASS  );
         
         tmpChar = new Lidia(getAtlas());
-        tmpChar.setPosition(1100,100);
+        tmpChar.setPosition(1300,1400);
         tmpChar.updateAnimation();
         tmpChar.setDirection(MapCharacter.dirUp);
         characters.add(tmpChar);
         
-        //Backup plan due to libgdx not rendering friggin' flipped tiles
-        dojo = new Image(getAtlas().findRegion("maps/dojo to render"));
-        dojo.setX(540);
-        dojo.setY(1344);
        
     }
     
@@ -67,9 +59,10 @@ public class Chapter2_6 extends AbstractChapter {
     public void render(float delta) {
         super.render(delta);
 
-      
+       
+        
         stage.getSpriteBatch().begin();
-        dojo.draw(stage.getSpriteBatch(), 1);
+
         //This is probably the bestest "Scene Director" ever made. 
         //Valve should totally hire me. 
         for(MapCharacter character : characters){
@@ -86,53 +79,29 @@ public class Chapter2_6 extends AbstractChapter {
                             }
                         }));
                         character.addAction(actions);
+                        character.setWalking(true);
                         break;
                     case 1:
-                        dialog.setText("Lidia: Finally made it to Hikari. ");
-                        dialog.setVisible(true);
-                       break;
+                        if(character.getY()<1570){
+                            character.setY(character.getY()+1);
+                            centerCamera(character);
+                        }else{
+                            character.setDirection(MapCharacter.dirLeft);
+                            act = 2;
+                        }
+                        break;
                     case 2:
-                        dialog.setVisible(false);
-                        character.setWalking(true);
-                        act = 3;
+                        if(character.getX()>1020){
+                            character.setX(character.getX()-1);
+                            centerCamera(character);
+                        }else{
+                            character.setDirection(MapCharacter.dirUp);
+                            act = 3;
+                        }
                         break;
                     case 3:
-                        if(character.getY()<800){
-                            character.setY(character.getY()+1);
-                            centerCamera(character);
-                        }else{
-                            character.setDirection(MapCharacter.dirRight);
-                            character.setWalking(false);
-                            act = 4;
-                        }
+                        game.setScreen(new Chapter2_7(game));
                         break;
-                    case 4:
-                        dialog.setText("Lidia: Everything looks gorgeous!");
-                        dialog.setVisible(true);
-                        break;
-                    case 5:
-                        dialog.setVisible(false);
-                        character.setDirection(MapCharacter.dirUp);
-                        character.setWalking(true);
-                        act = 6;
-                        break;
-                    case 6:
-                        if(character.getY()<1600){
-                            character.setY(character.getY()+1);
-                            centerCamera(character);
-                        }else{
-                            character.setY(1400);
-                            centerCamera(character);
-                            camera.zoom = 1f;
-                            camera.update();
-                            character.setDirection(MapCharacter.dirUp);
-                            character.setWalking(false);
-                            act = 6;
-                            centerCamera(character);
-//                            character.setX(character.getX()-1);
-                        }
-                        break;
-                        
                    
                 }
             }
@@ -142,12 +111,11 @@ public class Chapter2_6 extends AbstractChapter {
                 character.draw(stage.getSpriteBatch(), 1);
         }
         stage.getSpriteBatch().end();
-        tileMapRenderer.render(camera,overLayers);
+
         if(dialog.isVisible()){
             hud.act(delta);
             hud.draw();
         }
-        
     }   
 
  

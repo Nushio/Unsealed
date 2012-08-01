@@ -109,12 +109,12 @@ public class Xios extends BattleEnemy {
             switch(getState()){
                 case BattleEntity.stateIdle:
                     if(!currentAnimation.isAnimationFinished(stateTime)){
-                        for(BattleHero hero : BattleGrid.heroes){
-                            if(hero.getGridYInt() == this.getGridYInt()){
+//                        for(BattleHero hero : BattleGrid.heroes){
+//                            if(hero.getGridYInt() == this.getGridYInt()){
                                 setState(BattleEntity.stateAttacking);
                                 hit = false;
-                            }
-                        }
+//                            }
+//                        }
                     }else{
                         Gdx.app.log(Unsealed.LOG,"Setting state to idle!");
                         setState(BattleEntity.stateIdle);
@@ -125,6 +125,8 @@ public class Xios extends BattleEnemy {
                     if(currentAnimation.isAnimationFinished(stateTime+0.3f)&&!hit){
                         hit = true;
                         showRoot(true);
+                        if(this.getHp()<600)
+                            showRoot(true);
                     }
                     if(currentAnimation.isAnimationFinished(stateTime)){
                         setState(BattleEntity.stateIdle);
@@ -137,6 +139,12 @@ public class Xios extends BattleEnemy {
                         showTrunk(BattleGrid.random.nextInt(3),BattleGrid.random.nextInt(3),true);
                         showTrunk(BattleGrid.random.nextInt(3),BattleGrid.random.nextInt(3),true);
                         showTrunk(BattleGrid.random.nextInt(3),BattleGrid.random.nextInt(3),true);
+                        if(this.getHp()<600)
+                            showTrunk(BattleGrid.random.nextInt(3),BattleGrid.random.nextInt(3),true);
+                        if(this.getHp()<300)
+                            showTrunk(BattleGrid.random.nextInt(3),BattleGrid.random.nextInt(3),true);
+                        if(this.getHp()<100)
+                            showTrunk(BattleGrid.random.nextInt(3),BattleGrid.random.nextInt(3),true);
                         //                        showTrunk(1,1,true);
                     }
                     if(currentAnimation.isAnimationFinished(stateTime)){
@@ -162,12 +170,12 @@ public class Xios extends BattleEnemy {
             public void run() {
                 switch(getState()){
                     case BattleEntity.stateIdle:
-                        if(BattleGrid.random.nextInt(100)>30){
-                            hit = false;
-                            setState(BattleEntity.stateAttacking);
-                        }else if(BattleGrid.random.nextInt(100)>30){
+                        if(BattleGrid.random.nextInt(100)<35){
                             hit = false;
                             setState(BattleEntity.stateAltAttacking);
+                        }else if(BattleGrid.random.nextInt(100)<30){
+                            hit = false;
+                            setState(BattleEntity.stateAttacking);
                         }else{
                             setState(BattleEntity.stateIdle);
                         }
@@ -180,7 +188,7 @@ public class Xios extends BattleEnemy {
     }
 
     public void showRoot(boolean show){
-        tmpDart = new TreeRoot(atlas,BattleGrid.random.nextInt(3),-9f,this);
+        tmpDart = new TreeRoot(atlas,BattleGrid.random.nextInt(3),-4f,this);
         tmpDart.setVisible(show);
         darts.add(tmpDart);
     }
@@ -205,17 +213,17 @@ public class Xios extends BattleEnemy {
                 this.addAction(actions);
                 break;
             case BattleEntity.stateAltAttacking:
-                actions = sequence(color(Color.GREEN), delay(0.2f),
+                actions = sequence(color(Color.GREEN), delay(0.1f),
                         color(Color.YELLOW),delay(0.1f),
-                        color(Color.GREEN),delay(0.2f),
+                        color(Color.GREEN),delay(0.1f),
                         color(Color.YELLOW),delay(0.1f),
                         color(Color.WHITE),delay(0.1f));
                 this.addAction(actions);
                 break;
         }
     }
-    @Override
-    public void setStatus(int status) {
-
-    }
+//    @Override
+//    public void setStatus(int status) {
+//
+//    }
 }

@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="25" height="15" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="30" height="18" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="Exteriors" tilewidth="32" tileheight="32">
   <image source="tiles_/exteriors.png" width="1120" height="1568"/>
  </tileset>
- <layer name="Ground" width="25" height="15">
+ <layer name="Ground" width="30" height="18">
   <data encoding="base64" compression="zlib">
-   eJx1lEkOACEIBH00nwM/N3OQpFKBg3EBmq0xzjn3X/mveOfCPd6Z8pBu77bPd7848631CrjUCcgDdvZvWQm7gFmwL/gIvTt+2na8KZs7+OFewmt947IO7SPP3gfHf7WnZKw5+zLV2O/EtJ5541yZx8QL5zDlQc5tPr1PcVg+1dQy83er31SvrW7mkvltLlBuvSkfct9zZyz3YevNFBvnxtzxnJF//ge2OfU8eSZTi3L/aebPxlHPCXM0nn2X8Kb/auKx3zdu8G9zj/r+Acp28XI=
+   eJzllDsOxDAIBTk0l7O53KbYSKMJOOUWWyA7AfN5D9gRsf9U8pK6ZOG+8Z3fO/Up25KvjTc1xC3o75NvN2LRJqFPvHNOeYhb0i/d6SNxJyYZzzpZw4Q1a8/mn/NnniVZjU1XLzG8466YeXWdpXPFE28LOSTPHWf+zzi2Y2+e+rnzRZ6cU8YzN+fBXp/qNTY+u9ys7/g4zRHfuhc77Dusd/SYn/pq2gnuN+pt19Xtmezml3b2b14nrrv5ONVsn91uYN+7lmm3vM1wyp/n1/vTO5x8GcMpLn2b767f/Ya5eMbf9rPztb+pp4l/t2dL+l/JB3I4aag=
   </data>
  </layer>
- <layer name="Pit of Doom" width="25" height="15">
+ <layer name="Pit of Doom" width="30" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYBh+QIaRgUGWSliOEbv5v4G0AyN18C8GTHvsoXLXgexkRvLxDQbs9sD8ADI/BYsfSQFJaPY4MqL6wZFC85HtgfkrhUZ2YAPUtgM5fcLiAxaG2NICOeYjp09kd9sjpQVK8gWy+ehpCD09UIpxpVHk9EAppjQPDEYAAD6QNGY=
+   eJztk0EKgDAMBJN/qC+xqF9R/6xv0YuRGsh1F3oQsjD00jJt2YhkMpnW6VSkJxmUd962zspxCe6OzsPWTTFO4dyT7S2fcwfvvGrF3QvoRc/EjFopP/H6P7HdiP1A7+5vft3oDMVOMv3wbjAwzuhGZ8hhnS3zAKE7LbM=
   </data>
  </layer>
- <layer name="Decorations" width="25" height="15">
+ <layer name="Decorations" width="30" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYMAE5SwIdiETFgUEABcRemaxEFYDAgFEmFVOpFmUAJB7d5ARFqNgFIwC6gB/Ouc/PxrbR2zZCirfiC3jdiKZCQBqNAaD
+   eJxjYBgFyKCcBcEuZCJdPxcZekBgFgthNSAQQIT55USaRW2Ayw87yAyTUTAK6AF2jUC7B8JeXHb6D9LywW8A3EVOnUMI7BxE4QsAr/4IdQ==
   </data>
  </layer>
- <layer name="Tree Trunk" width="25" height="15">
+ <layer name="Tree Trunk" width="30" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYMAEvIwMDHxAzM+IRRINGADVGAKxER612MwiRh8MBAPVhABxKBa1MLdiMwufPlIAzK3UMAsXgLl1FIyCoQpIKTfIBaSUG+QCYsqNwexXmNsAnfoIUg==
+   eJxjYBgFyICXkYGBD4j5GQmrNQCqMQRiIyLUIgNs5pNiVjBQTQgQh2JRC3M/NoDNfHxmkQJg7scGqGE+LgBz/yigPSAlb1ATkJvPKAXUyhtDHYzG+9AHgyUOAS17Cfc=
   </data>
  </layer>
- <layer name="Tree Top" width="25" height="15">
+ <layer name="Tree Top" width="30" height="18">
   <data encoding="base64" compression="zlib">
-   eJyzYWBgsGVABXFAHA/ECQyUAWsgtqGSWbgAzK2jYBQMVSABxJJALEVDO2B5ET2vUxMQU24MZr/C3EYMILeMhLmNlgDmNgCO2wkn
+   eJxjYMAPJIBYEoilCKgjVS0hPdZAbAPEtkSYgU8tqebHAXE8ECcQYS8+tdQwnxyAy3wDRhpZiAaM0OwJppO9oXSyBxmQk96pAUjJG9QEtE67QwWMxvvQB6NxODAAANzYD9M=
   </data>
  </layer>
- <layer name="Decorations" width="25" height="15">
+ <layer name="Decorations" width="30" height="18">
   <data encoding="base64" compression="zlib">
-   eJwzZGHACgxxiJMCQliws0fBKBgF9AX0zH+DIa9To/yihT30chcoDgDSmQLC
+   eJxjYBjaoJyFgSGEBcKG0cQCQxzqcYkjg1loasrR+ITcQqpbiXXHKKAvICat0MrOgbB7FAwcoFaZMVTtpxdAL8upCfDlWVqX5YMh/gBDZQby
   </data>
  </layer>
 </map>

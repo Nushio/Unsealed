@@ -148,36 +148,48 @@ public class Chapter1_6 extends AbstractChapter {
                         dialog.setVisible(true);
                         break;
                     case 1:
-                        dialog.setText("Townsfolk Ramsey: Those are some great fighting skills. Miss Terius, please teach us, or at least teach our children");
+                        dialog.setText("Townsfolk Ramsey: Those are some great fighting skills. Miss... Terius, was it? Please teach us, or at least teach our children");
                         break;
                     case 2:
                         dialog.setText("Townsfolk Hashbang: We owe you a great debt Miss Terius");
                         break;
                     case 3:
-                        dialog.setText("Lidia: You're welcome, everyone. Now, let's begin the first lesson of Spellcasting...");
+                        dialog.setText("Lidia: You're welcome. The skills I've used, anyone could use them.");
                         break;
                     case 4:
                         dialog.setText("Lidia: Everyone can be a Spellcaster if you desire it. \n" +
-                        		"Now that the Pixie has been released, magic will start flowing more naturally.\n");
+                        		"With the Guardian released, magic will start flowing more naturally.\n");
                         break;
                     case 5:
                         dialog.setText("Lidia: Magic is a very powerful tool, and it's important that it remains Free to use and study\n." +
-                        		"That's the reason the Pixie was sealed for so long. Only a few select elders knew about the connection between Pixies and magic\n" +
+                        		"The reason the Guardian was sealed for so long was that only few knew about the connection between the Guardians and magic\n" +
                         		"They did not pass on their secrets, and in time, the use of magic was completely forgotten. ");
                         break;
                     case 6:
-                        dialog.setText("Lidia: That's why the Free Spellweaver Foundation set a few basic rules to ensure that the knowledge is preserved. \n" +
-                        		"The First Freedom is the Freedom to use magic. Using magic should not be forbidden. It should be encouraged!\n" +
-                        		"The Second Freedom is the Freedom to study the spell. This is a requirement to weave new, more powerful spells");
+                        dialog.setText("Lidia: That's why the Free Spellweaver Foundation set Laws to ensure that the knowledge is preserved. \n" +
+                        		"The First Law is the Freedom to use magic. Using magic should not be forbidden. It should be encouraged!\n" +
+                        		"The Second Law is the Freedom to study the spell. This is a requirement to weave new, more powerful spells");
                         break;
                     case 7:
-                        dialog.setText("Lidia: The Third Freedom is the Freedom to teach others how to do Spells. \n" +
-                        		"And last but not least, The Final Freedom is the Freedom to share the Spells you weave");
+                        dialog.setText("Lidia: The Third Law is that Knowledge must not be restricted.\n" +
+                        		"Everyone is born capable of spellweaving, but some would like to deny the rights of others.\n" +
+                        		"That has to stop, and Xios must be stopped.\n" +
+                        		"The Final Law is the Freedom to share the Spells you weave with others. " +
+                        		"You must pass the knowledge of spellweaving to those who seek it, so that the art isn't forgotten.\n");
                         break;
                     case 8:
-                        dialog.setText("Lidia: These are the basic rules, and I'm free to answer any questions you might have. ");
+                        dialog.setText("Lidia: These laws are the building blocks of The Foudation. " +
+                        		"We've placed a powerful Enchantments on our spells to ensure that any spell learnt form us complies with these laws.\n" +
+                        		"By sharing the knowledge, we can help communities advance at a greater pace");
                         break;
                     case 9:
+                        dialog.setText("Townsfolk Terranova: Laws that force Freedom? Now I've heard everything....");
+                        break;
+                    case 10:
+                        dialog.setText("Lidia: If anyone has questions, I'll be staying around town for the rest of the week.\n" +
+                        		"I would be glad to give everyone lessons on Spellweaving.");
+                        break;
+                    case 11:
                         dialog.setVisible(false);
                         game.setScreen( new Chapter1_7( game ) );
                         break;

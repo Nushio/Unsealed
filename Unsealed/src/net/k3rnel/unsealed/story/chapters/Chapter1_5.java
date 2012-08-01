@@ -44,9 +44,13 @@ public class Chapter1_5 extends BattleScreen {
     @Override
     public void show() {
         super.show();
+        hero.setSkill1(null);
         hero.setSkill2(new EarthSpikes(getAtlas()));
-        hud.bButton.addActor(hero.getSkill2());
-        
+        hero.setSkill3(null);
+        hero.setSkill4(null);
+        hero.setSkill5(new EarthSpikes(getAtlas()));
+        hero.setSkill6(null);
+        buttonPress(9,true);
         game.getMusicManager().play( UnsealedMusic.BATTLE );
         
         AtlasRegion atlasRegion = atlas.findRegion( "battle/ui/continue" );
@@ -62,11 +66,18 @@ public class Chapter1_5 extends BattleScreen {
             @Override
             public void clicked(InputEvent arg0, float arg1, float arg2) {
                act = -1;
+               grid.reset();
+               hero.reset();
                hero.setHp(150);
                hero.setMana(0);
                hero.setGrid(1,1);
+               hero.setSkill1(null);
                hero.setSkill2(new EarthSpikes(getAtlas()));
-               hud.bButton.addActor(hero.getSkill2());
+               hero.setSkill3(null);
+               hero.setSkill4(null);
+               hero.setSkill5(new EarthSpikes(getAtlas()));
+               hero.setSkill6(null);
+               buttonPress(9,true);
                grid.assignEntity(hero);
                restartButton.setVisible(false);
             }
@@ -75,7 +86,15 @@ public class Chapter1_5 extends BattleScreen {
         camera.position.set(700, 660, 0);
         camera.update();
     }
-    
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        if(restartButton.isVisible()){
+            this.getBatch().begin();
+            restartButton.draw(this.getBatch(), 1);
+            this.getBatch().end();
+        }
+    }
     @Override
     public void checkScene(float delta){
         this.stateTime+=delta;
@@ -83,7 +102,6 @@ public class Chapter1_5 extends BattleScreen {
         switch(act){
             case -1:
                 dialog.setVisible(true);
-                grid.reset();
                
                 dialog.setText("I need to concentrate and use my Skills appropriately");
                 if(stateTime>4){

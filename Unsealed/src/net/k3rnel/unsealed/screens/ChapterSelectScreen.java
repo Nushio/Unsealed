@@ -35,7 +35,14 @@ import com.badlogic.gdx.utils.Scaling;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.story.chapters.Chapter1_1;
+import net.k3rnel.unsealed.story.chapters.Chapter1_3;
+import net.k3rnel.unsealed.story.chapters.Chapter1_4;
+import net.k3rnel.unsealed.story.chapters.Chapter1_5;
+import net.k3rnel.unsealed.story.chapters.Chapter1_7;
 import net.k3rnel.unsealed.story.chapters.Chapter2_1;
+import net.k3rnel.unsealed.story.chapters.Chapter2_3;
+import net.k3rnel.unsealed.story.chapters.Chapter2_4;
+import net.k3rnel.unsealed.story.chapters.Chapter2_7;
 import net.k3rnel.unsealed.story.chapters.Chapter3_4;
 
 public class ChapterSelectScreen extends AbstractScreen {
@@ -76,8 +83,10 @@ public class ChapterSelectScreen extends AbstractScreen {
         chapterLabel.setAlignment(Align.center);
         table.add(chapterLabel).align(Align.center);
         chapterLabel = new Label("Chapter 2\nOld Friends",skin);
+        chapterLabel.setAlignment(Align.center);
         table.add(chapterLabel).align(Align.center);
         chapterLabel = new Label("Chapter 3\nWalled Gardens",skin);
+        chapterLabel.setAlignment(Align.center);
         table.add(chapterLabel).align(Align.center);
         table.add();
         table.row();
@@ -112,7 +121,7 @@ public class ChapterSelectScreen extends AbstractScreen {
             
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen( new Chapter2_1( game ) );
+                game.setScreen( new Chapter2_7( game ) );
                 
             }
         });

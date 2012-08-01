@@ -18,161 +18,222 @@
  */
 package net.k3rnel.unsealed.story.chapters;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 import net.k3rnel.unsealed.Unsealed;
-import net.k3rnel.unsealed.battle.BattleGrid;
-import net.k3rnel.unsealed.battle.enemies.Clam;
-import net.k3rnel.unsealed.battle.enemies.Snake;
-import net.k3rnel.unsealed.battle.skills.EarthSpikes;
-import net.k3rnel.unsealed.battle.skills.FireLion;
-import net.k3rnel.unsealed.screens.BattleScreen;
 import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
+import net.k3rnel.unsealed.story.characters.Lidia;
+import net.k3rnel.unsealed.story.characters.Shura;
+import net.k3rnel.unsealed.story.helpers.MapCharacter;
 
-public class Chapter2_3 extends BattleScreen {
+public class Chapter2_3 extends AbstractChapter {
 
-    protected Button restartButton;
-
+  
+    /**
+     * Chapter Two: Old Friends
+     * @param game
+     */
     public Chapter2_3(Unsealed game) {
-        super(game,true, "RouteOne");
-
+        super(game);
+        mapname="RouteTwo";
     }
 
     @Override
     public void show() {
         super.show();
-        game.getMusicManager().play( UnsealedMusic.BATTLE );
-        
-        hero.setSkill1(new EarthSpikes(getAtlas()));
-        hud.xButton.addActor(hero.getSkill1());
-        
-        hero.setSkill3(new FireLion(getAtlas()));
-        hud.aButton.addActor(hero.getSkill3());
-        
-        AtlasRegion atlasRegion = atlas.findRegion( "battle/ui/continue" );
-        restartButton = new ImageButton(new Image(atlasRegion).getDrawable(),new Image(atlasRegion).getDrawable());
-        restartButton.setY(140);
-        restartButton.setX(170);
-        restartButton.setWidth(426);
-        restartButton.setHeight(165);
-        restartButton.setVisible(false);
-        restartButton.setDisabled(true);
-        restartButton.addListener(new ClickListener() {
 
-            @Override
-            public void clicked(InputEvent arg0, float arg1, float arg2) {
-               act = -1;
-               hero.setHp(150);
-               hero.setMana(0);
-               hero.setGrid(1,1);
-               hero.setSkill1(new EarthSpikes(getAtlas()));
-               hud.xButton.addActor(hero.getSkill1());
-               
-               hero.setSkill3(new FireLion(getAtlas()));
-               hud.aButton.addActor(hero.getSkill3());
-               grid.assignEntity(hero);
-               restartButton.setVisible(false);
-            }
-        });
-        this.stage.addActor(restartButton);
-        camera.position.set(1250, 1560, 0);
+        game.getMusicManager().play( UnsealedMusic.DESERT );
+        
+        tmpChar = new Lidia(getAtlas());
+        tmpChar.setPosition(800,1600);
+        tmpChar.updateAnimation();
+        tmpChar.setDirection(MapCharacter.dirRight);
+        characters.add(tmpChar);
+        
+        tmpChar = new Shura(getAtlas());
+        tmpChar.setPosition(1860,1960);
+        tmpChar.updateAnimation();
+        tmpChar.setDirection(MapCharacter.dirDown);
+        tmpChar.setVisible(false);
+        characters.add(tmpChar);
+        camera.zoom = 2f;
         camera.update();
+       
     }
     
     @Override
-    public void checkScene(float delta){
-        this.stateTime+=delta;
-       
-        switch(act){
-            case -1:
-                dialog.setVisible(true);
-                dialog.setText("I need to concentrate and use my Skills appropriately");
-                if(stateTime>4){
-                    grid.reset();
-                    hero.setHp(150);
-                    hero.setMana(0);
-                    grid.assignEntity(hero);
-                    act = 0;
+    public void render(float delta) {
+        super.render(delta);
+
+        stage.getSpriteBatch().begin();
+        //This is probably the bestest "Scene Director" ever made. 
+        //Valve should totally hire me. 
+        for(MapCharacter character : characters){
+            if(character instanceof Lidia){
+                switch(act){
+                    case 0:
+                        centerCamera(character);
+                        character.getColor().a = 0;
+                        character.setWalking(false);
+                        actions = sequence(fadeIn(0.95f),delay(0.75f),run(new Runnable() {
+                            @Override
+                            public void run() {
+                                setAct(1);
+                            }
+                        }));
+                        character.addAction(actions);
+                        character.setWalking(true);
+                        break;
+                    case 1:
+                        if(character.getX()<801){
+                            character.setX(character.getX()+2);
+                            centerCamera(character);
+                        }else{
+                            //TODO Move till X = 800
+//                            camera.zoom = 2.0f;
+//                            camera.update();
+                            act = 2;
+//                        }
+                        }
+                       break;
+                   
+                    case 2:
+                        if(character.getX()<1201){
+                            character.setX(character.getX()+2);
+                            centerCamera(character);
+                        }else{
+                            camera.zoom = 1.8f;
+                            camera.update();
+                            act = 3;
+//                        }
+                        }
+                        break;
+                    case 3:
+                        if(character.getX()<1401){
+                            character.setX(character.getX()+1);
+                            centerCamera(character);
+                        }else{
+                            character.setWalking(false);
+                            act = 4;
+//                        }
+                        }
+                        break;
+                    case 18:
+                        if(character.getX()<2201){
+                            character.setWalking(true);
+                            character.setX(character.getX()+1);
+                            centerCamera(character);
+                        }else{
+                            character.setWalking(false);
+                            act = 19;
+//                        }
+                        }
+                        break;
+                    case 19:
+                        game.setScreen(new Chapter2_4(game));
+                        break;
+                   
                 }
-                break;
-            case 0:
-                dialog.setText("Remember you can use your Skills with J and L");
-                dialog.setVisible(true);
-                if(stateTime>4){
-                    act = 1;
-                    stateTime = 0;
+            }
+            if(character instanceof Shura){
+                switch(act){
+                    case 4:
+                        character.setVisible(true);
+                        if(character.getY()>1800){
+                            character.setWalking(true);
+                            character.setY(character.getY()-1);
+                        }else{
+                            camera.zoom = 1.6f;
+                            camera.update();
+                            act = 5;
+                        }
+                        break;
+                    case 5:
+                        if(character.getY()>1600){
+                            character.setY(character.getY()-1);
+                        }else{
+                            camera.zoom = 1.3f;
+                            camera.update();
+                            act = 6;
+                            character.setDirection(MapCharacter.dirLeft);
+                        }
+                        break;
+                    case 6:
+                        if(character.getX()>1600){
+                            character.setX(character.getX()-1);
+                        }else{
+                            camera.zoom = 1.0f;
+                            camera.update();
+                            act = 7;
+                            character.setWalking(false);
+                        }
+                        break;
+                    case 7:
+                        dialog.setText("Lidia: Shura! I'm glad to see you! \n" +
+                                "After Marblehead... We didn't part in the best of terms... ");
+                        dialog.setVisible(true);
+                        break;
+                    case 8:
+                        dialog.setText("Shura: The best of terms? You nearly got us killed over a boy!\n" +
+                        		"You just had to tell him we're Spellweavers, didn't you? ");
+                        break;
+                    case 9:
+                        dialog.setText("Lidia: That was what we set out to do, remember?\n" +
+                        		"Unseal the Guardians? Teach them about Spellweaving?");
+                        break;
+                    case 10:
+                        dialog.setText("Shura: Falling in love was also part of the mission?");
+                        break;
+                    case 11:
+                        dialog.setText("Lidia: I... You.. You're right. \n" +
+                        		"I'm sorry... I should've known better...");
+                        break;
+                    case 12:
+                        dialog.setText("Lidia: Will you forgive me? \n" +
+                        		"We can't undo the past, but we can move on and learn from our mistakes.");
+                        break;
+                    case 13:
+                        dialog.setText("Shura: I can forgive you, but I won't join you. \n" +
+                        		"You need to learn take care of yourself and cool down sometimes.\n" +
+                        		"Let me share this new Spell I weaved...");
+                        break;
+                    case 14:
+                        dialog.setText("Lidia learned Ice Prison!");
+                        break;
+                    case 15:
+                        dialog.setText("Shura: Alright, put it to good use. I'll see you later!");
+                        break;
+                    case 16:
+                        dialog.setVisible(false);
+                        character.setDirection(MapCharacter.dirRight);
+                        character.setWalking(true);
+                        act = 17;
+                        break;
+                    case 17:
+                        if(character.getX()<1800){
+                            character.setX(character.getX()+2.5f);
+                        }else{
+                          act = 18;
+                          character.setVisible(false);
+                        }
+                        break;
                 }
-                break;
-            case 1:
-                disableInput = false;
-                dialog.setVisible(false);
-                grid.spawnEnemies(new Clam(getAtlas(),50,3,0),new Clam(getAtlas(),50,3,2),new Snake(getAtlas(),60,4,1));
-                act = 2;
-                break;
-            case 2:
-                if(BattleGrid.checkState()==BattleGrid.battleWon){
-                    act = 3;
-                    stateTime = 0;
-                }else  if(BattleGrid.checkState()==BattleGrid.battleLost&&stateTime>3){
-                    dialog.setText("You were defeated! The hopes and dreams of Altera died with you...");
-                    dialog.setVisible(true);
-                    restartButton.setVisible(true);
-                }
-                break;
-            case 3:
-                disableInput = false;
-                dialog.setVisible(false);
-                grid.spawnEnemies(new Clam(getAtlas(),70,5,0),new Clam(getAtlas(),70,5,2),new Snake(getAtlas(),60,3,1),new Snake(getAtlas(),80,4,1));
-                act = 4;
-                break;
-            case 4:
-                if(BattleGrid.checkState()==BattleGrid.battleWon){
-                    act = 5;
-                    stateTime = 0;
-                }else  if(BattleGrid.checkState()==BattleGrid.battleLost&&stateTime>3){
-                    dialog.setText("You were defeated! The hopes and dreams of Altera died with you...");
-                    dialog.setVisible(true);
-                    restartButton.setVisible(true);
-                }
-                break;
-            case 5:
-                dialog.setText("Lidia: These clams are getting on my nerves....");
-                dialog.setVisible(true);
-                if(stateTime>4){
-                    act=6;
-                }
-                break;
-            case 6:
-                disableInput = false;
-                dialog.setVisible(false);
-                grid.spawnEnemies(new Clam(getAtlas(),100,5,0),new Clam(getAtlas(),100,5,2),new Clam(getAtlas(),100,5,1),new Snake(getAtlas(),60,3,1),new Snake(getAtlas(),80,4,2));
-                act = 7;
-                break;
-            case 7:
-                if(BattleGrid.checkState()==BattleGrid.battleWon){
-                    act = 8;
-                    stateTime = 0;
-                }else  if(BattleGrid.checkState()==BattleGrid.battleLost&&stateTime>3){
-                    dialog.setText("You were defeated! The hopes and dreams of Altera died with you...");
-                    dialog.setVisible(true);
-                    restartButton.setVisible(true);
-                }
-                break;
-            case 8:
-                dialog.setText("Level Up! Your Maximum HP has been raised to 180!");
-                dialog.setVisible(true);
-                if(stateTime>4){
-                    act=9;
-                }
-                break;
-            case 9:
-                game.setScreen(new Chapter2_4(game));
-                break;
+            }
+            character.act(delta);
+            if(character.isVisible())
+                character.draw(stage.getSpriteBatch(), 1);
         }
-    }
+        stage.getSpriteBatch().end();
+        
+        if(dialog.isVisible()){
+            hud.act(delta);
+            hud.draw();
+        }
+        
+    }   
+
+ 
 }

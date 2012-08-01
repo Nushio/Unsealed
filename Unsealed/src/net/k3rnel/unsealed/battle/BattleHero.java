@@ -252,6 +252,8 @@ public class BattleHero extends BattleEntity {
 
     }
     public void reset(){
+        this.setStatus(BattleEntity.statusNormal);
+        this.setState(BattleEntity.stateIdle);
         magics = new ArrayList<MagicEntity>();
     }
     public void showFireLion(boolean show){

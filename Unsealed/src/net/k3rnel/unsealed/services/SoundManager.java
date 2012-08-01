@@ -40,7 +40,7 @@ public class SoundManager implements CacheEntryRemovedListener<UnsealedSound,Sou
      */
     public enum UnsealedSound
     {
-        CLICK( "sfx/enchant.ogg" ),
+        CLICK( "sfx/enchant.wav" ),
         FIRE( "sfx/Fire.ogg" )
         ;
 

@@ -27,19 +27,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.battle.BattleGrid;
+import net.k3rnel.unsealed.battle.enemies.Bee;
 import net.k3rnel.unsealed.battle.enemies.Clam;
 import net.k3rnel.unsealed.battle.enemies.Snake;
 import net.k3rnel.unsealed.battle.skills.EarthSpikes;
 import net.k3rnel.unsealed.battle.skills.FireLion;
-import net.k3rnel.unsealed.battle.skills.IceTentacle;
 import net.k3rnel.unsealed.screens.BattleScreen;
 import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
 
-public class Chapter2_5 extends BattleScreen {
+public class Chapter2_7 extends BattleScreen {
 
     protected Button restartButton;
 
-    public Chapter2_5(Unsealed game) {
+    public Chapter2_7(Unsealed game) {
         super(game,true, "RouteOne");
 
     }
@@ -48,14 +48,13 @@ public class Chapter2_5 extends BattleScreen {
     public void show() {
         super.show();
         game.getMusicManager().play( UnsealedMusic.BATTLE );
-        hero.setHp(200);
+        
+        hero.setHp(180);
         hero.setSkill1(new EarthSpikes(getAtlas()));
-        hero.setSkill2(new IceTentacle(getAtlas()));
+        hud.xButton.addActor(hero.getSkill1());
+        
         hero.setSkill3(new FireLion(getAtlas()));
-        hero.setSkill4(new EarthSpikes(getAtlas()));
-        hero.setSkill5(new IceTentacle(getAtlas()));
-        hero.setSkill6(new FireLion(getAtlas()));
-        buttonPress(9,true);
+        hud.aButton.addActor(hero.getSkill3());
         
         AtlasRegion atlasRegion = atlas.findRegion( "battle/ui/continue" );
         restartButton = new ImageButton(new Image(atlasRegion).getDrawable(),new Image(atlasRegion).getDrawable());
@@ -70,52 +69,41 @@ public class Chapter2_5 extends BattleScreen {
             @Override
             public void clicked(InputEvent arg0, float arg1, float arg2) {
                act = -1;
-               hero.setHp(200);
+               hero.setHp(180);
                hero.setMana(0);
                hero.setGrid(1,1);
                hero.setSkill1(new EarthSpikes(getAtlas()));
-               hero.setSkill2(new IceTentacle(getAtlas()));
-               hero.setSkill3(new FireLion(getAtlas()));
-               hero.setSkill4(new EarthSpikes(getAtlas()));
-               hero.setSkill5(new IceTentacle(getAtlas()));
-               hero.setSkill6(new FireLion(getAtlas()));
-               buttonPress(9,true);
+               hud.xButton.addActor(hero.getSkill1());
                
+               hero.setSkill3(new FireLion(getAtlas()));
+               hud.aButton.addActor(hero.getSkill3());
                grid.assignEntity(hero);
                restartButton.setVisible(false);
             }
         });
         this.stage.addActor(restartButton);
-        camera.position.set(1250, 1560, 0);
+        camera.position.set(1050, 1960, 0);
         camera.update();
     }
     
     @Override
     public void checkScene(float delta){
         this.stateTime+=delta;
-       
+        
         switch(act){
             case -1:
                 dialog.setVisible(true);
                 dialog.setText("I need to concentrate and use my Skills appropriately");
                 if(stateTime>4){
-                    hero.setSkill1(new EarthSpikes(getAtlas()));
-                    hero.setSkill2(new IceTentacle(getAtlas()));
-                    hero.setSkill3(new FireLion(getAtlas()));
-                    hero.setSkill4(new EarthSpikes(getAtlas()));
-                    hero.setSkill5(new IceTentacle(getAtlas()));
-                    hero.setSkill6(new FireLion(getAtlas()));
-                    buttonPress(9,true);
-                    hero.setHp(200);
-                    hero.setMana(0);
-                    hero.reset();
                     grid.reset();
+                    hero.setHp(180);
+                    hero.setMana(0);
                     grid.assignEntity(hero);
                     act = 0;
                 }
                 break;
             case 0:
-                dialog.setText("Remember you can use your Skills with J, K and L");
+                dialog.setText("Remember you can use your Skills with J and L");
                 dialog.setVisible(true);
                 if(stateTime>4){
                     act = 1;
@@ -125,8 +113,7 @@ public class Chapter2_5 extends BattleScreen {
             case 1:
                 disableInput = false;
                 dialog.setVisible(false);
-                hero.setMana(0);
-                grid.spawnEnemies(new Clam(getAtlas(),100,3,0),new Clam(getAtlas(),100,3,2),new Snake(getAtlas(),120,4,1));
+                grid.spawnEnemies(new Clam(getAtlas(),70,3,0),new Clam(getAtlas(),70,3,2),new Bee(getAtlas(),70,4,1));
                 act = 2;
                 break;
             case 2:
@@ -140,39 +127,44 @@ public class Chapter2_5 extends BattleScreen {
                 }
                 break;
             case 3:
-                disableInput = false;
-                dialog.setVisible(false);
-                hero.setMana(0);
-                grid.spawnEnemies(new Clam(getAtlas(),100,5,0),new Clam(getAtlas(),100,5,2),new Snake(getAtlas(),100,3,1),new Snake(getAtlas(),80,4,1));
-                act = 4;
+                dialog.setText("Lidia: Bees? I must be getting near Hikaru...");
+                dialog.setVisible(true);
+                if(stateTime>4){
+                    act=4;
+                }
                 break;
             case 4:
+                disableInput = false;
+                dialog.setVisible(false);
+                grid.spawnEnemies(new Clam(getAtlas(),70,5,0),new Clam(getAtlas(),70,5,2),new Bee(getAtlas(),60,3,1),new Bee(getAtlas(),80,4,1));
+                act = 5;
+                break;
+            case 5:
                 if(BattleGrid.checkState()==BattleGrid.battleWon){
-                    act = 5;
+                    act = 6;
                     stateTime = 0;
                 }else  if(BattleGrid.checkState()==BattleGrid.battleLost&&stateTime>3){
                     dialog.setText("You were defeated! The hopes and dreams of Altera died with you...");
                     dialog.setVisible(true);
                     restartButton.setVisible(true);
-                }
-                break;
-            case 5:
-                dialog.setText("Lidia: These creatures look angry and confused!");
-                dialog.setVisible(true);
-                if(stateTime>4){
-                    act=6;
                 }
                 break;
             case 6:
-                disableInput = false;
-                dialog.setVisible(false);
-                hero.setMana(0);
-                grid.spawnEnemies(new Clam(getAtlas(),100,5,0),new Clam(getAtlas(),100,5,2),new Clam(getAtlas(),100,5,1),new Snake(getAtlas(),80,3,1),new Snake(getAtlas(),80,4,2));
-                act = 7;
+                dialog.setText("Lidia: One more round and I can relax...");
+                dialog.setVisible(true);
+                if(stateTime>3){
+                    act=7;
+                }
                 break;
             case 7:
+                disableInput = false;
+                dialog.setVisible(false);
+                grid.spawnEnemies(new Clam(getAtlas(),100,5,0),new Clam(getAtlas(),100,5,2),new Clam(getAtlas(),100,5,1),new Snake(getAtlas(),60,3,1),new Snake(getAtlas(),80,4,2));
+                act = 8;
+                break;
+            case 8:
                 if(BattleGrid.checkState()==BattleGrid.battleWon){
-                    act = 8;
+                    act = 9;
                     stateTime = 0;
                 }else  if(BattleGrid.checkState()==BattleGrid.battleLost&&stateTime>3){
                     dialog.setText("You were defeated! The hopes and dreams of Altera died with you...");
@@ -180,18 +172,16 @@ public class Chapter2_5 extends BattleScreen {
                     restartButton.setVisible(true);
                 }
                 break;
-            case 8:
-                game.setScreen(new Chapter2_6(game));
+            case 9:
+                dialog.setText("Level Up! Your Maximum HP has been raised to 200!");
+                dialog.setVisible(true);
+                if(stateTime>4){
+                    act=10;
+                }
                 break;
-        }
-    }
-    @Override
-    public void render(float delta) {
-        super.render(delta);
-        if(restartButton.isVisible()){
-            this.getBatch().begin();
-            restartButton.draw(this.getBatch(), 1);
-            this.getBatch().end();
+            case 10:
+                game.setScreen(new Chapter2_8(game));
+                break;
         }
     }
 }

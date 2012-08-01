@@ -27,7 +27,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
 import net.k3rnel.unsealed.story.characters.Lidia;
-import net.k3rnel.unsealed.story.characters.Pixie;
+import net.k3rnel.unsealed.story.characters.Penguin;
 import net.k3rnel.unsealed.story.characters.Whisperer;
 import net.k3rnel.unsealed.story.helpers.MapCharacter;
 
@@ -59,7 +59,7 @@ public class Chapter1_1 extends AbstractChapter {
         tmpChar.setPosition(291,470);
         tmpChar.setVisible(false);
         characters.add(tmpChar);
-        tmpChar = new Pixie(getAtlas());
+        tmpChar = new Penguin(getAtlas());
         tmpChar.updateAnimation();
         tmpChar.setPosition(82,660);
         characters.add(tmpChar);
@@ -115,43 +115,43 @@ public class Chapter1_1 extends AbstractChapter {
                             setAct(4);
                         }
                         break;
-                    case 15:
+                    case 19:
                         if(character.getY()<470){
                             character.setWalking(true);
                             character.setY(character.getY()+1);
                             centerCamera(character);
                         }else{
                             character.setDirection(MapCharacter.dirLeft);
-                            setAct(16);
+                            setAct(20);
                         }
                         break;
-                    case 16:
+                    case 20:
                         if(character.getX()>70){
                             character.setX(character.getX()-1);
                             centerCamera(character);
                         }else{
                             character.setDirection(MapCharacter.dirUp);
-                            setAct(17);
+                            setAct(21);
                         }
                         break;
-                    case 17:
+                    case 21:
                         if(character.getY()<580){
                             character.setY(character.getY()+1);
                             centerCamera(character);
                         }else{
                             character.setWalking(false);
-                            setAct(18);
+                            setAct(22);
                         }
                         break;
-                    case 18:
+                    case 22:
                         dialog.setText("Lidia: You poor thing....\n" +
                         		"Awaken from your slumber. Let the seal be broken.\n" +
-                        		"I, Lidia Terious, Unseal you!");
+                        		"I, Lidia Terious, UNSEAL YOU!");
                         dialog.setVisible(true);
                         break;
-                    case 19:
+                    case 23:
                         dialog.setVisible(false);
-                        setAct(20);
+                        setAct(24);
                         break;
 
                 }
@@ -174,10 +174,10 @@ public class Chapter1_1 extends AbstractChapter {
                         dialog.setVisible(true);
                         break;
                     case 6:
-                        dialog.setText("Whisperer: You know I'm just a whisper away from being summoned");
+                        dialog.setText("Whisperer: You know I am but a mere whisper away from being summoned");
                         break;
                     case 7:
-                        dialog.setText("Lidia: The next Pixie is up ahead, I can sense it.");
+                        dialog.setText("Lidia: I found the next Guardian. It's up ahead, I can sense it.");
                         break;
                     case 8:
                         dialog.setText("Whisperer: It is calling out for you. It's been sealed for so long. ");
@@ -186,88 +186,78 @@ public class Chapter1_1 extends AbstractChapter {
                         dialog.setText("Lidia: If I was sealed for 300 years I wouldn't just whisper for help... I'd shout too.");
                         break;
                     case 10:
-                        dialog.setText("Lidia: It's incredible how the locals won't do anything to save the Pixies.\n" +
-                        		"It's always up to a Traveler to set things right");
+                        dialog.setText("Lidia: The locals think of them as just statues, they've forgotten that they are much more than that.\n" +
+                        		"It's always up to a Traveler to set things right and undo their damage!");
                         break;
                     case 11:
-                        dialog.setText("Whisperer: There's a reason the Free Spellweaver Foundation granted you the ability to -");
+                        dialog.setText("Whisperer: You sound weary. This'll be the Fifth Guardian and you're already tired?");
                         break;
                     case 12:
-                        dialog.setText("Lidia: Yes, to help others, spread the values, and make sure that magic stays free. I know. ");
+                        dialog.setText("Lidia: You say it as if it were easy. You simply appear and disappear at the slightest sign of trouble.\n" +
+                        		"After what happened at Marblehead, I'm taking things a little more calmed this time.");
                         break;
                     case 13:
-                        dialog.setText("Whisperer: The Pixie awaits. We can continue the discussion later");
+                        dialog.setText("Whisperer: Marblehead was different. New Lion has always allied with Spellweavers");
                         break;
                     case 14:
+                        dialog.setText("Lidia: And apparently, Marblehead has always been against Spellweavers!\n" +
+                        		"You should've warned me!");
+                        break;
+                    case 15:
+                        dialog.setText("Whisperer: You were distracted...");
+                        break;
+                    case 16:
                         dialog.setVisible(false);
                         actions = sequence(fadeOut(0.75f),run(new Runnable() {
                             @Override
                             public void run() {
-                                setAct(15);
+                                setAct(17);
                             }
                         }));
                         character.addAction(actions);
                         break;
+                    case 17:
+                        dialog.setText("Lidia: She just *had* to bring that up again...  ");
+                        dialog.setVisible(true);
+                        break;
+                    case 18:
+                        dialog.setVisible(false);
+                        act = 19;
+                        break;
                 }
             }
-            if(character instanceof Pixie){
+            if(character instanceof Penguin){
                 switch(act){
-                    case 20:
+                    case 24:
                         actions = sequence(fadeOut(0.75f),
                                 run(new Runnable() {
                                     @Override
                                     public void run() {
-                                        setAct(21);
+                                        setAct(25);
                                     }
                                 }),fadeIn(0.75f));
                         character.addAction(actions);
                         break;
-                    case 21:
-                        character.setWalking(true);
-                        setAct(22);
-                        break;
-                    case 22:
-                        if(character.getX()>31){
-                            character.setX(character.getX()-3);
-
-                        }else if(character.getY()>530){
-                            character.setY(character.getY()-3);
-                        }else{
-                            setAct(23);
-                        }
-                        break;
-                    case 23:
-                        if(character.getX()<141){
-                            character.setX(character.getX()+3);
-                        }else if(character.getY()<660){
-                            character.setY(character.getY()+3);
-                        }else{
-                            setAct(24);
-                        }
-                        break;
-                    case 24:
-                        dialog.setText("Pixie: Wheeee!" +
-                        		"Thank you, Traveler!");
-                        dialog.setVisible(true);
-                        break;
                     case 25:
-                        dialog.setText("Pixie: I will restore their magic to everyone in the area.\n" +
-                        		"I'm Free!");
-                        dialog.setVisible(true);
+                        character.setWalking(true);
+                        setAct(26);
                         break;
+                    
                     case 26:
-                        dialog.setVisible(false);
-                        if(character.getY()<900){
-                            character.setY(character.getY()+5);
-                        }else{
-                            setAct(27);
-                        }
+                        dialog.setText("Penguin: *Squeeak*!" +
+                        		"Thank you, Traveler! I've been calling out for so long!\n" +
+                        		"I am Archimides, The Guardian of this area.");
+                        dialog.setVisible(true);
                         break;
                     case 27:
-                        dialog.setText("Lidia: I guess it's time to meet the people of New Lion Town");
-                        dialog.setVisible(true);
+                        dialog.setText("Penguin: Now that I've been unsealed, magic will return to this area.\n" +
+                        		"Thank you for your help");
                         break;
                     case 28:
+                        dialog.setText("Lidia: I'm glad to hear that. I'll talk with the people of New Lion to let them know");
+                        break;                        
+                    case 29:
+                        dialog.setVisible(false);
                         game.setScreen( new Chapter1_2( game ) );
                         break;
                 }
