@@ -97,6 +97,13 @@ raw-resources/xcfs/ghost.xcf
 
 ---
 
+Fiona 'Wyverii' Wilson
+
+raw-resources/images/battle/entities/terrex.png
+
+
+---
+
 Unknown Horizons
 Chriss Oelmueller
 Stubb
@@ -111,3 +118,40 @@ LibGDX / Bad Logic Games
 raw-resources/xcfs/uiskin.xcf
 http://code.google.com/p/libgdx/source/browse/#svn%2Ftrunk%2Fextensions%2Fgdx-tools%2Fassets%2Fui
 
+----
+
+Music
+
+music/02 - The Empire.ogg
+music/04 - Theme of Love_0.ogg
+music/05 - Opening Theme.ogg
+music/07 - Overworld.ogg
+music/09 - Victory.ogg
+music/14 - Tragedy.ogg
+music/20 - Eastern City.ogg
+music/24 - Undying Dream_0.ogg
+music/25 - Sanctuary_1.ogg
+music/32 - Water Temple_2.ogg
+The bundle above was composed by avgvst and is licensed CC-By 3.0
+http://opengameart.org/content/generic-8-bit-jrpg-soundtrack
+
+music/alienblues.ogg
+Composed by Clemens H, Licensed CC0
+http://opengameart.org/content/alien-blues-8-bit-melody
+
+music/hold the line_1.ogg
+Compsed by Bart, from OpenGameArt.org. Licensed CC-By-SA 3
+http://opengameart.org/content/hold-line-lospec-mix
+
+music/The Adventure Begins 8-bit remix.ogg
+Composed by Bart, from OpenGameArt.org. Licensed CC-By-SA 3
+http://opengameart.org/content/the-adventure-begins-8-bix-remix
+
+music/free-software-song-julian-coccia.ogg
+Downloaded from http://www.gnu.org/music/free-software-song.html
+Recorded by Julian Coccia and released under GFDLv1.3+.
+
+music/victory-theme.ogg
+Recorded by Saul Rodriguez & Julio Nacianceno 'Agnus Dei'
+The Audio was remixed by Juan 'Nushio' Rodriguez  with their permission 
+and is licensed CC-By-SA 3.0

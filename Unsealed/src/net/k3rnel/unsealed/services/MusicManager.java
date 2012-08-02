@@ -46,7 +46,8 @@ public class MusicManager implements Disposable {
         DOJO( "music/14 - Tragedy.ogg" ),
         GRASS("music/The Adventure Begins 8-bit remix.ogg"),
         VICTORY( "music/victory-theme.ogg" ),
-        BOSSBATTLE( "music/07 - Overworld.ogg" );
+        CREDITS( "music/free-software-song-julian-coccia.ogg" ),
+        MOUNTAIN( "music/07 - Overworld.ogg" );
 
         private String fileName;
         private Music musicResource;

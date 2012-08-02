@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="18" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Exteriors" tilewidth="32" tileheight="32">
+  <image source="tiles_/exteriors.png" width="1120" height="1568"/>
+ </tileset>
+ <layer name="Ground" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJzllDkOwzAMBPVofk7i5+IiBgbjlVymSEGINq/lucYY60+pLuqLJviF7/rylJd0W74WbHoTtyG/X9ouxKJOQV6wM6Y6xG3Jp3j6KPCsSY1nnsxhV2vmXuGf8RNni2bQSfmyhnfcOfZ9dZ6td45nvU3sIfuceub/jGM9zuZpnpMv9smYajyxGQdnfZeva+M3YbM89eO0R7T1LKbap1o7FmfztL/pJnjeHMM2tvNOpv2lXvLl+5V6nfCecrbPdBs4985ld1vedrjkz/vr++kbzn65hru49O1+p3m3DbF4x9/us/Ha326mWf90Z1vyX9EHBTJo1Q==
+  </data>
+ </layer>
+ <layer name="rocks" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF+IA7EHsAcTYU59DJ3iwkO0ftHbV31N5Re0ftHbV3qNsLAPkRISs=
+  </data>
+ </layer>
+ <layer name="Japanese" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJzt1VlOAkEUheF6oV+ZZA8MAu5DRIZ9oIz7AGRwAyDDRgSBjci4An7fSPqaqnSq+4mTfAnp5NbJpUmhlFLfIaVWWOMHtjLhrCm+MBPO/eXZHgcc/+lNOkqlkEYGj8gihzyeHPeMbp8wMxFEERPm//LM8wJeUMQrSiijgqowZ7KPLjXOfcM76migiRba6Ai9Jvvo0mWuhz4+MMAQI4zx6fHcOd/DAkuLvyuTbOjbYudjr7Tbic9nXHzslXaL834ekPD4nkwSxG5SgtjtHnd097dfHX79H91G6rBxf+siddi4v3UJosMkV9e7Q3s=
+  </data>
+ </layer>
+</map>

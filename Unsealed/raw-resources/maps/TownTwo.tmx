@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="70" height="70" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="Exteriors" tilewidth="32" tileheight="32">
-  <image source="tiles_/exteriors.png" width="1120" height="1728"/>
+  <image source="tiles_/exteriors.png" width="1120" height="1568"/>
+ </tileset>
+ <tileset firstgid="1716" name="Dungeons" tilewidth="32" tileheight="32">
+  <image source="tiles_/Dungeons.png" width="608" height="320"/>
  </tileset>
  <layer name="Ground" width="70" height="70">
   <data encoding="base64" compression="zlib">
@@ -25,12 +28,12 @@
  </layer>
  <layer name="Water" width="70" height="70">
   <data encoding="base64" compression="zlib">
-   eJzt07ENhDAQBMCDAuCLppavBWgFvgf8AdlZhEbyjLT5ebWOAAAAAAAAAADgbx0itiT70Pqyto7y/jPJTy96SdR6+Xb+r2q99L4fveSmMWIuWfSSetpNr73cu6nlM7a+EAAAAAAAAACAN7sADGJBNQ==
+   eJzt1NEJQjEMBdC0A6hTuZjOoquoq6g7+B5YhNL3XSHnQH76lVySRgAAAAAAAAAAsLqViPugHmV2Z3M9l/lfg3rLZZjLJfnO9LmcltrXiPM3m6x31eey3s+xjN8z6edvO3JNnsuu/u5m9M9kzaXZ+n+z59L2ZqsOdXaHAAAAAAAAAAD8sw/jWD7b
   </data>
  </layer>
  <layer name="Tents" width="70" height="70">
   <data encoding="base64" compression="zlib">
-   eJzt1rcNA0EMBMCLXlXIlCLTskwpMqXIAGIBDBQQuMdpBtiUICNuawAAAAAAAEBPx6m1U+QcuUzzm9fLNXa/Re6RR8Ed1fN6ecbur8g78im4o3peL8tFa6vIOrJZzG9eL9vYfRfZRw4Fd1TPA+A3o/S7aqP0u2qj9Ltqo/S7avrd2PyPnP+R8z9y/kfO/wDmSPfJ6T453Sen++R0HwAAAAD+yReynzy/
+   eJzt0DENAAAIwDA+xOAB/7JQQeBoFSyLAAAAAAAAAAAA2FN5XfBT+wIAAAAAAAAAAMATA5DMAHg=
   </data>
  </layer>
  <layer name="Tree Trunk" width="70" height="70">

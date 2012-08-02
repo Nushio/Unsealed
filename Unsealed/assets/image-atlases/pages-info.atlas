@@ -73,6 +73,13 @@ char-sprites/george_spritesheet
   orig: 192, 192
   offset: 0, 0
   index: -1
+char-sprites/xios-overworld
+  rotate: false
+  xy: 1344, 373
+  size: 150, 176
+  orig: 150, 176
+  offset: 0, 0
+  index: -1
 char-sprites/pixie_spritesheet
   rotate: false
   xy: 576, 187
@@ -332,200 +339,179 @@ pages-info5.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-battle/entities/xios
-  rotate: false
-  xy: 0, 1452
-  size: 608, 592
-  orig: 608, 592
-  offset: 0, 0
-  index: -1
 battle/entities/ghost
   rotate: false
-  xy: 608, 1954
+  xy: 0, 1944
   size: 1020, 90
   orig: 1020, 90
   offset: 0, 0
   index: -1
-battle/entities/terrex
-  rotate: false
-  xy: 608, 1721
-  size: 846, 231
-  orig: 846, 231
-  offset: 0, 0
-  index: -1
 battle/entities/shield-shura
   rotate: false
-  xy: 0, 938
+  xy: 1020, 1522
   size: 512, 512
   orig: 512, 512
   offset: 0, 0
   index: -1
-battle/entities/shield-blue
+battle/entities/xios
   rotate: false
-  xy: 0, 424
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
-battle/entities/turtle
-  rotate: false
-  xy: 608, 1559
-  size: 889, 160
-  orig: 889, 160
-  offset: 0, 0
-  index: -1
-battle/entities/snake
-  rotate: false
-  xy: 608, 1480
-  size: 963, 77
-  orig: 963, 77
-  offset: 0, 0
-  index: -1
-battle/entities/sand-snake-cookiez
-  rotate: false
-  xy: 608, 1401
-  size: 963, 77
-  orig: 963, 77
-  offset: 0, 0
-  index: -1
-battle/entities/shield
-  rotate: false
-  xy: 512, 887
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
-battle/entities/snakebite_side
-  rotate: false
-  xy: 1024, 887
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
-battle/entities/turtleshell_side
-  rotate: false
-  xy: 1536, 887
-  size: 512, 512
-  orig: 512, 512
-  offset: 0, 0
-  index: -1
-battle/entities/sand-snake
-  rotate: false
-  xy: 512, 731
-  size: 749, 154
-  orig: 749, 154
-  offset: 0, 0
-  index: -1
-battle/entities/snake-1
-  rotate: false
-  xy: 512, 575
-  size: 749, 154
-  orig: 749, 154
+  xy: 0, 1350
+  size: 608, 592
+  orig: 608, 592
   offset: 0, 0
   index: -1
 battle/entities/spikes
   rotate: false
-  xy: 1261, 629
+  xy: 608, 1264
   size: 640, 256
   orig: 640, 256
   offset: 0, 0
   index: -1
 battle/entities/lidia
   rotate: false
-  xy: 0, 50
+  xy: 0, 976
   size: 520, 372
   orig: 520, 372
   offset: 0, 0
   index: -1
-battle/entities/treeroot
+battle/entities/gnu
   rotate: false
-  xy: 512, 485
-  size: 704, 88
-  orig: 704, 88
+  xy: 608, 1852
+  size: 291, 90
+  orig: 291, 90
   offset: 0, 0
   index: -1
-battle/entities/shura
+battle/entities/fireball
   rotate: false
-  xy: 520, 204
-  size: 520, 279
-  orig: 520, 279
-  offset: 0, 0
-  index: -1
-battle/entities/bee
-  rotate: false
-  xy: 1261, 549
-  size: 656, 78
-  orig: 656, 78
+  xy: 899, 1817
+  size: 102, 125
+  orig: 102, 125
   offset: 0, 0
   index: -1
 battle/entities/lightningclaw
   rotate: false
-  xy: 1040, 227
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-battle/entities/lightningclaw-rotate
-  rotate: false
-  xy: 1296, 291
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-battle/entities/firelion
-  rotate: false
-  xy: 1552, 291
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-battle/entities/firelion_left
-  rotate: false
-  xy: 1628, 1788
+  xy: 608, 1594
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 battle/entities/clam
   rotate: false
-  xy: 0, 0
+  xy: 608, 1544
   size: 288, 48
   orig: 288, 48
   offset: 0, 0
   index: -1
-battle/entities/icetacle
+battle/entities/shura
   rotate: false
-  xy: 1296, 33
+  xy: 520, 890
+  size: 990, 372
+  orig: 990, 372
+  offset: 0, 0
+  index: -1
+battle/entities/lightningclaw-rotate
+  rotate: false
+  xy: 1248, 1264
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-battle/entities/torrentacle
+battle/entities/firelion
   rotate: false
-  xy: 1552, 33
+  xy: 1504, 1264
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+battle/entities/shield-blue
+  rotate: false
+  xy: 1532, 1522
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+battle/entities/shield
+  rotate: false
+  xy: 0, 462
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+battle/entities/snakebite_side
+  rotate: false
+  xy: 1510, 750
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+battle/entities/firelion_left
+  rotate: false
+  xy: 1760, 1264
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+battle/entities/ferrex
+  rotate: false
+  xy: 512, 657
+  size: 846, 231
+  orig: 846, 231
+  offset: 0, 0
+  index: -1
+battle/entities/bee
+  rotate: false
+  xy: 1358, 670
+  size: 656, 78
+  orig: 656, 78
+  offset: 0, 0
+  index: -1
+battle/entities/turtleshell_side
+  rotate: false
+  xy: 1358, 156
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+battle/entities/darkex
+  rotate: false
+  xy: 512, 424
+  size: 846, 231
+  orig: 846, 231
+  offset: 0, 0
+  index: -1
+battle/entities/terrex
+  rotate: false
+  xy: 0, 191
+  size: 846, 231
+  orig: 846, 231
+  offset: 0, 0
+  index: -1
+battle/entities/turtle
+  rotate: false
+  xy: 0, 29
+  size: 889, 160
+  orig: 889, 160
+  offset: 0, 0
+  index: -1
+battle/entities/sand-snake
+  rotate: false
+  xy: 889, 0
+  size: 749, 154
+  orig: 749, 154
+  offset: 0, 0
+  index: -1
+battle/entities/icetacle
+  rotate: false
+  xy: 889, 166
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 battle/entities/treetrunk
   rotate: false
-  xy: 520, 111
+  xy: 1145, 331
   size: 212, 91
   orig: 212, 91
-  offset: 0, 0
-  index: -1
-battle/entities/fireball
-  rotate: false
-  xy: 1901, 760
-  size: 102, 125
-  orig: 102, 125
-  offset: 0, 0
-  index: -1
-battle/entities/tornado
-  rotate: false
-  xy: 1571, 1530
-  size: 256, 256
-  orig: 256, 256
   offset: 0, 0
   index: -1
 
@@ -533,6 +519,60 @@ pages-info6.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+battle/entities/snake
+  rotate: false
+  xy: 0, 427
+  size: 963, 77
+  orig: 963, 77
+  offset: 0, 0
+  index: -1
+battle/entities/sand-snake-cookiez
+  rotate: false
+  xy: 0, 348
+  size: 963, 77
+  orig: 963, 77
+  offset: 0, 0
+  index: -1
+battle/entities/snake-1
+  rotate: false
+  xy: 963, 350
+  size: 749, 154
+  orig: 749, 154
+  offset: 0, 0
+  index: -1
+battle/entities/treeroot
+  rotate: false
+  xy: 0, 258
+  size: 704, 88
+  orig: 704, 88
+  offset: 0, 0
+  index: -1
+battle/entities/torrentacle
+  rotate: false
+  xy: 0, 0
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+battle/entities/tornado
+  rotate: false
+  xy: 256, 0
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+
+pages-info7.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+splash-screen/splash
+  rotate: false
+  xy: 0, 482
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
 splash-screen/tutorial
   rotate: false
   xy: 0, 0
@@ -540,16 +580,9 @@ splash-screen/tutorial
   orig: 800, 480
   offset: 0, 0
   index: -1
-splash-screen/splash
-  rotate: false
-  xy: 800, 173
-  size: 512, 307
-  orig: 512, 307
-  offset: 0, 0
-  index: -1
 splash-screen/menulogo
   rotate: false
-  xy: 1312, 289
+  xy: 800, 771
   size: 512, 191
   orig: 512, 191
   offset: 0, 0

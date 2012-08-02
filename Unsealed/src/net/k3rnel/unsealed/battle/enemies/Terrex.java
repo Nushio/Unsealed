@@ -40,8 +40,8 @@ public class Terrex extends BattleEnemy {
     List<PeaDart> darts;
     PeaDart tmpDart;
     TextureAtlas atlas;
-    public Terrex(TextureAtlas atlas, int x, int y) {
-        super(100, x, y);
+    public Terrex(TextureAtlas atlas, int hp, int x, int y) {
+        super(hp, x, y);
         this.offsetX = 32;
         this.offsetY = 10;
         setGrid(x, y);

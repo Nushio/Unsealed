@@ -57,9 +57,10 @@ import net.k3rnel.unsealed.battle.skills.TornadoVacuum;
 import net.k3rnel.unsealed.battle.skills.IceTentacle;
 import net.k3rnel.unsealed.screens.AbstractScreen;
 import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
-import net.k3rnel.unsealed.story.helpers.MapCharacter;
-import net.k3rnel.unsealed.story.helpers.StyledTable;
-import net.k3rnel.unsealed.story.helpers.TextBox;
+import net.k3rnel.unsealed.services.SoundManager.UnsealedSound;
+import net.k3rnel.unsealed.story.MapCharacter;
+import net.k3rnel.unsealed.story.StyledTable;
+import net.k3rnel.unsealed.story.TextBox;
 
 public class BattleScreen extends AbstractScreen {
 
@@ -69,7 +70,7 @@ public class BattleScreen extends AbstractScreen {
 
     TiledMap tileMap;
     TileAtlas tileAtlas;
-    TileMapRenderer tileMapRenderer;
+    protected TileMapRenderer tileMapRenderer;
     public OrthographicCamera camera;
 
     public BattleGrid grid;
@@ -539,6 +540,7 @@ public class BattleScreen extends AbstractScreen {
                     }else{
                         if(hero.getState()==BattleEntity.stateIdle){
                             if(hero.getMana()>=1){
+                                game.getSoundManager().play(UnsealedSound.CLICK);
                                 hero.magicType=0;
                                 hero.setMana(hero.getMana()-1);
                                 hero.setState(BattleEntity.stateAttacking);
@@ -552,6 +554,7 @@ public class BattleScreen extends AbstractScreen {
                         if(hero.getState()==BattleEntity.stateIdle){
                             if(hero.getSkill1()!=null)
                                 if(hero.getMana()>=hero.getSkill1().manaCost){
+                                    game.getSoundManager().play(UnsealedSound.CLICK);
                                     hero.setMana(hero.getMana()-hero.getSkill1().manaCost);
                                     hero.setState(hero.getSkill1().stance);
                                     hero.magicType = hero.getSkill1().id;
@@ -567,6 +570,7 @@ public class BattleScreen extends AbstractScreen {
                         if(hero.getState()==BattleEntity.stateIdle){
                             if(hero.getSkill2()!=null)
                                 if(hero.getMana()>=hero.getSkill2().manaCost){
+                                    game.getSoundManager().play(UnsealedSound.CLICK);
                                     hero.setMana(hero.getMana()-hero.getSkill2().manaCost);
                                     hero.magicType = hero.getSkill2().id;
                                     hero.setState(hero.getSkill2().stance);
@@ -582,6 +586,7 @@ public class BattleScreen extends AbstractScreen {
                         if(hero.getState()==BattleEntity.stateIdle){
                             if(hero.getSkill3()!=null)
                                 if(hero.getMana()>=hero.getSkill3().manaCost){
+                                    game.getSoundManager().play(UnsealedSound.CLICK);
                                     hero.setMana(hero.getMana()-hero.getSkill3().manaCost);
                                     hero.magicType = hero.getSkill3().id;
                                     hero.setState(hero.getSkill3().stance);

@@ -234,6 +234,31 @@ public class BattleGrid extends Stage {
         battleState = BattleGrid.battleStarted;
 
     }
+    public void spawnEnemies(boolean schedule,BattleEnemy... spawnies){
+        BattleEntity enemy;
+        enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
+        for(int i = 0; i < spawnies.length; i++){
+            enemy = spawnies[i];
+            assignEntity(enemy);
+            if(schedule)
+                timer.scheduleTask(enemy.nextTask(), random.nextInt(5));
+        }
+        Gdx.app.log(Unsealed.LOG, "Spawned "+enemies.size+" enemies");
+        battleState = BattleGrid.battleStarted;
+
+    }
+    public void spawnEnemies(int speed, BattleEnemy... spawnies ){
+        BattleEntity enemy;
+        enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
+        for(int i = 0; i < spawnies.length; i++){
+            enemy = spawnies[i];
+            assignEntity(enemy);
+            timer.scheduleTask(enemy.nextTask(), random.nextInt(speed));
+        }
+        Gdx.app.log(Unsealed.LOG, "Spawned "+enemies.size+" enemies");
+        battleState = BattleGrid.battleStarted;
+
+    }
     public void spawnEnemies(int bonus) {
         BattleScreen.round++;
 
@@ -256,18 +281,18 @@ public class BattleGrid extends Stage {
                     else if(random.nextInt(100)<50)
                         enemy = new Bee(getAtlas(),50,(int)spawnPoint.x,(int)spawnPoint.y);
                     else
-                        enemy = new Terrex(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
+                        enemy = new Terrex(getAtlas(),100, (int)spawnPoint.x,(int)spawnPoint.y);
                 }else{
                     if(random.nextInt(100)<30){
                         enemy = new Clam(getAtlas(), 60,(int)spawnPoint.x,(int)spawnPoint.y);
                     }else if(random.nextInt(100)<40){
-                        enemy = new Terrex(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
+                        enemy = new Terrex(getAtlas(), 130,(int)spawnPoint.x,(int)spawnPoint.y);
                     }else if(random.nextInt(100)<40){
                         enemy = new Ghost(getAtlas(), 80,(int)spawnPoint.x,(int)spawnPoint.y);
                     }else if(random.nextInt(100)<40){
-                        enemy = new Snake(getAtlas(), 70,(int)spawnPoint.x,(int)spawnPoint.y);
+                        enemy = new Snake(getAtlas(), 80,(int)spawnPoint.x,(int)spawnPoint.y);
                     }else{
-                        enemy = new Bee(getAtlas(),70, (int)spawnPoint.x,(int)spawnPoint.y);
+                        enemy = new Bee(getAtlas(),90, (int)spawnPoint.x,(int)spawnPoint.y);
                     }
                 }
                 //                

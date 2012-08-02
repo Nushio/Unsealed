@@ -18,7 +18,7 @@
  */
 package net.k3rnel.unsealed.story.characters;
 
-import net.k3rnel.unsealed.story.helpers.MapCharacter;
+import net.k3rnel.unsealed.story.MapCharacter;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;

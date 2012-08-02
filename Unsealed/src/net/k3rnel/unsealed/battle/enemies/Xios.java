@@ -39,7 +39,6 @@ import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.battle.BattleEnemy;
 import net.k3rnel.unsealed.battle.BattleEntity;
 import net.k3rnel.unsealed.battle.BattleGrid;
-import net.k3rnel.unsealed.battle.BattleHero;
 import net.k3rnel.unsealed.battle.magic.MagicEntity;
 import net.k3rnel.unsealed.battle.magic.TreeRoot;
 import net.k3rnel.unsealed.battle.magic.TreeTrunk;
