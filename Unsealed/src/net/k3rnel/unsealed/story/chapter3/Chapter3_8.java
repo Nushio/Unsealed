@@ -144,7 +144,7 @@ public class Chapter3_8 extends BattleScreen {
             case 1:
                 disableInput = false;
                 dialog.setVisible(false);
-                grid.spawnEnemies(new Xios(getAtlas(),100,4,1));
+                grid.spawnEnemies(new Xios(getAtlas(),1337,4,1));
                 act = 2;
                 stateTime = 0;
                 break;
@@ -169,7 +169,7 @@ public class Chapter3_8 extends BattleScreen {
             case 3:
                 disableInput=true;
                 grid.reset();
-                grid.spawnEnemies(false,new GNU(getAtlas(),500,1,1));
+               
                 act = 4;
                 stateTime = 0;
                 break;
@@ -185,6 +185,7 @@ public class Chapter3_8 extends BattleScreen {
                 break;
             case 5:
                 hero.setHp(0);
+                grid.spawnEnemies(false,new GNU(getAtlas(),500,1,1));
                 grid.spawnEnemies(false,new FakeXios(getAtlas(),1,4,1));
                 dialog.setText("Xios: NOOOOOOOOOOOOOOOOOOOOOOOOO!");
                 if(stateTime>4){
@@ -198,7 +199,7 @@ public class Chapter3_8 extends BattleScreen {
                 game.getMusicManager().play( UnsealedMusic.VICTORY );
                 dialog.setVisible(true);
                 if(stateTime>5){
-                    act = 4;
+                    act = 12;
                     stateTime = 0;
                 }
                 break;
