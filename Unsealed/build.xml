@@ -3,7 +3,7 @@
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
     <target name="create_run_jar">
-        <jar destfile="/home/Nushio/Unsealed.jar">
+        <jar destfile="Unsealed.jar">
             <manifest>
                 <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
                 <attribute name="Rsrc-Main-Class" value="net.k3rnel.unsealed.DesktopLauncher"/>
@@ -11,15 +11,15 @@
                 <attribute name="Rsrc-Class-Path" value="./ gdx.jar gdx-tools.jar gdx-backend-lwjgl-natives.jar gdx-backend-lwjgl.jar gdx-natives.jar gdx-backend-jogl-natives.jar gdx-backend-jogl.jar gdx-tiled-preprocessor.jar"/>
             </manifest>
             <zipfileset src="jar-in-jar-loader.zip"/>
-            <fileset dir="/home/Nushio/SparkleShare/workspace/Unsealed/Unsealed/bin"/>
-            <zipfileset dir="/home/Nushio/SparkleShare/workspace/Unsealed/Unsealed/libs" includes="gdx.jar"/>
-            <zipfileset dir="/home/Nushio/SparkleShare/workspace/Unsealed/Unsealed/libs" includes="gdx-tools.jar"/>
-            <zipfileset dir="/home/Nushio/SparkleShare/workspace/Unsealed/Unsealed/libs" includes="gdx-backend-lwjgl-natives.jar"/>
-            <zipfileset dir="/home/Nushio/SparkleShare/workspace/Unsealed/Unsealed/libs" includes="gdx-backend-lwjgl.jar"/>
-            <zipfileset dir="/home/Nushio/SparkleShare/workspace/Unsealed/Unsealed/libs" includes="gdx-natives.jar"/>
-            <zipfileset dir="/home/Nushio/SparkleShare/workspace/Unsealed/Unsealed/libs" includes="gdx-backend-jogl-natives.jar"/>
-            <zipfileset dir="/home/Nushio/SparkleShare/workspace/Unsealed/Unsealed/libs" includes="gdx-backend-jogl.jar"/>
-            <zipfileset dir="/home/Nushio/SparkleShare/workspace/Unsealed/Unsealed/libs" includes="gdx-tiled-preprocessor.jar"/>
+            <fileset dir="bin"/>
+            <zipfileset dir="libs" includes="gdx.jar"/>
+            <zipfileset dir="libs" includes="gdx-tools.jar"/>
+            <zipfileset dir="libs" includes="gdx-backend-lwjgl-natives.jar"/>
+            <zipfileset dir="libs" includes="gdx-backend-lwjgl.jar"/>
+            <zipfileset dir="libs" includes="gdx-natives.jar"/>
+            <zipfileset dir="libs" includes="gdx-backend-jogl-natives.jar"/>
+            <zipfileset dir="libs" includes="gdx-backend-jogl.jar"/>
+            <zipfileset dir="libs" includes="gdx-tiled-preprocessor.jar"/>
         </jar>
     </target>
 </project>
