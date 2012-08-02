@@ -291,6 +291,7 @@ public class BattleEntity extends Image {
         this.status = status;
         switch(this.status){
             case BattleEntity.statusNormal:
+                this.getActions().clear();
                 break;
             case BattleEntity.statusBurned:
                 actions =     
