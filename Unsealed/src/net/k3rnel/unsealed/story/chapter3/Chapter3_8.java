@@ -37,6 +37,7 @@ import net.k3rnel.unsealed.battle.skills.ThunderClaw;
 import net.k3rnel.unsealed.battle.skills.TornadoVacuum;
 import net.k3rnel.unsealed.screens.BattleScreen;
 import net.k3rnel.unsealed.screens.ChapterSelectScreen;
+import net.k3rnel.unsealed.screens.CreditsScreen;
 import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
 
 public class Chapter3_8 extends BattleScreen {
@@ -203,7 +204,7 @@ public class Chapter3_8 extends BattleScreen {
                 break;
             case 12:
                 game.getMusicManager().play( UnsealedMusic.MENU );
-                game.setScreen(new ChapterSelectScreen(game));
+                game.setScreen(new CreditsScreen(game));
                 break;
         }
     }

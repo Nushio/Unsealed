@@ -88,6 +88,14 @@ public class MenuScreen extends AbstractScreen {
         } );
         table.add(optionsButton).size( 300, 60 ).uniform().spaceBottom(10);
         table.row();
+        TextButton creditsButton = new TextButton( "Credits", skin );
+        creditsButton.addListener( new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y ) {
+                    game.setScreen( new CreditsScreen( game) );
+            }
+        } );
+        table.add(creditsButton).uniform().spaceBottom(10);
         table.pad(10).defaults().spaceBottom(10);
     }
 }

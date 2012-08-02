@@ -22,45 +22,25 @@ Assets were authored by the following people:
 
 Resources, Licensed CC-By-SA 3.0 and GPLv3 (unless otherwise noted):
 
-Juan 'Nushio' Rodriguez
-raw-resources/images/battle/field-3x3.png
-raw-resources/images/battle/field-3x4.png
-raw-resources/images/battle/field-4x3.png
-raw-resources/images/battle/field-4x4.png
-Based on the Liberated Pixel Cup 'dirt' tileset.
-http://lpc.opengameart.org/static/lpc-style-guide/assets.html
 
-raw-resources/images/battle/lifebar.png
-raw-resources/images/battle/enemy-lifebar.png
-raw-resources/xcfs/lifebar.xcf
-raw-resources/xcfs/lifebar-xl.xcf
-Based on Pennomi's UI Elements
-http://opengameart.org/content/lpc-pennomis-ui-elements
-
-raw-resources/images/char-sprites/female_spritesheet.png
-Based on Pennomi & Laetissima's Irish Dancing Dress Female Spritesheet
-
-raw-resources/images/char-sprites/male_spritesheet.png
-Based on Johannes Sjölund's Character animations & weapons
-
-raw-resources/maps/tiles_/collisionator.png
-Licensed: CC0. (Free to use as needed / Public Domain)
-
-raw-resources/images/battle/triggers.png
-raw-resources/xcfs/triggers.xcf
 
 ----
 
 Laura 'Yamilian' Katz
 raw-resources/images/splash-screen/menulogo.png
-raw-resources/images/splash-screen/splash.png
 
+raw-resources/images/char-sprites/lidia_spritesheet.png
+
+raw-resources/images/char-sprites/shura_spritesheet.png
+raw-resources/images/char-sprites/penguins.png
+
+raw-resources/images/char-sprites/whisperer_spritesheet.png
 ----
 
 Nikko 'lastplacer' Campbell
 
-raw-resources/maps/DungeonTest.tmx
-
+Every tmx inside raw-resources/maps/
+Including the "dojo to render' inside raw-resources/images/maps/
 raw-resources/maps/tiles_/Dungeons.png
 Based on the Base Assets for the LPC
 http://lpc.opengameart.org/static/lpc-style-guide/assets.html#outdoors
@@ -82,11 +62,22 @@ raw-resources/maps/tiles_/Interiors.png
 Based on the Base Assets for the LPC
 http://lpc.opengameart.org/static/lpc-style-guide/assets.html#building-indoors
 
+raw-resources/images/battle/maps/battlemap0.png
+raw-resources/images/battle/maps/battlemap1.png
+raw-resources/images/battle/maps/battlemap2.png
+raw-resources/images/battle/maps/battlemap3.png
+raw-resources/images/battle/maps/battlemap4.png
+raw-resources/images/battle/maps/battlemap5.png
+raw-resources/images/battle/maps/battlemap6.png
+raw-resources/images/battle/maps/battlemap-test.png
+
 
 ----
 
 Ben 'Cookiez' Potter
 
+raw-resources/images/battle/entities/bee.png
+raw-resources/images/battle/entities/fireball.png
 raw-resources/images/battle/clam.png
 raw-resources/images/battle/ghost.png
 raw-resources/images/battle/lidia.png
@@ -94,13 +85,107 @@ raw-resources/images/battle/lidia.png
 raw-resources/xcfs/clam.xcf
 raw-resources/xcfs/ghost.xcf
 
+raw-resources/images/battle/entities/snake.png
+raw-resources/images/char-sprites/pixie_spritesheet.png
 
+enemies such as Xios and Gnu inside battle
+xios-overworld.png
+gnu.png
+
+Xios' attack animations, the treeroot and treetrunk
 ---
 
 Fiona 'Wyverii' Wilson
 
 raw-resources/images/battle/entities/terrex.png
+raw-resources/images/battle/entities/sand-snake.png
+raw-resources/images/battle/entities/snake-1.png
 
+---
+
+Juan 'Nushio' Rodriguez
+raw-resources/images/battle/field-3x3.png
+raw-resources/images/battle/field-3x4.png
+raw-resources/images/battle/field-4x3.png
+raw-resources/images/battle/field-4x4.png
+Based on the Liberated Pixel Cup 'dirt' tileset.
+http://lpc.opengameart.org/static/lpc-style-guide/assets.html
+
+raw-resources/images/battle/lifebar.png
+raw-resources/images/battle/enemy-lifebar.png
+raw-resources/xcfs/lifebar.xcf
+raw-resources/xcfs/lifebar-xl.xcf
+dialog-box.9.png
+Based on Pennomi's UI Elements
+http://opengameart.org/content/lpc-pennomis-ui-elements
+
+raw-resources/images/char-sprites/female_spritesheet.png
+Based on Pennomi & Laetissima's Irish Dancing Dress Female Spritesheet
+
+raw-resources/images/char-sprites/male_spritesheet.png
+Based on Johannes Sjölund's Character animations & weapons
+
+raw-resources/maps/tiles_/collisionator.png
+Licensed: CC0. (Free to use as needed / Public Domain)
+
+raw-resources/images/battle/triggers.png
+raw-resources/xcfs/triggers.xcf
+raw-resources/images/battle/ui/dpad_alt.png
+raw-resources/images/battle/ui/dpad_down.png
+raw-resources/images/battle/ui/dpad_left.png
+raw-resources/images/battle/ui/dpad_right.png
+raw-resources/images/battle/ui/dpad_up.png
+raw-resources/images/battle/ui/dpad.png
+raw-resources/images/battle/ui/lefttrigger.png
+raw-resources/images/battle/ui/mana_sphere.png
+
+
+-----
+Daniel 'Daneeklu' Eddleland
+
+raw-resources/images/battle/entities/firelion_left.png
+raw-resources/images/battle/entities/firelion.png
+raw-resources/images/battle/entities/icetacle.png
+raw-resources/images/battle/entities/lightningclaw.png
+raw-resources/images/battle/entities/shield.png
+raw-resources/images/battle/entities/snakebite_side.png
+raw-resources/images/battle/entities/spikes.png
+raw-resources/images/battle/entities/tornado.png
+raw-resources/images/battle/entities/torrentacle.png
+
+raw-resources/images/battle/ui/spells.png
+Made by Daneeklu then ruined by Nushio. 
+Contains Firepunch icon by Jorge Avila
+http://opengameart.org/content/fire-punch
+
+---
+Kids by
+Artist: 'sheep'
+
+http://opengameart.org/content/alternate-lpc-character-sprites-george
+
+Radomir Dopieralksi
+http://opengameart.org/content/one-more-lpc-alternate-character
+
+
+---
+
+Citizen 0 & Combat Dummy By johannes  'wulax' Sjolund 
+http://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+
+Citizen 10 by Luke_Mehl
+---
+
+KPKarl
+raw-resources/images/splash-screen/splash.png
+Contains Yamilian's Unsealed logo. 
+---
+'artistic dude'
+Fire sound effect
+http://opengameart.org/content/fire-evil-spell
+
+Enchant sound effect by p0ss
+http://opengameart.org/content/spell-sounds-starter-pack
 
 ---
 
@@ -112,6 +197,9 @@ raw-resources/svgs/unknown_horizons_gui.svg
 raw-resources/svgs/unknown_horizons_gui_2.svg
 http://opengameart.org/content/real-time-strategy-gui-hud-elements-unknown-horizons
 
+raw-resources/images/battle/ui/blue_facebutton1.png
+raw-resources/images/battle/ui/blue_facebutton2.png
+Derived from the above svgs. 
 ----
 
 LibGDX / Bad Logic Games

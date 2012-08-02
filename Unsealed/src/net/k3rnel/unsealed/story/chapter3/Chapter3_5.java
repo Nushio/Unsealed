@@ -20,7 +20,6 @@ package net.k3rnel.unsealed.story.chapter3;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
@@ -30,7 +29,6 @@ import net.k3rnel.unsealed.story.AbstractChapter;
 import net.k3rnel.unsealed.story.MapCharacter;
 import net.k3rnel.unsealed.story.characters.Lidia;
 import net.k3rnel.unsealed.story.characters.Shura;
-import net.k3rnel.unsealed.story.characters.Whisperer;
 
 public class Chapter3_5 extends AbstractChapter {
 

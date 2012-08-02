@@ -172,15 +172,13 @@ public class Chapter3_6 extends BattleScreen {
                 break;
             case 5:
                 dialog.setText("Lidia learned Mini Tornado!");
-                game.getMusicManager().play( UnsealedMusic.VICTORY );
                 dialog.setVisible(true);
                 if(stateTime>5){
-                    act = 5;
+                    act = 6;
                     stateTime = 0;
                 }
                 break;
             case 6:
-                game.getMusicManager().play( UnsealedMusic.MENU );
                 game.setScreen(new Chapter3_7(game));
                 break;
         }

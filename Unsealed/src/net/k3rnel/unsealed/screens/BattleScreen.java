@@ -277,7 +277,7 @@ public class BattleScreen extends AbstractScreen {
         roundLabel = new Label("Round "+round,getSkin());
         roundLabel.setX(350);
         roundLabel.setY(350);
-        this.stage.addActor(roundLabel);
+//        this.stage.addActor(roundLabel);
 
         atlasRegion = atlas.findRegion( "battle/ui/continue" );
         restartButton = new ImageButton(new Image(atlasRegion).getDrawable(),new Image(atlasRegion).getDrawable());

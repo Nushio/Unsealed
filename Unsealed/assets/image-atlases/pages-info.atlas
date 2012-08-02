@@ -566,9 +566,23 @@ pages-info7.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-splash-screen/splash
+splash-screen/credits
+  rotate: false
+  xy: 0, 964
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+splash-screen/final
   rotate: false
   xy: 0, 482
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1
+splash-screen/splash
+  rotate: false
+  xy: 800, 964
   size: 800, 480
   orig: 800, 480
   offset: 0, 0

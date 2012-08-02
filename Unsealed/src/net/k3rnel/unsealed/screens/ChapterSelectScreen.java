@@ -37,10 +37,6 @@ import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.story.chapter1.Chapter1_1;
 import net.k3rnel.unsealed.story.chapter2.Chapter2_1;
 import net.k3rnel.unsealed.story.chapter3.Chapter3_1;
-import net.k3rnel.unsealed.story.chapter3.Chapter3_5;
-import net.k3rnel.unsealed.story.chapter3.Chapter3_6;
-import net.k3rnel.unsealed.story.chapter3.Chapter3_7;
-import net.k3rnel.unsealed.story.chapter3.Chapter3_8;
 
 public class ChapterSelectScreen extends AbstractScreen {
 
