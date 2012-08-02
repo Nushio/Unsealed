@@ -132,7 +132,7 @@ public class ChapterSelectScreen extends AbstractScreen {
             
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen( new Chapter3_8( game) );
+                game.setScreen( new Chapter3_1( game) );
                 
             }
         });
