@@ -25,9 +25,9 @@ The OpenJDK6 has been tested to build and run this game without issues.
 
 Building also requires Ant 1.7 or above. 
 
-To build, just type 'ant' on the current directory. (Without quotations)
+To build, just type 'sh compile.sh' on the Unsealed directory. (Without quotations)
 
-To run, just type 'java -jar Unsealed.jar' on the current directory.
+To run, just type 'java -jar Unsealed.jar' on the Unsealed directory.
 
 Share & Enjoy!
--Nushio
+-Nushio & Friends
