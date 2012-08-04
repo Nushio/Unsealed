@@ -19,6 +19,10 @@
 package net.k3rnel.unsealed.battle;
 
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.color;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +36,7 @@ import net.k3rnel.unsealed.battle.magic.ThunderClaw;
 import net.k3rnel.unsealed.battle.magic.Wind;
 import net.k3rnel.unsealed.battle.skills.AbstractSkill;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -252,6 +257,9 @@ public class BattleHero extends BattleEntity {
 
     }
     public void reset(){
+        this.getActions().clear();
+        this.actions = sequence( color(Color.WHITE) );
+        this.addAction(actions);
         this.setStatus(BattleEntity.statusNormal);
         this.setState(BattleEntity.stateIdle);
         magics = new ArrayList<MagicEntity>();

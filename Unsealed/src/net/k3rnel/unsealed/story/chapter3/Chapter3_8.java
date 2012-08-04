@@ -94,7 +94,6 @@ public class Chapter3_8 extends BattleScreen {
                hero.setSkill6(new TornadoVacuum(getAtlas()));
                buttonPress(9,true);
                buttonPress(9,true);
-               hero.reset();
                grid.reset();
                grid.assignEntity(hero);
                restartButton.setVisible(false);
