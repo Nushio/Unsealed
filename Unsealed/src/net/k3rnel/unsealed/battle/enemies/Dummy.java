@@ -80,7 +80,8 @@ public class Dummy extends BattleEnemy {
     @Override
     public void act(float delta) {
         super.act(delta);
-        this.setDrawable(new Image(this.currentAnimation.getKeyFrame(this.stateTime)).getDrawable());
+        if(currentAnimation!=null&&this.currentAnimation.getKeyFrame(this.stateTime)!=null)
+            this.setDrawable(new Image(this.currentAnimation.getKeyFrame(this.stateTime)).getDrawable());
 
     }
 
