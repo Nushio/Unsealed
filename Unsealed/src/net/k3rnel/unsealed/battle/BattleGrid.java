@@ -65,7 +65,7 @@ public class BattleGrid extends Stage {
 
     private BattleEnemy tmpBattleEnemy;
     private BattleHero tmpBattleHero;
-
+    Vector2 tmpSpawnPoint;
     public static Timer timer;
 
     public static Random random;
@@ -73,9 +73,10 @@ public class BattleGrid extends Stage {
     private OrthographicCamera cam;
 
 
-    public BattleGrid(float width, float height, int sizeX, int sizeY) {
+    public BattleGrid(TextureAtlas atlas, float width, float height, int sizeX, int sizeY) {
         this.width = width;
         this.height = height;
+        this.atlas = atlas;
         setViewport(this.width, this.height, true);
         timer = new Timer();
         BattleGrid.sizeX = sizeX;
@@ -262,45 +263,44 @@ public class BattleGrid extends Stage {
     public void spawnEnemies(int bonus) {
         BattleScreen.round++;
 
-        Vector2 spawnPoint;
-        BattleEntity enemy;
+      
         enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
 
         for(int i = 0; i < random.nextInt(4)+1; i++){
-            spawnPoint = getUnusedPosition();
-            if(spawnPoint!=null){
+            tmpSpawnPoint = getUnusedPosition();
+            if(tmpSpawnPoint!=null){
                 if(BattleScreen.round < 4){
                     if(random.nextInt(100)<40)
-                        enemy = new Clam(getAtlas(),50, (int)spawnPoint.x,(int)spawnPoint.y);
+                        tmpBattleEnemy = new Clam(getAtlas(),50, (int)tmpSpawnPoint.x,(int)tmpSpawnPoint.y);
                     else 
-                        enemy = new Ghost(getAtlas(), 80,(int)spawnPoint.x,(int)spawnPoint.y);
+                        tmpBattleEnemy = new Ghost(getAtlas(), 80,(int)tmpSpawnPoint.x,(int)tmpSpawnPoint.y);
 
                 }else if(BattleScreen.round>4&&BattleScreen.round<7){
                     if(random.nextInt(100)<40)
-                        enemy = new Snake(getAtlas(),70,(int)spawnPoint.x,(int)spawnPoint.y);
+                        tmpBattleEnemy = new Snake(getAtlas(),70,(int)tmpSpawnPoint.x,(int)tmpSpawnPoint.y);
                     else if(random.nextInt(100)<50)
-                        enemy = new Bee(getAtlas(),50,(int)spawnPoint.x,(int)spawnPoint.y);
+                        tmpBattleEnemy = new Bee(getAtlas(),50,(int)tmpSpawnPoint.x,(int)tmpSpawnPoint.y);
                     else
-                        enemy = new Terrex(getAtlas(),100, (int)spawnPoint.x,(int)spawnPoint.y);
+                        tmpBattleEnemy = new Terrex(getAtlas(),100, (int)tmpSpawnPoint.x,(int)tmpSpawnPoint.y);
                 }else{
                     if(random.nextInt(100)<30){
-                        enemy = new Clam(getAtlas(), 60,(int)spawnPoint.x,(int)spawnPoint.y);
+                        tmpBattleEnemy = new Clam(getAtlas(), 60,(int)tmpSpawnPoint.x,(int)tmpSpawnPoint.y);
                     }else if(random.nextInt(100)<40){
-                        enemy = new Terrex(getAtlas(), 130,(int)spawnPoint.x,(int)spawnPoint.y);
+                        tmpBattleEnemy = new Terrex(getAtlas(), 130,(int)tmpSpawnPoint.x,(int)tmpSpawnPoint.y);
                     }else if(random.nextInt(100)<40){
-                        enemy = new Ghost(getAtlas(), 80,(int)spawnPoint.x,(int)spawnPoint.y);
+                        tmpBattleEnemy = new Ghost(getAtlas(), 80,(int)tmpSpawnPoint.x,(int)tmpSpawnPoint.y);
                     }else if(random.nextInt(100)<40){
-                        enemy = new Snake(getAtlas(), 80,(int)spawnPoint.x,(int)spawnPoint.y);
+                        tmpBattleEnemy = new Snake(getAtlas(), 80,(int)tmpSpawnPoint.x,(int)tmpSpawnPoint.y);
                     }else{
-                        enemy = new Bee(getAtlas(),90, (int)spawnPoint.x,(int)spawnPoint.y);
+                        tmpBattleEnemy = new Bee(getAtlas(),90, (int)tmpSpawnPoint.x,(int)tmpSpawnPoint.y);
                     }
                 }
                 //                
                 //                else
                 //Override below to only spawn this type of enemy
                 //                  enemy = new Bee(getAtlas(), (int)spawnPoint.x,(int)spawnPoint.y);
-                assignEntity(enemy);
-                timer.scheduleTask(enemy.nextTask(), random.nextInt(5));
+                assignEntity(tmpBattleEnemy);
+                timer.scheduleTask(tmpBattleEnemy.nextTask(), random.nextInt(5));
 
                 if(random.nextInt(bonus+1)/3>2&&enemies.size<9){
                     i--;

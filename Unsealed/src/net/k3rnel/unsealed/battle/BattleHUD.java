@@ -28,6 +28,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class BattleHUD extends Stage {
 
@@ -55,43 +57,47 @@ public class BattleHUD extends Stage {
     private Image manasphere4;
     private Image manasphere5;
     private Image manasphere6;
-
-    public BattleHUD(float width, float height) {
+    Drawable tmpButtonA;
+    Drawable tmpButtonB;
+    public BattleHUD(TextureAtlas atlas, float width, float height) {
         this.width = width;
         this.height = height;
+        this.atlas = atlas;
         setViewport(this.width, this.height, true);
         init();
     }
     private void init() {
         //TODO: Non-hardcoded field sizes
-        atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
-       
+        
         AtlasRegion atlasRegion = atlas.findRegion("battle/ui/blue_facebutton1");
         TextureRegion[][] textures = atlasRegion.split(83,92);
-
-        aButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+        blankButton = textures;
+        
+        tmpButtonA = new TextureRegionDrawable(textures[0][0]);
+        tmpButtonB = new TextureRegionDrawable(textures[1][0]);
+        
+        aButton = new ImageButton(tmpButtonA,tmpButtonB);
         aButton.setSize(83,92);
         aButton.setX( this.getWidth() - (aButton.getWidth()*aButton.getScaleX()) );
         aButton.setY( this.getHeight() -(aButton.getHeight()*aButton.getScaleY()+ 100) ); 
         this.addActor(aButton);
         //
-        textures = atlasRegion.split(83,92);
-        blankButton = textures;
-        xButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+        xButton = new ImageButton(tmpButtonA,tmpButtonB);
         xButton.setSize(83,92);
         xButton.setX( this.getWidth() - (xButton.getWidth()*xButton.getScaleX()) -160 );
         xButton.setY( this.getHeight() -(xButton.getHeight()*xButton.getScaleY()+ 100) );
         this.addActor(xButton);
         //
-        textures = atlasRegion.split(83,92);
-        bButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+        bButton = new ImageButton(tmpButtonA,tmpButtonB);
         bButton.setX( this.getWidth() - (bButton.getWidth()*bButton.getScaleX()) -80 );
         bButton.setY( this.getHeight() -(bButton.getHeight()*bButton.getScaleY()+ 160) ); 
         this.addActor(bButton);
 
         atlasRegion = atlas.findRegion("battle/ui/blue_facebutton2");
         textures = atlasRegion.split(75,74);
-        yButton = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+        tmpButtonA = new TextureRegionDrawable(textures[0][0]);
+        tmpButtonB = new TextureRegionDrawable(textures[1][0]);
+        yButton = new ImageButton(tmpButtonA, tmpButtonB);
         textures = atlas.findRegion("battle/ui/spells").split(64,64);
         Image actor = new Image(textures[2][1]);
         actor.setY(0);
@@ -102,49 +108,60 @@ public class BattleHUD extends Stage {
         if(Gdx.app.getVersion()>1||Unsealed.DEBUG==true){
             atlasRegion = atlas.findRegion("battle/ui/lefttrigger");
             textures  = atlasRegion.split(181,57);
-
-            leftTrigger = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
+            tmpButtonB = new TextureRegionDrawable(textures[1][0]);
+            leftTrigger = new ImageButton(tmpButtonA, tmpButtonB);
             leftTrigger.setPosition(0, this.getHeight()-leftTrigger.getHeight());
 
             this.addActor(leftTrigger);
 
             atlasRegion = atlas.findRegion("battle/ui/righttrigger");
             textures = atlasRegion.split(181,57);
-            rightTrigger = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
+            tmpButtonB = new TextureRegionDrawable(textures[1][0]);
+            rightTrigger = new ImageButton(tmpButtonA, tmpButtonB);
             rightTrigger.setPosition(this.getWidth()-rightTrigger.getWidth(), this.getHeight()-rightTrigger.getHeight());
 
             this.addActor(rightTrigger);
 
             atlasRegion = atlas.findRegion("battle/ui/dpad_alt");
-            dPad = new Image(new Image(atlasRegion).getDrawable());
+            dPad = new Image(new TextureRegionDrawable(atlasRegion));
             dPad.setX((dPad.getWidth()*dPad.getScaleX()) - 80);
             dPad.setY( this.getHeight() -(dPad.getHeight()*dPad.getScaleY()+ 100) ); 
             this.addActor(dPad);
 
             atlasRegion = atlas.findRegion("battle/ui/dpad_down");
             textures = atlasRegion.split(60,43);
-            dPadDown = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
+            tmpButtonB = new TextureRegionDrawable(textures[1][0]);
+            dPadDown = new ImageButton(tmpButtonA, tmpButtonB);
             dPadDown.setPosition(84,this.getHeight()-227); 
 
             this.addActor(dPadDown);
 
             atlasRegion = atlas.findRegion("battle/ui/dpad_up");
             textures = atlasRegion.split(60,43);
-            dPadUp = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[1][0]).getDrawable());
+            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
+            tmpButtonB = new TextureRegionDrawable(textures[1][0]);
+            dPadUp = new ImageButton(tmpButtonA, tmpButtonB);
             dPadUp.setPosition(84,this.getHeight()-143);
 
             this.addActor(dPadUp);
 
             atlasRegion = atlas.findRegion("battle/ui/dpad_left");
             textures = atlasRegion.split(43,60);
-            dPadLeft = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[0][1]).getDrawable());
+            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
+            tmpButtonB = new TextureRegionDrawable(textures[0][1]);
+            dPadLeft = new ImageButton(tmpButtonA, tmpButtonB);
             dPadLeft.setPosition(50,this.getHeight()-194);  
 
             this.addActor(dPadLeft);
 
             atlasRegion = atlas.findRegion("battle/ui/dpad_right");
             textures = atlasRegion.split(43,60);
-            dPadRight = new ImageButton(new Image(textures[0][0]).getDrawable(),new Image(textures[0][1]).getDrawable());
+            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
+            tmpButtonB = new TextureRegionDrawable(textures[0][1]);
+            dPadRight = new ImageButton(tmpButtonA, tmpButtonB);
             dPadRight.setPosition(138,this.getHeight()-194);
 
             this.addActor(dPadRight);
@@ -187,60 +204,60 @@ public class BattleHUD extends Stage {
         int manaBars = hero.getMana()/5;
         switch(manaBars){
             case 0:
-                manasphere1.setDrawable(new Image(manasphere[0][fillSize]).getDrawable());
-                manasphere2.setDrawable(new Image(manasphere[0][0]).getDrawable());
-                manasphere3.setDrawable(new Image(manasphere[0][0]).getDrawable());
-                manasphere4.setDrawable(new Image(manasphere[0][0]).getDrawable());
-                manasphere5.setDrawable(new Image(manasphere[0][0]).getDrawable());
-                manasphere6.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere1.setDrawable(new TextureRegionDrawable(manasphere[0][fillSize]));
+                manasphere2.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
+                manasphere3.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
+                manasphere4.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
+                manasphere5.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
+                manasphere6.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
                 break;
             case 1:
-                manasphere1.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere2.setDrawable(new Image(manasphere[0][fillSize]).getDrawable());
-                manasphere3.setDrawable(new Image(manasphere[0][0]).getDrawable());
-                manasphere4.setDrawable(new Image(manasphere[0][0]).getDrawable());
-                manasphere5.setDrawable(new Image(manasphere[0][0]).getDrawable());
-                manasphere6.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere1.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere2.setDrawable(new TextureRegionDrawable(manasphere[0][fillSize]));
+                manasphere3.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
+                manasphere4.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
+                manasphere5.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
+                manasphere6.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
                 break;
             case 2:
-                manasphere1.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere2.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere3.setDrawable(new Image(manasphere[0][fillSize]).getDrawable());
-                manasphere4.setDrawable(new Image(manasphere[0][0]).getDrawable());
-                manasphere5.setDrawable(new Image(manasphere[0][0]).getDrawable());
-                manasphere6.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere1.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere2.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere3.setDrawable(new TextureRegionDrawable(manasphere[0][fillSize]));
+                manasphere4.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
+                manasphere5.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
+                manasphere6.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
                 break;
             case 3:
-                manasphere1.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere2.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere3.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere4.setDrawable(new Image(manasphere[0][fillSize]).getDrawable());
-                manasphere5.setDrawable(new Image(manasphere[0][0]).getDrawable());
-                manasphere6.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere1.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere2.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere3.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere4.setDrawable(new TextureRegionDrawable(manasphere[0][fillSize]));
+                manasphere5.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
+                manasphere6.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
                 break;
             case 4:
-                manasphere1.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere2.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere3.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere4.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere5.setDrawable(new Image(manasphere[0][fillSize]).getDrawable());
-                manasphere6.setDrawable(new Image(manasphere[0][0]).getDrawable());
+                manasphere1.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere2.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere3.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere4.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere5.setDrawable(new TextureRegionDrawable(manasphere[0][fillSize]));
+                manasphere6.setDrawable(new TextureRegionDrawable(manasphere[0][0]));
                 break;
             case 5:
-                manasphere1.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere2.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere3.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere4.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere5.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere6.setDrawable(new Image(manasphere[0][fillSize]).getDrawable());
+                manasphere1.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere2.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere3.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere4.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere5.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere6.setDrawable(new TextureRegionDrawable(manasphere[0][fillSize]));
                 break;
             case 6:
-                manasphere1.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere2.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere3.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere4.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere5.setDrawable(new Image(manasphere[0][5]).getDrawable());
-                manasphere6.setDrawable(new Image(manasphere[0][5]).getDrawable());
+                manasphere1.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere2.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere3.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere4.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere5.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
+                manasphere6.setDrawable(new TextureRegionDrawable(manasphere[0][5]));
                 break;
         }
     }

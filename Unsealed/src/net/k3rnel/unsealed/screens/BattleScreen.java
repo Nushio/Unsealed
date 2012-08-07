@@ -19,6 +19,7 @@
 package net.k3rnel.unsealed.screens;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
@@ -31,6 +32,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.graphics.g2d.tiled.SimpleTileAtlas;
 import com.badlogic.gdx.graphics.g2d.tiled.TileAtlas;
 import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledLoader;
@@ -116,21 +118,37 @@ public class BattleScreen extends AbstractScreen {
     @Override
     public void show() {
         super.show();
-
+        long time = new Date().getTime();
+        Gdx.app.log(Unsealed.LOG,"Starting... ");
         if(!scriptedBattle)
             game.getMusicManager().play( UnsealedMusic.BATTLE );
         atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
 
+        time = new Date().getTime() - time;
+        Gdx.app.log(Unsealed.LOG,"Started atlas in... "+time);
+        time = new Date().getTime();
+        
         // Load the tmx file into map
         tileMap = TiledLoader.createMap(Gdx.files.internal("map-atlases/"+mapname+".tmx"));
 
+        time = new Date().getTime() - time;
+        Gdx.app.log(Unsealed.LOG,"Started tiledMap in... "+time);
+        time = new Date().getTime();
+        
         // Load the tiles into atlas
         tileAtlas = new TileAtlas(tileMap, Gdx.files.internal("map-atlases/"));
 
-
+        time = new Date().getTime() - time;
+        Gdx.app.log(Unsealed.LOG,"Started tileAtlas in... "+time);
+        time = new Date().getTime();
+        
         // Create the renderer
         tileMapRenderer = new TileMapRenderer(tileMap, tileAtlas, tileMap.width, tileMap.height);
 
+        time = new Date().getTime() - time;
+        Gdx.app.log(Unsealed.LOG,"Started tileMapRenderer in... "+time);
+        time = new Date().getTime();
+        
         // Create the camera
         camera = new OrthographicCamera(MENU_VIEWPORT_WIDTH,MENU_VIEWPORT_HEIGHT);
         camera.position.set(850,1265, 0);
@@ -146,8 +164,10 @@ public class BattleScreen extends AbstractScreen {
         stateTime = 0;
 
         characters = new ArrayList<MapCharacter>();
-
-        hud = new BattleHUD(this.stage.getWidth(), stage.getHeight());
+        time = new Date().getTime() - time;
+        Gdx.app.log(Unsealed.LOG,"Started camera & overlay in... "+time);
+        time = new Date().getTime();
+        hud = new BattleHUD(getAtlas(),this.stage.getWidth(), stage.getHeight());
         hud.xButton.addListener(new PressedListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -254,8 +274,14 @@ public class BattleScreen extends AbstractScreen {
                 }
             });
         }
-        grid = new BattleGrid(this.stage.getWidth(), stage.getHeight(),6,3);
+        time = new Date().getTime() - time;
+        Gdx.app.log(Unsealed.LOG,"Started HUD in... "+time);
+        time = new Date().getTime();
+        grid = new BattleGrid(getAtlas(), this.stage.getWidth(), stage.getHeight(),6,3);
 
+        time = new Date().getTime() - time;
+        Gdx.app.log(Unsealed.LOG,"Started GRID in... "+time);
+        time = new Date().getTime();
         hero = new BattleHero(getAtlas(),150);
         hero.setGrid(1,1);
         hero.setSkill1(new EarthSpikes(getAtlas()));
@@ -271,9 +297,14 @@ public class BattleScreen extends AbstractScreen {
         hero.setSkill4(new ThunderClaw(getAtlas()));
         hero.setSkill5(new IceTentacle(getAtlas()));
         hero.setSkill6(new FirePunch(getAtlas()));
+        time = new Date().getTime() - time;
+        Gdx.app.log(Unsealed.LOG,"Started hero in... "+time);
+        time = new Date().getTime();
         if(!scriptedBattle)
             grid.spawnEnemies(bonus);
-
+        time = new Date().getTime() - time;
+        Gdx.app.log(Unsealed.LOG,"Started spawn enemies in... "+time);
+        time = new Date().getTime();
         roundLabel = new Label("Round "+round,getSkin());
         roundLabel.setX(350);
         roundLabel.setY(350);
@@ -323,7 +354,9 @@ public class BattleScreen extends AbstractScreen {
         dialog.setWidth(Gdx.graphics.getWidth());
         dialog.setHeight(Gdx.graphics.getHeight() / 8);
         dialog.setVisible(false);
-
+        time = new Date().getTime() - time;
+        Gdx.app.log(Unsealed.LOG,"Started the rest in... "+time);
+        time = new Date().getTime();
         hud.addActor(dialog);
         Gdx.input.setInputProcessor(new InputMultiplexer(this,stage,hud));
     } 

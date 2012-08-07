@@ -40,7 +40,7 @@ public class TextureAtlasGenerator {
 
         // set the maximum dimension of each image atlas
         settings.maxWidth = 2048;
-        settings.maxHeight = 2048;
+        settings.maxHeight = 1024;
 
         // pack the images
         TexturePacker2.process( settings, INPUT_DIR, OUTPUT_DIR, PACK_FILE );

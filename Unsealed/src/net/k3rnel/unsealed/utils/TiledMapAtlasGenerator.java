@@ -41,7 +41,8 @@ public class TiledMapAtlasGenerator {
     public static void main(String[] args ) {
         // create the packing's settings
         Settings settings = new Settings();
-
+settings.maxHeight = 1024;
+settings.maxWidth = 1024;
         //We need this so that libgdx can use the Gdx.app methods. 
         JoglApplication jogl = new JoglApplication(new ApplicationListener() {
             @Override
