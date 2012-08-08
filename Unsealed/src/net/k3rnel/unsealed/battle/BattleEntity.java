@@ -154,7 +154,7 @@ public class BattleEntity extends Image {
         this.gridX = gridX;
 //        Gdx.app.log(Unsealed.LOG, "GridX:"+gridX);
         if(reset)
-            setX((this.gridX+1)*65+150 - offsetX);
+            setX((this.gridX+1)*65+153 - offsetX);
     }
     /**
      * @return the gridY
@@ -174,7 +174,7 @@ public class BattleEntity extends Image {
     public void setGridY(float gridY) {
         this.gridY = gridY;
 //        Gdx.app.log(Unsealed.LOG, "GridY:"+gridY);
-        setY((gridY+1)*-40 + 230 - offsetY);
+        setY((gridY+1)*-40 + 200 - offsetY);
 //        setY();
     }
 

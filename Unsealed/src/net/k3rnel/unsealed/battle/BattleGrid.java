@@ -87,7 +87,7 @@ public class BattleGrid extends Stage {
         enemies = new Array<BattleEnemy>((sizeX/2)*sizeY);
         cam = new OrthographicCamera(this.width, this.height);            
         cam.position.set(this.width / 2, this.height / 2, 0);
-        cam.zoom = 1f;
+        cam.zoom = 0.8f;
         this.setCamera(cam);
 
     }

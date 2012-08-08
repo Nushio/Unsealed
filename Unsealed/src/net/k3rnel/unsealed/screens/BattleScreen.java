@@ -152,13 +152,15 @@ public class BattleScreen extends AbstractScreen {
         // Create the camera
         camera = new OrthographicCamera(MENU_VIEWPORT_WIDTH,MENU_VIEWPORT_HEIGHT);
         camera.position.set(850,1265, 0);
+        camera.zoom = 0.8f;
         camera.update();
 
 
         AtlasRegion atlasRegion = atlas.findRegion( "battle/ui/field-3x3" );
         battleoverlay = new Image(atlasRegion);
-        battleoverlay.setX( MENU_VIEWPORT_WIDTH/2 - battleoverlay.getWidth()/2 );
-        battleoverlay.setY( MENU_VIEWPORT_HEIGHT/2-battleoverlay.getHeight()- 25); 
+        battleoverlay.setScale(1.2f);
+        battleoverlay.setX( MENU_VIEWPORT_WIDTH/2 - (battleoverlay.getWidth()*battleoverlay.getScaleX())/2 );
+        battleoverlay.setY( MENU_VIEWPORT_HEIGHT/2 - (battleoverlay.getHeight()*battleoverlay.getScaleY())- 65);
         stage.addActor(battleoverlay);
 
         stateTime = 0;
@@ -208,6 +210,20 @@ public class BattleScreen extends AbstractScreen {
                 buttonPress(8,false); 
             }
         });
+        
+        hud.yButton.addListener(new PressedListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchDown(event, x, y, pointer, button);
+                buttonPress(9,true); 
+                return true;
+            }
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                buttonPress(9,false); 
+            }
+        });
         if(Gdx.app.getType()==ApplicationType.Android||Unsealed.DEBUG==true){
             hud.leftTrigger.addListener(new PressedListener() {
                 @Override
@@ -238,41 +254,6 @@ public class BattleScreen extends AbstractScreen {
             });
 
 
-            hud.dPadDown.addListener(new PressedListener() {
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    super.touchDown(event, x, y, pointer, button);
-                    buttonPress(1,true); 
-                    return true;
-                }
-            });
-
-            hud.dPadUp.addListener(new PressedListener() {
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    super.touchDown(event, x, y, pointer, button);
-                    buttonPress(0,true); 
-                    return true;
-                }
-            });
-
-            hud.dPadLeft.addListener(new PressedListener() {
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    super.touchDown(event, x, y, pointer, button);
-                    buttonPress(2,true); 
-                    return true;
-                }
-            });
-
-            hud.dPadRight.addListener(new PressedListener() {
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    super.touchDown(event, x, y, pointer, button);
-                    buttonPress(3,true); 
-                    return true;
-                }
-            });
         }
         time = new Date().getTime() - time;
         Gdx.app.log(Unsealed.LOG,"Started HUD in... "+time);
@@ -372,7 +353,8 @@ public class BattleScreen extends AbstractScreen {
         stage.act( delta );
         
         // (2) draw the result
-
+         
+        
         if(scriptedBattle)
             checkScene(delta);
 
@@ -725,5 +707,45 @@ public class BattleScreen extends AbstractScreen {
                     break;
                 }
             }
+        
+    }
+    float x;
+    float y;
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        x= Gdx.graphics.getWidth();
+        x = x/800f;
+        y = Gdx.graphics.getHeight();
+        y = y/480f;
+        
+        if(screenY>200*y&&screenY<280*y){
+            if(screenX>110*x&&screenX<180*x){
+                Gdx.app.log(Unsealed.LOG,"Down");
+                buttonPress(1,true); 
+                return true; 
+            }
+        }
+        if(screenY>76*y&&screenY<156*y){
+            if(screenX>110*x&&screenX<180*x){
+                Gdx.app.log(Unsealed.LOG,"Up");
+                buttonPress(0,true); 
+                return true; 
+            }
+        }
+        if(screenX>50*x&&screenX<125*x){
+            if(screenY>150*y&&screenY<210*y){
+                Gdx.app.log(Unsealed.LOG,"Left");
+                buttonPress(2,true);
+                return true;
+            }   
+        }
+        if(screenX>180*x&&screenX<255*x){
+            if(screenY>150*y&&screenY<210*y){
+                Gdx.app.log(Unsealed.LOG,"Right");
+                buttonPress(3,true); 
+              return true;
+            }
+        }
+        return super.touchDown(screenX, screenY, pointer, button);
     }
 }

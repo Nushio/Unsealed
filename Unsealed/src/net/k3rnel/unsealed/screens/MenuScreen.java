@@ -21,6 +21,8 @@ package net.k3rnel.unsealed.screens;
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
 
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -73,7 +75,10 @@ public class MenuScreen extends AbstractScreen {
                 if(Unsealed.DEBUG)
                     game.setScreen( new BattleScreen( game,false ,"TownOne") );
                 else
-                    game.setScreen( new QuickTutorialScreen( game ) );
+                    if(Gdx.app.getType()!=ApplicationType.Android)
+                        game.setScreen( new QuickTutorialScreen( game ) );
+                    else
+                        game.setScreen( new BattleScreen( game,false ,"TownOne") );
             }
         } );
         table.add(battleArenaButton).size( 300, 60 ).uniform().spaceBottom(10);

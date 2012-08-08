@@ -130,41 +130,41 @@ public class BattleHUD extends Stage {
             dPad.setY( this.getHeight() -(dPad.getHeight()*dPad.getScaleY()+ 100) ); 
             this.addActor(dPad);
 
-            atlasRegion = atlas.findRegion("battle/ui/dpad_down");
-            textures = atlasRegion.split(60,43);
-            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
-            tmpButtonB = new TextureRegionDrawable(textures[1][0]);
-            dPadDown = new ImageButton(tmpButtonA, tmpButtonB);
-            dPadDown.setPosition(84,this.getHeight()-227); 
+//            atlasRegion = atlas.findRegion("battle/ui/dpad_down");
+//            textures = atlasRegion.split(60,43);
+//            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
+//            tmpButtonB = new TextureRegionDrawable(textures[1][0]);
+//            dPadDown = new ImageButton(tmpButtonA, tmpButtonB);
+//            dPadDown.setPosition(84,this.getHeight()-227); 
 
-            this.addActor(dPadDown);
+//            this.addActor(dPadDown);
 
-            atlasRegion = atlas.findRegion("battle/ui/dpad_up");
-            textures = atlasRegion.split(60,43);
-            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
-            tmpButtonB = new TextureRegionDrawable(textures[1][0]);
-            dPadUp = new ImageButton(tmpButtonA, tmpButtonB);
-            dPadUp.setPosition(84,this.getHeight()-143);
+//            atlasRegion = atlas.findRegion("battle/ui/dpad_up");
+//            textures = atlasRegion.split(60,43);
+//            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
+//            tmpButtonB = new TextureRegionDrawable(textures[1][0]);
+//            dPadUp = new ImageButton(tmpButtonA, tmpButtonB);
+//            dPadUp.setPosition(84,this.getHeight()-143);
+//
+//            this.addActor(dPadUp);
 
-            this.addActor(dPadUp);
-
-            atlasRegion = atlas.findRegion("battle/ui/dpad_left");
-            textures = atlasRegion.split(43,60);
-            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
-            tmpButtonB = new TextureRegionDrawable(textures[0][1]);
-            dPadLeft = new ImageButton(tmpButtonA, tmpButtonB);
-            dPadLeft.setPosition(50,this.getHeight()-194);  
-
-            this.addActor(dPadLeft);
-
-            atlasRegion = atlas.findRegion("battle/ui/dpad_right");
-            textures = atlasRegion.split(43,60);
-            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
-            tmpButtonB = new TextureRegionDrawable(textures[0][1]);
-            dPadRight = new ImageButton(tmpButtonA, tmpButtonB);
-            dPadRight.setPosition(138,this.getHeight()-194);
-
-            this.addActor(dPadRight);
+//            atlasRegion = atlas.findRegion("battle/ui/dpad_left");
+//            textures = atlasRegion.split(43,60);
+//            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
+//            tmpButtonB = new TextureRegionDrawable(textures[0][1]);
+//            dPadLeft = new ImageButton(tmpButtonA, tmpButtonB);
+//            dPadLeft.setPosition(50,this.getHeight()-194);  
+//
+//            this.addActor(dPadLeft);
+//
+//            atlasRegion = atlas.findRegion("battle/ui/dpad_right");
+//            textures = atlasRegion.split(43,60);
+//            tmpButtonA = new TextureRegionDrawable(textures[0][0]);
+//            tmpButtonB = new TextureRegionDrawable(textures[0][1]);
+//            dPadRight = new ImageButton(tmpButtonA, tmpButtonB);
+//            dPadRight.setPosition(138,this.getHeight()-194);
+//
+//            this.addActor(dPadRight);
         }
         atlasRegion = atlas.findRegion("battle/ui/mana_sphere");
         manasphere = atlasRegion.split(32,43);
