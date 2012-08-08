@@ -30,8 +30,8 @@ import net.k3rnel.unsealed.services.SoundManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Unsealed extends Game {
 
@@ -48,15 +48,13 @@ public class Unsealed extends Game {
     private PreferencesManager preferencesManager;
     private MusicManager musicManager;
     private SoundManager soundManager;
-    //Loads teh maps
-    private AssetManager assetManager;
     
+    private TextureAtlas texAtlas;
     //The instance to our game.
     private static Unsealed instance;
     
     public Unsealed(){
     	instance = this;
-		assetManager = new AssetManager(); 	
     }
     
     // Service getters
@@ -83,11 +81,13 @@ public class Unsealed extends Game {
     public OptionsScreen getOptionsScreen(){
         return new OptionsScreen(this);
     }
-    
-    public AssetManager getAssetManager() {
-    	return assetManager;
-    }
 
+    public TextureAtlas getTextureAtlas(){
+        if(texAtlas == null){
+            texAtlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
+        }
+        return texAtlas;
+    }
     @Override
     public void create() {	
         Gdx.app.log( Unsealed.LOG, "Creating game on " + Gdx.app.getType() );

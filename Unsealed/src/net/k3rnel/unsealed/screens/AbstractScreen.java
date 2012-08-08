@@ -82,7 +82,7 @@ public abstract class AbstractScreen extends InputAdapter implements Screen {
 
     public TextureAtlas getAtlas() {
         if( atlas == null ) {
-            atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
+            atlas = Unsealed.getInstance().getTextureAtlas();
         }
         return atlas;
     }
@@ -171,7 +171,7 @@ public abstract class AbstractScreen extends InputAdapter implements Screen {
         if( font != null ) font.dispose();
         if( batch != null ) batch.dispose();
         if( skin != null ) skin.dispose();
-        if( atlas != null ) atlas.dispose();
+//        if( atlas != null ) atlas.dispose();
 //        if( stage != null ) stage.dispose();
     }
 

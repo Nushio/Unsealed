@@ -43,6 +43,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.PressedListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.battle.BattleEntity;
@@ -121,7 +122,7 @@ public class BattleScreen extends AbstractScreen {
         Gdx.app.log(Unsealed.LOG,"Starting... ");
         if(!scriptedBattle)
             game.getMusicManager().play( UnsealedMusic.BATTLE );
-        atlas = new TextureAtlas( Gdx.files.internal( "image-atlases/pages-info.atlas" ) );
+        atlas = Unsealed.getInstance().getTextureAtlas();
 
         time = new Date().getTime() - time;
         Gdx.app.log(Unsealed.LOG,"Started atlas in... "+time);
@@ -174,6 +175,7 @@ public class BattleScreen extends AbstractScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 buttonPress(6,true); 
+                Gdx.input.vibrate(10);
                 return true;
             }
             @Override
@@ -187,6 +189,7 @@ public class BattleScreen extends AbstractScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 buttonPress(7,true); 
+                Gdx.input.vibrate(10);
                 return true;
             }
             @Override
@@ -201,6 +204,7 @@ public class BattleScreen extends AbstractScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 buttonPress(8,true); 
+                Gdx.input.vibrate(10);
                 return true;
             }
             @Override
@@ -215,6 +219,7 @@ public class BattleScreen extends AbstractScreen {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 buttonPress(9,true); 
+                Gdx.input.vibrate(10);
                 return true;
             }
             @Override
@@ -229,6 +234,7 @@ public class BattleScreen extends AbstractScreen {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     super.touchDown(event, x, y, pointer, button);
                     buttonPress(4,true); 
+                    Gdx.input.vibrate(10);
                     return true;
                 }
 
@@ -243,6 +249,7 @@ public class BattleScreen extends AbstractScreen {
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     super.touchDown(event, x, y, pointer, button);
                     buttonPress(5,true); 
+                    Gdx.input.vibrate(10);
                     return true;
                 }
                 @Override
@@ -291,7 +298,7 @@ public class BattleScreen extends AbstractScreen {
         //        this.stage.addActor(roundLabel);
 
         atlasRegion = atlas.findRegion( "battle/ui/continue" );
-        restartButton = new ImageButton(new Image(atlasRegion).getDrawable(),new Image(atlasRegion).getDrawable());
+        restartButton = new ImageButton(new TextureRegionDrawable(atlasRegion),new TextureRegionDrawable(atlasRegion));
         restartButton.setY(140);
         restartButton.setX(170);
         restartButton.setWidth(426);
@@ -721,6 +728,7 @@ public class BattleScreen extends AbstractScreen {
             if(screenY>200*y&&screenY<280*y){
                 if(screenX>110*x&&screenX<180*x){
                     Gdx.app.log(Unsealed.LOG,"Down");
+                    Gdx.input.vibrate(10);
                     buttonPress(1,true); 
                     return true; 
                 }
@@ -728,6 +736,7 @@ public class BattleScreen extends AbstractScreen {
             if(screenY>76*y&&screenY<156*y){
                 if(screenX>110*x&&screenX<180*x){
                     Gdx.app.log(Unsealed.LOG,"Up");
+                    Gdx.input.vibrate(10);
                     buttonPress(0,true); 
                     return true; 
                 }
@@ -735,6 +744,7 @@ public class BattleScreen extends AbstractScreen {
             if(screenX>50*x&&screenX<125*x){
                 if(screenY>150*y&&screenY<210*y){
                     Gdx.app.log(Unsealed.LOG,"Left");
+                    Gdx.input.vibrate(10);
                     buttonPress(2,true);
                     return true;
                 }   
@@ -742,6 +752,7 @@ public class BattleScreen extends AbstractScreen {
             if(screenX>180*x&&screenX<255*x){
                 if(screenY>150*y&&screenY<210*y){
                     Gdx.app.log(Unsealed.LOG,"Right");
+                    Gdx.input.vibrate(10);
                     buttonPress(3,true); 
                     return true;
                 }
