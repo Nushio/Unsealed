@@ -38,7 +38,16 @@ public class DesktopLauncher {
         // whether to use OpenGL ES 2.0
         boolean useOpenGLES2 = true;
 
-        // create the game
-        new LwjglApplication( listener, title, width, height, useOpenGLES2 );
+        try{
+            // create the game
+            new LwjglApplication( listener, title, width, height, useOpenGLES2 );
+        }catch(Exception e){
+            useOpenGLES2 = false;
+            try{
+                new LwjglApplication( listener, title+" (OpenGL 1.0)", width, height, useOpenGLES2 );
+            }catch(Exception ee){
+                System.out.println("Sorry! Apparently you can't run this game. ");
+            }
+        }
     }
 }

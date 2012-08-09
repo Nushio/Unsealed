@@ -39,6 +39,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Timer.Task;
 
 public class BattleEntity extends Image {
@@ -98,7 +99,7 @@ public class BattleEntity extends Image {
             return;
         }
         if(getStatus()!=BattleEntity.statusStunned)
-            this.setDrawable(new Image(this.currentAnimation.getKeyFrame(this.stateTime)).getDrawable());
+            this.setDrawable(new TextureRegionDrawable(this.currentAnimation.getKeyFrame(this.stateTime)));
     }
 
     @Override
