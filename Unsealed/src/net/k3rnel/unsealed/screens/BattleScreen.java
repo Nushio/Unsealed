@@ -447,19 +447,43 @@ public class BattleScreen extends AbstractScreen {
                 case Input.Keys.U:
                     buttonPress(4,true);
                     return true;
+                case Input.Keys.BUTTON_L1:
+                    buttonPress(4,true);
+                    return true;
+                case Input.Keys.BUTTON_L2:
+                    buttonPress(4,true);
+                    return true;
                 case Input.Keys.O:
+                    buttonPress(5,true);
+                    return true;
+                case Input.Keys.BUTTON_R1:
+                    buttonPress(5,true);
+                    return true;
+                case Input.Keys.BUTTON_R2:
                     buttonPress(5,true);
                     return true;
                 case Input.Keys.J:
                     buttonPress(6,true);
                     return true;
+                case Input.Keys.BUTTON_X:
+                    buttonPress(6,true);
+                    return true;
                 case Input.Keys.K:
+                    buttonPress(7,true);
+                    return true;
+                case Input.Keys.DPAD_CENTER:
                     buttonPress(7,true);
                     return true;
                 case Input.Keys.L:
                     buttonPress(8,true);
                     return true;
+                case Input.Keys.BACK:
+                    buttonPress(8,true);
+                    return true;
                 case Input.Keys.I:
+                    buttonPress(9,true);
+                    return true;
+                case Input.Keys.BUTTON_Y:
                     buttonPress(9,true);
                     return true;
             }
@@ -472,19 +496,43 @@ public class BattleScreen extends AbstractScreen {
                 case Input.Keys.U:
                     buttonPress(4,false);
                     return true;
+                case Input.Keys.BUTTON_L1:
+                    buttonPress(4,false);
+                    return true;
+                case Input.Keys.BUTTON_L2:
+                    buttonPress(4,false);
+                    return true;
                 case Input.Keys.O:
+                    buttonPress(5,false);
+                    return true;
+                case Input.Keys.BUTTON_R1:
+                    buttonPress(5,false);
+                    return true;
+                case Input.Keys.BUTTON_R2:
                     buttonPress(5,false);
                     return true;
                 case Input.Keys.J:
                     buttonPress(6,false);
                     return true;
+                case Input.Keys.DPAD_CENTER:
+                    buttonPress(6,false);
+                    return true;
                 case Input.Keys.K:
                     buttonPress(7,false);
+                    return true;
+                case Input.Keys.BUTTON_X:
+                    buttonPress(8,false);
                     return true;
                 case Input.Keys.L:
                     buttonPress(8,false);
                     return true;
+                case Input.Keys.BUTTON_CIRCLE:
+                    buttonPress(8,false);
+                    return true;
                 case Input.Keys.I:
+                    buttonPress(9,false);
+                    return true;
+                case Input.Keys.BUTTON_Y:
                     buttonPress(9,false);
                     return true;
                 case Input.Keys.BACK:
