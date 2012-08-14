@@ -19,9 +19,6 @@
 package net.k3rnel.unsealed.battle.enemies;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -33,20 +30,13 @@ import com.badlogic.gdx.utils.Timer.Task;
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.battle.BattleEnemy;
 import net.k3rnel.unsealed.battle.BattleEntity;
-import net.k3rnel.unsealed.battle.BattleGrid;
-import net.k3rnel.unsealed.battle.BattleHero;
-import net.k3rnel.unsealed.battle.magic.MagicEntity;
-import net.k3rnel.unsealed.battle.magic.PeaDart;
 
 public class GNU extends BattleEnemy {
 
-    List<MagicEntity> darts;
-    MagicEntity tmpDart;
     TextureAtlas atlas;
     public GNU(TextureAtlas atlas, int hp, int x, int y) {
         super(hp, x, y);
         this.atlas = atlas;
-        darts = new ArrayList<MagicEntity>();
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/gnu" );
         TextureRegion[][] spriteSheet = atlasRegion.split(97,90);
         TextureRegion[] frames = new TextureRegion[1];
@@ -70,50 +60,14 @@ public class GNU extends BattleEnemy {
     @Override
     public void act(float delta) {
         super.act(delta);
-        for(int i = 0; i< darts.size(); i++){
-            if(darts.get(i).destroyMe){
-                darts.remove(i);
-                i--;
-            }else{
-                darts.get(i).act(delta);
-            }
-        }  
-        if(this.getStatus()!=BattleEntity.statusStunned)
-        switch(getState()){
-            case BattleEntity.stateIdle:
-                if(!currentAnimation.isAnimationFinished(stateTime)){
-                    for(BattleHero hero : BattleGrid.heroes){
-                        if(hero.getGridYInt() == this.getGridYInt()){
-                            setState(BattleEntity.stateAttacking);
-                            hit = false;
-                        }
-                    }
-                }else{
-                    Gdx.app.log(Unsealed.LOG,"Setting state to blocking!");
-                    setState(BattleEntity.stateBlocking);
-                    BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(4));
-                }
-                break;
-            case BattleEntity.stateAttacking:
-                if(currentAnimation.isAnimationFinished(stateTime+0.3f)&&!hit){
-                        hit = true;
-                        showDart(true);
-                }
-                if(currentAnimation.isAnimationFinished(stateTime)){
-                    setState(BattleEntity.stateBlocking);
-                    BattleGrid.timer.scheduleTask(nextTask(),BattleGrid.random.nextInt(4));
-                }
-                break;
-        }
+        
         
     }
     
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        for(MagicEntity dart : darts){
-            dart.draw(batch, parentAlpha);
-        }
+        
     }
     @Override
     public Task nextTask(){
@@ -133,12 +87,4 @@ public class GNU extends BattleEnemy {
         return currentTask;
     }
     
-    public void showDart(boolean show){
-        tmpDart = new PeaDart(atlas,2,-8f,this);
-        tmpDart.setVisible(false);
-        if(show)
-            tmpDart.setVisible(show);
-
-        darts.add(tmpDart);
-    }
 }

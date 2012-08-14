@@ -18,11 +18,6 @@
  */
 package net.k3rnel.unsealed.battle.enemies;
 
-
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -31,7 +26,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 import net.k3rnel.unsealed.battle.BattleEnemy;
 import net.k3rnel.unsealed.battle.BattleEntity;
-import net.k3rnel.unsealed.battle.magic.MagicEntity;
 /**
  * Only a cat with a different cloak a Lion still has claws... 
  * @author Nushio
@@ -39,13 +33,10 @@ import net.k3rnel.unsealed.battle.magic.MagicEntity;
  */
 public class FakeXios extends BattleEnemy {
 
-    List<MagicEntity> darts;
-    MagicEntity tmpDart;
     TextureAtlas atlas;
     public FakeXios(TextureAtlas atlas, int hp, int x, int y) {
         super(hp, x, y);
         this.atlas = atlas;
-        darts = new ArrayList<MagicEntity>();
         AtlasRegion atlasRegion = atlas.findRegion( "battle/entities/xios" );
         TextureRegion[][] spriteSheet = atlasRegion.split(304, 294);
         TextureRegion[] frames = new TextureRegion[4];
@@ -91,8 +82,6 @@ public class FakeXios extends BattleEnemy {
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        for(MagicEntity dart : darts){
-            dart.draw(batch, parentAlpha);
-        }
+       
     }
 }

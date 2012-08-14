@@ -142,8 +142,8 @@ public class Snake extends BattleEnemy {
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        for(MagicEntity magic : darts){
-            magic.draw(batch, parentAlpha);
+        for(int i = 0; i< darts.size(); i++){
+            darts.get(i).draw(batch,parentAlpha);
         }
     }
     @Override

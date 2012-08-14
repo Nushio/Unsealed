@@ -95,14 +95,15 @@ public class Ghost extends BattleEnemy {
                     break;
                 case BattleEntity.stateAltAttacking:
                     if(currentAnimation.isAnimationFinished(stateTime)){
-                        for(BattleHero hero : BattleGrid.heroes){
-                            if(hero.getGridYInt() == getGridYInt()){
-                                if(hero.getGridXInt() == getGridXInt()-1){
-                                    if(hero.getState()==BattleEntity.stateBlocking) 
-                                        hero.setHp(hero.getHp()-10);
+                        for(int i = 0; i<BattleGrid.heroes.size;i++){
+                            tmpHero = BattleGrid.heroes.get(i);
+                            if(tmpHero.getGridYInt() == getGridYInt()){
+                                if(tmpHero.getGridXInt() == getGridXInt()-1){
+                                    if(tmpHero.getState()==BattleEntity.stateBlocking) 
+                                        tmpHero.setHp(tmpHero.getHp()-10);
                                     else
-                                        hero.setHp(hero.getHp()-20);
-                                    hero.setState(BattleEntity.stateIdle);
+                                        tmpHero.setHp(tmpHero.getHp()-20);
+                                    tmpHero.setState(BattleEntity.stateIdle);
                                 }
                             }
                         }
@@ -125,10 +126,11 @@ public class Ghost extends BattleEnemy {
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        for(PeaDart dart : darts){
-            dart.draw(batch, parentAlpha);
-        }
+        for(int i = 0; i< darts.size(); i++){
+            darts.get(i).draw(batch,parentAlpha);
+         }
     }
+    BattleHero tmpHero;
     @Override
     public Task nextTask(){
         currentTask = new Task() {
@@ -136,12 +138,13 @@ public class Ghost extends BattleEnemy {
             public void run() {
                 switch(getState()){
                     case BattleEntity.stateIdle:
-                        for(BattleHero hero : BattleGrid.heroes){
-                            if(hero.getGridYInt() == getGridYInt()){
+                        for(int i = 0; i<BattleGrid.heroes.size;i++){
+                            tmpHero = BattleGrid.heroes.get(i);
+                            if(tmpHero.getGridYInt() == getGridYInt()){
                                 setState(BattleEntity.stateAttacking);
                             }else if(BattleGrid.random.nextInt(100)>70){
-                                if(BattleGrid.checkGrid(hero.getGridXInt()+1,hero.getGridYInt())==null){
-                                    if(BattleGrid.moveEntity(getGhost(),hero.getGridXInt()+1,hero.getGridYInt()))
+                                if(BattleGrid.checkGrid(tmpHero.getGridXInt()+1,tmpHero.getGridYInt())==null){
+                                    if(BattleGrid.moveEntity(getGhost(),tmpHero.getGridXInt()+1,tmpHero.getGridYInt()))
                                         setState(BattleEntity.stateAltAttacking);
                                 }
                             }else{

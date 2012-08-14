@@ -33,7 +33,8 @@ import net.k3rnel.unsealed.battle.BattleHero;
 public class Bee extends BattleEnemy {
 
     TextureAtlas atlas;
-
+    BattleHero tmpHero;
+    
     public Bee(TextureAtlas atlas, int hp, int x, int y) {
         super(hp, x, y);
         this.offsetX = 25;
@@ -71,14 +72,15 @@ public class Bee extends BattleEnemy {
             switch(getState()){
                 case BattleEntity.stateAltAttacking:
                     if(currentAnimation.isAnimationFinished(stateTime)){
-                        for(BattleHero hero : BattleGrid.heroes){
-                            if(hero.getGridYInt() == getGridYInt()){
-                                if(hero.getGridXInt() == getGridXInt()-1){
-                                    if(hero.getState()==BattleEntity.stateBlocking) 
-                                        hero.setHp(hero.getHp()-10);
+                        for(int i = 0;i<BattleGrid.heroes.size;i++){
+                            tmpHero = BattleGrid.heroes.get(i);
+                            if(tmpHero.getGridYInt() == getGridYInt()){
+                                if(tmpHero.getGridXInt() == getGridXInt()-1){
+                                    if(tmpHero.getState()==BattleEntity.stateBlocking) 
+                                        tmpHero.setHp(tmpHero.getHp()-10);
                                     else
-                                        hero.setHp(hero.getHp()-20);
-                                    hero.setState(BattleEntity.stateIdle);
+                                        tmpHero.setHp(tmpHero.getHp()-20);
+                                    tmpHero.setState(BattleEntity.stateIdle);
                                 }
                             }
                         }
@@ -103,10 +105,11 @@ public class Bee extends BattleEnemy {
             public void run() {
                 switch(getState()){
                     case BattleEntity.stateIdle:
-                        for(BattleHero hero : BattleGrid.heroes){
+                        for(int i = 0;i<BattleGrid.heroes.size;i++){
+                            tmpHero = BattleGrid.heroes.get(i);
                             if(BattleGrid.random.nextInt(100)>70){
-                                if(BattleGrid.checkGrid(hero.getGridXInt()+1,hero.getGridYInt())==null){
-                                    if(BattleGrid.moveEntity(getBee(),hero.getGridXInt()+1,hero.getGridYInt()))
+                                if(BattleGrid.checkGrid(tmpHero.getGridXInt()+1,tmpHero.getGridYInt())==null){
+                                    if(BattleGrid.moveEntity(getBee(),tmpHero.getGridXInt()+1,tmpHero.getGridYInt()))
                                         setState(BattleEntity.stateAltAttacking);
                                 }
                             }else{

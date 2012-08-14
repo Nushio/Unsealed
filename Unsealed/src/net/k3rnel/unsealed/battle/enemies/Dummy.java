@@ -21,9 +21,6 @@ package net.k3rnel.unsealed.battle.enemies;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -33,12 +30,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 import net.k3rnel.unsealed.battle.BattleEnemy;
 import net.k3rnel.unsealed.battle.BattleEntity;
-import net.k3rnel.unsealed.battle.magic.PeaDart;
 
 public class Dummy extends BattleEnemy {
 
-    List<PeaDart> darts;
-    PeaDart tmpDart;
     TextureAtlas atlas;
 
 
@@ -47,7 +41,6 @@ public class Dummy extends BattleEnemy {
         this.offsetX = 10;
         setGrid(x, y);
         this.atlas = atlas;
-        darts = new ArrayList<PeaDart>();
         AtlasRegion atlasRegion = atlas.findRegion( "char-sprites/combat_dummy" );
         TextureRegion[][] spriteSheet = atlasRegion.split(64, 64);
         TextureRegion[] frames = new TextureRegion[8];

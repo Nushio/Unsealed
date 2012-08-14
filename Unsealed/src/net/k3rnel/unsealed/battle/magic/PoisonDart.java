@@ -58,22 +58,24 @@ public class PoisonDart extends MagicEntity {
         this.setGrid(entity.getGridXInt()-1,entity.getGridYInt());
     }
     
+    BattleHero tmpHero;
     @Override
     public void act(float delta) {
         super.act(delta);
         if(this.getGridX()<0)
             destroyMe=true;
-        for(BattleHero hero : BattleGrid.heroes){
-            if(hero.getGridYInt() == this.getGridYInt() && hero.getGridXInt() == this.getGridXInt()){
+        for(int i = 0; i<BattleGrid.heroes.size;i++){
+            tmpHero = BattleGrid.heroes.get(i);
+            if(tmpHero.getGridYInt() == this.getGridYInt() && tmpHero.getGridXInt() == this.getGridXInt()){
                 Gdx.app.log(Unsealed.LOG,"SMACK!");
-                if(hero.getState()==BattleEntity.stateBlocking){
+                if(tmpHero.getState()==BattleEntity.stateBlocking){
                     
                 }else{
-                    if( hero.setHp(hero.getHp()-5)){
+                    if( tmpHero.setHp(tmpHero.getHp()-5)){
                         Gdx.app.log(Unsealed.LOG, "The clams have avenged themselves! You died a miserable death");
-                        hero.setHp(0);
+                        tmpHero.setHp(0);
                     }
-                    hero.setStatus(BattleEntity.statusPoisoned);
+                    tmpHero.setStatus(BattleEntity.statusPoisoned);
                 }
                 destroyMe=true;
             }

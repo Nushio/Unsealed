@@ -345,9 +345,9 @@ public class BattleHero extends BattleEntity {
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        for(MagicEntity magic : magics){
-            magic.draw(batch, parentAlpha);
-        }
+        for(int i = 0; i< magics.size(); i++){
+            magics.get(i).draw(batch,parentAlpha);
+        }       
         if(this.getState()==BattleEntity.stateBlocking)
             shield.draw(batch, parentAlpha);
     }

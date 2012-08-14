@@ -101,10 +101,11 @@ public class SandTurtle extends BattleEnemy {
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        for(MagicEntity dart : darts){
-            dart.draw(batch, parentAlpha);
-        }
+        for(int i = 0; i< darts.size(); i++){
+            darts.get(i).draw(batch, parentAlpha);
+        }  
     }
+    BattleHero tmpHero;
     @Override
     public Task nextTask(){
         currentTask = new Task() {
@@ -112,8 +113,9 @@ public class SandTurtle extends BattleEnemy {
             public void run() {
                 switch(getState()){
                     case BattleEntity.stateIdle:
-                        for(BattleHero hero : BattleGrid.heroes){
-                            if(hero.getGridYInt() == getGridYInt()){
+                        for(int i = 0;i<BattleGrid.heroes.size;i++){
+                            tmpHero = BattleGrid.heroes.get(i);
+                            if(tmpHero.getGridYInt() == getGridYInt()){
                                 setState(BattleEntity.stateAttacking);
                             }else{
                                 moveCharacter();
@@ -156,19 +158,21 @@ public class SandTurtle extends BattleEnemy {
                 break;
 
             case 2://Do move towards hero
-                for(BattleHero hero : BattleGrid.heroes){
-                    if(hero.getGridYInt() > getGridYInt() && getGridYInt()<3){
+                for(int i = 0;i<BattleGrid.heroes.size;i++){
+                    tmpHero = BattleGrid.heroes.get(i);
+                    if(tmpHero.getGridYInt() > getGridYInt() && getGridYInt()<3){
                         BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()+1);
-                    }else if(hero.getGridYInt() < getGridYInt() && getGridYInt()>=0){
+                    }else if(tmpHero.getGridYInt() < getGridYInt() && getGridYInt()>=0){
                         BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()-1);
                     }
                 }
                 break;
             case 3:
-                for(BattleHero hero : BattleGrid.heroes){
-                    if(hero.getGridYInt() > getGridYInt() && getGridYInt()<3){
+                for(int i = 0;i<BattleGrid.heroes.size;i++){
+                    tmpHero = BattleGrid.heroes.get(i);
+                    if(tmpHero.getGridYInt() > getGridYInt() && getGridYInt()<3){
                         BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()+1);
-                    }else if(hero.getGridYInt() < getGridYInt() && getGridYInt()>=0){
+                    }else if(tmpHero.getGridYInt() < getGridYInt() && getGridYInt()>=0){
                         BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()-1);
                     }
                 }

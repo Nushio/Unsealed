@@ -81,6 +81,7 @@ public class Clam extends BattleEnemy {
         this.setWidth(48);
     }
 
+    BattleHero tmpHero;
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -96,8 +97,9 @@ public class Clam extends BattleEnemy {
         switch(getState()){
             case BattleEntity.stateIdle:
                 if(!currentAnimation.isAnimationFinished(stateTime)){
-                    for(BattleHero hero : BattleGrid.heroes){
-                        if(hero.getGridYInt() == this.getGridYInt()){
+                    for(int i = 0;i<BattleGrid.heroes.size;i++){
+                        tmpHero = BattleGrid.heroes.get(i);
+                        if(tmpHero.getGridYInt() == this.getGridYInt()){
                             setState(BattleEntity.stateAttacking);
                             hit = false;
                         }
@@ -125,8 +127,8 @@ public class Clam extends BattleEnemy {
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        for(MagicEntity dart : darts){
-            dart.draw(batch, parentAlpha);
+        for(int i = 0; i< darts.size(); i++){
+           darts.get(i).draw(batch,parentAlpha);
         }
     }
     @Override

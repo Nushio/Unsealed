@@ -142,10 +142,11 @@ public class SandSnake extends BattleEnemy {
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        for(MagicEntity magic : darts){
-            magic.draw(batch, parentAlpha);
+        for(int i = 0; i< darts.size(); i++){
+            darts.get(i).draw(batch, parentAlpha);
         }
     }
+    BattleHero tmpHero;
     @Override
     public Task nextTask(){
         currentTask = new Task() {
@@ -153,8 +154,9 @@ public class SandSnake extends BattleEnemy {
             public void run() {
                 switch(getState()){
                     case BattleEntity.stateIdle:
-                        for(BattleHero hero : BattleGrid.heroes){
-                            if(hero.getGridYInt() == getGridYInt()){
+                        for(int i = 0; i<BattleGrid.heroes.size;i++){
+                            tmpHero = BattleGrid.heroes.get(i);
+                            if(tmpHero.getGridYInt() == getGridYInt()){
                                 hit = false;
                                 if(BattleGrid.random.nextInt(100)>70){
                                     attackType = 2;

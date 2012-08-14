@@ -30,7 +30,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.tiled.TileAtlas;
 import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
@@ -397,10 +396,11 @@ public class BattleScreen extends AbstractScreen {
 
         grid.draw();
         stage.getSpriteBatch().begin();
-        for(MapCharacter character : characters){
-            if(character.isVisible()){
-                character.act(delta);
-                character.draw(stage.getSpriteBatch(), 1);
+        for(int i = 0; i< characters.size();i++){
+            tmpChar = characters.get(i);
+            if(tmpChar.isVisible()){
+                tmpChar.act(delta);
+                tmpChar.draw(stage.getSpriteBatch(), 1);
             }
         }
 

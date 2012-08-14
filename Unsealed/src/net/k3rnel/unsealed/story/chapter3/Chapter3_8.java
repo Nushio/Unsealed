@@ -36,7 +36,6 @@ import net.k3rnel.unsealed.battle.skills.SuperFirePunch;
 import net.k3rnel.unsealed.battle.skills.ThunderClaw;
 import net.k3rnel.unsealed.battle.skills.TornadoVacuum;
 import net.k3rnel.unsealed.screens.BattleScreen;
-import net.k3rnel.unsealed.screens.ChapterSelectScreen;
 import net.k3rnel.unsealed.screens.CreditsScreen;
 import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
 

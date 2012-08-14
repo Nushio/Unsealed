@@ -55,23 +55,23 @@ public class TreeRoot extends MagicEntity {
 
         this.setGrid(entity.getGridXInt()-1,y);
     }
-    
+    BattleHero tmpHero;
     @Override
     public void act(float delta) {
         super.act(delta);
         if(this.getGridX()<0)
             destroyMe=true;
-        for(BattleHero hero : BattleGrid.heroes){
-            if(hero.getGridYInt() == this.getGridYInt() && hero.getGridXInt() == this.getGridXInt()){
-                Gdx.app.log(Unsealed.LOG,"SMACK!");
-                if(hero.getState()==BattleEntity.stateBlocking){
-                    hero.setHp(hero.getHp()-10);
+        for(int i = 0; i< BattleGrid.heroes.size;i++){
+            tmpHero = BattleGrid.heroes.get(i);
+            if(tmpHero.getGridYInt() == this.getGridYInt() && tmpHero.getGridXInt() == this.getGridXInt()){
+                if(tmpHero.getState()==BattleEntity.stateBlocking){
+                    tmpHero.setHp(tmpHero.getHp()-10);
                 }else{
-                    if( hero.setHp(hero.getHp()-20)){
+                    if( tmpHero.setHp(tmpHero.getHp()-20)){
                         Gdx.app.log(Unsealed.LOG, "The clams have avenged themselves! You died a miserable death");
-                        hero.setHp(0);
+                        tmpHero.setHp(0);
                     }else{
-                        hero.setStatus(BattleEntity.statusPoisoned);
+                        tmpHero.setStatus(BattleEntity.statusPoisoned);
                     }
                 }
                 destroyMe=true;

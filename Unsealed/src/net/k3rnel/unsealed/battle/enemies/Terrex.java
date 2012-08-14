@@ -99,15 +99,16 @@ public class Terrex extends BattleEnemy {
                     break;
                 case BattleEntity.stateAltAttacking:
                     if(currentAnimation.isAnimationFinished(stateTime)){
-                        for(BattleHero hero : BattleGrid.heroes){
-                            if(hero.getGridYInt() == getGridYInt()){
-                                if(hero.getGridXInt() == getGridXInt()-1){
-                                    if(hero.getState()==BattleEntity.stateBlocking) 
-                                        hero.setHp(hero.getHp()-10);
+                        for(int i = 0;i<BattleGrid.heroes.size;i++){
+                            tmpHero = BattleGrid.heroes.get(i);
+                            if(tmpHero.getGridYInt() == getGridYInt()){
+                                if(tmpHero.getGridXInt() == getGridXInt()-1){
+                                    if(tmpHero.getState()==BattleEntity.stateBlocking) 
+                                        tmpHero.setHp(tmpHero.getHp()-10);
                                     else
-                                        hero.setHp(hero.getHp()-20);
-                                    BattleGrid.moveEntity(hero,hero.getGridXInt()-1,hero.getGridYInt());
-                                    hero.setState(BattleEntity.stateIdle);
+                                        tmpHero.setHp(tmpHero.getHp()-20);
+                                    BattleGrid.moveEntity(tmpHero,tmpHero.getGridXInt()-1,tmpHero.getGridYInt());
+                                    tmpHero.setState(BattleEntity.stateIdle);
                                 }
                             }
                         }
@@ -124,14 +125,15 @@ public class Terrex extends BattleEnemy {
             }
         }  
     }
-
+    
     @Override
     public void draw(SpriteBatch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        for(PeaDart dart : darts){
-            dart.draw(batch, parentAlpha);
+        for(int i = 0; i< darts.size(); i++){
+            darts.get(i).draw(batch,parentAlpha);
         }
     }
+    BattleHero tmpHero;
     @Override
     public Task nextTask(){
         currentTask = new Task() {
@@ -139,9 +141,10 @@ public class Terrex extends BattleEnemy {
             public void run() {
                 switch(getState()){
                     case BattleEntity.stateIdle:
-                        for(BattleHero hero : BattleGrid.heroes){
-                            if(hero.getGridYInt() == getGridYInt()){
-                                if(hero.getGridXInt() == getGridXInt()-1)
+                        for(int i = 0;i<BattleGrid.heroes.size;i++){
+                            tmpHero = BattleGrid.heroes.get(i);
+                            if(tmpHero.getGridYInt() == getGridYInt()){
+                                if(tmpHero.getGridXInt() == getGridXInt()-1)
                                     setState(BattleEntity.stateAltAttacking);
                                 else
                                     setState(BattleEntity.stateAttacking);
@@ -186,26 +189,29 @@ public class Terrex extends BattleEnemy {
                     }
                 break;
             case 4://Do move towards hero
-                for(BattleHero hero : BattleGrid.heroes){
-                    if(hero.getGridYInt() > getGridYInt() && getGridYInt()<3){
+                for(int i = 0;i<BattleGrid.heroes.size;i++){
+                    tmpHero = BattleGrid.heroes.get(i);
+                    if(tmpHero.getGridYInt() > getGridYInt() && getGridYInt()<3){
                         BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()+1);
-                    }else if(hero.getGridYInt() < getGridYInt() && getGridYInt()>=0){
+                    }else if(tmpHero.getGridYInt() < getGridYInt() && getGridYInt()>=0){
                         BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()-1);
                     }
                 }
                 break;
             case 5:
-                for(BattleHero hero : BattleGrid.heroes){
-                    if(hero.getGridYInt() > getGridYInt() && getGridYInt()<3){
+                for(int i = 0;i<BattleGrid.heroes.size;i++){
+                    tmpHero = BattleGrid.heroes.get(i);
+                    if(tmpHero.getGridYInt() > getGridYInt() && getGridYInt()<3){
                         BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()+1);
-                    }else if(hero.getGridYInt() < getGridYInt() && getGridYInt()>=0){
+                    }else if(tmpHero.getGridYInt() < getGridYInt() && getGridYInt()>=0){
                         BattleGrid.moveEntity(this, this.getGridXInt(), this.getGridYInt()-1);
                     }
                 }
                 break;
             case 6:
-                for(BattleHero hero : BattleGrid.heroes){
-                    if(hero.getGridYInt() == getGridYInt() ){
+                for(int i = 0;i<BattleGrid.heroes.size;i++){
+                    tmpHero = BattleGrid.heroes.get(i);
+                    if(tmpHero.getGridYInt() == getGridYInt() ){
                         if(getGridXInt()>2)
                             BattleGrid.moveEntity(this, this.getGridXInt()-1, this.getGridYInt());
                     }
