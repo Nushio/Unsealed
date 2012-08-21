@@ -62,6 +62,7 @@ public class ThunderClawKick extends MagicEntity {
         if(this.getGridX()<0)
             destroyMe=true;
         for(int i = 0; i<BattleGrid.heroes.size;i++){
+            tmpHero = BattleGrid.heroes.get(i);
             if(tmpHero.getGridYInt() == this.getGridYInt() && tmpHero.getGridXInt() == this.getGridXInt()){
                 Gdx.app.log(Unsealed.LOG,"SMACK!");
                 if(tmpHero.getState()==BattleEntity.stateBlocking){

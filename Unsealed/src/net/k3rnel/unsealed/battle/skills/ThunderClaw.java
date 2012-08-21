@@ -28,7 +28,7 @@ public class ThunderClaw extends AbstractSkill {
      public ThunderClaw(TextureAtlas atlas) {
         super(atlas);
         id = 6;
-        manaCost = 10;
+        manaCost = 5;
         this.setY(18);
         this.setX(5);
         stance = BattleEntity.stateAttacking;
