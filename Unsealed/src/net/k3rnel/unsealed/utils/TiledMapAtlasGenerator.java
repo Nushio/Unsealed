@@ -23,7 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.backends.jogl.JoglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.tiledmappacker.TiledMapPacker;
 import com.badlogic.gdx.tools.imagepacker.TexturePacker.Settings;
 
@@ -41,10 +41,10 @@ public class TiledMapAtlasGenerator {
     public static void main(String[] args ) {
         // create the packing's settings
         Settings settings = new Settings();
-settings.maxHeight = 1024;
-settings.maxWidth = 1024;
+        settings.maxHeight = 1024;
+        settings.maxWidth = 1024;
         //We need this so that libgdx can use the Gdx.app methods. 
-        JoglApplication jogl = new JoglApplication(new ApplicationListener() {
+        LwjglApplication lwjgl = new LwjglApplication(new ApplicationListener() {
             @Override
             public void create() {
             }
@@ -84,7 +84,7 @@ settings.maxWidth = 1024;
             e.printStackTrace();
         }
         //We exit the program. Duh.
-        jogl.exit();
+        lwjgl.exit();
     }
     
     /**
