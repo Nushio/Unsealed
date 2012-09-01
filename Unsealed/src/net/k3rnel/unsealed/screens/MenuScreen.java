@@ -54,22 +54,26 @@ public class MenuScreen extends AbstractScreen {
         table.row().fill().expandX();
         AtlasRegion splashRegion = getAtlas().findRegion( "splash-screen/menulogo" );
         Image logo = new Image(splashRegion);
+        table.add();
         table.add(logo).fill(false);
+        table.add();
         table.row();
         table.pad(10).defaults().spaceBottom(10);
-        TextButton storyModeButton = new TextButton( "Story Mode", skin );
-        storyModeButton.setVisible(true);
-        storyModeButton.addListener( new ClickListener() {
+        TextButton currentButton = new TextButton( "Story Mode", skin );
+        currentButton.setVisible(true);
+        currentButton.addListener( new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y ) {
                 game.setScreen( new ChapterSelectScreen( game ) );
             }
         } );
-        table.add(storyModeButton).size( 300, 60 ).uniform().spaceBottom(10);
+        table.add();
+        table.add(currentButton).size( 300, 60 ).uniform().spaceBottom(10);
+        table.add();
         table.row();
         table.pad(10).defaults().spaceBottom(10);
-        TextButton battleArenaButton = new TextButton( "Battle Arena", skin );
-        battleArenaButton.addListener( new ClickListener() {
+        currentButton = new TextButton( "Battle Arena", skin );
+        currentButton.addListener( new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y ) {
                 if(Unsealed.DEBUG)
@@ -81,26 +85,51 @@ public class MenuScreen extends AbstractScreen {
                         game.setScreen( new BattleScreen( game,false ,"TownOne") );
             }
         } );
-        table.add(battleArenaButton).size( 300, 60 ).uniform().spaceBottom(10);
+        table.add();
+        table.add(currentButton).size( 300, 60 ).uniform().spaceBottom(10);
+        table.add();
         table.row();
         table.pad(10).defaults().spaceBottom(10);
-        TextButton optionsButton = new TextButton( "Options", skin );
-        optionsButton.addListener( new ClickListener() {
+//       
+//        table.add(currentButton).size( 300, 60 ).uniform().spaceBottom(10);
+//        table.row();
+//        table.pad(10).defaults().spaceBottom(10);
+//        TextButton optionsButton = new TextButton( "Options", skin );
+//        optionsButton.addListener( new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y ) {
+//                    game.setScreen( new OptionsScreen( game) );
+//            }
+//        } );
+//        table.add(optionsButton).size( 300, 60 ).uniform().spaceBottom(10);
+//        table.row();
+        currentButton = new TextButton( "Options", skin );
+        currentButton.addListener( new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y ) {
                     game.setScreen( new OptionsScreen( game) );
             }
         } );
-        table.add(optionsButton).size( 300, 60 ).uniform().spaceBottom(10);
-        table.row();
-        TextButton creditsButton = new TextButton( "Credits", skin );
-        creditsButton.addListener( new ClickListener() {
+        table.add(currentButton).uniform().spaceBottom(10);
+        currentButton = new TextButton( "Tutorial", skin );
+        currentButton.addListener( new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y ) {
+                    if(Gdx.app.getType()==ApplicationType.Android)
+                        game.setScreen( new TutorialAndroidScreen( game) );
+                    else
+                        game.setScreen( new TutorialDesktopScreen( game) );
+            }
+        } );
+        table.add(currentButton).uniform().spaceBottom(10);
+        currentButton = new TextButton( "Credits", skin );
+        currentButton.addListener( new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y ) {
                     game.setScreen( new CreditsScreen( game) );
             }
         } );
-        table.add(creditsButton).uniform().spaceBottom(10);
+        table.add(currentButton).uniform().spaceBottom(10);
         table.pad(10).defaults().spaceBottom(10);
     }
 }

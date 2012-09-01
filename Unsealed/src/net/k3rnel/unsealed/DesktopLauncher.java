@@ -30,7 +30,7 @@ public class DesktopLauncher {
         ApplicationListener listener = new Unsealed();
 
         // define the window's title
-        String title = "Unsealed: Whispers of Wisdom (v1.1)";
+        String title = "Unsealed: Whispers of Wisdom (v1.1.1)";
 
         // define the window's size
         int width = 800, height = 480;
