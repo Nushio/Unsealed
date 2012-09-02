@@ -97,8 +97,7 @@ public class OptionsScreen extends AbstractScreen {
         table.row();
         table.add( "Volume" );
         // range is [0.0,1.0]; step is 0.1f
-        Slider volumeSlider = new Slider( 0f, 1f, 0.1f, getSkin() );
-
+        Slider volumeSlider = new Slider( 0f, 1f, 0.1f, false, getSkin() );
         table.add( volumeSlider );
         volumeSlider.setValue( game.getPreferencesManager().getVolume() );
         volumeSlider.addListener( new ChangeListener() {

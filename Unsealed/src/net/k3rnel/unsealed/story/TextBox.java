@@ -66,10 +66,9 @@ public class TextBox extends StyledTable {
     }
 
     @Override
-    public Actor hit(float x, float y) {
-        return null;
+    public Actor hit(float x, float y, boolean touchable) {
+        return super.hit(x, y, touchable);
     }
-
     public void setText(String text) {
         label.setText(text);
     }

@@ -54,9 +54,7 @@ public class MenuScreen extends AbstractScreen {
         table.row().fill().expandX();
         AtlasRegion splashRegion = getAtlas().findRegion( "splash-screen/menulogo" );
         Image logo = new Image(splashRegion);
-        table.add();
-        table.add(logo).fill(false);
-        table.add();
+        table.add(logo).colspan(3).fill(false);
         table.row();
         table.pad(10).defaults().spaceBottom(10);
         TextButton currentButton = new TextButton( "Story Mode", skin );
@@ -67,9 +65,7 @@ public class MenuScreen extends AbstractScreen {
                 game.setScreen( new ChapterSelectScreen( game ) );
             }
         } );
-        table.add();
-        table.add(currentButton).size( 300, 60 ).uniform().spaceBottom(10);
-        table.add();
+        table.add(currentButton).colspan(3).size( 300, 60 ).uniform().spaceBottom(10);
         table.row();
         table.pad(10).defaults().spaceBottom(10);
         currentButton = new TextButton( "Battle Arena", skin );
@@ -85,24 +81,9 @@ public class MenuScreen extends AbstractScreen {
                         game.setScreen( new BattleScreen( game,false ,"TownOne") );
             }
         } );
-        table.add();
-        table.add(currentButton).size( 300, 60 ).uniform().spaceBottom(10);
-        table.add();
+        table.add(currentButton).colspan(3).size( 300, 60 ).uniform().spaceBottom(10);
         table.row();
         table.pad(10).defaults().spaceBottom(10);
-//       
-//        table.add(currentButton).size( 300, 60 ).uniform().spaceBottom(10);
-//        table.row();
-//        table.pad(10).defaults().spaceBottom(10);
-//        TextButton optionsButton = new TextButton( "Options", skin );
-//        optionsButton.addListener( new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y ) {
-//                    game.setScreen( new OptionsScreen( game) );
-//            }
-//        } );
-//        table.add(optionsButton).size( 300, 60 ).uniform().spaceBottom(10);
-//        table.row();
         currentButton = new TextButton( "Options", skin );
         currentButton.addListener( new ClickListener() {
             @Override

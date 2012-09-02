@@ -99,15 +99,13 @@ public class Chapter3_8 extends BattleScreen {
             }
         });
         this.stage.addActor(restartButton);
-        camera.position.set(1050, 1960, 0);
+        camera.position.set(510, 280, 0);
+        camera.zoom = 1f;
         camera.update();
     }
     @Override
     public void render(float delta) {
         super.render(delta);
-        camera.position.set(1000, 1000, 0);
-        camera.zoom = 100f;
-        camera.update();
         if(restartButton.isVisible()){
             this.getBatch().begin();
             restartButton.draw(this.getBatch(), 1);
@@ -117,9 +115,7 @@ public class Chapter3_8 extends BattleScreen {
     @Override
     public void checkScene(float delta){
         this.stateTime+=delta;
-        camera.position.set(510, 280, 0);
-        camera.zoom = 1f;
-        camera.update();
+   
         switch(act){
             case -1:
                 buttonPress(9,true);

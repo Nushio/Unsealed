@@ -22,15 +22,18 @@ import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.battle.BattleGrid;
 import net.k3rnel.unsealed.battle.enemies.Dummy;
 import net.k3rnel.unsealed.battle.skills.EarthSpikes;
+import net.k3rnel.unsealed.battle.skills.FireLion;
+import net.k3rnel.unsealed.battle.skills.FirePunch;
+import net.k3rnel.unsealed.battle.skills.IceTentacle;
+import net.k3rnel.unsealed.battle.skills.ThunderClaw;
+import net.k3rnel.unsealed.battle.skills.TornadoVacuum;
 import net.k3rnel.unsealed.screens.BattleScreen;
-import net.k3rnel.unsealed.story.MapCharacter;
-import net.k3rnel.unsealed.story.characters.Kid;
 
 public class TutorialDesktopScreen extends BattleScreen {
 
 
      public TutorialDesktopScreen(Unsealed game) {
-        super(game,true,"TownOne");
+        super(game,true,"Boss Arena");
         
      }
    
@@ -38,41 +41,22 @@ public class TutorialDesktopScreen extends BattleScreen {
     public void show() {
         super.show();
         
-        camera.position.set(1300,1220, 0);
+        camera.position.set(510, 305, 0);
+        camera.zoom = 0.8f;
         camera.update();
-        hero.setSkill1(null);
+        hero.setSkill1(new FirePunch(getAtlas()));
         hero.setSkill2(new EarthSpikes(getAtlas()));
-        hero.setSkill3(null);
-        hero.setSkill4(null);
-        hero.setSkill5(new EarthSpikes(getAtlas()));
-        hero.setSkill6(null);
+        hero.setSkill3(new ThunderClaw(getAtlas()));
+        hero.setSkill4(new IceTentacle(getAtlas()));
+        hero.setSkill5(new TornadoVacuum(getAtlas()));
+        hero.setSkill6(new FireLion(getAtlas()));
         buttonPress(9,true);
-        hud.bButton.addActor(hero.getSkill2());
-        MapCharacter character = new Kid(getAtlas(),0);
-        character.setVisible(true);
-        character.setPosition(300,270);
-        character.setDirection(MapCharacter.dirDown);
-        character.updateAnimation();
-        characters.add(character);
-        
-        character = new Kid(getAtlas(),1);
-        character.setVisible(true);
-        character.setPosition(400,270);
-        character.setDirection(MapCharacter.dirDown);
-        character.updateAnimation();
-        characters.add(character);
-        
-        character = new Kid(getAtlas(),2);
-        character.setVisible(true);
-        character.setPosition(350,270);
-        character.setDirection(MapCharacter.dirDown);
-        character.updateAnimation();
-        characters.add(character);
-        
+        buttonPress(9,true);     
     }
     @Override
     public void checkScene(float delta){
         this.stateTime+=delta;
+      
         switch(act){
             case 0:
                 disableInput = true;
@@ -161,44 +145,53 @@ public class TutorialDesktopScreen extends BattleScreen {
             case 9:
                 if(stateTime>3){
                     disableInput = false;
-                    buttonPress(7,true);
+                    buttonPress(6,true);
                     disableInput = true;
                     stateTime = 0;
                     act = 10;
                 }
                 break;
             case 10:
-                dialog.setText("New spells will be unlocked as the game progresses. ");
-                if(stateTime>3){
+                dialog.setText("You can switch spells by pressing I");
+                if(stateTime>5){
+                    buttonPress(9,true);
                     stateTime = 0;
                     act = 11;
                 }
                 break;
             case 11:
-                dialog.setText("Now, lets test these abilities! ");
                 if(stateTime>4){
+                    buttonPress(9,true);
                     stateTime = 0;
                     act = 12;
                 }
                 break;
             case 12:
+                dialog.setText("Now, lets test these abilities! ");
+                if(stateTime>4){
+                    stateTime = 0;
+                    act = 13;
+                }
+                break;
+               
+            case 13:
                 disableInput = false;
                 dialog.setVisible(false);
                 grid.spawnEnemies(new Dummy(getAtlas(),3,1),new Dummy(getAtlas(),4,1),new Dummy(getAtlas(),5,2),new Dummy(getAtlas(),5,0));
                 disableInput = false;
-                act = 13;
+                act = 14;
                 break;
-            case 13:
+            case 14:
                 if(BattleGrid.checkState()==BattleGrid.battleWon){
-                    act = 14;
+                    act = 15;
                     stateTime = 0;
                 }
                 break;
-            case 14:
-                dialog.setVisible(false);
-                act = 15;
-                break;
             case 15:
+                dialog.setVisible(false);
+                act = 16;
+                break;
+            case 16:
                 game.setScreen(new MenuScreen(game));
                 break;
         }

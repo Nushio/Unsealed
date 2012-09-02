@@ -36,12 +36,12 @@ import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledLoader;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
-import com.badlogic.gdx.scenes.scene2d.utils.PressedListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import net.k3rnel.unsealed.Unsealed;
@@ -169,7 +169,7 @@ public class BattleScreen extends AbstractScreen {
         Gdx.app.log(Unsealed.LOG,"Started camera & overlay in... "+time);
         time = new Date().getTime();
         hud = new BattleHUD(getAtlas(),this.stage.getWidth(), stage.getHeight());
-        hud.xButton.addListener(new PressedListener() {
+        hud.xButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
@@ -183,7 +183,7 @@ public class BattleScreen extends AbstractScreen {
                 buttonPress(6,false); 
             }
         });
-        hud.bButton.addListener(new PressedListener() {
+        hud.bButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
@@ -198,7 +198,7 @@ public class BattleScreen extends AbstractScreen {
             }
         });
 
-        hud.aButton.addListener(new PressedListener() {
+        hud.aButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
@@ -213,7 +213,7 @@ public class BattleScreen extends AbstractScreen {
             }
         });
 
-        hud.yButton.addListener(new PressedListener() {
+        hud.yButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
@@ -228,7 +228,7 @@ public class BattleScreen extends AbstractScreen {
             }
         });
         if(Gdx.app.getType()==ApplicationType.Android||Unsealed.DEBUG==true){
-            hud.leftTrigger.addListener(new PressedListener() {
+            hud.leftTrigger.addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     super.touchDown(event, x, y, pointer, button);
@@ -243,7 +243,7 @@ public class BattleScreen extends AbstractScreen {
                     buttonPress(4,false); 
                 }
             });
-            hud.rightTrigger.addListener(new PressedListener() {
+            hud.rightTrigger.addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     super.touchDown(event, x, y, pointer, button);
@@ -678,7 +678,7 @@ public class BattleScreen extends AbstractScreen {
                             hud.xButton.setX( hud.getWidth() - (hud.xButton.getWidth()*hud.xButton.getScaleX()) -160 );
                             hud.xButton.setY( hud.getHeight() -(hud.xButton.getHeight()*hud.xButton.getScaleY()+ 100) );
                             hud.xButton.addActor(hero.getSkill1());
-                            hud.xButton.addListener(new PressedListener() {
+                            hud.xButton.addListener(new InputListener() {
                                 @Override
                                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                                     super.touchDown(event, x, y, pointer, button);
@@ -706,7 +706,7 @@ public class BattleScreen extends AbstractScreen {
                             hud.bButton.setX( hud.getWidth() - (hud.bButton.getWidth()*hud.bButton.getScaleX()) - 80 );
                             hud.bButton.setY( hud.getHeight() -(hud.bButton.getHeight()*hud.bButton.getScaleY() + 160) );
                             hud.bButton.addActor(hero.getSkill2());
-                            hud.bButton.addListener(new PressedListener() {
+                            hud.bButton.addListener(new InputListener() {
                                 @Override
                                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                                     super.touchDown(event, x, y, pointer, button);
@@ -734,7 +734,7 @@ public class BattleScreen extends AbstractScreen {
                             hud.aButton.setX( hud.getWidth() - (hud.aButton.getWidth()*hud.aButton.getScaleX()) );
                             hud.aButton.setY( hud.getHeight() -(hud.aButton.getHeight()*hud.aButton.getScaleY() + 100) );
                             hud.aButton.addActor(hero.getSkill3());
-                            hud.aButton.addListener(new PressedListener() {
+                            hud.aButton.addListener(new InputListener() {
                                 @Override
                                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                                     super.touchDown(event, x, y, pointer, button);
