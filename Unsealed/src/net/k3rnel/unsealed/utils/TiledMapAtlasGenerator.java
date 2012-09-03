@@ -22,8 +22,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.tiledmappacker.TiledMapPacker;
 import com.badlogic.gdx.tools.imagepacker.TexturePacker.Settings;
 
@@ -43,32 +41,6 @@ public class TiledMapAtlasGenerator {
         Settings settings = new Settings();
         settings.maxHeight = 1024;
         settings.maxWidth = 1024;
-        //We need this so that libgdx can use the Gdx.app methods. 
-        LwjglApplication lwjgl = new LwjglApplication(new ApplicationListener() {
-            @Override
-            public void create() {
-            }
-
-            @Override
-            public void dispose() {
-            }
-
-            @Override
-            public void pause() {
-            }
-
-            @Override
-            public void render() {
-            }
-
-            @Override
-            public void resize(int width, int height) {
-            }
-
-            @Override
-            public void resume() {
-            }
-        }, "", 0, 0, false);
         
         //Creates temp file variables
         File inputDir = new File(INPUT_DIR);
@@ -83,8 +55,6 @@ public class TiledMapAtlasGenerator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //We exit the program. Duh.
-        lwjgl.exit();
     }
     
     /**

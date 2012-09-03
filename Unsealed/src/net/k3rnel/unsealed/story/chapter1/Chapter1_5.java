@@ -187,7 +187,7 @@ public class Chapter1_5 extends BattleScreen {
                 grid.reset();
                 hero.setMana(0);
                 grid.assignEntity(hero);
-                grid.spawnEnemies(new Snake(getAtlas(),80,3,1),new Snake(getAtlas(),80,4,1),new Snake(getAtlas(),70,4,2),new Snake(getAtlas(),80,5,1),new Snake(getAtlas(),100,5,0));
+                grid.spawnEnemies(new Snake(getAtlas(),80,3,1),new Snake(getAtlas(),80,4,1),new Snake(getAtlas(),70,4,2),new Snake(getAtlas(),80,5,1));
                 act = 10;
                 stateTime = 0;
                 break;
