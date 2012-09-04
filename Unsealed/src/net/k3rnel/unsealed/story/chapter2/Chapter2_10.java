@@ -24,8 +24,6 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-
 import net.k3rnel.unsealed.Unsealed;
 import net.k3rnel.unsealed.screens.ChapterSelectScreen;
 import net.k3rnel.unsealed.services.MusicManager.UnsealedMusic;
@@ -37,7 +35,6 @@ import net.k3rnel.unsealed.story.characters.Penguin;
 public class Chapter2_10 extends AbstractChapter {
 
     final int[] overLayers = {6, 12 };
-    Image dojo;
 
     /**
      * Chapter Two: Old Friends
@@ -65,11 +62,6 @@ public class Chapter2_10 extends AbstractChapter {
         tmpChar.setPosition(1100,1600);
         characters.add(tmpChar);
 
-        //Backup plan due to libgdx not rendering friggin' flipped tiles
-        dojo = new Image(getAtlas().findRegion("maps/dojo to render"));
-        dojo.setX(540);
-        dojo.setY(1344);
-
     }
 
     @Override
@@ -78,7 +70,6 @@ public class Chapter2_10 extends AbstractChapter {
 
 
         stage.getSpriteBatch().begin();
-        dojo.draw(stage.getSpriteBatch(), 1);
         //This is probably the bestest "Scene Director" ever made. 
         //Valve should totally hire me. 
         for(MapCharacter character : characters){

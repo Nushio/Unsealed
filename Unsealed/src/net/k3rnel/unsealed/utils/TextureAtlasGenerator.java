@@ -39,7 +39,7 @@ public class TextureAtlasGenerator {
         settings.edgePadding = false;
 
         // set the maximum dimension of each image atlas
-        settings.maxWidth = 2048;
+        settings.maxWidth = 1024;
         settings.maxHeight = 1024;
 
         // pack the images
