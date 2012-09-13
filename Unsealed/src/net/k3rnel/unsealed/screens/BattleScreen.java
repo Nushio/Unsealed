@@ -49,6 +49,7 @@ import net.k3rnel.unsealed.battle.BattleEntity;
 import net.k3rnel.unsealed.battle.BattleGrid;
 import net.k3rnel.unsealed.battle.BattleHUD;
 import net.k3rnel.unsealed.battle.BattleHero;
+import net.k3rnel.unsealed.battle.heroes.Lidia;
 import net.k3rnel.unsealed.battle.magic.MagicEntity;
 import net.k3rnel.unsealed.battle.skills.EarthSpikes;
 import net.k3rnel.unsealed.battle.skills.FireLion;
@@ -268,7 +269,7 @@ public class BattleScreen extends AbstractScreen {
         time = new Date().getTime() - time;
         Gdx.app.log(Unsealed.LOG,"Started GRID in... "+time);
         time = new Date().getTime();
-        hero = new BattleHero(getAtlas(),150);
+        hero = new Lidia(getAtlas(),150,1,1);
         hero.setGrid(1,1);
         hero.setSkill1(new EarthSpikes(getAtlas()));
         hud.xButton.addActor(hero.getSkill1());
@@ -308,7 +309,7 @@ public class BattleScreen extends AbstractScreen {
 
             @Override
             public void clicked(InputEvent arg0, float arg1, float arg2) {
-                hero = new BattleHero(getAtlas(),150);
+                hero = new Lidia(getAtlas(),150,1,1);
                 hero.setGrid(1,1);
                 hero.reset();
                 hero.setSkill1(new EarthSpikes(getAtlas()));
