@@ -63,6 +63,7 @@ import net.k3rnel.unsealed.services.SoundManager.UnsealedSound;
 import net.k3rnel.unsealed.story.MapCharacter;
 import net.k3rnel.unsealed.story.StyledTable;
 import net.k3rnel.unsealed.story.TextBox;
+import net.k3rnel.unsealed.utils.SimpleDirectionGestureDetector;
 
 public class BattleScreen extends AbstractScreen {
 
@@ -103,6 +104,10 @@ public class BattleScreen extends AbstractScreen {
 
     public boolean disableInput = false;
 
+//    Touchpad touchpad;
+//    public int touchpad1Direction;
+//    Touchpad touchpad2;
+
     public BattleScreen(Unsealed game, boolean scriptedBattle, String mapname) {
         super(game);
         if(scriptedBattle){
@@ -110,6 +115,49 @@ public class BattleScreen extends AbstractScreen {
             act = 0;
         }
         this.mapname = mapname;
+//        touchpad = new Touchpad(0, getSkin());
+//        touchpad.setBounds(15, 30, 150, 150);
+//        touchpad1Direction = -1;
+//        touchpad.addListener(new ChangeListener(){
+//
+//            @Override
+//            public void changed(ChangeEvent event, Actor actor) {
+//                System.out.println("x="+touchpad.getKnobX()+", y="+touchpad.getKnobY());
+//                if(touchpad.getKnobX()<55&&touchpad.getKnobY()<108&&touchpad.getKnobY()>31){
+//                    if(touchpad1Direction!=2){
+//                        System.out.println("Going left!");
+//                        touchpad1Direction=2;
+//                        buttonPress(2, true);
+//                    }
+//                }else if(touchpad.getKnobX()>90&&touchpad.getKnobY()<108&&touchpad.getKnobY()>31){
+//
+//                    if(touchpad1Direction!=3){
+//                        System.out.println("Going right!");
+//                        touchpad1Direction=3;
+//                        buttonPress(3, true);
+//                    }
+//                }else if(touchpad.getKnobY()>80&&touchpad.getKnobX()<120&&touchpad.getKnobX()>50){
+//                    if(touchpad1Direction!=0){
+//                        System.out.println("Going up!");
+//                        touchpad1Direction=0;
+//                        buttonPress(0, true);
+//                    }
+//                }else if(touchpad.getKnobY()<60&&touchpad.getKnobX()<120&&touchpad.getKnobX()>50){
+//                    if(touchpad1Direction!=1){
+//                        System.out.println("Going down!");
+//                        touchpad1Direction=1;
+//                        buttonPress(1, true);
+//                    }
+//                }else{
+//                    touchpad1Direction=-1;
+//                }
+//            }
+//        });
+//        stage.addActor(touchpad);
+//
+//        touchpad2 = new Touchpad(20, getSkin());
+//        touchpad2.setBounds(630, 30, 150, 150);
+//        stage.addActor(touchpad2);
     }
     @Override
     protected boolean isGameScreen() {
@@ -345,7 +393,72 @@ public class BattleScreen extends AbstractScreen {
         Gdx.app.log(Unsealed.LOG,"Started the rest in... "+time);
         time = new Date().getTime();
         hud.addActor(dialog);
-        Gdx.input.setInputProcessor(new InputMultiplexer(this,stage,hud));
+        Gdx.input.setInputProcessor(new InputMultiplexer(this,stage,hud,
+                new SimpleDirectionGestureDetector(
+                new SimpleDirectionGestureDetector.UnsealedDirectionListener() {
+
+                    @Override
+                    public void onUpLeft() {
+                        buttonPress(0,true);
+
+                    }
+
+                    @Override
+                    public void onRightLeft() {
+                        buttonPress(3,true);
+
+                    }
+
+                    @Override
+                    public void onLeftLeft() {
+                        buttonPress(2,true);
+
+                    }
+
+                    @Override
+                    public void onDownLeft() {
+                        buttonPress(1,true);
+
+                    }
+                    @Override
+                    public void onDownRight() {
+                        buttonPress(7, true);
+                        buttonPress(7, false);
+                        
+                    }
+                    @Override
+                    public void onLeftRight() {
+                        buttonPress(6, true);
+                        buttonPress(6, false);
+                        
+                    }
+                    @Override
+                    public void onRightRight() {
+                        buttonPress(8, true);
+                        buttonPress(8, false);
+                        
+                    }
+                    @Override
+                    public void onUpRight() {
+                        buttonPress(9, true);
+                        buttonPress(9, false);
+                        
+                    }
+                    @Override
+                    public void onTapLeft() {
+                        buttonPress(4, true);
+                        buttonPress(4, false);
+                        
+                    }
+                    @Override
+                    public void onTapRight() {
+                        buttonPress(5, true);
+                        buttonPress(5, false);
+                        
+                    }
+                })
+        ));
+
     } 
 
     public void checkScene(float delta){

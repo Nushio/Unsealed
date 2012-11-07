@@ -34,7 +34,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class MenuScreen extends AbstractScreen {
     
     private Table table;
-
+    
     public MenuScreen( Unsealed game ) {
         super( game );
     }
