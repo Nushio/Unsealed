@@ -7,5 +7,7 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/Unsealed"/>
 	<classpathentry exported="true" kind="lib" path="/Unsealed/libs/gdx.jar" sourcepath="/Unsealed/libs/gdx-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-controllers-android.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Unsealed/libs/gdx-controllers.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

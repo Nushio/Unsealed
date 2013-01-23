@@ -31,7 +31,6 @@ import com.badlogic.gdx.tools.imagepacker.TexturePacker.Settings;
  * Your mileage may vary. 
  */
 
-@SuppressWarnings("deprecation")
 public class TiledMapAtlasGenerator {
     private static final String INPUT_DIR = "raw-resources/maps";
     private static final String OUTPUT_DIR = "assets/map-atlases/";
