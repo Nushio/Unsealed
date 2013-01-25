@@ -19,10 +19,7 @@
 
 package net.k3rnel.unsealed;
 
-import net.k3rnel.unsealed.screens.MenuScreen;
-import net.k3rnel.unsealed.screens.OptionsScreen;
-import net.k3rnel.unsealed.screens.QuickTutorialScreen;
-import net.k3rnel.unsealed.screens.SplashScreen;
+import net.k3rnel.unsealed.screens.BattleScreen;
 import net.k3rnel.unsealed.services.MusicManager;
 import net.k3rnel.unsealed.services.PreferencesManager;
 import net.k3rnel.unsealed.services.SoundManager;
@@ -69,18 +66,6 @@ public class Unsealed extends Game {
     public SoundManager getSoundManager() {
         return soundManager;
     }
-    
-    public QuickTutorialScreen getSplashScreen() {
-        return new QuickTutorialScreen(this);
-    }
-
-    public MenuScreen getMenuScreen() {
-        return new MenuScreen(this);
-    }
-
-    public OptionsScreen getOptionsScreen(){
-        return new OptionsScreen(this);
-    }
 
     public TextureAtlas getTextureAtlas(){
         if(texAtlas == null){
@@ -119,10 +104,7 @@ public class Unsealed extends Game {
         // show the splash screen when the game is resized for the first time;
         // this approach avoids calling the screen's resize method repeatedly
         if( getScreen() == null ) {
-            if(Unsealed.DEBUG)
-                setScreen( new MenuScreen ( this ) );
-            else
-                setScreen( new SplashScreen( this ) );
+            setScreen( new BattleScreen( this ) );
         }
     }
 
